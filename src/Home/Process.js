@@ -6,7 +6,7 @@ export default function Process() {
   return (
     <PrimarySection py="100px" backgroundColor="purple">
       <Container>
-        <h2 className={styles.Heading}>4 Simple Steps to Your Dummy Ticket</h2>
+        <h2 className={styles.Heading}>3 Simple Steps to Your Dummy Ticket</h2>
         <div className="row justify-content-between">
           <div className={styles.StepsCol}>
             <div className={styles.StepsHeadingDiv}>

@@ -76,7 +76,7 @@ export default function HeroForm() {
   return (
     <form className={styles.Form} id="form" method="post">
       {/* Return / One way */}
-      <div className={`${styles.Row} justify-content-start`}>
+      <div className={`row justify-content-start`}>
         <p
           className={`${styles.Type} ${
             ticketType === "OneWay" && styles.Active
