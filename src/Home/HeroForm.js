@@ -104,10 +104,6 @@ export default function HeroForm() {
           Return
         </p>
       </div>
-      {/* Feedback */}
-      {feedback && (
-        <div className={`${styles.Alert} ${feedbackClass}`}>{feedback}</div>
-      )}
 
       {/* Passenger Name */}
       <div className={styles.Row}>
@@ -262,6 +258,10 @@ export default function HeroForm() {
           </div>
         )}
       </div>
+      {/* Feedback */}
+      {feedback && (
+        <div className={`${styles.Alert} ${feedbackClass}`}>{feedback}</div>
+      )}
       <div className="text-center mt-4">
         <PrimaryButton type="submit" onClick={handleForm}>
           Submit
