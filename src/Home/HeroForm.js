@@ -41,6 +41,7 @@ export default function HeroForm() {
       setFeedbackClass(styles.Danger);
     } else {
       fetch(process.env.REACT_APP_BACKEND_URL, {
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
