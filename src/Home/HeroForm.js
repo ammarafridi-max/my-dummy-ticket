@@ -69,7 +69,6 @@ export default function HeroForm() {
         setFeedback("");
         setFeedbackClass("");
       }, 10000);
-      console.log(customerData);
     }
   }
 
