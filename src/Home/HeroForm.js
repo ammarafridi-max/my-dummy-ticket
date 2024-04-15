@@ -35,11 +35,15 @@ export default function HeroForm() {
   };
 
   function handleForm(e) {
+    // Prevent default form function
     e.preventDefault();
+
+    // Check if data is incomplete
     if (!firstName || !lastName || !email || !number) {
       setFeedback("All fields are mandatory");
       setFeedbackClass(styles.Danger);
     } else {
+      // Proceed to sending data to backend
       fetch(process.env.REACT_APP_BACKEND_URL, {
         method: "POST",
         headers: {
@@ -57,6 +61,10 @@ export default function HeroForm() {
               setFeedback("");
               setFeedbackClass("");
             }, 3000);
+          } else {
+            return response.json().then((data) => {
+              throw new Error(data.error);
+            });
           }
         })
         .catch((error) => {
