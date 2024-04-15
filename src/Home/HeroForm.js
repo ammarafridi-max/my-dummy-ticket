@@ -1,11 +1,8 @@
 import styles from "./HeroForm.module.css";
 import Input from "../Components/FormElements/Input";
-import { Option, OptionsDiv } from "../Components/FormElements/Select";
-import Select from "../Components/FormElements/Select";
 import Label from "../Components/FormElements/Label";
 import { useState } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
-import airports from "airport-codes/airports.json";
 
 export default function HeroForm() {
   const airportData = ["Dubai, UAE", "Abu Dhabi, UAE", "Sharjah, UAE"];
@@ -39,12 +36,12 @@ export default function HeroForm() {
 
   function handleForm(e) {
     e.preventDefault();
-
+    console.log(process.env.REACT_APP_BACKEND_URL);
     if (!firstName || !lastName || !email || !number) {
       setFeedback("All fields are mandatory");
       setFeedbackClass(styles.Danger);
     } else {
-      fetch("http://localhost:3001/", {
+      fetch(process.env.REACT_APP_BACKEND_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
