@@ -1,0 +1,22 @@
+.Nav {
+  display: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .Nav {
+    display: block;
+    padding: 20px 0;
+  }
+  .MenuContainer {
+    width: 20%;
+  }
+  .MenuContainer > * {
+    font-size: 30px !important;
+  }
+  .LogoContainer {
+    width: 60%;
+  }
+  .Logo {
+    width: 100%;
+  }
+}
