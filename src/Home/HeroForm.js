@@ -36,7 +36,6 @@ export default function HeroForm() {
 
   function handleForm(e) {
     e.preventDefault();
-    console.log(process.env.REACT_APP_BACKEND_URL);
     if (!firstName || !lastName || !email || !number) {
       setFeedback("All fields are mandatory");
       setFeedbackClass(styles.Danger);
