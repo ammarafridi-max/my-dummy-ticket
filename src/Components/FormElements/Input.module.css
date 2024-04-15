@@ -1,0 +1,16 @@
+.Input {
+  border-radius: 3px;
+  border: 1px solid rgba(184, 184, 184, 0.5);
+  padding: 7.5px 12.5px;
+  font-size: 14px;
+  background-color: white;
+  width: 50%;
+}
+
+.Input:focus-visible {
+  outline: none;
+}
+
+.Input::placeholder {
+  color: rgb(184, 184, 184);
+}

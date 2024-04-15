@@ -1,0 +1,37 @@
+.Nav {
+  padding: 10px 0;
+}
+
+.LogoDiv,
+.CTADiv {
+  width: 25%;
+  padding: 0;
+}
+
+.NavLinks {
+  width: 35%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Logo {
+  width: 100%;
+}
+
+.NavLink {
+  transition-duration: 0.3s;
+  padding: 7.5px 10px;
+  border-bottom: 4px solid transparent;
+}
+
+.NavLink:hover {
+  border-bottom: 4px solid #8800e7;
+}
+
+.CTADiv {
+  align-items: center;
+  display: flex;
+  justify-content: end;
+}

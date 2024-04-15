@@ -1,0 +1,31 @@
+.SelectDiv {
+  width: 97%;
+  border-radius: 3px;
+  border: 1px solid rgba(184, 184, 184, 0.5);
+  padding: 7.5px 12.5px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.Select,
+.Option {
+  border: none;
+  width: 100%;
+  padding: 0;
+}
+
+.Select:focus-visible {
+  outline: none;
+}
+
+.Option {
+  margin: 0;
+  padding: 7.5px 10px;
+  list-style-type: none;
+}
+
+.Option:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
