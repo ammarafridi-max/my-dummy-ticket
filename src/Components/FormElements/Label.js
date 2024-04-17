@@ -6,6 +6,7 @@ export default function Label(props) {
     marginLeft: props.ml || props.mx,
     marginTop: props.mt || props.my,
     marginBottom: props.mb || props.my || "10px",
+    fontWeight: "400",
   };
 
   return (

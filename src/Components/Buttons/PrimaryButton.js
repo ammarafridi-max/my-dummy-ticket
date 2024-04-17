@@ -5,7 +5,7 @@ export default function PrimaryButton(props) {
     backgroundImage: "linear-gradient(90deg, #8800e7, #4908B0)",
     border: "1px solid #8800e7",
     padding: "10px 30px",
-    borderRadius: "3px",
+    borderRadius: "5px",
     width: props.width,
   };
   return (

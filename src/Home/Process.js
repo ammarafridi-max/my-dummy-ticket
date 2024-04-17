@@ -4,7 +4,12 @@ import Container from "../Components/Container/Container";
 
 export default function Process() {
   return (
-    <PrimarySection py="75px" backgroundColor="purple" id="process">
+    <PrimarySection
+      py="75px"
+      className={styles.Section}
+      backgroundColor="purple"
+      id="process"
+    >
       <Container>
         <h2 className={styles.Heading}>How It Works</h2>
         <div className="row justify-content-between">
@@ -12,10 +17,10 @@ export default function Process() {
             <div className={styles.StepsHeadingDiv}>
               <h3 className={styles.StepsNumber}>1</h3>
             </div>
-            <h4 className={styles.StepsHeading}>Fill up the form</h4>
+            <h4 className={styles.StepsHeading}>Submit form</h4>
             <p className={styles.StepsText}>
-              Fill out our online form with your first name, last name, email,
-              and phone number.
+              Fill the online form with traveler name, contact details,
+              preferred date and travel route.
             </p>
           </div>
 
@@ -23,10 +28,10 @@ export default function Process() {
             <div className={styles.StepsHeadingDiv}>
               <h3 className={styles.StepsNumber}>2</h3>
             </div>
-            <h4 className={styles.StepsHeading}>Make the payment</h4>
+            <h4 className={styles.StepsHeading}>Payment</h4>
             <p className={styles.StepsText}>
-              Our team confirms your details within 60 minutes and sends you a
-              payment link to process your dummy ticket.
+              Our team confirms the details and sends you payment information in
+              30 minutes. Pay by secure payment link or bank transfer.
             </p>
           </div>
 
@@ -36,8 +41,8 @@ export default function Process() {
             </div>
             <h4 className={styles.StepsHeading}>Get your dummy ticket</h4>
             <p className={styles.StepsText}>
-              Upon confirmation, we swiftly send your dummy ticket via WhatsApp
-              or email, crafted to resemble authentic travel documents.
+              Get your verifiable dummy ticket as a PDF file by email and
+              Whatsapp!
             </p>
           </div>
         </div>

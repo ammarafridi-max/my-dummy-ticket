@@ -8,6 +8,11 @@
   padding: 0;
 }
 
+.CTADiv {
+  width: fit-content;
+  padding: 0;
+}
+
 .NavLinks {
   width: 35%;
   height: 70px;
