@@ -13,16 +13,16 @@ export default function Navigation() {
         </div>
         <div className={styles.NavLinks}>
           <a href="#form" className={styles.NavLink}>
-            Inquiry
+            Book
           </a>
-          <a href="/" className={styles.NavLink}>
-            Process
+          <a href="#process" className={styles.NavLink}>
+            How It Works
+          </a>
+          <a href="#contact" className={styles.NavLink}>
+            Contact
           </a>
           <a href="/" className={styles.NavLink}>
             About
-          </a>
-          <a href="/" className={styles.NavLink}>
-            Contact
           </a>
         </div>
         <div className={styles.CTADiv}>

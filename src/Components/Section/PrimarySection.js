@@ -12,7 +12,7 @@ export default function PrimarySection(props) {
   };
 
   return (
-    <section style={sectionStyle} className={props.className}>
+    <section style={sectionStyle} className={props.className} id={props.id}>
       {props.children}
     </section>
   );

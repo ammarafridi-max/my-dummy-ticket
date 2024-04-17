@@ -4,9 +4,9 @@ import Container from "../Components/Container/Container";
 
 export default function Process() {
   return (
-    <PrimarySection py="100px" backgroundColor="purple">
+    <PrimarySection py="75px" backgroundColor="purple" id="process">
       <Container>
-        <h2 className={styles.Heading}>3 Simple Steps to Your Dummy Ticket</h2>
+        <h2 className={styles.Heading}>How It Works</h2>
         <div className="row justify-content-between">
           <div className={styles.StepsCol}>
             <div className={styles.StepsHeadingDiv}>
@@ -25,8 +25,8 @@ export default function Process() {
             </div>
             <h4 className={styles.StepsHeading}>Make the payment</h4>
             <p className={styles.StepsText}>
-              Our team confirms your details within 24 hours via your preferred
-              contact method, addressing any questions.
+              Our team confirms your details within 60 minutes and sends you a
+              payment link to process your dummy ticket.
             </p>
           </div>
 

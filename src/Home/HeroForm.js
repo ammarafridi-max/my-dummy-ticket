@@ -80,7 +80,7 @@ export default function HeroForm() {
   }
 
   return (
-    <form className={styles.Form} id="form" method="post">
+    <form className={styles.Form} method="post">
       {/* Return / One way */}
       <div className={`row justify-content-start`}>
         <p
@@ -108,7 +108,7 @@ export default function HeroForm() {
       {/* Passenger Name */}
       <div className={styles.Row}>
         <div className={styles.Input}>
-          <Label>
+          <Label htmlFor="firstName">
             <span className={styles.Required}>*</span>First Name
           </Label>
           <Input
@@ -117,10 +117,11 @@ export default function HeroForm() {
             onChange={(e) => setFirstName(e.target.value)}
             required
             name="firstName"
+            id="firstName"
           />
         </div>
         <div className={styles.Input}>
-          <Label>
+          <Label htmlFor="lastName">
             <span className={styles.Required}>*</span>Last Name
           </Label>
           <Input
@@ -128,13 +129,15 @@ export default function HeroForm() {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
+            name="lastName"
+            id="lastName"
           />
         </div>
       </div>
       {/* Contact Detail */}
       <div className={styles.Row}>
         <div className={styles.Input}>
-          <Label>
+          <Label htmlFor="email">
             <span className={styles.Required}>*</span>Email
           </Label>
           <Input
@@ -142,10 +145,13 @@ export default function HeroForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            name="email"
+            id="email"
+            autoComplete="on"
           />
         </div>
         <div className={styles.Input}>
-          <Label>
+          <Label htmlFor="number">
             <span className={styles.Required}>*</span>Phone Number
           </Label>
           <Input
@@ -153,107 +159,59 @@ export default function HeroForm() {
             value={number}
             onChange={(e) => setNumber(e.target.value)}
             required
+            name="number"
+            id="number"
           />
         </div>
       </div>
-      {/* From / To Detail */}
-      {/* <div className={`row ${styles.Row}`}>
-        <div className={styles.Input}>
-          <Label mb="5px">From</Label>
-          <Select
-            placeholder="Select airport"
-            value={from}
-            onClick={() => {
-              setShowFromOptions(true);
-            }}
-          >
-            {showFromOptions && (
-              <OptionsDiv>
-                {airportData.map((airport) => {
-                  return (
-                    <Option
-                      value={airport}
-                      onClick={() => {
-                        setFrom(airport);
-                        setShowFromOptions(false);
-                      }}
-                    >
-                      {airport}
-                    </Option>
-                  );
-                })}
-              </OptionsDiv>
-            )}
-          </Select>
-        </div>
 
-        <div className={styles.Input}>
-          <Label mb="5px">To</Label>
-          <Select
-            placeholder="Select airport"
-            value={to}
-            onClick={() => {
-              setShowToOptions(true);
-            }}
-          >
-            {showToOptions && (
-              <OptionsDiv>
-                {airportData.map((airport) => {
-                  return (
-                    <Option
-                      value={airport}
-                      onClick={() => {
-                        setTo(airport);
-                        setShowToOptions(false);
-                      }}
-                    >
-                      {airport}
-                    </Option>
-                  );
-                })}
-              </OptionsDiv>
-            )}
-          </Select>
-        </div>
-      </div> */}
+      {/* From / To */}
       <div className={styles.Row}>
         <div className={styles.Input}>
-          <Label>From</Label>
+          <Label htmlFor="from">From</Label>
           <Input
             type="text"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
             required
+            name="from"
+            id="from"
           />
         </div>
         <div className={styles.Input}>
-          <Label>To</Label>
+          <Label htmlFor="to">To</Label>
           <Input
             type="text"
             value={to}
             onChange={(e) => setTo(e.target.value)}
             required
+            name="to"
+            id="to"
           />
         </div>
       </div>
       {/* Dates */}
       <div className={styles.Row}>
         <div className={styles.Input}>
-          <Label>Departure Date</Label>
+          <Label htmlFor="departureDate">Departure Date</Label>
           <Input
             type="date"
             value={departureDate}
             onChange={(e) => setDepartureDate(e.target.value)}
+            name="departureDate"
+            id="departureDate"
           />
         </div>
         {ticketType === "Return" && (
           <div className={styles.Input}>
-            <Label>Arrival Date</Label>
+            <Label htmlFor="arrivalDate">Arrival Date</Label>
             <Input
               type="date"
               value={arrivalDate}
               onChange={(e) => setArrivalDate(e.target.value)}
               required
+              name="arrivalDate"
+              id="arrivalDate"
             />
           </div>
         )}

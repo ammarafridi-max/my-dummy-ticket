@@ -3,7 +3,6 @@
       180deg,
       rgb(0, 0, 0, 0.8),
       rgb(0, 0, 0, 0),
-      rgb(0, 0, 0, 0),
       rgb(0, 0, 0, 0.8)
     ),
     url("./hero-img.png");
@@ -16,6 +15,7 @@
 .HeroHeading {
   color: white;
   font-size: 44px;
+  line-height: 1.2;
 }
 
 .HeroText {
@@ -23,4 +23,20 @@
   font-size: 20px;
   margin: 30px 0;
   font-weight: 400;
+}
+
+@media screen and (max-width: 991px) {
+  .Hero {
+    background-image: linear-gradient(
+        180deg,
+        rgb(0, 0, 0, 0.8),
+        rgb(0, 0, 0, 0),
+        rgb(0, 0, 0, 0.8)
+      ),
+      url("./hero-img.png");
+  }
+  .HeroHeading {
+    font-size: 38px;
+    font-weight: 600;
+  }
 }

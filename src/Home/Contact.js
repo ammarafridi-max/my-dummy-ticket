@@ -7,7 +7,7 @@ import { WhatsApp } from "@mui/icons-material";
 
 export default function Contact() {
   return (
-    <PrimarySection py="75px">
+    <PrimarySection py="75px" id="contact">
       <Container>
         <h2 className="text-center mb-5">Contact Us</h2>
         <div className="row">

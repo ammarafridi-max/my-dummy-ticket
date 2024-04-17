@@ -15,6 +15,9 @@ export default function Input(props) {
         style={style}
         onClick={props.onClick}
         onChange={props.onChange}
+        id={props.id}
+        name={props.name}
+        autoComplete={props.autoComplete}
       />
     </div>
   );
