@@ -9,7 +9,7 @@ export default function Navigation() {
         className={`col-11 col-lg-10 mx-auto row justify-content-between align-items-center ${styles.Nav}`}
       >
         <div className={styles.LogoDiv}>
-          <img src={logo} className={styles.Logo} />
+          <img src={logo} className={styles.Logo} alt="MyDummyTicket.ae logo" />
         </div>
         <div className={styles.NavLinks}>
           <a href="#form" className={styles.NavLink}>
@@ -29,6 +29,7 @@ export default function Navigation() {
           <a
             href="https://api.whatsapp.com/send?phone=97165355055&text=Hi.%20I%20need%20a%20dummy%20ticket."
             target="_blank"
+            rel="noreferrer"
           >
             <PrimaryButton>Contact Us</PrimaryButton>
           </a>

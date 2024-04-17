@@ -11,7 +11,7 @@ export default function Process() {
       id="process"
     >
       <Container>
-        <h2 className={styles.Heading}>How It Works</h2>
+        <h2 className="section-heading">How It Works</h2>
         <div className="row justify-content-between">
           <div className={styles.StepsCol}>
             <div className={styles.StepsHeadingDiv}>

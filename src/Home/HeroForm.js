@@ -5,10 +5,6 @@ import { useState } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 
 export default function HeroForm() {
-  const airportData = ["Dubai, UAE", "Abu Dhabi, UAE", "Sharjah, UAE"];
-
-  const [showFromOptions, setShowFromOptions] = useState(false);
-  const [showToOptions, setShowToOptions] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [feedbackClass, setFeedbackClass] = useState(styles.Danger);
 
@@ -121,14 +117,11 @@ export default function HeroForm() {
           />
         </div>
         <div className={styles.Input}>
-          <Label htmlFor="lastName">
-            <span className={styles.Required}>*</span>Last Name
-          </Label>
+          <Label htmlFor="lastName">Last Name</Label>
           <Input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            required
             name="lastName"
             id="lastName"
           />

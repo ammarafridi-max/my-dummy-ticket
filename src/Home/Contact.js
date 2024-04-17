@@ -9,7 +9,7 @@ export default function Contact() {
   return (
     <PrimarySection py="75px" id="contact">
       <Container>
-        <h2 className="text-center mb-5">Contact Us</h2>
+        <h2 className="section-heading">Contact Us</h2>
         <div className="row">
           <div className={`col-lg-5 ${styles.CardsContainer}`}>
             <div className={styles.ContactCard}>
@@ -44,6 +44,7 @@ export default function Contact() {
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               className={styles.Map}
+              title="MyDummyTicket.ae store location"
             ></iframe>
           </div>
         </div>

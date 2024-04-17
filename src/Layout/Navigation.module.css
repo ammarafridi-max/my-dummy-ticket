@@ -29,6 +29,9 @@
   transition-duration: 0.3s;
   padding: 7.5px 10px;
   border-bottom: 4px solid transparent;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .NavLink:hover {

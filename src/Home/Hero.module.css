@@ -5,11 +5,12 @@
       rgb(0, 0, 0, 0),
       rgb(0, 0, 0, 0.8)
     ),
-    url("./hero-img.png");
+    url("./hero-img.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  padding: 75px 0;
 }
 
 .HeroHeading {
@@ -28,15 +29,6 @@
 }
 
 @media screen and (max-width: 991px) {
-  .Hero {
-    background-image: linear-gradient(
-        180deg,
-        rgb(0, 0, 0, 0.8),
-        rgb(0, 0, 0, 0),
-        rgb(0, 0, 0, 0.8)
-      ),
-      url("./hero-img.png");
-  }
   .HeroHeading {
     font-size: 34px;
     font-weight: 600;
