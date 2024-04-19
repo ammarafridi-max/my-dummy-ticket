@@ -12,7 +12,11 @@ export default function MobileNavigation() {
         </div>
         <div className={styles.LogoContainer}>
           <a href="/">
-            <img src={logo} className={styles.Logo} />
+            <img
+              src={logo}
+              className={styles.Logo}
+              alt="My Dummy Ticket Logo"
+            />
           </a>
         </div>
         <div className={styles.MenuContainer}></div>

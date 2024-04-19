@@ -8,7 +8,8 @@ export default function HeroForm() {
   const [feedback, setFeedback] = useState("");
   const [feedbackClass, setFeedbackClass] = useState(styles.Danger);
 
-  const [ticketType, setTicketType] = useState("OneWay");
+  const [ticketType, setTicketType] = useState("One Way");
+  const [formState, setFormState] = useState("Active");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -31,14 +32,18 @@ export default function HeroForm() {
   };
 
   function handleForm(e) {
-    // Prevent default form function
     e.preventDefault();
 
     // Check if data is incomplete
-    if (!firstName || !lastName || !email || !number) {
-      setFeedback("All fields are mandatory");
+    if (!firstName || !email || !number) {
+      setFeedback("First name, email, and phone number are required");
       setFeedbackClass(styles.Danger);
+      setTimeout(function () {
+        setFeedback("");
+        setFeedbackClass("");
+      }, 10000);
     } else {
+      setFormState("Loading");
       // Proceed to sending data to backend
       fetch(process.env.REACT_APP_BACKEND_URL, {
         method: "POST",
@@ -52,11 +57,7 @@ export default function HeroForm() {
             // Show success feedback
             setFeedback("Form submitted successfully. We'll contact you soon!");
             setFeedbackClass(styles.Success);
-            // Reset feedback
-            setTimeout(function () {
-              setFeedback("");
-              setFeedbackClass("");
-            }, 3000);
+            setFormState("Active");
           } else {
             return response.json().then((data) => {
               throw new Error(data.error);
@@ -67,11 +68,12 @@ export default function HeroForm() {
           console.log("Error:", error);
           setFeedback("Error submitting form. Please try again later");
           setFeedbackClass(styles.Danger);
+          setFormState("Active");
+          setTimeout(function () {
+            setFeedback("");
+            setFeedbackClass("");
+          }, 10000);
         });
-      setTimeout(function () {
-        setFeedback("");
-        setFeedbackClass("");
-      }, 10000);
     }
   }
 
@@ -81,10 +83,10 @@ export default function HeroForm() {
       <div className={`row justify-content-start`}>
         <p
           className={`${styles.Type} ${
-            ticketType === "OneWay" && styles.Active
+            ticketType === "One Way" && styles.Active
           }`}
           onClick={() => {
-            setTicketType("OneWay");
+            setTicketType("One Way");
           }}
         >
           One way
@@ -214,9 +216,16 @@ export default function HeroForm() {
         <div className={`${styles.Alert} ${feedbackClass}`}>{feedback}</div>
       )}
       <div className="text-center mt-4">
-        <PrimaryButton type="submit" onClick={handleForm}>
-          Submit
-        </PrimaryButton>
+        {formState === "Active" && (
+          <PrimaryButton type="submit" onClick={handleForm}>
+            Submit
+          </PrimaryButton>
+        )}
+        {formState === "Loading" && (
+          <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+          </div>
+        )}
       </div>
     </form>
   );

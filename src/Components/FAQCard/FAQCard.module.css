@@ -1,0 +1,36 @@
+.FAQCard {
+  margin-bottom: 20px;
+}
+
+.QuestionBox {
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  background-color: rgb(240, 240, 240);
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+
+.QuestionBox:hover {
+  cursor: pointer;
+}
+
+.Question {
+  width: 80%;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.FAQIcon {
+  width: fit-content;
+  margin: 0 0 0 auto;
+}
+
+.AnswerBox {
+  padding: 20px 20px 0 20px;
+  transition-duration: 0.3s;
+  color: rgb(100, 100, 100);
+  font-size: 16px;
+}

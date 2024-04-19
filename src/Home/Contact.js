@@ -13,23 +13,23 @@ export default function Contact() {
         <div className="row">
           <div className={`col-lg-5 ${styles.CardsContainer}`}>
             <div className={styles.ContactCard}>
-              <a href="tel:97165355055">
+              <a href="tel:+971569964924">
                 <div className={styles.IconContainer}>
                   <CallRoundedIcon className={styles.Icon} />
                 </div>
-                <p className={styles.Text}>+971 6 535 5055</p>
+                <p className={styles.Text}>+971 56 996 4924</p>
               </a>
             </div>
             <div className={styles.ContactCard}>
-              <a href="mailto:info@citytours.ae">
+              <a href="mailto:info@mydummyticket.ae">
                 <div className={styles.IconContainer}>
                   <EmailRoundedIcon className={styles.Icon} />
                 </div>
-                <p className={styles.Text}>info@citytours.ae</p>
+                <p className={styles.Text}>info@mydummyticket.ae</p>
               </a>
             </div>
             <div className={styles.ContactCard}>
-              <a href="https://api.whatsapp.com/send?phone=97165355055&text=Hi.%20I%20need%20a%20dummy%20ticket.">
+              <a href="https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket.">
                 <div className={styles.IconContainer}>
                   <WhatsApp className={styles.Icon} />
                 </div>

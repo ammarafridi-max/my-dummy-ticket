@@ -18,6 +18,7 @@ export default function Input(props) {
         id={props.id}
         name={props.name}
         autoComplete={props.autoComplete}
+        pattern={props.pattern}
       />
     </div>
   );
