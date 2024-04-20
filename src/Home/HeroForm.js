@@ -19,6 +19,7 @@ export default function HeroForm() {
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
+  const [passport, setPassport] = useState("");
 
   const customerData = {
     firstName,
@@ -29,6 +30,32 @@ export default function HeroForm() {
     to,
     departureDate,
     arrivalDate,
+    passport,
+  };
+
+  const uploadToCloudinary = (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append(
+      "upload_preset",
+      `${process.env.REACT_APP_CLOUDINARY_PRESENT_NAME}`
+    );
+
+    fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("File uploaded to Cloudinary:", data);
+        setPassport(data.secure_url);
+      })
+      .catch((error) => {
+        console.error("Error uploading file to Cloudinary:", error);
+      });
   };
 
   function handleForm(e) {
@@ -119,13 +146,16 @@ export default function HeroForm() {
           />
         </div>
         <div className={styles.Input}>
-          <Label htmlFor="lastName">Last Name</Label>
+          <Label htmlFor="lastName">
+            <span className={styles.Required}>*</span>Last Name
+          </Label>
           <Input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             name="lastName"
             id="lastName"
+            required
           />
         </div>
       </div>
@@ -199,7 +229,7 @@ export default function HeroForm() {
         </div>
         {ticketType === "Return" && (
           <div className={styles.Input}>
-            <Label htmlFor="arrivalDate">Arrival Date</Label>
+            <Label htmlFor="arrivalDate">Return Date</Label>
             <Input
               type="date"
               value={arrivalDate}
@@ -211,7 +241,22 @@ export default function HeroForm() {
           </div>
         )}
       </div>
-      {/* Feedback */}
+      {/* Attach documents */}
+      <div className={styles.Row}>
+        <div className={styles.Input}>
+          <Label htmlFor="passport">Passport Copy</Label>
+          <Input
+            type="file"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              uploadToCloudinary(file);
+            }}
+            name="passport"
+            id="passport"
+          />
+        </div>
+      </div>
+      {/* Feedback and Button */}
       {feedback && (
         <div className={`${styles.Alert} ${feedbackClass}`}>{feedback}</div>
       )}
