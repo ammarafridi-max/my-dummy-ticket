@@ -1,13 +1,14 @@
 .StepsCol {
-  width: 30%;
+  width: 28%;
   text-align: center;
 }
 
 .StepsHeadingDiv {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
+  padding: 15px;
   background-color: white;
-  color: #8800e7;
+  color: #1a4d2e;
   border-radius: 100px;
   display: flex;
   align-items: center;
@@ -30,6 +31,20 @@
 
 .StepsText {
   font-size: 18px;
+  margin: 0;
+}
+
+.Icon {
+  width: 5%;
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+.Icon * {
+  color: #f5efe6;
+  font-size: 70px !important;
+  margin: auto;
 }
 
 @media only screen and (max-width: 991.5px) {
@@ -40,6 +55,19 @@
     width: 80%;
     text-align: center;
     margin: 0 auto;
-    margin-bottom: 40px;
+  }
+  .Icon {
+    width: 100%;
+    margin: auto 0;
+    display: flex;
+    justify-content: center;
+    rotate: 90deg;
+    margin: 40px 0;
+  }
+
+  .Icon * {
+    color: #f5efe6;
+    font-size: 70px !important;
+    margin: auto;
   }
 }

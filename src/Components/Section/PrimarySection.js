@@ -4,11 +4,9 @@ export default function PrimarySection(props) {
     paddingBottom: props.pb || props.py,
     marginTop: props.mt || props.my,
     marginBottom: props.mb || props.my,
-    backgroundImage:
-      props.backgroundColor === "purple"
-        ? "linear-gradient(90deg, rgba(73,8,176,1), rgba(136,0,231,1))"
-        : "",
-    color: props.backgroundColor === "purple" ? "white" : "black",
+    backgroundColor:
+      props.backgroundColor === "primary" ? "#1A4D2E" : "#F5EFE6",
+    color: props.backgroundColor === "primary" ? "white" : "black",
   };
 
   return (

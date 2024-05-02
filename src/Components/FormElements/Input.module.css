@@ -1,14 +1,17 @@
 .Input {
   border-radius: 100px;
   border: none;
-  background-color: rgb(240, 240, 240);
-  padding: 15px 25px;
+  background-color: rgb(242, 242, 242);
+  padding: 10px 20px;
   font-size: 14px;
   width: 50%;
+  transition-duration: 0.3s;
 }
 
-.Input:focus-visible {
+.Input:focus-visible,
+.Input:hover {
   outline: none;
+  background-color: rgb(230, 230, 230);
 }
 
 .Input::placeholder {

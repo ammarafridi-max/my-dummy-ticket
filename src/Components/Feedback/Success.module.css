@@ -1,0 +1,11 @@
+.Success {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}

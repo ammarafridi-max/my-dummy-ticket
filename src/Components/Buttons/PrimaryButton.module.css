@@ -1,0 +1,23 @@
+.Btn {
+  color: white;
+  text-align: center;
+  background-color: #305e42;
+  border: 1px solid #305e42;
+  padding: 10px 30px;
+  border-radius: 100px;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s,
+    transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* background-image: linear-gradient(
+    to right,
+    #8800e7,
+    #4908b0
+  ); Adding gradient background */
+}
+
+.Btn:hover {
+  background-color: #1a4d2e;
+  border-color: #1a4d2e;
+  transform: translateY(-2px); /* Lift button slightly on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}

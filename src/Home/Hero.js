@@ -6,11 +6,17 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
-    <section className={styles.Hero} id="form">
-      <div className="col-12 col-lg-11 mx-auto justify-content-between row align-items-center">
-        <div className="col-11 col-lg-6 mx-auto">
+    <PrimarySection
+      className={styles.HeroSection}
+      id="form"
+      pt="25px"
+      pb="75px"
+    >
+      <Container className={`${styles.HeroDiv}`}>
+        <div className="col-12 col-lg-5">
           <h1 className={styles.HeroHeading}>
-            Get a dummy ticket for AED 49 only!
+            Get your dummy ticket from
+            <span className="primary-color"> AED 49</span>
           </h1>
           <p className={styles.HeroText}>
             Our dummy tickets are used for visa applications or as proof of
@@ -18,10 +24,14 @@ export default function Hero() {
             verify on airline websites.
           </p>
         </div>
-        <div className="col-lg-6">
+        <div className="col-12 col-lg-6 m-0 p-0">
+          {/* <div className="col-12 row m-0 p-0">
+            <p className={styles.Btn}>Flight</p>
+            <p className={styles.Btn}>Hotel</p>
+          </div> */}
           <HeroForm />
         </div>
-      </div>
-    </section>
+      </Container>
+    </PrimarySection>
   );
 }

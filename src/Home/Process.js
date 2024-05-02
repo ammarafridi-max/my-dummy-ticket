@@ -1,14 +1,15 @@
 import styles from "./Process.module.css";
 import PrimarySection from "../Components/Section/PrimarySection";
 import Container from "../Components/Container/Container";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 export default function Process() {
   return (
     <PrimarySection
-      py="75px"
+      py="100px"
       className={styles.Section}
-      backgroundColor="purple"
       id="process"
+      backgroundColor="primary"
     >
       <Container>
         <h2 className="section-heading">How It Works</h2>
@@ -24,6 +25,10 @@ export default function Process() {
             </p>
           </div>
 
+          <div className={styles.Icon}>
+            <ArrowForwardIosRoundedIcon />
+          </div>
+
           <div className={styles.StepsCol}>
             <div className={styles.StepsHeadingDiv}>
               <h3 className={styles.StepsNumber}>2</h3>
@@ -33,6 +38,10 @@ export default function Process() {
               Our team confirms the details and sends you payment information in
               30 minutes. Pay by secure payment link or bank transfer.
             </p>
+          </div>
+
+          <div className={styles.Icon}>
+            <ArrowForwardIosRoundedIcon />
           </div>
 
           <div className={styles.StepsCol}>

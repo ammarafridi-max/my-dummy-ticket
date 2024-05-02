@@ -3,9 +3,15 @@
   width: 100%;
   border-radius: 30px;
   background-color: white;
+  margin: 0;
+  /* -webkit-box-shadow: 0px 0px 40px 4px rgba(240, 240, 240, 1);
+  -moz-box-shadow: 0px 0px 40px 4px rgba(240, 240, 240, 1);
+  box-shadow: 0px 0px 40px 4px rgba(240, 240, 240, 1); */
 }
 
 .Type {
+  font-size: 14px;
+  margin-bottom: 15px;
   padding: 10px 15px;
   width: fit-content;
   border-radius: 5px;
@@ -13,8 +19,8 @@
 }
 
 .Active {
-  color: #4908b0;
-  background-color: #f3d0ff;
+  color: #1a4d2e;
+  background-color: #e8edea;
 }
 
 .Alert {

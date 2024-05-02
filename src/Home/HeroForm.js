@@ -3,13 +3,15 @@ import Input from "../Components/FormElements/Input";
 import Label from "../Components/FormElements/Label";
 import { useState } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
+import Success from "../Components/Feedback/Success";
+import Error from "../Components/Feedback/Error";
 
 export default function HeroForm() {
   const [feedback, setFeedback] = useState("");
-  const [feedbackClass, setFeedbackClass] = useState(styles.Danger);
 
   const [ticketType, setTicketType] = useState("One Way");
   const [formState, setFormState] = useState("Active");
+  const [price, setPrice] = useState(49);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -63,15 +65,15 @@ export default function HeroForm() {
 
     // Check if data is incomplete
     if (!firstName || !email || !number) {
-      setFeedback("First name, email, and phone number are required");
-      setFeedbackClass(styles.Danger);
-      setTimeout(function () {
-        setFeedback("");
-        setFeedbackClass("");
-      }, 10000);
+      setFeedback(
+        <Error>
+          First name, last name, email address, and phone number are required
+        </Error>
+      );
+
+      // Proceed to sending data to backend
     } else {
       setFormState("Loading");
-      // Proceed to sending data to backend
       fetch(process.env.REACT_APP_BACKEND_URL, {
         method: "POST",
         headers: {
@@ -82,8 +84,11 @@ export default function HeroForm() {
         .then((response) => {
           if (response.ok) {
             // Show success feedback
-            setFeedback("Form submitted successfully. We'll contact you soon!");
-            setFeedbackClass(styles.Success);
+            setFeedback(
+              <Success>
+                Form submitted successfully. We'll contact you soon!
+              </Success>
+            );
             setFormState("Active");
           } else {
             return response.json().then((data) => {
@@ -93,12 +98,12 @@ export default function HeroForm() {
         })
         .catch((error) => {
           console.log("Error:", error);
-          setFeedback("Error submitting form. Please try again later");
-          setFeedbackClass(styles.Danger);
+          setFeedback(
+            <Error>Error submitting form. Please try again later</Error>
+          );
           setFormState("Active");
           setTimeout(function () {
             setFeedback("");
-            setFeedbackClass("");
           }, 10000);
         });
     }
@@ -114,6 +119,7 @@ export default function HeroForm() {
           }`}
           onClick={() => {
             setTicketType("One Way");
+            setPrice(49);
           }}
         >
           One way
@@ -124,6 +130,7 @@ export default function HeroForm() {
           }`}
           onClick={() => {
             setTicketType("Return");
+            setPrice(89);
           }}
         >
           Return
@@ -241,8 +248,9 @@ export default function HeroForm() {
           </div>
         )}
       </div>
+
       {/* Attach documents */}
-      <div className={styles.Row}>
+      {/* <div className={styles.Row}>
         <div className={styles.Input}>
           <Label htmlFor="passport">Passport Copy</Label>
           <Input
@@ -255,15 +263,14 @@ export default function HeroForm() {
             id="passport"
           />
         </div>
-      </div>
+      </div> */}
+
       {/* Feedback and Button */}
-      {feedback && (
-        <div className={`${styles.Alert} ${feedbackClass}`}>{feedback}</div>
-      )}
+      {feedback}
       <div className="text-center mt-4">
         {formState === "Active" && (
           <PrimaryButton type="submit" onClick={handleForm}>
-            Submit
+            Proceed to Payment (AED {price})
           </PrimaryButton>
         )}
         {formState === "Loading" && (

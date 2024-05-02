@@ -1,10 +1,15 @@
+.Header {
+  background-color: #f5efe6;
+  padding: 20px 0;
+}
+
 .Nav {
-  padding: 10px 0;
+  position: static;
 }
 
 .LogoDiv,
 .CTADiv {
-  width: 25%;
+  width: 20%;
   padding: 0;
 }
 
@@ -27,15 +32,15 @@
 
 .NavLink {
   transition-duration: 0.3s;
-  padding: 7.5px 10px;
+  padding: 10px 10px;
   border-bottom: 4px solid transparent;
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .NavLink:hover {
-  border-bottom: 4px solid #8800e7;
+  border-bottom: 4px solid #305e42;
 }
 
 .CTADiv {
