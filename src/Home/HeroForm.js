@@ -21,7 +21,6 @@ export default function HeroForm() {
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
-  const [passport, setPassport] = useState("");
 
   const customerData = {
     firstName,
@@ -32,33 +31,32 @@ export default function HeroForm() {
     to,
     departureDate,
     arrivalDate,
-    passport,
   };
 
-  const uploadToCloudinary = (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append(
-      "upload_preset",
-      `${process.env.REACT_APP_CLOUDINARY_PRESENT_NAME}`
-    );
+  // const uploadToCloudinary = (file) => {
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append(
+  //     "upload_preset",
+  //     `${process.env.REACT_APP_CLOUDINARY_PRESENT_NAME}`
+  //   );
 
-    fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("File uploaded to Cloudinary:", data);
-        setPassport(data.secure_url);
-      })
-      .catch((error) => {
-        console.error("Error uploading file to Cloudinary:", error);
-      });
-  };
+  //   fetch(
+  //     `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`,
+  //     {
+  //       method: "POST",
+  //       body: formData,
+  //     }
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("File uploaded to Cloudinary:", data);
+  //       setPassport(data.secure_url);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error uploading file to Cloudinary:", error);
+  //     });
+  // };
 
   function handleForm(e) {
     e.preventDefault();
