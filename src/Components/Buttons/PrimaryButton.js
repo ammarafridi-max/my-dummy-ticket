@@ -1,13 +1,20 @@
 import styles from "./PrimaryButton.module.css";
 
-export default function PrimaryButton(props) {
+export default function PrimaryButton({
+  onClick,
+  type,
+  className,
+  disabled,
+  children,
+}) {
   return (
     <button
-      onClick={props.onClick}
-      type={props.type}
-      className={`${styles.Btn} ${props.className}`}
+      onClick={onClick}
+      type={type}
+      className={`${styles.Btn} ${className}`}
+      disabled={disabled}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

@@ -1,6 +1,6 @@
 import styles from "./Footer.module.css";
 import Container from "../Components/Container/Container";
-import { WhatsApp, FacebookRounded } from "@mui/icons-material";
+import { WhatsApp } from "@mui/icons-material";
 
 export default function Footer() {
   return (
@@ -14,6 +14,7 @@ export default function Footer() {
       <a
         href="https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket."
         target="_blank"
+        rel="noreferrer"
       >
         <div className={styles.WhatsAppIcon}>
           <WhatsApp fontSize="medium" />

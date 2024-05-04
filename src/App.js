@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navigation from "./Layout/Navigation";
@@ -8,7 +6,7 @@ import Footer from "./Layout/Footer";
 import Home from "./Home/Home";
 import FAQ from "./FAQ/FAQ";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <MobileNavigation />
@@ -21,10 +19,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);

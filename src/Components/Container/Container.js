@@ -1,5 +1,3 @@
-import styles from "./Container.module.css";
-
 export default function Container(props) {
   const containerStyle = {
     paddingTop: props.pt || props.py,

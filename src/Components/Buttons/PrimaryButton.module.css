@@ -21,3 +21,13 @@
   transform: translateY(-2px); /* Lift button slightly on hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
+
+.Btn:disabled {
+  opacity: 0.6;
+}
+
+.Btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+  background-color: #305e42;
+}

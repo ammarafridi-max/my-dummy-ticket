@@ -1,18 +1,17 @@
 import styles from "./HeroForm.module.css";
 import Input from "../Components/FormElements/Input";
 import Label from "../Components/FormElements/Label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import Success from "../Components/Feedback/Success";
 import Error from "../Components/Feedback/Error";
 
 export default function HeroForm() {
   const [feedback, setFeedback] = useState("");
+  const [formState, setFormState] = useState("Active");
 
   const [ticketType, setTicketType] = useState("One Way");
-  const [formState, setFormState] = useState("Active");
-  const [price, setPrice] = useState(49);
-
+  const [ticketId, setTicketId] = useState("price_1PCSArIy9CRhj2A0xXopFs0u"); // One Way
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,8 +20,11 @@ export default function HeroForm() {
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
+  const [price, setPrice] = useState(49);
 
   const customerData = {
+    ticketType,
+    ticketId,
     firstName,
     lastName,
     email,
@@ -32,31 +34,6 @@ export default function HeroForm() {
     departureDate,
     arrivalDate,
   };
-
-  // const uploadToCloudinary = (file) => {
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append(
-  //     "upload_preset",
-  //     `${process.env.REACT_APP_CLOUDINARY_PRESENT_NAME}`
-  //   );
-
-  //   fetch(
-  //     `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`,
-  //     {
-  //       method: "POST",
-  //       body: formData,
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("File uploaded to Cloudinary:", data);
-  //       setPassport(data.secure_url);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error uploading file to Cloudinary:", error);
-  //     });
-  // };
 
   function handleForm(e) {
     e.preventDefault();
@@ -81,34 +58,37 @@ export default function HeroForm() {
       })
         .then((response) => {
           if (response.ok) {
-            // Show success feedback
-            setFeedback(
-              <Success>
-                Form submitted successfully. We'll contact you soon!
-              </Success>
-            );
-            setFormState("Active");
+            return response.json();
           } else {
             return response.json().then((data) => {
               throw new Error(data.error);
             });
           }
         })
+        .then((data) => {
+          window.location.href = `${data.url}`;
+        })
         .catch((error) => {
-          console.log("Error:", error);
           setFeedback(
             <Error>Error submitting form. Please try again later</Error>
           );
           setFormState("Active");
-          setTimeout(function () {
-            setFeedback("");
-          }, 10000);
         });
     }
   }
 
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("success")) {
+      setFeedback(
+        <Success>Order placed! You will receive an email confirmation.</Success>
+      );
+      setFormState("Inactive");
+    }
+  }, []);
+
   return (
-    <form className={styles.Form} method="post">
+    <form className={styles.Form} action="/" method="post">
       {/* Return / One way */}
       <div className={`row justify-content-start`}>
         <p
@@ -118,6 +98,7 @@ export default function HeroForm() {
           onClick={() => {
             setTicketType("One Way");
             setPrice(49);
+            setTicketId("price_1PCSArIy9CRhj2A0xXopFs0u");
           }}
         >
           One way
@@ -129,6 +110,7 @@ export default function HeroForm() {
           onClick={() => {
             setTicketType("Return");
             setPrice(89);
+            setTicketId("price_1PCbiNIy9CRhj2A08SKJLtAe");
           }}
         >
           Return
@@ -247,33 +229,17 @@ export default function HeroForm() {
         )}
       </div>
 
-      {/* Attach documents */}
-      {/* <div className={styles.Row}>
-        <div className={styles.Input}>
-          <Label htmlFor="passport">Passport Copy</Label>
-          <Input
-            type="file"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              uploadToCloudinary(file);
-            }}
-            name="passport"
-            id="passport"
-          />
-        </div>
-      </div> */}
-
       {/* Feedback and Button */}
       {feedback}
       <div className="text-center mt-4">
         {formState === "Active" && (
           <PrimaryButton type="submit" onClick={handleForm}>
-            Proceed to Payment (AED {price})
+            Proceed to Payment <strong>(AED {price})</strong>
           </PrimaryButton>
         )}
         {formState === "Loading" && (
-          <div class="spinner-border" role="status">
-            <span class="sr-only"></span>
+          <div className="spinner-border" role="status">
+            <span className="sr-only"></span>
           </div>
         )}
       </div>
