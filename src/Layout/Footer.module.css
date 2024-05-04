@@ -36,3 +36,10 @@
   margin: 0 auto;
   font-size: 45px !important;
 }
+
+@media screen and (max-width: 991px) {
+  .WhatsAppIcon {
+    right: 40px;
+    bottom: 40px;
+  }
+}

@@ -25,9 +25,9 @@ export default function Process() {
             </p>
           </div>
 
-          <div className={styles.Icon}>
+          {/* <div className={styles.Icon}>
             <ArrowForwardIosRoundedIcon />
-          </div>
+          </div> */}
 
           <div className={styles.StepsCol}>
             <div className={styles.StepsHeadingDiv}>
@@ -40,9 +40,9 @@ export default function Process() {
             </p>
           </div>
 
-          <div className={styles.Icon}>
+          {/* <div className={styles.Icon}>
             <ArrowForwardIosRoundedIcon />
-          </div>
+          </div> */}
 
           <div className={styles.StepsCol}>
             <div className={styles.StepsHeadingDiv}>

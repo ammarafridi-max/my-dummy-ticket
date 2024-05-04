@@ -9,7 +9,7 @@ export function Option(props) {
   );
 }
 
-export function OptionsDiv(props) {
+export function Options(props) {
   return <div className={styles.OptionsDiv}>{props.children}</div>;
 }
 

@@ -1,0 +1,36 @@
+.Div {
+  width: 100%;
+  background-color: rgb(242, 242, 242);
+  padding: 10px 15px;
+  border-radius: 100px;
+}
+
+.Div {
+  width: 100%;
+  background-color: rgb(242, 242, 242);
+  padding: 10px 15px;
+  border-radius: 100px;
+}
+
+.Select,
+.Select:focus-visible,
+.Select:focus-within {
+  width: 28%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.Input {
+  width: 70%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 991px) {
+  .Select {
+    width: 15%;
+  }
+}

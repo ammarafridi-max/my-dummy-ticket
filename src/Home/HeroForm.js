@@ -39,12 +39,16 @@ export default function HeroForm() {
     e.preventDefault();
 
     // Check if data is incomplete
-    if (!firstName || !email || !number) {
-      setFeedback(
-        <Error>
-          First name, last name, email address, and phone number are required
-        </Error>
-      );
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !number ||
+      !from ||
+      !to ||
+      !departureDate
+    ) {
+      setFeedback(<Error>All fields are mandatory</Error>);
 
       // Proceed to sending data to backend
     } else {
@@ -175,6 +179,12 @@ export default function HeroForm() {
             id="number"
           />
         </div>
+        {/* <div className={styles.Input}>
+          <Label htmlFor="number">
+            <span className={styles.Required}>*</span>Phone Number
+          </Label>
+          <Number />
+        </div> */}
       </div>
 
       {/* From / To */}
@@ -190,7 +200,6 @@ export default function HeroForm() {
             required
             name="from"
             id="from"
-            required
           />
         </div>
         <div className={styles.Input}>
@@ -201,7 +210,6 @@ export default function HeroForm() {
             type="text"
             value={to}
             onChange={(e) => setTo(e.target.value)}
-            required
             name="to"
             id="to"
             required
@@ -232,7 +240,6 @@ export default function HeroForm() {
               type="date"
               value={arrivalDate}
               onChange={(e) => setArrivalDate(e.target.value)}
-              required
               name="arrivalDate"
               id="arrivalDate"
               required
