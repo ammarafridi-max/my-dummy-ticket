@@ -44,7 +44,10 @@
     display: block;
   }
   .HeroHeading {
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 600;
+  }
+  .HeroText {
+    font-size: 20px;
   }
 }

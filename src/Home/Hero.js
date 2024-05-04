@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="col-12 col-lg-5">
           <h1 className={styles.HeroHeading}>
             Get your dummy ticket from
-            <span className="primary-color"> AED 49</span>
+            <span className="primary-color"> AED 49!</span>
           </h1>
           <p className={styles.HeroText}>
             Our dummy tickets are used for visa applications or as proof of

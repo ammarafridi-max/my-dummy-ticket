@@ -180,7 +180,9 @@ export default function HeroForm() {
       {/* From / To */}
       <div className={styles.Row}>
         <div className={styles.Input}>
-          <Label htmlFor="from">From</Label>
+          <Label htmlFor="from">
+            <span className={styles.Required}>*</span>From
+          </Label>
           <Input
             type="text"
             value={from}
@@ -188,10 +190,13 @@ export default function HeroForm() {
             required
             name="from"
             id="from"
+            required
           />
         </div>
         <div className={styles.Input}>
-          <Label htmlFor="to">To</Label>
+          <Label htmlFor="to">
+            <span className={styles.Required}>*</span>To
+          </Label>
           <Input
             type="text"
             value={to}
@@ -199,24 +204,30 @@ export default function HeroForm() {
             required
             name="to"
             id="to"
+            required
           />
         </div>
       </div>
       {/* Dates */}
       <div className={styles.Row}>
         <div className={styles.Input}>
-          <Label htmlFor="departureDate">Departure Date</Label>
+          <Label htmlFor="departureDate">
+            <span className={styles.Required}>*</span>Departure Date
+          </Label>
           <Input
             type="date"
             value={departureDate}
             onChange={(e) => setDepartureDate(e.target.value)}
             name="departureDate"
             id="departureDate"
+            required
           />
         </div>
         {ticketType === "Return" && (
           <div className={styles.Input}>
-            <Label htmlFor="arrivalDate">Return Date</Label>
+            <Label htmlFor="arrivalDate">
+              <span className={styles.Required}>*</span>Return Date
+            </Label>
             <Input
               type="date"
               value={arrivalDate}
@@ -224,6 +235,7 @@ export default function HeroForm() {
               required
               name="arrivalDate"
               id="arrivalDate"
+              required
             />
           </div>
         )}
