@@ -14,7 +14,6 @@ export default function MobileNavigation() {
       setMenuOpen(true);
     }
   }
-
   return (
     <div className={styles.Nav}>
       <Container className="row justify-content-between">

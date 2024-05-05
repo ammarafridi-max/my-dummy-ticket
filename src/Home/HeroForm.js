@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import Success from "../Components/Feedback/Success";
 import Error from "../Components/Feedback/Error";
+import stripe from "./stripe.png";
+import Counter from "../Components/FormElements/Counter";
 
 export default function HeroForm() {
   const [feedback, setFeedback] = useState("");
@@ -20,6 +22,7 @@ export default function HeroForm() {
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(49);
 
   const customerData = {
@@ -33,6 +36,7 @@ export default function HeroForm() {
     to,
     departureDate,
     arrivalDate,
+    quantity,
   };
 
   function handleForm(e) {
@@ -114,15 +118,15 @@ export default function HeroForm() {
           onClick={() => {
             setTicketType("Return");
             setPrice(89);
-            setTicketId("price_1PCbiNIy9CRhj2A08SKJLtAe");
+            setTicketId("price_1PCcqAIy9CRhj2A0eB1hR3Nn");
           }}
         >
           Return
         </p>
       </div>
 
-      {/* Passenger Name */}
-      <div className={styles.Row}>
+      <div className="row">
+        {/* Passenger Name */}
         <div className={styles.Input}>
           <Label htmlFor="firstName">
             <span className={styles.Required}>*</span>First Name
@@ -136,6 +140,7 @@ export default function HeroForm() {
             id="firstName"
           />
         </div>
+
         <div className={styles.Input}>
           <Label htmlFor="lastName">
             <span className={styles.Required}>*</span>Last Name
@@ -149,9 +154,9 @@ export default function HeroForm() {
             required
           />
         </div>
-      </div>
-      {/* Contact Detail */}
-      <div className={styles.Row}>
+
+        {/* Contact */}
+
         <div className={styles.Input}>
           <Label htmlFor="email">
             <span className={styles.Required}>*</span>Email
@@ -166,6 +171,7 @@ export default function HeroForm() {
             autoComplete="on"
           />
         </div>
+
         <div className={styles.Input}>
           <Label htmlFor="number">
             <span className={styles.Required}>*</span>Phone Number
@@ -179,16 +185,9 @@ export default function HeroForm() {
             id="number"
           />
         </div>
-        {/* <div className={styles.Input}>
-          <Label htmlFor="number">
-            <span className={styles.Required}>*</span>Phone Number
-          </Label>
-          <Number />
-        </div> */}
-      </div>
 
-      {/* From / To */}
-      <div className={styles.Row}>
+        {/* From / To */}
+
         <div className={styles.Input}>
           <Label htmlFor="from">
             <span className={styles.Required}>*</span>From
@@ -202,6 +201,7 @@ export default function HeroForm() {
             id="from"
           />
         </div>
+
         <div className={styles.Input}>
           <Label htmlFor="to">
             <span className={styles.Required}>*</span>To
@@ -215,9 +215,9 @@ export default function HeroForm() {
             required
           />
         </div>
-      </div>
-      {/* Dates */}
-      <div className={styles.Row}>
+
+        {/* Dates */}
+
         <div className={styles.Input}>
           <Label htmlFor="departureDate">
             <span className={styles.Required}>*</span>Departure Date
@@ -231,6 +231,7 @@ export default function HeroForm() {
             required
           />
         </div>
+
         {ticketType === "Return" && (
           <div className={styles.Input}>
             <Label htmlFor="arrivalDate">
@@ -246,15 +247,38 @@ export default function HeroForm() {
             />
           </div>
         )}
+
+        <div className={styles.Input}>
+          <Label>
+            <span className={styles.Required}>*</span>Number Of Passengers
+          </Label>
+          <Counter
+            onAdd={(e) => {
+              e.preventDefault();
+              setQuantity((current) => (current < 6 ? current + 1 : current));
+            }}
+            onSubtract={(e) => {
+              e.preventDefault();
+              setQuantity((current) => (current > 1 ? current - 1 : current));
+            }}
+          >
+            {quantity}
+          </Counter>
+        </div>
       </div>
 
       {/* Feedback and Button */}
       {feedback}
       <div className="text-center mt-4">
         {formState === "Active" && (
-          <PrimaryButton type="submit" onClick={handleForm}>
-            Proceed to Payment <strong>(AED {price})</strong>
-          </PrimaryButton>
+          <div>
+            <PrimaryButton type="submit" onClick={handleForm}>
+              Proceed to Payment <strong>(AED {price * quantity})</strong>
+            </PrimaryButton>
+            <div>
+              <img src={stripe} className={styles.StripeImg} />
+            </div>
+          </div>
         )}
         {formState === "Loading" && (
           <div className="spinner-border" role="status">

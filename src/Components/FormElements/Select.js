@@ -15,7 +15,7 @@ export function Options(props) {
 
 export default function Select(props) {
   return (
-    <div>
+    <>
       <div className={styles.SelectDiv}>
         <input
           type="text"
@@ -27,6 +27,6 @@ export default function Select(props) {
         />
       </div>
       {props.children}
-    </div>
+    </>
   );
 }

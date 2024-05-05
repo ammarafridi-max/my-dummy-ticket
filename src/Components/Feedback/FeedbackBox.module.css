@@ -1,0 +1,22 @@
+.Container {
+  width: 33%;
+  padding: 20px 40px;
+  background-color: #d4edda;
+  border-radius: 10px;
+  position: fixed;
+  right: 0;
+  margin: 0px 20px 0 0;
+}
+
+.Text {
+  width: fit-content;
+  padding: 0;
+  color: #0f401b;
+}
+
+.Icon {
+  width: fit-content;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
