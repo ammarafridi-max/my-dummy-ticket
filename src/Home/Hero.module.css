@@ -22,14 +22,18 @@
   width: fit-content;
   display: flexbox;
   padding: 10px 40px;
-  border-radius: 50px;
+  border-radius: 10px 10px 0 0;
   margin: 0;
-  margin-right: 10px;
-  margin-bottom: 15px;
+  font-size: 15px;
 }
 
 .Btn:hover {
   cursor: pointer;
+}
+
+.Active {
+  border: 2px solid black;
+  border-bottom: 0;
 }
 
 @media screen and (max-width: 991px) {

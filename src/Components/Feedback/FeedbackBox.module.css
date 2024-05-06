@@ -1,22 +1,32 @@
 .Container {
-  width: 33%;
+  width: 40%;
   padding: 20px 40px;
   background-color: #d4edda;
   border-radius: 10px;
-  position: fixed;
-  right: 0;
-  margin: 0px 20px 0 0;
+  position: absolute;
+  right: 30px;
+  top: 30px;
 }
 
 .Text {
-  width: fit-content;
+  width: 90%;
   padding: 0;
   color: #0f401b;
 }
 
 .Icon {
-  width: fit-content;
+  width: 10%;
   padding: 0;
   background-color: transparent;
   border: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .Container {
+    width: 90%;
+    margin: 0 auto;
+    top: 20px;
+    right: 10px;
+    left: 10px;
+  }
 }

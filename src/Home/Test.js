@@ -1,37 +1,74 @@
 import { useState, useEffect } from "react";
+import styles from "./Test.module.css";
 
 export default function Test() {
-  const [airportCode, setAirportCode] = useState("");
-  const [airportList, setAirportList] = useState([]);
+  const review = [
+    {
+      key: 1,
+      value: 0,
+      text: "Dissatisfied",
+    },
+    {
+      key: 2,
+      value: 5,
+      text: "OK",
+    },
+    {
+      key: 3,
+      value: 10,
+      text: "Very Good",
+    },
+    {
+      key: 4,
+      value: 20,
+      text: "Amazing",
+    },
+  ];
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "ebe9ec1940msh979480d76c87d13p1b618fjsnc41978c04259",
-      "X-RapidAPI-Host": "travel-hacking-tool.p.rapidapi.com",
-    },
-  };
-  useEffect(
-    function () {
-      fetch(
-        "https://travel-hacking-tool.p.rapidapi.com/api/listairports/",
-        options
-      )
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-    },
-    [airportCode]
-  );
+  const [bill, setBill] = useState();
+  const [user1Tip, setUser1Tip] = useState();
+  const [user2Tip, setUser2Tip] = useState();
+
+  const tip = Number(bill * ((user1Tip + user2Tip) / 2 / 100));
+
+  function handleChange(e) {
+    setBill(e.target.value);
+  }
 
   return (
-    <div>
-      <input
-        type="text"
-        value={airportCode}
-        onChange={(e) => {
-          setAirportCode(e.target.value);
-        }}
-      />
+    <div className="col-lg-10 mx-auto">
+      <p>
+        How much was the bill?
+        <input type="text" value={bill} onChange={handleChange} />
+      </p>
+      <p>
+        How did you like the food?
+        <select onChange={(e) => setUser1Tip(e.target.value)}>
+          {review.map((review) => {
+            return (
+              <option
+                id={review.key}
+                value={review.value}
+              >{`${review.text} (${review.value})`}</option>
+            );
+          })}
+        </select>
+      </p>
+      <p>
+        How did your friend like the food?
+        <select onChange={(e) => setUser2Tip(e.target.value)}>
+          {review.map((review) => {
+            return (
+              <option
+                id={review.key}
+                value={review.value}
+              >{`${review.text} (${review.value})`}</option>
+            );
+          })}
+        </select>
+      </p>
+      <p>Total: ${bill}</p>
+      <p>Tip: {tip}</p>
     </div>
   );
 }

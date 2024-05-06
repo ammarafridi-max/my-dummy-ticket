@@ -4,6 +4,7 @@ import Navigation from "./Layout/Navigation";
 import MobileNavigation from "./Layout/MobileNavigation";
 import Footer from "./Layout/Footer";
 import Home from "./Home/Home";
+import Test from "./Home/Test";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
       <Footer />
     </BrowserRouter>

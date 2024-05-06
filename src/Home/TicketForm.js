@@ -1,16 +1,15 @@
-import styles from "./HeroForm.module.css";
+import styles from "./TicketForm.module.css";
 import Input from "../Components/FormElements/Input";
 import Label from "../Components/FormElements/Label";
 import { useState, useEffect } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
-import Success from "../Components/Feedback/Success";
 import Error from "../Components/Feedback/Error";
 import stripe from "./stripe.png";
 import Counter from "../Components/FormElements/Counter";
-import Select from "../Components/FormElements/Select";
+import FeedbackBox from "../Components/Feedback/FeedbackBox";
 
-export default function HeroForm() {
-  const [feedback, setFeedback] = useState("");
+export default function TicketForm() {
+  const [feedback, setFeedback] = useState();
   const [formState, setFormState] = useState("Active");
 
   const [ticketType, setTicketType] = useState("One Way");
@@ -91,7 +90,9 @@ export default function HeroForm() {
     const query = new URLSearchParams(window.location.search);
     if (query.get("success")) {
       setFeedback(
-        <Success>Order placed! You will receive an email confirmation.</Success>
+        <FeedbackBox>
+          Payment successful! Your dummy ticket will soon be sent to you.
+        </FeedbackBox>
       );
       setFormState("Inactive");
     }
@@ -249,7 +250,7 @@ export default function HeroForm() {
           </div>
         )}
 
-        <div className={styles.Input}>
+        {/* <div className={styles.Input}>
           <Label>
             <span className={styles.Required}>*</span>Number of Travelers
           </Label>
@@ -265,7 +266,7 @@ export default function HeroForm() {
           >
             {quantity}
           </Counter>
-        </div>
+        </div> */}
       </div>
 
       {/* Feedback and Button */}
