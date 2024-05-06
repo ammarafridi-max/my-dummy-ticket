@@ -7,7 +7,7 @@ export default function Container(props) {
   };
   return (
     <div
-      className={`col-11 col-lg-10 mx-auto ${props.className}`}
+      className={`col-11 col-lg-10 mx-auto m-0 ${props.className}`}
       style={containerStyle}
     >
       {props.children}

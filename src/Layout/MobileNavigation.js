@@ -52,6 +52,12 @@ function MenuList({ onClick }) {
       <a href="#process" onClick={onClick}>
         <div className={styles.MenuItem}>How It Works</div>
       </a>
+      <a href="#about" onClick={onClick}>
+        <div className={styles.MenuItem}>About Us</div>
+      </a>
+      <a href="#faqs" onClick={onClick}>
+        <div className={styles.MenuItem}>FAQs</div>
+      </a>
       <a href="#contact" onClick={onClick}>
         <div className={styles.MenuItem}>Contact Us</div>
       </a>

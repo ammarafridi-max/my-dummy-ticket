@@ -12,7 +12,9 @@ export default function Hero() {
       pt="25px"
       pb="75px"
     >
-      <Container className={`${styles.HeroDiv}`}>
+      <Container
+        className={`${styles.HeroDiv} row justify-content-between align-items-center`}
+      >
         <div className="col-12 col-lg-5">
           <h1 className={styles.HeroHeading}>
             Get your dummy ticket from

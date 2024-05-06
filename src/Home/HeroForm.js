@@ -7,6 +7,7 @@ import Success from "../Components/Feedback/Success";
 import Error from "../Components/Feedback/Error";
 import stripe from "./stripe.png";
 import Counter from "../Components/FormElements/Counter";
+import Select from "../Components/FormElements/Select";
 
 export default function HeroForm() {
   const [feedback, setFeedback] = useState("");
@@ -81,6 +82,7 @@ export default function HeroForm() {
             <Error>Error submitting form. Please try again later</Error>
           );
           setFormState("Active");
+          console.log(error);
         });
     }
   }
@@ -125,8 +127,9 @@ export default function HeroForm() {
         </p>
       </div>
 
-      <div className="row">
-        {/* Passenger Name */}
+      {/* Names */}
+
+      <div className={`row`}>
         <div className={styles.Input}>
           <Label htmlFor="firstName">
             <span className={styles.Required}>*</span>First Name
@@ -187,7 +190,6 @@ export default function HeroForm() {
         </div>
 
         {/* From / To */}
-
         <div className={styles.Input}>
           <Label htmlFor="from">
             <span className={styles.Required}>*</span>From
@@ -217,7 +219,6 @@ export default function HeroForm() {
         </div>
 
         {/* Dates */}
-
         <div className={styles.Input}>
           <Label htmlFor="departureDate">
             <span className={styles.Required}>*</span>Departure Date
@@ -250,16 +251,16 @@ export default function HeroForm() {
 
         <div className={styles.Input}>
           <Label>
-            <span className={styles.Required}>*</span>Number Of Passengers
+            <span className={styles.Required}>*</span>Number of Travelers
           </Label>
           <Counter
             onAdd={(e) => {
+              setQuantity((current) => (current < 12 ? current + 1 : current));
               e.preventDefault();
-              setQuantity((current) => (current < 6 ? current + 1 : current));
             }}
             onSubtract={(e) => {
-              e.preventDefault();
               setQuantity((current) => (current > 1 ? current - 1 : current));
+              e.preventDefault();
             }}
           >
             {quantity}
@@ -269,8 +270,8 @@ export default function HeroForm() {
 
       {/* Feedback and Button */}
       {feedback}
-      <div className="text-center mt-4">
-        {formState === "Active" && (
+      <div className="text-center mt-3">
+        {formState === "Active" ? (
           <div>
             <PrimaryButton type="submit" onClick={handleForm}>
               Proceed to Payment <strong>(AED {price * quantity})</strong>
@@ -279,8 +280,7 @@ export default function HeroForm() {
               <img src={stripe} className={styles.StripeImg} />
             </div>
           </div>
-        )}
-        {formState === "Loading" && (
+        ) : (
           <div className="spinner-border" role="status">
             <span className="sr-only"></span>
           </div>

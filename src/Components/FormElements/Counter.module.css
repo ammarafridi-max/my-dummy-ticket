@@ -7,14 +7,16 @@
 .Number {
   width: 100px;
   text-align: center;
+  font-size: 15px;
 }
 
 .Button {
   padding: 0;
   background-color: transparent;
   border: none;
+  font-size: 12px;
 }
 
-.Button > * {
-  font-size: 15px;
+.Button * {
+  font-size: 17px !important;
 }

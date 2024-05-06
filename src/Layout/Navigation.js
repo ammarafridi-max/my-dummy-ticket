@@ -1,9 +1,6 @@
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import styles from "./Navigation.module.css";
 import logo from "./logo2.png";
-import FeedbackBox from "../Components/Feedback/FeedbackBox";
-import { useEffect, useState } from "react";
-import { TroubleshootOutlined } from "@mui/icons-material";
 
 export default function Navigation() {
   return (
@@ -26,6 +23,12 @@ export default function Navigation() {
           </a>
           <a href="#process" className={styles.NavLink}>
             How It Works
+          </a>
+          <a href="#about" className={styles.NavLink}>
+            About Us
+          </a>
+          <a href="#faqs" className={styles.NavLink}>
+            FAQs
           </a>
           <a href="#contact" className={styles.NavLink}>
             Contact

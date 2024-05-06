@@ -2,16 +2,9 @@
   background-color: #f5efe6;
 }
 
-.HeroDiv {
-  border-radius: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .HeroHeading {
   color: black;
-  font-size: 52px;
+  font-size: 48px;
   line-height: 1.2;
   font-weight: 600;
   text-transform: capitalize;

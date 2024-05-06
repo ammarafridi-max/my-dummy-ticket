@@ -1,32 +1,17 @@
 import { useState } from "react";
 import styles from "./Select.module.css";
 
-export function Option(props) {
+export default function Select({ children, onChange, onClick, id, className }) {
   return (
-    <li value={props.value} className={styles.Option} onClick={props.onClick}>
-      {props.children}
-    </li>
-  );
-}
-
-export function Options(props) {
-  return <div className={styles.OptionsDiv}>{props.children}</div>;
-}
-
-export default function Select(props) {
-  return (
-    <>
-      <div className={styles.SelectDiv}>
-        <input
-          type="text"
-          onChange={props.onChange}
-          onClick={props.onClick}
-          className={styles.Select}
-          value={props.value}
-          placeholder={props.placeholder}
-        />
-      </div>
-      {props.children}
-    </>
+    <div className={styles.Container}>
+      <select
+        className={`${styles.Select} ${className}`}
+        onChange={onChange}
+        onClick={onClick}
+        id={id}
+      >
+        {children}
+      </select>
+    </div>
   );
 }

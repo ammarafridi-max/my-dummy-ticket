@@ -5,6 +5,7 @@ import About from "./About.js";
 import Contact from "./Contact.js";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Test from "./Test.js";
+import FAQ from "./FAQ.js";
 
 export default function Home() {
   return (
@@ -16,7 +17,8 @@ export default function Home() {
       </HelmetProvider>
       <Hero />
       <Process />
-      {/* <About /> */}
+      <About />
+      <FAQ />
       <Contact />
     </div>
   );

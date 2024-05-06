@@ -1,16 +1,17 @@
 import styles from "./About.module.css";
 import PrimarySection from "../Components/Section/PrimarySection";
 import Container from "../Components/Container/Container";
+import img from "./about.png";
 
 export default function About() {
   return (
-    <PrimarySection py="50px">
+    <PrimarySection pt="75px" id="about">
       <Container>
-        <div className="row">
-          <div className={`col-12 col-lg-5 ${styles.Gallery}`}>
-            <div className={styles.Column}></div>
+        <div className="row align-items-center justify-content-between">
+          <div className={`col-12 ${styles.ImgDiv}`}>
+            <img src={img} className={styles.Img} />
           </div>
-          <div className="col-12 col-lg-7 my-5">
+          <div className={`col-12 ${styles.TextSection}`}>
             <h2 className="section-heading text-start">About Us</h2>
             <p>
               My Dummy Ticket is a service provider based in the United Arab
