@@ -1,6 +1,6 @@
 import styles from "./Contact.module.css";
-import PrimarySection from "../Components/Section/PrimarySection";
-import Container from "../Components/Container/Container";
+import PrimarySection from "../../Components/Section/PrimarySection";
+import Container from "../../Components/Container/Container";
 import CallRoundedIcon from "@mui/icons-material/CallRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { WhatsApp } from "@mui/icons-material";

@@ -1,25 +1,46 @@
-.Container {
-  width: 100%;
-  border-radius: 100px;
-  padding: 0 20px;
-  background-color: rgb(242, 242, 242);
-  transition-duration: 0.3s;
-}
-
 .Select {
   width: 100%;
-  border-radius: 100px;
+  border-radius: 6px;
+  padding: 10px 20px;
+  background-color: rgb(242, 242, 242);
+  transition-duration: 0.3s;
   border: none;
-  background-color: transparent;
-  font-size: 14px;
-  padding: 10px 0;
 }
 
 .Select:focus-visible {
   outline: none;
 }
 
-.Container:hover {
-  outline: none;
-  background-color: rgb(230, 230, 230);
+.Hidden {
+  display: none;
+}
+
+.Show {
+  display: block;
+}
+
+.OptionsBox {
+  height: fit-content;
+  max-height: 150px;
+  width: 100%;
+  list-style-type: none;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid rgb(242, 242, 242);
+  padding: 0;
+  overflow: scroll;
+  margin: 0;
+  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  z-index: 0;
+}
+
+.Option {
+  padding: 5px 10px;
+}
+
+.Option:hover {
+  background-color: #d1dbd5;
+  color: #1a4d2e;
 }

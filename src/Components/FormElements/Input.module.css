@@ -4,7 +4,7 @@
   border: none;
   background-color: rgb(242, 242, 242);
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 15px;
   transition-duration: 0.3s;
 }
 
@@ -16,8 +16,4 @@
 
 .Input::placeholder {
   color: rgb(184, 184, 184);
-}
-
-.Input:invalid {
-  background-color: red;
 }

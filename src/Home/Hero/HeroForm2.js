@@ -1,15 +1,16 @@
-import styles from "./HeroForm.module.css";
-import Input from "../Components/FormElements/Input";
-import Label from "../Components/FormElements/Label";
+import styles from "./TicketForm.module.css";
+import Input from "../../Components/FormElements/Input";
+import Label from "../../Components/FormElements/Label";
 import { useState, useEffect } from "react";
-import PrimaryButton from "../Components/Buttons/PrimaryButton";
-import Success from "../Components/Feedback/Success";
-import Error from "../Components/Feedback/Error";
+import PrimaryButton from "../../Components/Buttons/PrimaryButton";
+import Success from "../../Components/Feedback/Success";
+import Error from "../../Components/Feedback/Error";
 import stripe from "./stripe.png";
-import Counter from "../Components/FormElements/Counter";
-import Select from "../Components/FormElements/Select";
+import Counter from "../../Components/FormElements/Counter";
+import Select from "../../Components/FormElements/Select";
 
 export default function HeroForm2() {
+  const today = new Date().toISOString().split("T")[0];
   const [feedback, setFeedback] = useState("");
   const [formState, setFormState] = useState("Active");
 
@@ -93,7 +94,7 @@ export default function HeroForm2() {
   return (
     <form className={styles.Form} action="/" method="post">
       {/* Return / One way */}
-      <div className={`row justify-content-start`}>
+      <div className={styles.Row}>
         <p
           className={`${styles.Type} ${
             ticketType === "One Way" && styles.Active
@@ -120,15 +121,10 @@ export default function HeroForm2() {
         </p>
       </div>
 
-      <div className={styles.Row}></div>
-
       {/* From / To */}
-      <p className={styles.FieldTitle}>1. Travel Information</p>
-      <div className={styles.Row}>
+      <div className="row">
         <div className={styles.Input}>
-          <Label htmlFor="from">
-            <span className={styles.Required}>*</span>From
-          </Label>
+          <Label htmlFor="from">From</Label>
           <Input
             type="text"
             value={from}
@@ -136,32 +132,59 @@ export default function HeroForm2() {
             required
             name="from"
             id="from"
+            autoComplete="on"
           />
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="to">
-            <span className={styles.Required}>*</span>To
-          </Label>
+          <Label htmlFor="To">To</Label>
           <Input
             type="text"
             value={to}
             onChange={(e) => setTo(e.target.value)}
+            required
             name="to"
             id="to"
+          />
+        </div>
+      </div>
+
+      {/* Contact */}
+
+      <div className="row">
+        <div className={styles.Input}>
+          <Label htmlFor="email">Email Address</Label>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
+            name="email"
+            id="email"
+            autoComplete="on"
+            placeholder="Email Address"
+          />
+        </div>
+
+        <div className={styles.Input}>
+          <Label htmlFor="number">Phone Number</Label>
+          <Input
+            type="text"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+            required
+            name="number"
+            id="number"
+            placeholder="Phone Number"
           />
         </div>
       </div>
 
       {/* Dates */}
 
-      <p className={styles.FieldTitle}>2. Dates</p>
-      <div className={styles.Row}>
+      <div className="row">
         <div className={styles.Input}>
-          <Label htmlFor="departureDate">
-            <span className={styles.Required}>*</span>Departure Date
-          </Label>
+          <Label htmlFor="departureDate">Departure Date</Label>
           <Input
             type="date"
             value={departureDate}
@@ -169,15 +192,14 @@ export default function HeroForm2() {
             name="departureDate"
             id="departureDate"
             required
+            min={today}
           />
         </div>
 
         <div className={styles.Input}>
           {ticketType === "Return" && (
             <>
-              <Label htmlFor="arrivalDate">
-                <span className={styles.Required}>*</span>Return Date
-              </Label>
+              <Label htmlFor="arrivalDate">Return Date</Label>
               <Input
                 type="date"
                 value={arrivalDate}
@@ -185,6 +207,7 @@ export default function HeroForm2() {
                 name="arrivalDate"
                 id="arrivalDate"
                 required
+                min={departureDate}
               />
             </>
           )}
@@ -192,7 +215,6 @@ export default function HeroForm2() {
       </div>
 
       {/* Passenger Detail */}
-      <p className={styles.FieldTitle}>3. Passenger Detail</p>
 
       {/* Quantity */}
       <div className={styles.Input}>
@@ -217,7 +239,7 @@ export default function HeroForm2() {
       {Array.from({ length: quantity }).map((_, index) => (
         <div key={index}>
           <p className={styles.PassengerNumber}>Passenger {index + 1}</p>
-          <div className={styles.Row}>
+          <div className="row">
             <div className={styles.Title}>
               <Select
                 id={`title${index}`}
@@ -277,40 +299,6 @@ export default function HeroForm2() {
           </div>
         </div>
       ))}
-
-      {/* Contact */}
-
-      <p className={styles.FieldTitle}>4. Contact Detail</p>
-      <div className={styles.Row}>
-        <div className={styles.Input}>
-          <Label htmlFor="email">
-            <span className={styles.Required}>*</span>Email
-          </Label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            name="email"
-            id="email"
-            autoComplete="on"
-          />
-        </div>
-
-        <div className={styles.Input}>
-          <Label htmlFor="number">
-            <span className={styles.Required}>*</span>Phone Number
-          </Label>
-          <Input
-            type="text"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-            required
-            name="number"
-            id="number"
-          />
-        </div>
-      </div>
 
       {/* Feedback and Button */}
       {feedback}

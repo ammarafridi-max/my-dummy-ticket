@@ -1,41 +1,35 @@
 import styles from "./TicketForm.module.css";
-import Input from "../Components/FormElements/Input";
-import Label from "../Components/FormElements/Label";
+import Input from "../../Components/FormElements/Input";
+import Label from "../../Components/FormElements/Label";
 import { useState, useEffect } from "react";
-import PrimaryButton from "../Components/Buttons/PrimaryButton";
-import Error from "../Components/Feedback/Error";
+import PrimaryButton from "../../Components/Buttons/PrimaryButton";
+import Error from "../../Components/Feedback/Error";
 import stripe from "./stripe.png";
-import Counter from "../Components/FormElements/Counter";
-import FeedbackBox from "../Components/Feedback/FeedbackBox";
+import Counter from "../../Components/FormElements/Counter";
+import FeedbackBox from "../../Components/Feedback/FeedbackBox";
 
 export default function HotelForm() {
   const [feedback, setFeedback] = useState();
   const [formState, setFormState] = useState("Active");
 
-  const [ticketType, setTicketType] = useState("One Way");
-  const [ticketId, setTicketId] = useState("price_1PCSArIy9CRhj2A0xXopFs0u"); // One Way
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
-  const [arrivalDate, setArrivalDate] = useState("");
+  const [city, setCity] = useState("");
+  const [checkinDate, setCheckinDate] = useState("");
+  const [checkoutDate, setCheckoutDate] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(49);
 
   const customerData = {
-    ticketType,
-    ticketId,
     firstName,
     lastName,
     email,
     number,
-    from,
-    to,
-    departureDate,
-    arrivalDate,
+    city,
+    checkinDate,
+    checkoutDate,
     quantity,
   };
 
@@ -48,9 +42,9 @@ export default function HotelForm() {
       !lastName ||
       !email ||
       !number ||
-      !from ||
-      !to ||
-      !departureDate
+      !city ||
+      !checkinDate ||
+      !checkoutDate
     ) {
       setFeedback(<Error>All fields are mandatory</Error>);
 
@@ -86,17 +80,17 @@ export default function HotelForm() {
     }
   }
 
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      setFeedback(
-        <FeedbackBox>
-          Payment successful! Your dummy ticket will soon be sent to you.
-        </FeedbackBox>
-      );
-      setFormState("Inactive");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const query = new URLSearchParams(window.location.search);
+  //   if (query.get("success")) {
+  //     setFeedback(
+  //       <FeedbackBox>
+  //         Payment successful! Your dummy ticket will soon be sent to you.
+  //       </FeedbackBox>
+  //     );
+  //     setFormState("Inactive");
+  //   }
+  // }, []);
 
   return (
     <form className={styles.Form} action="/" method="post">
@@ -104,8 +98,8 @@ export default function HotelForm() {
 
       <div className={`row`}>
         <div className={styles.Input}>
-          <Label htmlFor="firstName">
-            <span className={styles.Required}>*</span>First Name
+          <Label htmlFor="firstName" required>
+            First Name
           </Label>
           <Input
             type="text"
@@ -118,8 +112,8 @@ export default function HotelForm() {
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="lastName">
-            <span className={styles.Required}>*</span>Last Name
+          <Label htmlFor="lastName" required>
+            Last Name
           </Label>
           <Input
             type="text"
@@ -134,8 +128,8 @@ export default function HotelForm() {
         {/* Contact */}
 
         <div className={styles.Input}>
-          <Label htmlFor="email">
-            <span className={styles.Required}>*</span>Email
+          <Label htmlFor="email" required>
+            Email
           </Label>
           <Input
             type="email"
@@ -149,8 +143,8 @@ export default function HotelForm() {
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="number">
-            <span className={styles.Required}>*</span>Phone Number
+          <Label htmlFor="number" required>
+            Phone Number
           </Label>
           <Input
             type="text"
@@ -164,52 +158,50 @@ export default function HotelForm() {
 
         {/* From / To */}
         <div className={styles.Input}>
-          <Label htmlFor="from">
-            <span className={styles.Required}>*</span>From
+          <Label htmlFor="city" required>
+            City
           </Label>
           <Input
             type="text"
-            value={from}
-            onChange={(e) => setFrom(e.target.value)}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             required
-            name="from"
-            id="from"
+            name="city"
+            id="city"
           />
         </div>
 
         {/* Dates */}
         <div className={styles.Input}>
-          <Label htmlFor="departureDate">
-            <span className={styles.Required}>*</span>Check In Date
+          <Label htmlFor="checkinDate" required>
+            Check In Date
           </Label>
           <Input
             type="date"
-            value={departureDate}
-            onChange={(e) => setDepartureDate(e.target.value)}
-            name="departureDate"
-            id="departureDate"
+            value={checkinDate}
+            onChange={(e) => setCheckinDate(e.target.value)}
+            name="checkinDate"
+            id="checkinDate"
             required
           />
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="arrivalDate">
-            <span className={styles.Required}>*</span>Check Out Date
+          <Label htmlFor="checkoutDate" required>
+            Check Out Date
           </Label>
           <Input
             type="date"
-            value={arrivalDate}
-            onChange={(e) => setArrivalDate(e.target.value)}
-            name="arrivalDate"
-            id="arrivalDate"
+            value={checkoutDate}
+            onChange={(e) => setCheckoutDate(e.target.value)}
+            name="checkoutDate"
+            id="checkoutDate"
             required
           />
         </div>
 
         <div className={styles.Input}>
-          <Label>
-            <span className={styles.Required}>*</span>Number of Travelers
-          </Label>
+          <Label>Number of Travelers</Label>
           <Counter
             onAdd={(e) => {
               setQuantity((current) => (current < 12 ? current + 1 : current));

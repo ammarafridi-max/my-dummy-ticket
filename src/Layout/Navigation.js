@@ -30,9 +30,6 @@ export default function Navigation() {
           <a href="#faqs" className={styles.NavLink}>
             FAQs
           </a>
-          <a href="#contact" className={styles.NavLink}>
-            Contact
-          </a>
           {/* <a href="/" className={styles.NavLink}>
             FAQ
           </a> */}

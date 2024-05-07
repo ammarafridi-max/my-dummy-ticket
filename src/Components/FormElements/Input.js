@@ -11,10 +11,13 @@ export default function Input(props) {
         style={props.style}
         onClick={props.onClick}
         onChange={props.onChange}
+        onFocus={props.onFocus}
         id={props.id}
         name={props.name}
         autoComplete={props.autoComplete}
         pattern={props.pattern}
+        min={props.min}
+        max={props.max}
       />
     </div>
   );

@@ -1,13 +1,17 @@
-import PrimarySection from "../Components/Section/PrimarySection";
-import Container from "../Components/Container/Container";
+import PrimarySection from "../../Components/Section/PrimarySection";
+import Container from "../../Components/Container/Container";
 import TicketForm from "./TicketForm";
+import HeroForm2 from "./HeroForm2";
 import HotelForm from "./HotelForm";
 // import styles from "./Home.module.css";
 import styles from "./Hero.module.css";
 import { useState } from "react";
+import HotelRoundedIcon from "@mui/icons-material/HotelRounded";
+import LocalAirportRoundedIcon from "@mui/icons-material/LocalAirportRounded";
 
 export default function Hero() {
-  const [formType, setFormType] = useState("ticket");
+  const [formType, setFormType] = useState(<TicketForm />);
+  const [currentForm, setCurrentForm] = useState("ticket");
 
   return (
     <PrimarySection
@@ -32,26 +36,43 @@ export default function Hero() {
         </div>
         <div className="col-12 col-lg-6 m-0 p-0">
           <div className="col-12 row m-0 p-0">
-            {/* <p
+            {/* Ticket */}
+
+            <div
               className={`${styles.Btn} ${
-                (formType === "ticket") & styles.Active
+                currentForm === "ticket" && styles.Active
               }`}
               onClick={() => {
-                setFormType("ticket");
+                setFormType(<TicketForm />);
+                setCurrentForm("ticket");
               }}
             >
-              Flight
-            </p>
-            <p
+              <div className={styles.Icon}>
+                <LocalAirportRoundedIcon />
+              </div>
+              <p className={styles.BtnText}>Flight</p>
+            </div>
+
+            {/* Hotel */}
+
+            {/* <div
+              className={`${styles.Btn} ${
+                currentForm === "hotel" && styles.Active
+              }`}
               onClick={() => {
-                setFormType("hotel");
+                setFormType(<HotelForm />);
+                setCurrentForm("hotel");
               }}
-              className={`${styles.Btn}`}
             >
-              Hotel
-            </p> */}
+              <div className={styles.Icon}>
+                <HotelRoundedIcon />
+              </div>
+              <p className={styles.BtnText}>Hotel</p>
+            </div> */}
           </div>
-          {formType === "ticket" ? <TicketForm /> : <HotelForm />}
+
+          {/* Form */}
+          {formType}
         </div>
       </Container>
     </PrimarySection>

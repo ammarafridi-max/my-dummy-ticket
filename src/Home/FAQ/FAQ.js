@@ -1,7 +1,7 @@
 import styles from "./FAQ.js";
-import PrimarySection from "../Components/Section/PrimarySection";
-import Container from "../Components/Container/Container";
-import FAQCard from "../Components/FAQCard/FAQCard";
+import PrimarySection from "../../Components/Section/PrimarySection";
+import Container from "../../Components/Container/Container";
+import FAQCard from "../../Components/FAQCard/FAQCard";
 
 export default function FAQ() {
   return (

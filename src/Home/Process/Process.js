@@ -1,7 +1,6 @@
 import styles from "./Process.module.css";
-import PrimarySection from "../Components/Section/PrimarySection";
-import Container from "../Components/Container/Container";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import PrimarySection from "../../Components/Section/PrimarySection";
+import Container from "../../Components/Container/Container";
 
 export default function Process() {
   return (

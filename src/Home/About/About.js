@@ -1,6 +1,6 @@
 import styles from "./About.module.css";
-import PrimarySection from "../Components/Section/PrimarySection";
-import Container from "../Components/Container/Container";
+import PrimarySection from "../../Components/Section/PrimarySection";
+import Container from "../../Components/Container/Container";
 import img from "./about.png";
 
 export default function About() {

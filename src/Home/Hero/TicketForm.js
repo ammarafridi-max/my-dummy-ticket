@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import styles from "./TicketForm.module.css";
 import stripe from "./stripe.png";
-import Input from "../Components/FormElements/Input";
-import Label from "../Components/FormElements/Label";
-import PrimaryButton from "../Components/Buttons/PrimaryButton";
-import Error from "../Components/Feedback/Error";
-import FeedbackBox from "../Components/Feedback/FeedbackBox";
-import TextArea from "../Components/FormElements/TextArea";
+import Input from "../../Components/FormElements/Input";
+import Label from "../../Components/FormElements/Label";
+import PrimaryButton from "../../Components/Buttons/PrimaryButton";
+import Error from "../../Components/Feedback/Error";
+import FeedbackBox from "../../Components/Feedback/FeedbackBox";
+import TextArea from "../../Components/FormElements/TextArea";
+import Select from "../../Components/FormElements/Select";
 
 export default function TicketForm() {
+  const today = new Date().toISOString().split("T")[0];
   const [feedback, setFeedback] = useState();
   const [formState, setFormState] = useState("Active");
 
@@ -59,7 +61,7 @@ export default function TicketForm() {
       // Proceed to sending data to backend
     } else {
       setFormState("Loading");
-      fetch(process.env.REACT_APP_BACKEND_URL, {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/ticket`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -197,6 +199,7 @@ export default function TicketForm() {
           <Label htmlFor="from" required>
             From
           </Label>
+          {/* <Select /> */}
           <Input
             type="text"
             value={from}
@@ -233,6 +236,7 @@ export default function TicketForm() {
             name="departureDate"
             id="departureDate"
             required
+            min={today}
           />
         </div>
 
@@ -248,6 +252,7 @@ export default function TicketForm() {
               name="arrivalDate"
               id="arrivalDate"
               required
+              min={departureDate}
             />
           </div>
         )}

@@ -20,20 +20,50 @@
 .Btn {
   background-color: white;
   width: fit-content;
-  display: flexbox;
-  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  border: none;
   border-radius: 10px 10px 0 0;
   margin: 0;
   font-size: 15px;
+  opacity: 0.5;
 }
 
 .Btn:hover {
   cursor: pointer;
 }
 
+.Icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background-color: transparent;
+}
+
 .Active {
-  border: 2px solid black;
-  border-bottom: 0;
+  border: none;
+  color: #155724;
+  opacity: 1;
+}
+
+.Active .Icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background-color: #d1dbd5;
+}
+
+.BtnText {
+  display: flexbox;
+  font-size: 15px;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 991px) {
