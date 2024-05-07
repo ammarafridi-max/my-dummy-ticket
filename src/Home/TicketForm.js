@@ -1,12 +1,12 @@
+import { useState, useEffect } from "react";
 import styles from "./TicketForm.module.css";
+import stripe from "./stripe.png";
 import Input from "../Components/FormElements/Input";
 import Label from "../Components/FormElements/Label";
-import { useState, useEffect } from "react";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import Error from "../Components/Feedback/Error";
-import stripe from "./stripe.png";
-import Counter from "../Components/FormElements/Counter";
 import FeedbackBox from "../Components/Feedback/FeedbackBox";
+import TextArea from "../Components/FormElements/TextArea";
 
 export default function TicketForm() {
   const [feedback, setFeedback] = useState();
@@ -24,10 +24,10 @@ export default function TicketForm() {
   const [arrivalDate, setArrivalDate] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(49);
+  const [message, setMessage] = useState("");
 
   const customerData = {
     ticketType,
-    ticketId,
     firstName,
     lastName,
     email,
@@ -37,6 +37,8 @@ export default function TicketForm() {
     departureDate,
     arrivalDate,
     quantity,
+    price,
+    message,
   };
 
   function handleForm(e) {
@@ -101,7 +103,7 @@ export default function TicketForm() {
   return (
     <form className={styles.Form} action="/" method="post">
       {/* Return / One way */}
-      <div className={`row justify-content-start`}>
+      <div className={styles.Row}>
         <p
           className={`${styles.Type} ${
             ticketType === "One Way" && styles.Active
@@ -109,7 +111,6 @@ export default function TicketForm() {
           onClick={() => {
             setTicketType("One Way");
             setPrice(49);
-            setTicketId("price_1PCSArIy9CRhj2A0xXopFs0u");
           }}
         >
           One way
@@ -121,7 +122,6 @@ export default function TicketForm() {
           onClick={() => {
             setTicketType("Return");
             setPrice(89);
-            setTicketId("price_1PCcqAIy9CRhj2A0eB1hR3Nn");
           }}
         >
           Return
@@ -132,8 +132,8 @@ export default function TicketForm() {
 
       <div className={`row`}>
         <div className={styles.Input}>
-          <Label htmlFor="firstName">
-            <span className={styles.Required}>*</span>First Name
+          <Label htmlFor="firstName" required>
+            First Name
           </Label>
           <Input
             type="text"
@@ -146,8 +146,8 @@ export default function TicketForm() {
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="lastName">
-            <span className={styles.Required}>*</span>Last Name
+          <Label htmlFor="lastName" required>
+            Last Name
           </Label>
           <Input
             type="text"
@@ -162,8 +162,8 @@ export default function TicketForm() {
         {/* Contact */}
 
         <div className={styles.Input}>
-          <Label htmlFor="email">
-            <span className={styles.Required}>*</span>Email
+          <Label htmlFor="email" required>
+            Email
           </Label>
           <Input
             type="email"
@@ -177,8 +177,8 @@ export default function TicketForm() {
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="number">
-            <span className={styles.Required}>*</span>Phone Number
+          <Label htmlFor="number" required>
+            Phone Number
           </Label>
           <Input
             type="text"
@@ -192,8 +192,8 @@ export default function TicketForm() {
 
         {/* From / To */}
         <div className={styles.Input}>
-          <Label htmlFor="from">
-            <span className={styles.Required}>*</span>From
+          <Label htmlFor="from" required>
+            From
           </Label>
           <Input
             type="text"
@@ -206,8 +206,8 @@ export default function TicketForm() {
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="to">
-            <span className={styles.Required}>*</span>To
+          <Label htmlFor="to" required>
+            To
           </Label>
           <Input
             type="text"
@@ -221,8 +221,8 @@ export default function TicketForm() {
 
         {/* Dates */}
         <div className={styles.Input}>
-          <Label htmlFor="departureDate">
-            <span className={styles.Required}>*</span>Departure Date
+          <Label htmlFor="departureDate" required>
+            Departure Date
           </Label>
           <Input
             type="date"
@@ -236,8 +236,8 @@ export default function TicketForm() {
 
         {ticketType === "Return" && (
           <div className={styles.Input}>
-            <Label htmlFor="arrivalDate">
-              <span className={styles.Required}>*</span>Return Date
+            <Label htmlFor="arrivalDate" required>
+              Return Date
             </Label>
             <Input
               type="date"
@@ -250,9 +250,20 @@ export default function TicketForm() {
           </div>
         )}
 
+        {/* Message */}
+
+        <div className={`${styles.Input} w-100`}>
+          <Label htmlFor="departureDate" optional>
+            Additional Information{" "}
+          </Label>
+          <TextArea onChange={(e) => setMessage(e.target.value)}>
+            {message}
+          </TextArea>
+        </div>
+
         {/* <div className={styles.Input}>
           <Label>
-            <span className={styles.Required}>*</span>Number of Travelers
+            Number of Travelers
           </Label>
           <Counter
             onAdd={(e) => {

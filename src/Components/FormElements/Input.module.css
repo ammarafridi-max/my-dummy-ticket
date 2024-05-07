@@ -17,3 +17,7 @@
 .Input::placeholder {
   color: rgb(184, 184, 184);
 }
+
+.Input:invalid {
+  background-color: red;
+}
