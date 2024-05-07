@@ -61,7 +61,7 @@ export default function TicketForm() {
       // Proceed to sending data to backend
     } else {
       setFormState("Loading");
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/ticket`, {
+      fetch(process.env.REACT_APP_BACKEND_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
