@@ -28,6 +28,7 @@ export default function TicketForm() {
 
   const customerData = {
     ticketType,
+    ticketId,
     firstName,
     lastName,
     email,
@@ -37,7 +38,6 @@ export default function TicketForm() {
     departureDate,
     arrivalDate,
     quantity,
-    price,
     message,
   };
 
@@ -111,6 +111,7 @@ export default function TicketForm() {
           onClick={() => {
             setTicketType("One Way");
             setPrice(49);
+            setTicketId("price_1PCSArIy9CRhj2A0xXopFs0u");
           }}
         >
           One way
@@ -122,6 +123,7 @@ export default function TicketForm() {
           onClick={() => {
             setTicketType("Return");
             setPrice(89);
+            setTicketId("price_1PCcqAIy9CRhj2A0eB1hR3Nn");
           }}
         >
           Return
