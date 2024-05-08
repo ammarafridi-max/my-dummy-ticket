@@ -58,7 +58,7 @@ export default function Hero() {
 
             {/* Hotel */}
 
-            <div
+            {/* <div
               className={`${styles.Btn} ${
                 currentForm === "hotel" && styles.Active
               }`}
@@ -73,7 +73,7 @@ export default function Hero() {
               {currentForm === "hotel" && (
                 <p className={styles.BtnText}>Hotel</p>
               )}
-            </div>
+            </div> */}
 
             {/* Insurance */}
 
