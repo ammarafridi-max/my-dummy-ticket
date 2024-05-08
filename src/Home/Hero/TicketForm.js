@@ -52,10 +52,12 @@ export default function TicketForm() {
       !firstName ||
       !lastName ||
       !email ||
-      !number ||
+      !number.code ||
+      !number.digits ||
       !from ||
       !to ||
-      !departureDate
+      !departureDate ||
+      !arrivalDate
     ) {
       setFeedback(<Error>All fields are mandatory</Error>);
 
