@@ -2,35 +2,68 @@
   width: 100%;
   background-color: rgb(242, 242, 242);
   padding: 10px 15px;
-  border-radius: 100px;
+  border-radius: 5px;
+  position: relative;
 }
 
-.Div {
+.Code {
+  width: 25%;
+}
+
+.Digits {
+  width: 75%;
+  padding-left: 15px;
+}
+
+.Code,
+.Digits {
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+.Options {
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  height: 300px;
   width: 100%;
-  background-color: rgb(242, 242, 242);
-  padding: 10px 15px;
-  border-radius: 100px;
+  overflow: scroll;
+  background-color: white;
+  margin-top: 15px;
+  border: 2px solid rgb(242, 242, 242);
+  border-radius: 10px;
+  z-index: 1000;
 }
 
-.Select,
-.Select:focus-visible,
-.Select:focus-within {
-  width: 28%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
-
-.Input {
-  width: 70%;
-  background-color: transparent;
-  border: none;
-  outline: none;
+.Option {
+  width: 100%;
+  height: 40px;
+  display: flex;
   padding: 0 10px;
+  align-items: center;
+}
+
+.Option:hover {
+  background-color: #d1dbd5;
+  color: #1a4d2e;
+}
+
+.Digits {
+  border-left: 2px solid rgb(200, 200, 200);
 }
 
 @media screen and (max-width: 991px) {
   .Select {
     width: 15%;
+  }
+  .Code {
+    width: 15%;
+  }
+
+  .Digits {
+    width: 85%;
+    padding-left: 15px;
   }
 }

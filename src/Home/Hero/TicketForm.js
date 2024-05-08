@@ -4,10 +4,11 @@ import stripe from "./stripe.png";
 import Input from "../../Components/FormElements/Input";
 import Label from "../../Components/FormElements/Label";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import Error from "../../Components/Feedback/Error";
 import FeedbackBox from "../../Components/Feedback/FeedbackBox";
 import TextArea from "../../Components/FormElements/TextArea";
 import Select from "../../Components/FormElements/Select";
+import Number from "../../Components/FormElements/Number";
+import Error from "../../Components/Feedback/Error";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];
@@ -19,7 +20,7 @@ export default function TicketForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+  const [number, setNumber] = useState({ code: "", digits: "" });
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
@@ -34,7 +35,7 @@ export default function TicketForm() {
     firstName,
     lastName,
     email,
-    number,
+    number: `${number.code}${number.digits}`,
     from,
     to,
     departureDate,
@@ -184,14 +185,28 @@ export default function TicketForm() {
           <Label htmlFor="number" required>
             Phone Number
           </Label>
-          <Input
+          <Number
+            codeValue={number.code}
+            codeOnChange={(e) => {
+              setNumber((prev) => ({ ...prev, code: e.target.value }));
+            }}
+            digitsValue={number.digits}
+            digitsOnChange={(e) => {
+              setNumber((prev) => ({
+                ...prev,
+                digits: e.target.value,
+              }));
+            }}
+          />
+
+          {/* <Input
             type="text"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
             required
             name="number"
             id="number"
-          />
+          /> */}
         </div>
 
         {/* From / To */}

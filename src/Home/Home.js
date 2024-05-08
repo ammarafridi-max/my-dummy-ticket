@@ -1,4 +1,3 @@
-import airports from "airport-codes/airports.json";
 import Hero from "./Hero/Hero.js";
 import Process from "./Process/Process.js";
 import About from "./About/About";

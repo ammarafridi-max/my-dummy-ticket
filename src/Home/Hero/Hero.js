@@ -1,13 +1,14 @@
+// import styles from "./Home.module.css";
+import { useState } from "react";
 import PrimarySection from "../../Components/Section/PrimarySection";
 import Container from "../../Components/Container/Container";
 import TicketForm from "./TicketForm";
 import HeroForm2 from "./HeroForm2";
 import HotelForm from "./HotelForm";
-// import styles from "./Home.module.css";
 import styles from "./Hero.module.css";
-import { useState } from "react";
 import HotelRoundedIcon from "@mui/icons-material/HotelRounded";
 import LocalAirportRoundedIcon from "@mui/icons-material/LocalAirportRounded";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 
 export default function Hero() {
   const [formType, setFormType] = useState(<TicketForm />);
@@ -50,12 +51,14 @@ export default function Hero() {
               <div className={styles.Icon}>
                 <LocalAirportRoundedIcon />
               </div>
-              <p className={styles.BtnText}>Flight</p>
+              {currentForm === "ticket" && (
+                <p className={styles.BtnText}>Flight</p>
+              )}
             </div>
 
             {/* Hotel */}
 
-            {/* <div
+            <div
               className={`${styles.Btn} ${
                 currentForm === "hotel" && styles.Active
               }`}
@@ -67,7 +70,28 @@ export default function Hero() {
               <div className={styles.Icon}>
                 <HotelRoundedIcon />
               </div>
-              <p className={styles.BtnText}>Hotel</p>
+              {currentForm === "hotel" && (
+                <p className={styles.BtnText}>Hotel</p>
+              )}
+            </div>
+
+            {/* Insurance */}
+
+            {/* <div
+              className={`${styles.Btn} ${
+                currentForm === "insurance" && styles.Active
+              }`}
+              onClick={() => {
+                setFormType(<HotelForm />);
+                setCurrentForm("insurance");
+              }}
+            >
+              <div className={styles.Icon}>
+                <HealthAndSafetyIcon />
+              </div>
+              {currentForm === "insurance" && (
+                <p className={styles.BtnText}>Insurance</p>
+              )}
             </div> */}
           </div>
 
