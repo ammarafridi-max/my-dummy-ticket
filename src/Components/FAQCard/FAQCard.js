@@ -4,31 +4,26 @@ import { Add } from "@mui/icons-material";
 import { Remove } from "@mui/icons-material";
 
 export default function FAQCard({ question, children }) {
-  const [hidden, setHidden] = useState("none");
+  const [className, setClassName] = useState(styles.Hidden);
 
   function toggleHidden() {
-    setHidden((prevHidden) => (prevHidden === "none" ? "block" : "none"));
+    setClassName((prev) =>
+      prev === styles.Hidden ? styles.Show : styles.Hidden
+    );
   }
 
   return (
     <div className={styles.FAQCard}>
-      <div
-        className={`${styles.QuestionBox} ${
-          hidden === "block" ? styles.Active : ""
-        }`}
-        onClick={toggleHidden}
-      >
+      <div className={`${styles.QuestionBox}`} onClick={toggleHidden}>
         <p className={styles.Question}>{question}</p>
-        {hidden === "none" ? (
+        {className === styles.Hidden ? (
           <Add className={styles.FAQIcon} />
         ) : (
           <Remove className={styles.FAQIcon} />
         )}
       </div>
       {children && (
-        <p className={styles.AnswerBox} style={{ display: hidden }}>
-          {children}
-        </p>
+        <p className={`${className} ${styles.Answer}`}>{children}</p>
       )}
     </div>
   );

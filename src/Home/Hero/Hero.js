@@ -11,7 +11,7 @@ import LocalAirportRoundedIcon from "@mui/icons-material/LocalAirportRounded";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 
 export default function Hero() {
-  const [formType, setFormType] = useState(<TicketForm />);
+  const [formType, setFormType] = useState(<HeroForm2 />);
   const [currentForm, setCurrentForm] = useState("ticket");
 
   return (
@@ -44,7 +44,7 @@ export default function Hero() {
                 currentForm === "ticket" && styles.Active
               }`}
               onClick={() => {
-                setFormType(<TicketForm />);
+                setFormType(<HeroForm2 />);
                 setCurrentForm("ticket");
               }}
             >

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Number.module.css";
+
 const countryCodes = [
   { country: "Afghanistan", code: "93", iso: "AF" },
   { country: "Albania", code: "355", iso: "AL" },
@@ -242,24 +243,41 @@ const countryCodes = [
   { country: "Zambia", code: "260", iso: "ZM" },
   { country: "Zimbabwe", code: "263", iso: "ZW" },
 ];
-
 export default function Number(props) {
   const [code, setCode] = useState(props.codeValue);
   const [isOnFocus, setIsOnFocus] = useState(false);
-
   const filteredCodes = countryCodes.filter((country) => {
     return `${country.country} (+${country.code})`
       .toLowerCase()
       .includes(code.toLowerCase());
   });
 
+  const componentRef = useRef();
+
   const handleCodeChange = (newCode) => {
     setCode(newCode);
     props.codeOnChange({ target: { value: newCode } });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target)
+      ) {
+        setIsOnFocus(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={styles.Div}>
+    <div className={styles.Div} ref={componentRef}>
       <input
         type="text"
         className={styles.Code}
@@ -277,6 +295,7 @@ export default function Number(props) {
         name="digits"
         value={props.digitsValue}
         onChange={props.digitsOnChange}
+        placeholder="Number"
       />
       {isOnFocus && (
         <ul className={styles.Options}>

@@ -1,13 +1,14 @@
-import styles from "./TicketForm.module.css";
-import Input from "../../Components/FormElements/Input";
-import Label from "../../Components/FormElements/Label";
 import { useState, useEffect } from "react";
-import PrimaryButton from "../../Components/Buttons/PrimaryButton";
+import styles from "./TicketForm.module.css";
 import Success from "../../Components/Feedback/Success";
 import Error from "../../Components/Feedback/Error";
+import Input from "../../Components/FormElements/Input";
+import Label from "../../Components/FormElements/Label";
+import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import stripe from "./stripe.png";
 import Counter from "../../Components/FormElements/Counter";
-import Select from "../../Components/FormElements/Select";
+import SelectTitle from "../../Components/FormElements/SelectTitle";
+import Number from "../../Components/FormElements/Number";
 
 export default function HeroForm2() {
   const today = new Date().toISOString().split("T")[0];
@@ -17,11 +18,10 @@ export default function HeroForm2() {
   const [passengers, setPassengers] = useState([
     { title: "", firstName: "", lastName: "" },
   ]);
-
   const [ticketType, setTicketType] = useState("One Way");
   const [ticketId, setTicketId] = useState("price_1PCSArIy9CRhj2A0xXopFs0u"); // One Way
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+  const [number, setNumber] = useState({ code: "", digits: "" });
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
@@ -32,8 +32,9 @@ export default function HeroForm2() {
   const customerData = {
     ticketType,
     ticketId,
+    passengers,
     email,
-    number,
+    number: `${number.code}${number.digits}`,
     from,
     to,
     departureDate,
@@ -43,42 +44,42 @@ export default function HeroForm2() {
 
   function handleForm(e) {
     e.preventDefault();
-    console.log(passengers);
+    console.log(customerData);
 
     // Check if data is incomplete
-    // if (!email || !number || !from || !to || !departureDate) {
-    //   setFeedback(<Error>All fields are mandatory</Error>);
+    if (!email || !number || !from || !to || !departureDate) {
+      setFeedback(<Error>All fields are mandatory</Error>);
 
-    //   // Proceed to sending data to backend
-    // } else {
-    //   setFormState("Loading");
-    //   fetch(process.env.REACT_APP_BACKEND_URL, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(customerData),
-    //   })
-    //     .then((response) => {
-    //       if (response.ok) {
-    //         return response.json();
-    //       } else {
-    //         return response.json().then((data) => {
-    //           throw new Error(data.error);
-    //         });
-    //       }
-    //     })
-    //     .then((data) => {
-    //       window.location.href = `${data.url}`;
-    //     })
-    //     .catch((error) => {
-    //       setFeedback(
-    //         <Error>Error submitting form. Please try again later</Error>
-    //       );
-    //       setFormState("Active");
-    //       console.log(error);
-    //     });
-    // }
+      // Proceed to sending data to backend
+    } else {
+      setFormState("Loading");
+      fetch(process.env.REACT_APP_BACKEND_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.json().then((data) => {
+              throw new Error(data.error);
+            });
+          }
+        })
+        .then((data) => {
+          window.location.href = `${data.url}`;
+        })
+        .catch((error) => {
+          setFeedback(
+            <Error>Error submitting form. Please try again later</Error>
+          );
+          setFormState("Active");
+          console.log(error);
+        });
+    }
   }
 
   useEffect(() => {
@@ -122,9 +123,12 @@ export default function HeroForm2() {
       </div>
 
       {/* From / To */}
+
       <div className="row">
         <div className={styles.Input}>
-          <Label htmlFor="from">From</Label>
+          <Label htmlFor="from" required>
+            From
+          </Label>
           <Input
             type="text"
             value={from}
@@ -137,7 +141,9 @@ export default function HeroForm2() {
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="To">To</Label>
+          <Label htmlFor="to" required>
+            To
+          </Label>
           <Input
             type="text"
             value={to}
@@ -153,7 +159,9 @@ export default function HeroForm2() {
 
       <div className="row">
         <div className={styles.Input}>
-          <Label htmlFor="email">Email Address</Label>
+          <Label htmlFor="email" required>
+            Email Address
+          </Label>
           <Input
             type="email"
             value={email}
@@ -162,20 +170,25 @@ export default function HeroForm2() {
             name="email"
             id="email"
             autoComplete="on"
-            placeholder="Email Address"
           />
         </div>
 
         <div className={styles.Input}>
-          <Label htmlFor="number">Phone Number</Label>
-          <Input
-            type="text"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-            required
-            name="number"
-            id="number"
-            placeholder="Phone Number"
+          <Label htmlFor="number" required>
+            Phone Number
+          </Label>
+          <Number
+            codeValue={number.code}
+            codeOnChange={(e) => {
+              setNumber((prev) => ({ ...prev, code: e.target.value }));
+            }}
+            digitsValue={number.digits}
+            digitsOnChange={(e) => {
+              setNumber((prev) => ({
+                ...prev,
+                digits: e.target.value,
+              }));
+            }}
           />
         </div>
       </div>
@@ -184,7 +197,9 @@ export default function HeroForm2() {
 
       <div className="row">
         <div className={styles.Input}>
-          <Label htmlFor="departureDate">Departure Date</Label>
+          <Label htmlFor="departureDate" required>
+            Departure Date
+          </Label>
           <Input
             type="date"
             value={departureDate}
@@ -199,7 +214,9 @@ export default function HeroForm2() {
         <div className={styles.Input}>
           {ticketType === "Return" && (
             <>
-              <Label htmlFor="arrivalDate">Return Date</Label>
+              <Label htmlFor="arrivalDate" required>
+                Return Date
+              </Label>
               <Input
                 type="date"
                 value={arrivalDate}
@@ -217,18 +234,26 @@ export default function HeroForm2() {
       {/* Passenger Detail */}
 
       {/* Quantity */}
+
       <div className={styles.Input}>
-        <Label>
-          <span className={styles.Required}>*</span>Number Of Passengers
-        </Label>
+        <Label required>Number Of Passengers</Label>
         <Counter
           onAdd={(e) => {
             e.preventDefault();
             setQuantity((current) => (current < 6 ? current + 1 : current));
+            if (quantity < 6) {
+              setPassengers((prevPassengers) => [
+                ...prevPassengers,
+                { title: "", firstName: "", lastName: "" },
+              ]);
+            }
           }}
           onSubtract={(e) => {
             e.preventDefault();
             setQuantity((current) => (current > 1 ? current - 1 : current));
+            if (quantity > 1) {
+              setPassengers((prevPassengers) => prevPassengers.slice(0, -1));
+            }
           }}
         >
           {quantity}
@@ -236,29 +261,25 @@ export default function HeroForm2() {
       </div>
 
       {/* Names */}
-      {Array.from({ length: quantity }).map((_, index) => (
+
+      {passengers.map((passenger, index) => (
         <div key={index}>
-          <p className={styles.PassengerNumber}>Passenger {index + 1}</p>
+          <Label required>Passenger {index + 1}</Label>
+
           <div className="row">
             <div className={styles.Title}>
-              <Select
-                id={`title${index}`}
+              <SelectTitle
+                value={passenger.title}
                 onChange={(e) =>
                   setPassengers((prevPassengers) =>
-                    prevPassengers.map((passenger, i) =>
-                      i === index
-                        ? { ...passenger, title: e.target.value }
-                        : passenger
+                    prevPassengers.map((p, i) =>
+                      i === index ? { ...p, title: e.target.value } : p
                     )
                   )
                 }
-              >
-                <option value="Mr.">Mr.</option>
-                <option value="Mrs.">Mrs.</option>
-                <option value="Ms.">Ms.</option>
-                <option value="Master">Master</option>
-              </Select>
+              />
             </div>
+
             <div className={styles.Name}>
               <Input
                 type="text"
@@ -266,12 +287,11 @@ export default function HeroForm2() {
                 name={`firstName${index}`}
                 id={`firstName${index}`}
                 placeholder="First Name"
+                value={passenger.firstName}
                 onChange={(e) =>
                   setPassengers((prevPassengers) =>
-                    prevPassengers.map((passenger, i) =>
-                      i === index
-                        ? { ...passenger, firstName: e.target.value }
-                        : passenger
+                    prevPassengers.map((p, i) =>
+                      i === index ? { ...p, firstName: e.target.value } : p
                     )
                   )
                 }
@@ -285,12 +305,11 @@ export default function HeroForm2() {
                 id={`lastName${index}`}
                 required
                 placeholder="Last Name"
+                value={passenger.lastName}
                 onChange={(e) =>
                   setPassengers((prevPassengers) =>
-                    prevPassengers.map((passenger, i) =>
-                      i === index
-                        ? { ...passenger, lastName: e.target.value }
-                        : passenger
+                    prevPassengers.map((p, i) =>
+                      i === index ? { ...p, lastName: e.target.value } : p
                     )
                   )
                 }
@@ -300,8 +319,12 @@ export default function HeroForm2() {
         </div>
       ))}
 
-      {/* Feedback and Button */}
+      {/* Feedback */}
+
       {feedback}
+
+      {/* Button */}
+
       <div className="text-center mt-4">
         {formState === "Active" ? (
           <div>

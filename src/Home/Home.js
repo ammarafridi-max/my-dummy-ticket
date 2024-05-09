@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       <HelmetProvider>
         <Helmet>
-          <title>MyDummyTicket.ae - Get Your Dummy Ticket Online</title>
+          <title>My Dummy Ticket - Get Your Dummy Ticket Online</title>
         </Helmet>
       </HelmetProvider>
       <Hero />

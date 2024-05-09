@@ -46,64 +46,65 @@ export default function TicketForm() {
 
   function handleForm(e) {
     e.preventDefault();
+    console.log(customerData);
 
     // Check if data is incomplete
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !number.code ||
-      !number.digits ||
-      !from ||
-      !to ||
-      !departureDate ||
-      !arrivalDate
-    ) {
-      setFeedback(<Error>All fields are mandatory</Error>);
+    //   if (
+    //     !firstName ||
+    //     !lastName ||
+    //     !email ||
+    //     !number.code ||
+    //     !number.digits ||
+    //     !from ||
+    //     !to ||
+    //     !departureDate ||
+    //     (ticketType === "Return" && !arrivalDate)
+    //   ) {
+    //     setFeedback(<Error>All fields are mandatory</Error>);
 
-      // Proceed to sending data to backend
-    } else {
-      setFormState("Loading");
-      fetch(process.env.REACT_APP_BACKEND_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(customerData),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            return response.json().then((data) => {
-              throw new Error(data.error);
-            });
-          }
-        })
-        .then((data) => {
-          window.location.href = `${data.url}`;
-        })
-        .catch((error) => {
-          setFeedback(
-            <Error>Error submitting form. Please try again later</Error>
-          );
-          setFormState("Active");
-          console.log(error);
-        });
-    }
+    //     // Proceed to sending data to backend
+    //   } else {
+    //     setFormState("Loading");
+    //     fetch(process.env.REACT_APP_BACKEND_URL, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(customerData),
+    //     })
+    //       .then((response) => {
+    //         if (response.ok) {
+    //           return response.json();
+    //         } else {
+    //           return response.json().then((data) => {
+    //             throw new Error(data.error);
+    //           });
+    //         }
+    //       })
+    //       .then((data) => {
+    //         window.location.href = `${data.url}`;
+    //       })
+    //       .catch((error) => {
+    //         setFeedback(
+    //           <Error>Error submitting form. Please try again later</Error>
+    //         );
+    //         setFormState("Active");
+    //         console.log(error);
+    //       });
+    //   }
   }
 
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      setFeedback(
-        <FeedbackBox>
-          Payment successful! Your dummy ticket will soon be sent to you.
-        </FeedbackBox>
-      );
-      setFormState("Inactive");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const query = new URLSearchParams(window.location.search);
+  //   if (query.get("success")) {
+  //     setFeedback(
+  //       <FeedbackBox>
+  //         Payment successful! Your dummy ticket will soon be sent to you.
+  //       </FeedbackBox>
+  //     );
+  //     setFormState("Inactive");
+  //   }
+  // }, []);
 
   return (
     <form className={styles.Form} action="/" method="post">

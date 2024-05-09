@@ -1,0 +1,20 @@
+.SelectDiv {
+  width: 100%;
+  background-color: rgb(242, 242, 242);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.Select {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .SelectDiv {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
