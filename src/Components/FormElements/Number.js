@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Number.module.css";
-
 const countryCodes = [
   { country: "Afghanistan", code: "93", iso: "AF" },
   { country: "Albania", code: "355", iso: "AL" },
@@ -243,6 +242,7 @@ const countryCodes = [
   { country: "Zambia", code: "260", iso: "ZM" },
   { country: "Zimbabwe", code: "263", iso: "ZW" },
 ];
+
 export default function Number(props) {
   const [code, setCode] = useState(props.codeValue);
   const [isOnFocus, setIsOnFocus] = useState(false);
@@ -286,6 +286,7 @@ export default function Number(props) {
         value={code}
         onChange={(e) => handleCodeChange(e.target.value)}
         onFocus={() => setIsOnFocus(true)}
+        onClick={() => setCode("")}
         placeholder="Code"
       />
       <input
