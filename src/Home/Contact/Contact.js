@@ -28,7 +28,7 @@ export default function Contact() {
             </a>
           </div>
           <div className={styles.ContactCard}>
-            <a href="https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket.">
+            <a href="https://api.whatsapp.com/send?phone=97165355055&text=Hi.%20I%20need%20a%20dummy%20ticket.">
               <div className={styles.IconContainer}>
                 <WhatsApp className={styles.Icon} />
               </div>

@@ -1,14 +1,24 @@
 .StepsCol {
-  width: 28%;
+  width: 32%;
   text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px 20px;
+  transition-duration: 0.3s;
 }
 
-.StepsHeadingDiv {
+.StepsCol:hover {
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(196, 196, 196, 1);
+  -moz-box-shadow: 0px 0px 10px 5px rgba(196, 196, 196, 1);
+  box-shadow: 0px 0px 10px 5px rgba(196, 196, 196, 1);
+}
+
+.StepsNumberDiv {
   height: 60px;
   width: 60px;
   padding: 15px;
-  background-color: white;
-  color: #1a4d2e;
+  background-color: #1a4d2e;
+  color: white;
   border-radius: 100px;
   display: flex;
   align-items: center;
@@ -34,25 +44,13 @@
   margin: 0;
 }
 
-.Icon {
-  width: 5%;
-  margin: auto 0;
-  display: flex;
-  justify-content: center;
-}
-
-.Icon * {
-  color: #f5efe6;
-  font-size: 70px !important;
-  margin: auto;
-}
-
 @media only screen and (max-width: 991.5px) {
   .StepsCol {
-    width: 100%;
+    width: 90%;
     text-align: center;
     margin: 0 auto;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+    padding: 50px 20px;
   }
   .StepsCol:nth-of-type(3) {
     margin-bottom: 0px;

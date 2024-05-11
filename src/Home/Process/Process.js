@@ -4,17 +4,12 @@ import Container from "../../Components/Container/Container";
 
 export default function Process() {
   return (
-    <PrimarySection
-      py="100px"
-      className={styles.Section}
-      id="process"
-      backgroundColor="primary"
-    >
+    <PrimarySection className={styles.Section} id="process">
       <Container>
         <h2 className="section-heading">How It Works</h2>
         <div className="row justify-content-between">
           <div className={styles.StepsCol}>
-            <div className={styles.StepsHeadingDiv}>
+            <div className={styles.StepsNumberDiv}>
               <h3 className={styles.StepsNumber}>1</h3>
             </div>
             <h4 className={styles.StepsHeading}>Submit form</h4>
@@ -29,7 +24,7 @@ export default function Process() {
           </div> */}
 
           <div className={styles.StepsCol}>
-            <div className={styles.StepsHeadingDiv}>
+            <div className={styles.StepsNumberDiv}>
               <h3 className={styles.StepsNumber}>2</h3>
             </div>
             <h4 className={styles.StepsHeading}>Payment</h4>
@@ -44,7 +39,7 @@ export default function Process() {
           </div> */}
 
           <div className={styles.StepsCol}>
-            <div className={styles.StepsHeadingDiv}>
+            <div className={styles.StepsNumberDiv}>
               <h3 className={styles.StepsNumber}>3</h3>
             </div>
             <h4 className={styles.StepsHeading}>Get your dummy ticket</h4>

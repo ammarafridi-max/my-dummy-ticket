@@ -18,7 +18,7 @@ export default function HeroForm2() {
   const [passengers, setPassengers] = useState([
     { title: "", firstName: "", lastName: "" },
   ]);
-  const [ticketType, setTicketType] = useState("One Way");
+  const [type, setType] = useState("One Way");
   const [ticketId, setTicketId] = useState("price_1PCSArIy9CRhj2A0xXopFs0u"); // One Way
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState({ code: "", digits: "" });
@@ -30,8 +30,8 @@ export default function HeroForm2() {
   const [price, setPrice] = useState(49);
 
   const customerData = {
-    ticketType,
-    ticketId,
+    type,
+    price,
     passengers,
     email,
     number: `${number.code}${number.digits}`,
@@ -44,7 +44,6 @@ export default function HeroForm2() {
 
   function handleForm(e) {
     e.preventDefault();
-    console.log(customerData);
 
     // Check if data is incomplete
     if (!email || !number || !from || !to || !departureDate) {
@@ -53,7 +52,7 @@ export default function HeroForm2() {
       // Proceed to sending data to backend
     } else {
       setFormState("Loading");
-      fetch(process.env.REACT_APP_BACKEND_URL, {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/ticket`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +76,6 @@ export default function HeroForm2() {
             <Error>Error submitting form. Please try again later</Error>
           );
           setFormState("Active");
-          console.log(error);
         });
     }
   }
@@ -97,25 +95,19 @@ export default function HeroForm2() {
       {/* Return / One way */}
       <div className={styles.Row}>
         <p
-          className={`${styles.Type} ${
-            ticketType === "One Way" && styles.Active
-          }`}
+          className={`${styles.Type} ${type === "One Way" && styles.Active}`}
           onClick={() => {
-            setTicketType("One Way");
+            setType("One Way");
             setPrice(49);
-            setTicketId("price_1PCSArIy9CRhj2A0xXopFs0u");
           }}
         >
           One way
         </p>
         <p
-          className={`${styles.Type} ${
-            ticketType === "Return" && styles.Active
-          }`}
+          className={`${styles.Type} ${type === "Return" && styles.Active}`}
           onClick={() => {
-            setTicketType("Return");
+            setType("Return");
             setPrice(89);
-            setTicketId("price_1PCcqAIy9CRhj2A0eB1hR3Nn");
           }}
         >
           Return
@@ -212,7 +204,7 @@ export default function HeroForm2() {
         </div>
 
         <div className={styles.Input}>
-          {ticketType === "Return" && (
+          {type === "Return" && (
             <>
               <Label htmlFor="arrivalDate" required>
                 Return Date
@@ -326,7 +318,7 @@ export default function HeroForm2() {
       {/* Button */}
 
       <div className="text-center mt-4">
-        {formState === "Active" ? (
+        {formState === "Active" && (
           <div>
             <PrimaryButton type="submit" onClick={handleForm}>
               Proceed to Payment <strong>(AED {price * quantity})</strong>
@@ -335,7 +327,8 @@ export default function HeroForm2() {
               <img src={stripe} className={styles.StripeImg} />
             </div>
           </div>
-        ) : (
+        )}
+        {formState === "Loading" && (
           <div className="spinner-border" role="status">
             <span className="sr-only"></span>
           </div>

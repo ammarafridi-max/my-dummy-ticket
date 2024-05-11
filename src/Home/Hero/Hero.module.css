@@ -6,8 +6,13 @@
   color: black;
   font-size: 48px;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: capitalize;
+}
+
+.Price {
+  color: #155724;
+  font-weight: 800;
 }
 
 .HeroText {
@@ -15,6 +20,34 @@
   font-size: 22px;
   margin: 30px 0;
   font-weight: 400;
+}
+
+.CheckList {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.CheckList:nth-of-type(4) {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.Icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  background-color: #d1dbd5 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.Icon * {
+  color: #155724 !important;
+  font-size: 20px !important;
 }
 
 .Btn {
@@ -34,7 +67,7 @@
   cursor: pointer;
 }
 
-.Icon {
+.BtnIcon {
   width: 40px;
   height: 40px;
   display: flex;
@@ -50,7 +83,7 @@
   opacity: 1;
 }
 
-.Active .Icon {
+.Active .BtnIcon {
   background-color: #d1dbd5;
 }
 
@@ -66,7 +99,6 @@
   }
   .HeroHeading {
     font-size: 32px;
-    font-weight: 600;
   }
   .HeroText {
     font-size: 20px;

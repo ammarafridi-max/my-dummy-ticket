@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Number.module.css";
 const countryCodes = [
+  { country: "United Arab Emirates", code: "971", iso: "AE" },
   { country: "Afghanistan", code: "93", iso: "AF" },
   { country: "Albania", code: "355", iso: "AL" },
   { country: "Algeria", code: "213", iso: "DZ" },
@@ -227,7 +228,6 @@ const countryCodes = [
   { country: "U.S. Virgin Islands", code: "1-340", iso: "VI" },
   { country: "Uganda", code: "256", iso: "UG" },
   { country: "Ukraine", code: "380", iso: "UA" },
-  { country: "United Arab Emirates", code: "971", iso: "AE" },
   { country: "United Kingdom", code: "44", iso: "GB" },
   { country: "United States", code: "1", iso: "US" },
   { country: "Uruguay", code: "598", iso: "UY" },

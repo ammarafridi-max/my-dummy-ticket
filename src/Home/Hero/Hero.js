@@ -9,6 +9,7 @@ import styles from "./Hero.module.css";
 import HotelRoundedIcon from "@mui/icons-material/HotelRounded";
 import LocalAirportRoundedIcon from "@mui/icons-material/LocalAirportRounded";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 
 export default function Hero() {
   const [formType, setFormType] = useState(<HeroForm2 />);
@@ -27,12 +28,30 @@ export default function Hero() {
         <div className="col-12 col-lg-5">
           <h1 className={styles.HeroHeading}>
             Get your dummy ticket from
-            <span className="primary-color"> AED 49!</span>
+            <span className={styles.Price}> AED 49!</span>
           </h1>
           <p className={styles.HeroText}>
             Our dummy tickets are used for visa applications or as proof of
             onward travel. All come with a unique PNR code that can be used to
             verify on airline websites.
+          </p>
+          <p className={styles.CheckList}>
+            <span className={styles.Icon}>
+              <DoneRoundedIcon />
+            </span>
+            Dummy ticket in 30 minutes
+          </p>
+          <p className={styles.CheckList}>
+            <span className={styles.Icon}>
+              <DoneRoundedIcon />
+            </span>
+            Valid and legitimate
+          </p>
+          <p className={styles.CheckList}>
+            <span className={styles.Icon}>
+              <DoneRoundedIcon />
+            </span>
+            Safe and secure payment with Stripe
           </p>
         </div>
         <div className="col-12 col-lg-6 m-0 p-0">
@@ -48,7 +67,7 @@ export default function Hero() {
                 setCurrentForm("ticket");
               }}
             >
-              <div className={styles.Icon}>
+              <div className={styles.BtnIcon}>
                 <LocalAirportRoundedIcon />
               </div>
               {currentForm === "ticket" && (
