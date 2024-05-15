@@ -15,8 +15,8 @@ export default function Home() {
       </HelmetProvider>
       <Hero />
       <Process />
-      <About />
       <FAQ />
+      <About />
       <Contact />
     </div>
   );

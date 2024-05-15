@@ -14,16 +14,19 @@ export default function About() {
           <div className={`col-12 ${styles.TextSection}`}>
             <h2 className="section-heading text-start">About Us</h2>
             <p>
-              My Dummy Ticket is a service provider based in the United Arab
-              Emirates that assists travelers with getting a dummy ticket as
-              proof of travel for various purposes, especially for visa
-              procedures. Every year, we helps thousands of such travelers get
-              their dummy tickets within 30 minutes after confirmation.
-              <br />
-              <br />
-              Our mission is to help thousands of travelers get their dummy
-              bookings with ease so they can focus on other aspects of travel
-              planning.
+              MyDummyTicket.ae is a service of{" "}
+              <a
+                href="https://app.invest.dubai.ae/DUL/98A318CC-6751-4CDB-A958-9FF407AF6049"
+                target="_blank"
+                className={styles.Link}
+              >
+                Travl Technologies LLC
+              </a>
+              , a licenced travel agency based in Dubai, UAE. We provide travel
+              services to thousands of happy customers every year including air
+              tickets, hotel bookings, travel insurance, dummy flight bookings
+              for visa applications, airport transfers, tours and holiday
+              packages.
             </p>
           </div>
         </div>

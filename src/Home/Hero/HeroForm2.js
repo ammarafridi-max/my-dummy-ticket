@@ -11,15 +11,20 @@ import SelectTitle from "../../Components/FormElements/SelectTitle";
 import Number from "../../Components/FormElements/Number";
 
 export default function HeroForm2() {
-  const today = new Date().toISOString().split("T")[0];
+  let today = new Date().toISOString().split("T")[0];
+
   const [feedback, setFeedback] = useState("");
   const [formState, setFormState] = useState("Active");
 
+  const todayDate = new Date().getDate();
+  const todayMonth = new Date().toLocaleString("default", { month: "long" });
+  const todayYear = new Date().getFullYear();
+
+  const date = `${todayDate} ${todayMonth} ${todayYear}`;
   const [passengers, setPassengers] = useState([
     { title: "", firstName: "", lastName: "" },
   ]);
   const [type, setType] = useState("One Way");
-  const [ticketId, setTicketId] = useState("price_1PCSArIy9CRhj2A0xXopFs0u"); // One Way
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState({ code: "", digits: "" });
   const [from, setFrom] = useState("");
@@ -30,6 +35,10 @@ export default function HeroForm2() {
   const [price, setPrice] = useState(49);
 
   const customerData = {
+    creation: {
+      date,
+      time: new Date().toLocaleTimeString(),
+    },
     type,
     price,
     passengers,
