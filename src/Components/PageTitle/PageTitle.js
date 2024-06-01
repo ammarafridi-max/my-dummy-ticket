@@ -9,5 +9,9 @@ export default function PageTitle(props) {
     marginLeft: props.ml || props.mx,
   };
 
-  return <h1 style={style}>{props.children}</h1>;
+  return (
+    <h1 style={style} className={props.className}>
+      {props.children}
+    </h1>
+  );
 }

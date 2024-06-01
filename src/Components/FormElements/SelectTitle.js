@@ -1,7 +1,7 @@
 import styles from "./SelectTitle.module.css";
 
 export default function SelectTitle(props) {
-  const titles = ["", "Mr.", "Mrs.", "Ms.", "Master"];
+  const titles = ["Mr.", "Mrs.", "Ms.", "Master"];
 
   return (
     <div className={styles.SelectDiv}>

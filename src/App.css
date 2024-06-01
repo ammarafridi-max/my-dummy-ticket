@@ -1,7 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+:root {
+  --primary-color: #20b2aa;
+  --primary-color-dark: #188781;
+  --primary-color-light: #e9fbfa;
+  --grey-color: rgb(200, 200, 200);
+  --grey-color-light: rgb(245, 245, 245);
+  --grey-color-dark: rgb(120, 120, 120);
+}
 
 * {
-  font-family: "Lato", sans-serif;
+  font-family: "Outfit", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -21,15 +30,16 @@ p {
 }
 
 a {
-  color: black;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
 .section-heading {
   text-align: center;
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 600;
   padding-bottom: 50px;
+  padding-top: 0;
   margin: 0;
 }
 
@@ -39,6 +49,6 @@ a {
 
 @media only screen and (max-width: 991.5px) {
   .section-heading {
-    font-size: 36px;
+    font-size: 32px;
   }
 }

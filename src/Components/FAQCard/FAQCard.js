@@ -14,7 +14,12 @@ export default function FAQCard({ question, children }) {
 
   return (
     <div className={styles.FAQCard}>
-      <div className={`${styles.QuestionBox}`} onClick={toggleHidden}>
+      <div
+        className={`${styles.QuestionBox} ${
+          className === styles.Show && styles.Active
+        }`}
+        onClick={toggleHidden}
+      >
         <p className={styles.Question}>{question}</p>
         {className === styles.Hidden ? (
           <Add className={styles.FAQIcon} />

@@ -1,8 +1,10 @@
 import styles from "./Input.module.css";
+import { FaPlaneDeparture } from "react-icons/fa";
 
 export default function Input(props) {
   return (
     <div className={styles.InputDiv}>
+      {props.icon && <span className={styles.Icon}>{props.icon}</span>}
       <input
         type={props.type}
         className={styles.Input}

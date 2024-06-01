@@ -1,20 +1,30 @@
-.Input {
-  width: 100%;
-  border-radius: 5px;
-  border: none;
+.InputDiv {
+  display: flex;
+  align-items: center;
   background-color: rgb(242, 242, 242);
   padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 5px;
   transition-duration: 0.3s;
 }
 
-.Input:focus-visible,
-.Input:hover {
+.Icon {
+  margin-right: 15px;
+  font-size: 15px;
+}
+
+.Input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
   outline: none;
+}
+
+.InputDiv:hover {
   background-color: rgb(230, 230, 230);
 }
 
 .Input::placeholder {
-  color: rgb(184, 184, 184);
+  color: rgb(150, 150, 150);
   font-size: 14px;
 }

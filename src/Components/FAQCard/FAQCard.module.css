@@ -7,7 +7,8 @@
   font-weight: 400;
   display: flex;
   align-items: center;
-  background-color: #e8dfca;
+  color: white;
+  background-color: var(--primary-color);
   padding: 20px 30px;
   border-radius: 5px;
   transition-duration: 0.3s;
@@ -15,11 +16,11 @@
 
 .QuestionBox:hover {
   cursor: pointer;
-  background-color: #dcceaf;
+  background-color: var(--primary-color-dark);
 }
 
 .Active {
-  background-color: #dcceaf;
+  background-color: var(--primary-color-dark);
 }
 
 .Question {

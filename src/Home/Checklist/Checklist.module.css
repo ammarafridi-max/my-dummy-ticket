@@ -1,0 +1,33 @@
+.ChecklistBox {
+  padding-top: 75px;
+}
+
+.CheckList {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  color: rgb(110, 110, 110);
+}
+
+.CheckList:nth-of-type(4) {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.Icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: #d1dbd5 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.Icon * {
+  color: #155724 !important;
+  font-size: 18px !important;
+}

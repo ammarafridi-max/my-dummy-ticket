@@ -1,5 +1,7 @@
 .Label {
-  font-size: 14px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--primary-color-dark);
 }
 
 .Required {

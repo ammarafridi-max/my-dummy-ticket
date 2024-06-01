@@ -1,9 +1,9 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Hero from "./Hero/Hero.js";
 import Process from "./Process/Process.js";
 import About from "./About/About";
-import Contact from "./Contact/Contact.js";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import FAQ from "./FAQ/FAQ.js";
+import Benefits from "./Benefits/Benefits.js";
 
 export default function Home() {
   return (
@@ -15,9 +15,9 @@ export default function Home() {
       </HelmetProvider>
       <Hero />
       <Process />
+      <Benefits />
       <FAQ />
       <About />
-      <Contact />
     </div>
   );
 }

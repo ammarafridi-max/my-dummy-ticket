@@ -8,48 +8,42 @@ export default function Process() {
       <Container>
         <h2 className="section-heading">How It Works</h2>
         <div className="row justify-content-between">
-          <div className={styles.StepsCol}>
-            <div className={styles.StepsNumberDiv}>
-              <h3 className={styles.StepsNumber}>1</h3>
-            </div>
-            <h4 className={styles.StepsHeading}>Submit form</h4>
-            <p className={styles.StepsText}>
-              Fill the online form with traveler name, contact details,
-              preferred date and travel route.
-            </p>
-          </div>
-
-          {/* <div className={styles.Icon}>
-            <ArrowForwardIosRoundedIcon />
-          </div> */}
-
-          <div className={styles.StepsCol}>
-            <div className={styles.StepsNumberDiv}>
-              <h3 className={styles.StepsNumber}>2</h3>
-            </div>
-            <h4 className={styles.StepsHeading}>Payment</h4>
-            <p className={styles.StepsText}>
-              Our team confirms the details and sends you payment information in
-              30 minutes. Pay by secure payment link or bank transfer.
-            </p>
-          </div>
-
-          {/* <div className={styles.Icon}>
-            <ArrowForwardIosRoundedIcon />
-          </div> */}
-
-          <div className={styles.StepsCol}>
-            <div className={styles.StepsNumberDiv}>
-              <h3 className={styles.StepsNumber}>3</h3>
-            </div>
-            <h4 className={styles.StepsHeading}>Get your dummy ticket</h4>
-            <p className={styles.StepsText}>
-              Get your verifiable dummy ticket as a PDF file by email and
-              Whatsapp!
-            </p>
-          </div>
+          <Card
+            number={1}
+            title="Submit"
+            text="Fill the online form with travelers' names, contact details, preferred date and travel route."
+          />
+          <Card
+            number={2}
+            title="Pay"
+            text="Our team confirms the details and sends you payment information in
+            30 minutes."
+          />
+          <Card
+            number={3}
+            title="Receive"
+            text="Receive your verifiable dummy flight ticket as a PDF file via both email and WhatsApp instantly."
+          />
         </div>
       </Container>
     </PrimarySection>
+  );
+}
+
+function Card(props) {
+  return (
+    <div className={styles.Card}>
+      <div className={`row ${styles.CardRow}`}>
+        <div className="col-2 col-lg-2">
+          <div className={styles.NumberDiv}>
+            <h3 className={styles.Number}>{props.number}</h3>
+          </div>
+        </div>
+        <div className={`col-10 col-lg-10 ${styles.Content}`}>
+          <h4 className={styles.Title}>{props.title}</h4>
+          <p className={styles.Text}>{props.text}</p>
+        </div>
+      </div>
+    </div>
   );
 }

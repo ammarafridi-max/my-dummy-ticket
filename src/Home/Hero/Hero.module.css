@@ -1,23 +1,24 @@
 .HeroSection {
   background-color: #f5efe6;
+  padding: 75px 0;
 }
 
 .HeroHeading {
   color: black;
-  font-size: 48px;
+  font-size: 44px;
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: capitalize;
 }
 
 .Price {
-  color: #155724;
-  font-weight: 800;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .HeroText {
-  color: black;
-  font-size: 22px;
+  color: rgb(110, 110, 110);
+  font-size: 20px;
   margin: 30px 0;
   font-weight: 400;
 }
@@ -31,12 +32,11 @@
 .CheckList:nth-of-type(4) {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
 }
 
 .Icon {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 100px;
   background-color: #d1dbd5 !important;
   display: flex;
@@ -47,7 +47,7 @@
 
 .Icon * {
   color: #155724 !important;
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 .Btn {
@@ -94,13 +94,30 @@
 }
 
 @media screen and (max-width: 991px) {
-  .HeroDiv {
-    display: block;
+  .HeroSection {
+    padding: 50px 0;
+  }
+  .Content {
+    margin-bottom: 30px;
   }
   .HeroHeading {
-    font-size: 32px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 700;
   }
   .HeroText {
-    font-size: 20px;
+    font-size: 16px;
+    text-align: center;
+    margin: 15px 0;
+  }
+  .Icon {
+    width: 30px;
+    height: 30px;
+  }
+  .ChecklistBox {
+    display: none;
+  }
+  .CheckList {
+    font-size: 16px;
   }
 }

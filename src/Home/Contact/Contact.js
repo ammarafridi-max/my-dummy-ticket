@@ -13,11 +13,11 @@ export default function Contact() {
         <div className="row">
           <div className={`col-12 col-lg-4 ${styles.CardsContainer}`}>
             <div className={styles.ContactCard}>
-              <a href="tel:+971569964924">
+              <a href="tel:+971506045355">
                 <div className={styles.IconContainer}>
                   <CallRoundedIcon className={styles.Icon} />
                 </div>
-                <p className={styles.Text}>+971 56 996 4924</p>
+                <p className={styles.Text}>+971 50 604 5355</p>
               </a>
             </div>
             <div className={styles.ContactCard}>
@@ -29,7 +29,7 @@ export default function Contact() {
               </a>
             </div>
             <div className={styles.ContactCard}>
-              <a href="https://api.whatsapp.com/send?phone=97165355055&text=Hi.%20I%20need%20a%20dummy%20ticket.">
+              <a href="https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket.">
                 <div className={styles.IconContainer}>
                   <WhatsApp className={styles.Icon} />
                 </div>
@@ -39,7 +39,7 @@ export default function Contact() {
           </div>
           <div className="col-12 col-lg-8">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.2800426536546!2d55.43706777468754!3d25.294793627742163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5ee5fff76919%3A0x3bbe0c327f6b61b9!2sCity%20Tours%20LLC!5e0!3m2!1sen!2sae!4v1713194591927!5m2!1sen!2sae"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5169888101905!2d55.35569517468733!3d25.286828828065786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c89fbf4c7bf%3A0xeb51121eac30f9a!2sAbraj%20Al%20Mamzar%20Block%20A!5e0!3m2!1sen!2sae!4v1716027929446!5m2!1sen!2sae"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

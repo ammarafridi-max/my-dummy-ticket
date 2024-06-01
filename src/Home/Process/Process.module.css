@@ -1,79 +1,81 @@
-.StepsCol {
+.Section {
+  padding: 60px 0;
+  background-color: white !important;
+}
+
+.Card {
   width: 32%;
-  text-align: center;
-  background-color: white;
+  background-color: var(--primary-color);
   border-radius: 10px;
-  padding: 30px 20px;
+  padding: 50px 30px;
   transition-duration: 0.3s;
 }
 
-.StepsCol:hover {
-  -webkit-box-shadow: 0px 0px 10px 5px rgba(196, 196, 196, 1);
-  -moz-box-shadow: 0px 0px 10px 5px rgba(196, 196, 196, 1);
-  box-shadow: 0px 0px 10px 5px rgba(196, 196, 196, 1);
+.Card:hover {
+  background-color: var(--primary-color-dark);
+  -webkit-box-shadow: 0px 0px 20px 5px rgba(196, 196, 196, 1);
+  -moz-box-shadow: 0px 0px 20px 5px rgba(196, 196, 196, 1);
+  box-shadow: 0px 0px 20px 5px rgba(196, 196, 196, 1);
 }
 
-.StepsNumberDiv {
-  height: 60px;
-  width: 60px;
+.NumberDiv {
+  width: fit-content;
+  height: 40px;
+  width: 40px;
   padding: 15px;
-  background-color: #1a4d2e;
-  color: white;
+  background-color: white;
+  color: var(--primary-color);
   border-radius: 100px;
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 0 auto;
+  margin-right: 10px;
 }
 
-.StepsNumber {
+.Number {
   text-align: center;
   margin: 0 auto;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
 }
 
-.StepsHeading {
-  margin: 20px 0;
+.Content {
+  padding-left: 10px;
+}
+
+.Title {
+  width: 100%;
   font-weight: 600;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #fff;
+  text-align: left;
+  margin-bottom: 15px;
+  margin-top: 7.5px;
 }
 
-.StepsText {
-  font-size: 18px;
+.Text {
+  font-size: 17px;
   margin: 0;
+  color: #fff;
+  text-align: left;
+  font-weight: 400;
 }
 
 @media only screen and (max-width: 991.5px) {
-  .StepsCol {
-    width: 90%;
+  .Card {
+    width: 95%;
     text-align: center;
     margin: 0 auto;
     margin-bottom: 30px;
-    padding: 50px 20px;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
   }
-  .StepsCol:nth-of-type(3) {
+  .Card:nth-of-type(3) {
     margin-bottom: 0px;
   }
-  .StepsHeadingDiv {
-    margin-bottom: 0;
-  }
-  .StepsHeading {
-    margin: 15px 0;
-  }
-
-  .Icon {
-    width: 100%;
-    margin: auto 0;
-    display: flex;
-    justify-content: center;
-    rotate: 90deg;
-    margin: 40px 0;
-  }
-
-  .Icon * {
-    color: #f5efe6;
-    font-size: 70px !important;
-    margin: auto;
+  .Title {
+    margin-bottom: 15px;
   }
 }

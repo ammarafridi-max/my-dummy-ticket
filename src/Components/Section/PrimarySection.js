@@ -4,8 +4,7 @@ export default function PrimarySection(props) {
     paddingBottom: props.pb || props.py,
     marginTop: props.mt || props.my,
     marginBottom: props.mb || props.my,
-    backgroundColor:
-      props.backgroundColor === "primary" ? "#1A4D2E" : "#F5EFE6",
+    backgroundColor: "rgb(245, 245, 245)",
     color: props.backgroundColor === "primary" ? "white" : "black",
   };
 

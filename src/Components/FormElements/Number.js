@@ -246,6 +246,7 @@ const countryCodes = [
 export default function Number(props) {
   const [code, setCode] = useState(props.codeValue);
   const [isOnFocus, setIsOnFocus] = useState(false);
+
   const filteredCodes = countryCodes.filter((country) => {
     return `${country.country} (+${country.code})`
       .toLowerCase()
@@ -254,9 +255,9 @@ export default function Number(props) {
 
   const componentRef = useRef();
 
-  const handleCodeChange = (newCode) => {
-    setCode(newCode);
-    props.codeOnChange({ target: { value: newCode } });
+  const handleCodeChange = (e) => {
+    setCode(e);
+    props.codeOnChange({ target: { value: e } });
   };
 
   useEffect(() => {

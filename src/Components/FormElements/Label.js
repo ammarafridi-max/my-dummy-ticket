@@ -5,14 +5,12 @@ export default function Label(props) {
     marginRight: props.mr || props.mx,
     marginLeft: props.ml || props.mx,
     marginTop: props.mt || props.my,
-    marginBottom: props.mb || props.my || "10px",
-    fontWeight: "500",
-    color: "#1a4d2e",
+    marginBottom: props.mb || props.my || "5px",
   };
 
   return (
     <label htmlFor={props.htmlFor} className={styles.Label} style={style}>
-      {props.required && <span className={styles.Required}>*</span>}
+      {/* {props.required && <span className={styles.Required}>*</span>} */}
       {props.children}
       {props.optional && <span className={styles.Optional}>(Optional)</span>}
     </label>

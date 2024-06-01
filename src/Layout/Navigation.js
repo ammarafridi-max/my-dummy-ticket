@@ -1,6 +1,6 @@
-import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import styles from "./Navigation.module.css";
-import logo from "./logo2.png";
+import logo from "./logo.png"; // replace with the actual path to your logo
+import PrimaryButton from "../Components/Buttons/PrimaryButton"; // replace with the actual import for your PrimaryButton
 
 export default function Navigation() {
   return (
@@ -21,22 +21,19 @@ export default function Navigation() {
           <a href="/#form" className={styles.NavLink}>
             Book
           </a>
-          <a href="#process" className={styles.NavLink}>
+          <a href="/#process" className={styles.NavLink}>
             How It Works
           </a>
-          <a href="#about" className={styles.NavLink}>
+          <a href="/#about" className={styles.NavLink}>
             About Us
           </a>
-          <a href="#faqs" className={styles.NavLink}>
+          <a href="/#faqs" className={styles.NavLink}>
             FAQs
           </a>
-          {/* <a href="/" className={styles.NavLink}>
-            FAQ
-          </a> */}
         </div>
         <div className={styles.CTADiv}>
           <a
-            href="https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket."
+            href="https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket."
             target="_blank"
             rel="noreferrer"
           >
