@@ -9,7 +9,12 @@ import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Counter from "../../Components/FormElements/Counter";
 import SelectTitle from "../../Components/FormElements/SelectTitle";
 import Number from "../../Components/FormElements/Number";
-import { FaPlaneDeparture, FaPlaneArrival } from "react-icons/fa";
+import {
+  FaPlaneDeparture,
+  FaPlaneArrival,
+  FaRegDotCircle,
+  FaCircle,
+} from "react-icons/fa";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];
@@ -100,21 +105,6 @@ export default function TicketForm() {
       });
   };
 
-  // ---------- Check URL for success feedback ----------
-
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      setFeedback(
-        <Success>
-          Order placed! Your dummy ticket will be sent to your email address
-          soon.
-        </Success>
-      );
-      setFormState("Active");
-    }
-  }, []);
-
   // Update passenger details
 
   const updatePassenger = (index, field, value) => {
@@ -130,18 +120,37 @@ export default function TicketForm() {
       {/* Ticket Type */}
 
       <div className={styles.Row}>
-        {["One Way", "Return"].map((ticketType) => (
+        <div className="row">
           <p
-            key={ticketType}
-            className={`${styles.Type} ${type === ticketType && styles.Active}`}
+            className={styles.Type2}
             onClick={() => {
-              setType(ticketType);
-              setPrice(ticketType === "One Way" ? 49 : 69);
+              setType("One Way");
+              setPrice(49);
             }}
           >
-            {ticketType}
+            <FaCircle
+              className={`${styles.DotIcon} ${
+                type === "One Way" && styles.Active
+              }`}
+            />
+            One Way
           </p>
-        ))}
+
+          <p
+            className={styles.Type2}
+            onClick={() => {
+              setType("Return");
+              setPrice(69);
+            }}
+          >
+            <FaCircle
+              className={`${styles.DotIcon} ${
+                type === "Return" && styles.Active
+              }`}
+            />
+            Return
+          </p>
+        </div>
       </div>
 
       {/* From / To Inputs */}
@@ -329,4 +338,19 @@ export default function TicketForm() {
       </div>
     </form>
   );
+}
+
+{
+  /* {["One Way", "Return"].map((ticketType) => (
+          <p
+            key={ticketType}
+            className={`${styles.Type} ${type === ticketType && styles.Active}`}
+            onClick={() => {
+              setType(ticketType);
+              setPrice(ticketType === "One Way" ? 49 : 69);
+            }}
+          >
+            {ticketType}
+          </p>
+        ))} */
 }
