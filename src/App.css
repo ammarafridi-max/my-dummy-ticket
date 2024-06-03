@@ -5,7 +5,8 @@
   --primary-color-dark: #188781;
   --primary-color-light: #e9fbfa;
   --grey-color: rgb(200, 200, 200);
-  --grey-color-light: rgb(245, 245, 245);
+  --grey-color-light: rgb(230, 230, 230);
+  --grey-color-medium: rgb(160, 160, 160);
   --grey-color-dark: rgb(120, 120, 120);
 }
 

@@ -6,6 +6,11 @@ import TicketForm from "./TicketForm";
 import HotelForm from "./HotelForm";
 import styles from "./Hero.module.css";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
+import {
+  LocalAirportRounded,
+  HotelRounded,
+  HealthAndSafetyRounded,
+} from "@mui/icons-material";
 import Checklist from "../Checklist/Checklist";
 
 export default function Hero() {
@@ -23,13 +28,20 @@ function TextContent() {
   return (
     <div className={`col-12 col-lg-5 ${styles.Content}`}>
       <h1 className={styles.HeroHeading}>
-        Get your dummy ticket from
+        Get your dummy ticket for
         <span className={styles.Price}> AED 49</span>
       </h1>
       <p className={styles.HeroText}>
-        Our dummy tickets are used for visa applications or as proof of onward
-        travel. All come with a unique PNR code that can be used to verify on
-        airline websites.
+        Book confirmed flight reservations for visa application from licenced
+        Dubai agency (
+        <a
+          href="https://app.invest.dubai.ae/DUL/98A318CC-6751-4CDB-A958-9FF407AF6049"
+          target="_blank"
+          rel="noreferrer"
+        >
+          verify here
+        </a>
+        ). All bookings have a PNR code that you can check on airline websites.
       </p>
       <Checklist className={styles.ChecklistBox} />
     </div>
@@ -53,7 +65,7 @@ function FormContent() {
           }}
         >
           <div className={styles.BtnIcon}>
-            <LocalAirportRoundedIcon />
+            <LocalAirportRounded />
           </div>
           {currentForm === "ticket" && <p className={styles.BtnText}>Flight</p>}
         </div>
@@ -68,26 +80,9 @@ function FormContent() {
           }}
         >
           <div className={styles.Icon}>
-            <HotelRoundedIcon />
+            <HotelRounded />
           </div>
           {currentForm === "hotel" && <p className={styles.BtnText}>Hotel</p>}
-        </div>
-
-        <div
-          className={`${styles.Btn} ${
-            currentForm === "insurance" && styles.Active
-          }`}
-          onClick={() => {
-            setFormType(<HotelForm />);
-            setCurrentForm("insurance");
-          }}
-        >
-          <div className={styles.Icon}>
-            <HealthAndSafetyIcon />
-          </div>
-          {currentForm === "insurance" && (
-            <p className={styles.BtnText}>Insurance</p>
-          )}
         </div>
       </div> */}
 

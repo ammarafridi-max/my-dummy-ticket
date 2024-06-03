@@ -34,42 +34,31 @@
   align-items: center;
 }
 
-.Icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 100px;
-  background-color: #d1dbd5 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-}
-
-.Icon * {
-  color: #155724 !important;
-  font-size: 18px !important;
-}
+/* Form Content */
 
 .Btn {
-  background-color: white;
+  position: relative;
+  background-color: transparent;
   width: fit-content;
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 20px 30px 50px 30px;
+  margin-bottom: -30px;
+  margin-right: 10px;
   border: none;
   border-radius: 10px 10px 0 0;
-  margin: 0;
   font-size: 15px;
-  opacity: 0.5;
-}
-
-.Btn:hover {
   cursor: pointer;
 }
 
+.Active {
+  border: none;
+  color: var(--primary-color);
+  opacity: 1;
+  background-color: white;
+}
+
 .BtnIcon {
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,20 +66,10 @@
   background-color: transparent;
 }
 
-.Active {
-  border: none;
-  color: #155724;
-  opacity: 1;
-}
-
-.Active .BtnIcon {
-  background-color: #d1dbd5;
-}
-
 .BtnText {
   display: flexbox;
   font-size: 15px;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 991px) {

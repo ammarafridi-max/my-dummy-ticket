@@ -1,20 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import styles from "./TicketForm.module.css";
-import Success from "../../Components/Feedback/Success";
 import Error from "../../Components/Feedback/Error";
 import Input from "../../Components/FormElements/Input";
 import Label from "../../Components/FormElements/Label";
-import Select from "../../Components/FormElements/Select";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Counter from "../../Components/FormElements/Counter";
 import SelectTitle from "../../Components/FormElements/SelectTitle";
 import Number from "../../Components/FormElements/Number";
-import {
-  FaPlaneDeparture,
-  FaPlaneArrival,
-  FaRegDotCircle,
-  FaCircle,
-} from "react-icons/fa";
+import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];
@@ -39,7 +32,7 @@ export default function TicketForm() {
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(49);
+  const price = 49;
 
   const customerData = {
     creation: {
@@ -125,7 +118,6 @@ export default function TicketForm() {
             className={styles.Type2}
             onClick={() => {
               setType("One Way");
-              setPrice(49);
             }}
           >
             <FaCircle
@@ -140,7 +132,6 @@ export default function TicketForm() {
             className={styles.Type2}
             onClick={() => {
               setType("Return");
-              setPrice(69);
             }}
           >
             <FaCircle

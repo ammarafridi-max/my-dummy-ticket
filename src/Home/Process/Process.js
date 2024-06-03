@@ -16,8 +16,7 @@ export default function Process() {
           <Card
             number={2}
             title="Pay"
-            text="Our team confirms the details and sends you payment information in
-            30 minutes."
+            text="Once your details are entered, you will be directed to Stripe's secure Checkout page."
           />
           <Card
             number={3}
@@ -36,11 +35,11 @@ function Card(props) {
       <div className={`row ${styles.CardRow}`}>
         <div className="col-2 col-lg-2">
           <div className={styles.NumberDiv}>
-            <h3 className={styles.Number}>{props.number}</h3>
+            <p className={styles.Number}>{props.number}</p>
           </div>
         </div>
         <div className={`col-10 col-lg-10 ${styles.Content}`}>
-          <h4 className={styles.Title}>{props.title}</h4>
+          <h3 className={styles.Title}>{props.title}</h3>
           <p className={styles.Text}>{props.text}</p>
         </div>
       </div>

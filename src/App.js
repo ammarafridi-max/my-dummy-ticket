@@ -1,17 +1,10 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import { useEffect, useContext } from "react";
-import { CurrencyProvider, CurrencyContext } from "./Context/CurrencyContext";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Navigation from "./Layout/Navigation";
 import MobileNavigation from "./Layout/MobileNavigation";
 import Footer from "./Layout/Footer";
 import Home from "./Home/Home";
+import FAQ from "./FAQ/FAQ";
 import PaymentSuccess from "./PaymentSuccess/PaymentSuccess";
 
 export default function App() {
@@ -21,9 +14,10 @@ export default function App() {
         <MobileNavigation />
         <Navigation />
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/" element={<Home />} />
           <Route path="/payment-successful" element={<PaymentSuccess />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
         <Footer />
       </BrowserRouter>

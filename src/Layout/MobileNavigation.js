@@ -1,9 +1,10 @@
-import Container from "../Components/Container/Container";
+import { useState } from "react";
+import { pages } from "./Navigation";
 import styles from "./MobileNavigation.module.css";
+import logo from "./logo.png";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseIcon from "@mui/icons-material/Close";
-import logo from "./logo.png";
-import { useState } from "react";
+import Container from "../Components/Container/Container";
 
 export default function MobileNavigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,7 +18,6 @@ export default function MobileNavigation() {
   return (
     <div className={styles.Nav}>
       <Container className="row justify-content-between">
-        {/* <div className={styles.MenuContainer}>{icon}</div> */}
         <div className={styles.LogoContainer}>
           <a href="/">
             <img
@@ -45,21 +45,11 @@ export default function MobileNavigation() {
 function MenuList({ onClick }) {
   return (
     <div className={styles.MenuList}>
-      <a href="/#form" onClick={onClick}>
-        <div className={styles.MenuItem}>Book Now</div>
-      </a>
-      <a href="/#process" onClick={onClick}>
-        <div className={styles.MenuItem}>How It Works</div>
-      </a>
-      <a href="/#about" onClick={onClick}>
-        <div className={styles.MenuItem}>About Us</div>
-      </a>
-      <a href="/#faqs" onClick={onClick}>
-        <div className={styles.MenuItem}>FAQs</div>
-      </a>
-      <a href="/#contact" onClick={onClick}>
-        <div className={styles.MenuItem}>Contact Us</div>
-      </a>
+      {pages.map((page, i) => (
+        <a key={i} href={page.link} onClick={onClick}>
+          <div className={styles.MenuItem}>{page.name}</div>
+        </a>
+      ))}
     </div>
   );
 }

@@ -10,11 +10,47 @@ export default function FAQ() {
         <h2 className="section-heading">Frequently Asked Questions</h2>
         <div className="row">
           <FAQCard question="What is a dummy ticket?">
-            Dummy tickets are temporary flight reservations or bookings created
-            for visa application purposes or to satisfy travel requirements.
-            They are not actual tickets and cannot be used for travel. My Dummy
-            Ticket is a reliable service provider offering dummy tickets for
-            various travel needs.
+            A dummy ticket is a flight reservation used primarily for visa
+            applications and proof of onward travel. It looks like a real ticket
+            with a verifiable PNR number but is not intended for actual travel.
+          </FAQCard>
+          <FAQCard question="How can I be sure the dummy ticket is verifiable?">
+            Our dummy tickets are legitimate flight reservations. They can be
+            verified directly on the airline's website using the airline
+            reservation code and your surname.
+          </FAQCard>
+          <FAQCard question="What is the cost of a dummy ticket?">
+            Prices for dummy tickets start at AED 49 and can go up depending on
+            additional features like confirmed e-ticket numbers or extended
+            validity periods.
+          </FAQCard>
+          <FAQCard question="How long does it take to receive my dummy ticket?">
+            With My Dummy Ticket, you can get your dummy ticket within 30 - 60
+            minutes. Please note that we provide this service during our working
+            hours every day (09:00 AM - 09:00 PM).
+          </FAQCard>
+          <FAQCard question="What payment methods do you accept?">
+            We accept multiple payment methods. You can choose to pay on our
+            website through Stripe's secure Checkout application, transfer money
+            through a payment link, or transfer directly into our bank account
+            (available on request).
+          </FAQCard>
+          <FAQCard question="Is the dummy ticket suitable for all visa applications?">
+            Yes, our dummy tickets are suitable for all kinds of visit visa
+            applications. Most of our customers use our dummy ticket for
+            Schengen, Turkey, UAE, and Canada visa applications.
+          </FAQCard>
+        </div>
+      </Container>
+    </PrimarySection>
+  );
+}
+
+{
+  /* <FAQCard question="What is a dummy ticket?">
+            A dummy ticket is a flight reservation used primarily for visa
+            applications and proof of onward travel. It looks like a real ticket
+            with a verifiable PNR number but is not intended for actual travel.
           </FAQCard>
           <FAQCard question="Who needs a dummy ticket?">
             Dummy tickets are often required by visa authorities or immigration
@@ -41,9 +77,5 @@ export default function FAQ() {
             Yes, you can pay directly into our official bank account. We will
             share the details with you. Please connect with us by email or
             WhatsApp.
-          </FAQCard>
-        </div>
-      </Container>
-    </PrimarySection>
-  );
+          </FAQCard> */
 }

@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       <HelmetProvider>
         <Helmet>
-          <title>My Dummy Ticket - Get Your Dummy Ticket Online</title>
+          <title>My Dummy Ticket | Verifiable Dummy Ticket From AED 49</title>
         </Helmet>
       </HelmetProvider>
       <Hero />
