@@ -2,16 +2,16 @@ import styles from "./Counter.module.css";
 import { useState } from "react";
 import { Remove, Add } from "@mui/icons-material";
 
-export default function Counter({ children, onAdd, onSubtract }) {
+export default function Counter({ children, onAdd, onSubtract, className }) {
   return (
-    <div className={styles.Counter}>
-      <button type="none" className={styles.Button} onClick={onSubtract}>
+    <div className={`${styles.Counter} ${className}`}>
+      <p className={styles.Button} onClick={onSubtract}>
         <Remove />
-      </button>
+      </p>
       <p className={styles.Number}>{children}</p>
-      <button type="none" className={styles.Button} onClick={onAdd}>
+      <p className={styles.Button} onClick={onAdd}>
         <Add />
-      </button>
+      </p>
     </div>
   );
 }

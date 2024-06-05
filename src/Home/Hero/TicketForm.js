@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./TicketForm.module.css";
 import Error from "../../Components/Feedback/Error";
 import Input from "../../Components/FormElements/Input";
@@ -11,7 +11,6 @@ import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];
-
   const [feedback, setFeedback] = useState("");
   const [formState, setFormState] = useState("Active");
 
@@ -21,9 +20,7 @@ export default function TicketForm() {
     year: "numeric",
   });
 
-  const [passengers, setPassengers] = useState([
-    { title: "", firstName: "", lastName: "" },
-  ]);
+  const [passengers, setPassengers] = useState([]);
   const [type, setType] = useState("One Way");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState({ code: "", digits: "" });
@@ -31,8 +28,62 @@ export default function TicketForm() {
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState({
+    adults: 1,
+    children: 0,
+    infants: 0,
+  });
   const price = 49;
+
+  useEffect(() => {
+    const newPassengers = [];
+    let adults = 0;
+    let children = 0;
+    let infants = 0;
+
+    passengers.forEach((passenger) => {
+      if (passenger.type === "Adult" && adults < quantity.adults) {
+        newPassengers.push(passenger);
+        adults += 1;
+      } else if (passenger.type === "Child" && children < quantity.children) {
+        newPassengers.push(passenger);
+        children += 1;
+      } else if (passenger.type === "Infant" && infants < quantity.infants) {
+        newPassengers.push(passenger);
+        infants += 1;
+      }
+    });
+
+    while (adults < quantity.adults) {
+      newPassengers.push({
+        type: "Adult",
+        title: "",
+        firstName: "",
+        lastName: "",
+      });
+      adults += 1;
+    }
+    while (children < quantity.children) {
+      newPassengers.push({
+        type: "Child",
+        title: "",
+        firstName: "",
+        lastName: "",
+      });
+      children += 1;
+    }
+    while (infants < quantity.infants) {
+      newPassengers.push({
+        type: "Infant",
+        title: "",
+        firstName: "",
+        lastName: "",
+      });
+      infants += 1;
+    }
+
+    setPassengers(newPassengers);
+  }, [quantity]);
 
   const customerData = {
     creation: {
@@ -52,8 +103,6 @@ export default function TicketForm() {
     quantity,
   };
 
-  // ---------- Handle form submission ----------
-
   const handleForm = (e) => {
     e.preventDefault();
 
@@ -71,8 +120,6 @@ export default function TicketForm() {
     }
   };
 
-  // ---------- Submit form data to the backend ----------
-
   const submitForm = () => {
     setFormState("Loading");
     fetch(`${process.env.REACT_APP_BACKEND_URL}/ticket`, {
@@ -85,7 +132,13 @@ export default function TicketForm() {
       .then((response) => response.json())
       .then((data) => {
         if (data.url) {
-          window.location.href = data.url;
+          // Ensure the URL is valid
+          try {
+            const url = new URL(data.url);
+            window.location.href = data.url;
+          } catch (error) {
+            throw new Error("Invalid URL provided.");
+          }
         } else {
           throw new Error(data.error);
         }
@@ -98,24 +151,18 @@ export default function TicketForm() {
       });
   };
 
-  // Update passenger details
-
   const updatePassenger = (index, field, value) => {
     setPassengers((prev) =>
       prev.map((p, i) => (i === index ? { ...p, [field]: value } : p))
     );
   };
 
-  // ---------- Component ----------
-
   return (
     <form className={styles.Form} onSubmit={handleForm}>
-      {/* Ticket Type */}
-
       <div className={styles.Row}>
         <div className="row">
           <p
-            className={styles.Type2}
+            className={styles.Type}
             onClick={() => {
               setType("One Way");
             }}
@@ -129,7 +176,7 @@ export default function TicketForm() {
           </p>
 
           <p
-            className={styles.Type2}
+            className={styles.Type}
             onClick={() => {
               setType("Return");
             }}
@@ -144,13 +191,11 @@ export default function TicketForm() {
         </div>
       </div>
 
-      {/* From / To Inputs */}
       <div className="row">
         <div className={styles.Input}>
           <Label htmlFor="from" required>
             From
           </Label>
-          {/* <Select /> */}
           <Input
             icon={<FaPlaneDeparture />}
             type="text"
@@ -178,7 +223,6 @@ export default function TicketForm() {
         </div>
       </div>
 
-      {/* Dates */}
       <div className="row">
         <div className={styles.Input}>
           <Label htmlFor="departureDate" required>
@@ -212,74 +256,112 @@ export default function TicketForm() {
         )}
       </div>
 
-      {/* Passenger Details */}
-      <div className={styles.Input}>
-        <Label required>Number Of Passengers</Label>
-        <Counter
-          onAdd={(e) => {
-            e.preventDefault();
-            if (quantity < 12) {
-              setQuantity(quantity + 1);
-              setPassengers([
-                ...passengers,
-                { title: "", firstName: "", lastName: "" },
-              ]);
-            }
+      <div>
+        <Count
+          adultCount={quantity.adults}
+          childrenCount={quantity.children}
+          infantCount={quantity.infants}
+          onAdultAdd={() => {
+            setQuantity((q) => ({
+              ...q,
+              adults: q.adults < 10 ? q.adults + 1 : q.adults,
+            }));
           }}
-          onSubtract={(e) => {
-            e.preventDefault();
-            if (quantity > 1) {
-              setQuantity(quantity - 1);
-              setPassengers(passengers.slice(0, -1));
-            }
+          onAdultSubtract={() => {
+            setQuantity((q) => ({
+              ...q,
+              adults: q.adults > 1 ? q.adults - 1 : q.adults,
+            }));
           }}
-        >
-          {quantity}
-        </Counter>
+          onChildrenAdd={() =>
+            setQuantity((q) => ({
+              ...q,
+              children: q.children < 10 ? q.children + 1 : q.children,
+            }))
+          }
+          onChildrenSubtract={() =>
+            setQuantity((q) => ({
+              ...q,
+              children: q.children > 0 ? q.children - 1 : q.children,
+            }))
+          }
+          onInfantAdd={() =>
+            setQuantity((q) => ({
+              ...q,
+              infants: q.infants < 10 ? q.infants + 1 : q.infants,
+            }))
+          }
+          onInfantSubtract={() =>
+            setQuantity((q) => ({
+              ...q,
+              infants: q.infants > 0 ? q.infants - 1 : q.infants,
+            }))
+          }
+        />
       </div>
-      {passengers.map((passenger, index) => (
-        <div key={index}>
-          <Label required>Passenger {index + 1}</Label>
-          <div className="row mb-2">
-            <div className={styles.Title}>
-              <SelectTitle
-                value={passenger.title}
-                onChange={(e) =>
-                  updatePassenger(index, "title", e.target.value)
-                }
-              />
-            </div>
-            <div className={styles.Name}>
-              <Input
-                type="text"
-                required
-                name={`firstName${index}`}
-                id={`firstName${index}`}
-                placeholder="First Name"
-                value={passenger.firstName}
-                onChange={(e) =>
-                  updatePassenger(index, "firstName", e.target.value)
-                }
-              />
-            </div>
-            <div className={styles.Name}>
-              <Input
-                type="text"
-                required
-                name={`lastName${index}`}
-                id={`lastName${index}`}
-                placeholder="Last Name"
-                value={passenger.lastName}
-                onChange={(e) =>
-                  updatePassenger(index, "lastName", e.target.value)
-                }
-              />
-            </div>
-          </div>
-        </div>
-      ))}
 
-      {/* Contact Details */}
+      {(() => {
+        let adultCount = 0;
+        let childCount = 0;
+        let infantCount = 0;
+
+        return passengers.map((passenger, index) => {
+          let label;
+          if (passenger.type === "Adult") {
+            adultCount += 1;
+            label = `Adult ${adultCount}`;
+          } else if (passenger.type === "Child") {
+            childCount += 1;
+            label = `Child ${childCount}`;
+          } else if (passenger.type === "Infant") {
+            infantCount += 1;
+            label = `Infant ${infantCount}`;
+          }
+
+          return (
+            <div key={index}>
+              <Label required>{label}</Label>
+              <div className="row mb-2">
+                <div className={styles.Title}>
+                  <SelectTitle
+                    value={passenger.title}
+                    onChange={(e) =>
+                      updatePassenger(index, "title", e.target.value)
+                    }
+                  />
+                </div>
+                <div className={styles.Name}>
+                  <Input
+                    type="text"
+                    required
+                    name={`firstName${index}`}
+                    id={`firstName${index}`}
+                    placeholder="First Name"
+                    value={passenger.firstName}
+                    onChange={(e) =>
+                      updatePassenger(index, "firstName", e.target.value)
+                    }
+                  />
+                </div>
+                <div className={styles.Name}>
+                  <Input
+                    type="text"
+                    required
+                    name={`lastName${index}`}
+                    id={`lastName${index}`}
+                    placeholder="Last Name"
+                    value={passenger.lastName}
+                    onChange={(e) =>
+                      updatePassenger(index, "lastName", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        });
+      })()}
+
       <div className="row">
         <div className={styles.Input}>
           <Label htmlFor="email" required>
@@ -310,15 +392,17 @@ export default function TicketForm() {
         </div>
       </div>
 
-      {/* Feedback */}
       {feedback}
 
-      {/* Submit Button */}
       <div className="text-center mt-4">
         {formState === "Active" && (
           <PrimaryButton type="submit">
             Submit{" "}
-            <span className={styles.Total}>(AED {price * quantity})</span>
+            <span className={styles.Total}>
+              (AED{" "}
+              {price * (quantity.adults + quantity.children + quantity.infants)}
+              )
+            </span>
           </PrimaryButton>
         )}
         {formState === "Loading" && (
@@ -331,17 +415,60 @@ export default function TicketForm() {
   );
 }
 
-{
-  /* {["One Way", "Return"].map((ticketType) => (
-          <p
-            key={ticketType}
-            className={`${styles.Type} ${type === ticketType && styles.Active}`}
-            onClick={() => {
-              setType(ticketType);
-              setPrice(ticketType === "One Way" ? 49 : 69);
-            }}
-          >
-            {ticketType}
-          </p>
-        ))} */
+function Count(props) {
+  return (
+    <div className={`row ${styles.CountSection} p-0 mx-0`}>
+      <div className={styles.Count}>
+        <p className={styles.Gender}>
+          Adults <span className={styles.Age}>(12+)</span>
+        </p>
+        <Counter
+          className={styles.Counter}
+          onAdd={props.onAdultAdd}
+          onSubtract={props.onAdultSubtract}
+        >
+          {props.adultCount}
+        </Counter>
+      </div>
+      <div className={styles.Count}>
+        <p className={styles.Gender}>
+          Children <span className={styles.Age}>(2 - 12)</span>
+        </p>
+        <Counter
+          className={styles.Counter}
+          onAdd={props.onChildrenAdd}
+          onSubtract={props.onChildrenSubtract}
+        >
+          {props.childrenCount}
+        </Counter>
+      </div>
+      <div className={styles.Count}>
+        <p className={styles.Gender}>
+          Infants <span className={styles.Age}>(0 - 2)</span>
+        </p>
+        <Counter
+          className={styles.Counter}
+          onAdd={props.onInfantAdd}
+          onSubtract={props.onInfantSubtract}
+        >
+          {props.infantCount}
+        </Counter>
+      </div>
+    </div>
+  );
 }
+
+// `<p>
+// <strong>Type:</strong> ${formData.type}<br>
+// <strong>Creation Time: </strong>${formData.creation.time + " " + formData.creation.date}<br>
+// <strong>Number of Tickets:</strong> ${formData.quantity}<br>
+// ${formData.passengers.map((passenger) => {return(
+//   `<strong>${passenger.type}: </strong>${passenger.title} / ${passenger.firstName} / ${passenger.lastName}`
+// )})}
+// <strong>Phone Number:</strong> ${formData.phoneNumber}<br>
+// <strong>Email:</strong> ${formData.email}<br>
+// <strong>From:</strong> ${formData.from}<br>
+// <strong>To:</strong> ${formData.to}<br>
+// <strong>Departing on:</strong>${formData.departureDate}<br>
+// ${formData.type === "Return" &&`<strong>Returning on:</strong> ${formData.arrivalDate}<br>`}
+// <strong>Message:</strong>${formData.message} </p>`

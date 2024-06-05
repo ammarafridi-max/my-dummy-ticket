@@ -1,13 +1,17 @@
 .Counter {
-  padding: 10px 0px;
+  width: fit-content;
   display: flex;
   font-size: 14px;
+  border: 1px solid var(--grey-color);
+  border-radius: 5px;
 }
 
 .Number {
-  width: 100px;
+  width: 75px;
   text-align: center;
   font-size: 15px;
+  color: var(--grey-color-dark);
+  margin: auto 0;
 }
 
 .Button {
@@ -15,8 +19,17 @@
   background-color: transparent;
   border: none;
   font-size: 12px;
+  border-right: 1px solid var(--grey-color);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.Button:nth-of-type(3) {
+  border-right: none;
+  border-left: 1px solid var(--grey-color);
 }
 
 .Button * {
   font-size: 17px !important;
+  color: var(--grey-color-dark);
 }

@@ -10,6 +10,8 @@ export default function SelectTitle(props) {
         onChange={props.onChange}
         value={props.value || titles[0]}
         placeholder="Title"
+        name="title"
+        id="title"
       >
         {titles.map((title, i) => (
           <option value={title} key={i}>

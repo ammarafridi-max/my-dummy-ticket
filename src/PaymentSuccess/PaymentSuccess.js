@@ -23,6 +23,10 @@ export default function PaymentSuccess() {
             , or <a href="mailto:info@mydummyticket.ae">email us.</a>
           </p>
           <p>
+            If you also need a dummy hotel booking or a genuine travel
+            insurance, contact us now.
+          </p>
+          <p>
             For your reference, here's how your flight reservation will look
             like:
           </p>
