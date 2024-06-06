@@ -7,6 +7,7 @@ import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Counter from "../../Components/FormElements/Counter";
 import SelectTitle from "../../Components/FormElements/SelectTitle";
 import Number from "../../Components/FormElements/Number";
+import SelectAirport from "../../Components/FormElements/SelectAirport";
 import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 
 export default function TicketForm() {
@@ -57,7 +58,7 @@ export default function TicketForm() {
     while (adults < quantity.adults) {
       newPassengers.push({
         type: "Adult",
-        title: "",
+        title: "Mr.",
         firstName: "",
         lastName: "",
       });
@@ -66,7 +67,7 @@ export default function TicketForm() {
     while (children < quantity.children) {
       newPassengers.push({
         type: "Child",
-        title: "",
+        title: "Mr.",
         firstName: "",
         lastName: "",
       });
@@ -75,7 +76,7 @@ export default function TicketForm() {
     while (infants < quantity.infants) {
       newPassengers.push({
         type: "Infant",
-        title: "",
+        title: "Mr.",
         firstName: "",
         lastName: "",
       });
@@ -105,7 +106,6 @@ export default function TicketForm() {
 
   const handleForm = (e) => {
     e.preventDefault();
-
     if (
       !email ||
       !number.code ||
@@ -196,29 +196,20 @@ export default function TicketForm() {
           <Label htmlFor="from" required>
             From
           </Label>
-          <Input
+          <SelectAirport
             icon={<FaPlaneDeparture />}
-            type="text"
             value={from}
-            onChange={(e) => setFrom(e.target.value)}
-            required
-            name="from"
-            id="from"
-            autoComplete="on"
+            onChange={setFrom}
           />
         </div>
         <div className={styles.Input}>
           <Label htmlFor="to" required>
             To
           </Label>
-          <Input
+          <SelectAirport
             icon={<FaPlaneArrival />}
-            type="text"
             value={to}
-            onChange={(e) => setTo(e.target.value)}
-            required
-            name="to"
-            id="to"
+            onChange={setTo}
           />
         </div>
       </div>
@@ -432,7 +423,7 @@ function Count(props) {
       </div>
       <div className={styles.Count}>
         <p className={styles.Gender}>
-          Children <span className={styles.Age}>(2 - 12)</span>
+          Children <span className={styles.Age}>(2 - 11)</span>
         </p>
         <Counter
           className={styles.Counter}
@@ -444,7 +435,7 @@ function Count(props) {
       </div>
       <div className={styles.Count}>
         <p className={styles.Gender}>
-          Infants <span className={styles.Age}>(0 - 2)</span>
+          Infants <span className={styles.Age}>(0 - 1)</span>
         </p>
         <Counter
           className={styles.Counter}

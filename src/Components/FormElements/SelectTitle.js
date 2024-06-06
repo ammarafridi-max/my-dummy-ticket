@@ -8,7 +8,7 @@ export default function SelectTitle(props) {
       <select
         className={styles.Select}
         onChange={props.onChange}
-        value={props.value || titles[0]}
+        value={props.value || "Mr."}
         placeholder="Title"
         name="title"
         id="title"

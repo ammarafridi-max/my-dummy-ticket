@@ -253,12 +253,12 @@ export default function Number(props) {
       .includes(code.toLowerCase());
   });
 
-  const componentRef = useRef();
-
   const handleCodeChange = (e) => {
     setCode(e);
     props.codeOnChange({ target: { value: e } });
   };
+
+  const componentRef = useRef();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
