@@ -1,5 +1,4 @@
 import styles from "./Counter.module.css";
-import { useState } from "react";
 import { Remove, Add } from "@mui/icons-material";
 
 export default function Counter({ children, onAdd, onSubtract, className }) {

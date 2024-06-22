@@ -1,12 +1,11 @@
 import styles from "./TicketForm.module.css";
 import Input from "../../Components/FormElements/Input";
 import Label from "../../Components/FormElements/Label";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Error from "../../Components/Feedback/Error";
 import stripe from "./stripe.png";
 import Counter from "../../Components/FormElements/Counter";
-import FeedbackBox from "../../Components/Feedback/FeedbackBox";
 
 export default function HotelForm() {
   const [feedback, setFeedback] = useState();
@@ -20,7 +19,7 @@ export default function HotelForm() {
   const [checkinDate, setCheckinDate] = useState("");
   const [checkoutDate, setCheckoutDate] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(49);
+  const price = 49;
 
   const customerData = {
     firstName,
@@ -226,7 +225,11 @@ export default function HotelForm() {
               Proceed to Payment <strong>(AED {price * quantity})</strong>
             </PrimaryButton>
             <div>
-              <img src={stripe} className={styles.StripeImg} />
+              <img
+                src={stripe}
+                className={styles.StripeImg}
+                alt="Payment powered by stripe"
+              />
             </div>
           </div>
         ) : (

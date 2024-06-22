@@ -1,7 +1,5 @@
 import styles from "./Footer.module.css";
-import Container from "../Components/Container/Container";
 import { WhatsApp } from "@mui/icons-material";
-import PrimarySection from "../Components/Section/PrimarySection";
 
 export default function Footer() {
   return (

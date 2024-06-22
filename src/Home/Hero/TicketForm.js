@@ -7,6 +7,7 @@ import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Counter from "../../Components/FormElements/Counter";
 import SelectTitle from "../../Components/FormElements/SelectTitle";
 import Number from "../../Components/FormElements/Number";
+import TextArea from "../../Components/FormElements/TextArea";
 import SelectAirport from "../../Components/FormElements/SelectAirport";
 import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 
@@ -34,6 +35,7 @@ export default function TicketForm() {
     children: 0,
     infants: 0,
   });
+  const [message, setMessage] = useState("");
   const price = 49;
 
   useEffect(() => {
@@ -102,6 +104,7 @@ export default function TicketForm() {
     departureDate,
     arrivalDate,
     quantity,
+    message,
   };
 
   const handleForm = (e) => {
@@ -132,7 +135,6 @@ export default function TicketForm() {
       .then((response) => response.json())
       .then((data) => {
         if (data.url) {
-          // Ensure the URL is valid
           try {
             const url = new URL(data.url);
             window.location.href = data.url;
@@ -383,6 +385,17 @@ export default function TicketForm() {
         </div>
       </div>
 
+      <div className="row">
+        <div className={styles.TextArea}>
+          <Label optional>Message</Label>
+          <TextArea
+            value={message}
+            placeholder="Additional information (reason for dummy tickets, specific airline, flight time)"
+            onChange={setMessage}
+          />
+        </div>
+      </div>
+
       {feedback}
 
       <div className="text-center mt-4">
@@ -448,18 +461,3 @@ function Count(props) {
     </div>
   );
 }
-
-// `<p>
-// <strong>Type:</strong> ${formData.type}<br>
-// <strong>Creation Time: </strong>${formData.creation.time + " " + formData.creation.date}<br>
-// <strong>Number of Tickets:</strong> ${formData.quantity}<br>
-// ${formData.passengers.map((passenger) => {return(
-//   `<strong>${passenger.type}: </strong>${passenger.title} / ${passenger.firstName} / ${passenger.lastName}`
-// )})}
-// <strong>Phone Number:</strong> ${formData.phoneNumber}<br>
-// <strong>Email:</strong> ${formData.email}<br>
-// <strong>From:</strong> ${formData.from}<br>
-// <strong>To:</strong> ${formData.to}<br>
-// <strong>Departing on:</strong>${formData.departureDate}<br>
-// ${formData.type === "Return" &&`<strong>Returning on:</strong> ${formData.arrivalDate}<br>`}
-// <strong>Message:</strong>${formData.message} </p>`

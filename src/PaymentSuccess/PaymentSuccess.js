@@ -1,6 +1,5 @@
 import styles from "./PaymentSuccess.module.css";
 import PrimarySection from "../Components/Section/PrimarySection";
-import Container from "../Components/Container/Container";
 import PageTitle from "../Components/PageTitle/PageTitle";
 import img from "./sample-ticket.png";
 
@@ -30,7 +29,7 @@ export default function PaymentSuccess() {
             For your reference, here's how your flight reservation will look
             like:
           </p>
-          <img src={img} className={styles.Img} />
+          <img src={img} className={styles.Img} alt="A sample dummy ticket" />
         </div>
       </div>
     </PrimarySection>

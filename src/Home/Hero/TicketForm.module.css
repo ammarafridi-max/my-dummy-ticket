@@ -61,6 +61,11 @@
   margin-bottom: 10px;
 }
 
+.TextArea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .CountSection {
   border-radius: 5px;
   margin: 10px 0;

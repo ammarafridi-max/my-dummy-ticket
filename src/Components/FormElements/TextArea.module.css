@@ -1,4 +1,5 @@
 .TextArea {
+  font-size: 15px;
   width: 100%;
   background-color: rgb(242, 242, 242);
   padding: 10px 20px;
@@ -10,4 +11,7 @@
 .TextArea:focus-visible {
   outline: none;
   background-color: rgb(230, 230, 230);
+}
+.TextArea::placeholder {
+  color: var(--grey-color-medium);
 }

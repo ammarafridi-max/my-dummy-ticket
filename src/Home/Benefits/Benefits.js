@@ -9,7 +9,7 @@ export default function Benefits() {
       <Container>
         <h2 className="section-heading">Sample Ticket</h2>
         <div className="col-12 col-lg-6 mx-auto">
-          <img src={img} className={styles.Img} />
+          <img src={img} className={styles.Img} alt="A sample dummy ticket" />
         </div>
       </Container>
     </PrimarySection>

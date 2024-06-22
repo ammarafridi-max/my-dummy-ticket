@@ -1,7 +1,6 @@
 import styles from "./About.module.css";
 import PrimarySection from "../../Components/Section/PrimarySection";
 import Container from "../../Components/Container/Container";
-import img from "./about.png";
 
 export default function About() {
   return (
@@ -14,6 +13,7 @@ export default function About() {
             href="https://app.invest.dubai.ae/DUL/98A318CC-6751-4CDB-A958-9FF407AF6049"
             target="_blank"
             className={styles.Link}
+            rel="noreferrer"
           >
             Travl Technologies LLC
           </a>

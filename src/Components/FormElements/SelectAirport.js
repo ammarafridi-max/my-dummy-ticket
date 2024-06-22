@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./SelectAirport.module.css";
-import { FaPlaneDeparture } from "react-icons/fa";
 
 export default function SelectAirport({
   value,

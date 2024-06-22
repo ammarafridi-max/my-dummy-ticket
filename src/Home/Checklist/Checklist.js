@@ -1,7 +1,5 @@
 import styles from "./Checklist.module.css";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
-import PrimarySection from "../../Components/Section/PrimarySection";
-import Container from "../../Components/Container/Container";
 
 export default function Checklist(props) {
   return (
