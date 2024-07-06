@@ -6,15 +6,18 @@ export default function PrimaryButton({
   className,
   disabled,
   children,
+  href,
 }) {
   return (
-    <button
-      onClick={onClick}
-      type={type}
-      className={`${styles.Btn} ${className}`}
-      disabled={disabled}
-    >
-      {children}
-    </button>
+    <a href={href} target="_blank">
+      <button
+        onClick={onClick}
+        type={type}
+        className={`${styles.Btn} ${className}`}
+        disabled={disabled}
+      >
+        {children}
+      </button>
+    </a>
   );
 }

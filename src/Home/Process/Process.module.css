@@ -1,21 +1,26 @@
 .Section {
-  padding: 60px 0;
+  padding: 75px 0;
   background-color: white !important;
+  background-image: url("./bg-img.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .Card {
   width: 32%;
-  background-color: var(--primary-color);
-  border-radius: 10px;
-  padding: 50px 30px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px 20px;
   transition-duration: 0.3s;
 }
 
 .Card:hover {
-  background-color: var(--primary-color-dark);
-  -webkit-box-shadow: 0px 0px 20px 5px rgba(196, 196, 196, 1);
-  -moz-box-shadow: 0px 0px 20px 5px rgba(196, 196, 196, 1);
-  box-shadow: 0px 0px 20px 5px rgba(196, 196, 196, 1);
+  /* background-color: var(--primary-color-dark); */
+  -webkit-box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
 }
 
 .NumberDiv {
@@ -23,13 +28,13 @@
   height: 40px;
   width: 40px;
   padding: 15px;
-  background-color: white;
-  color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
   border-radius: 100px;
   display: flex;
   align-items: center;
   text-align: center;
-  margin-right: 10px;
+  margin-right: 7.5px;
 }
 
 .Number {
@@ -48,7 +53,7 @@
   font-weight: 600;
   text-transform: uppercase;
   font-size: 20px;
-  color: #fff;
+  color: var(--primary-color);
   text-align: left;
   margin-bottom: 15px;
   margin-top: 7.5px;
@@ -57,17 +62,20 @@
 .Text {
   font-size: 17px;
   margin: 0;
-  color: #fff;
+  color: black;
   text-align: left;
   font-weight: 400;
 }
 
 @media only screen and (max-width: 991.5px) {
+  .Section {
+    padding: 100px 0;
+  }
   .Card {
     width: 95%;
     text-align: center;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 40px 20px;
     display: flex;
     align-items: center;
@@ -77,5 +85,8 @@
   }
   .Title {
     margin-bottom: 15px;
+  }
+  .Text {
+    font-size: 18px;
   }
 }

@@ -4,7 +4,6 @@ import Label from "../../Components/FormElements/Label";
 import { useState } from "react";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import Error from "../../Components/Feedback/Error";
-import stripe from "./stripe.png";
 import Counter from "../../Components/FormElements/Counter";
 
 export default function HotelForm() {
@@ -224,13 +223,6 @@ export default function HotelForm() {
             <PrimaryButton type="submit" onClick={handleForm}>
               Proceed to Payment <strong>(AED {price * quantity})</strong>
             </PrimaryButton>
-            <div>
-              <img
-                src={stripe}
-                className={styles.StripeImg}
-                alt="Payment powered by stripe"
-              />
-            </div>
           </div>
         ) : (
           <div className="spinner-border" role="status">

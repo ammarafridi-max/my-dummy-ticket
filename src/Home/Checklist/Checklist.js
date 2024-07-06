@@ -14,7 +14,7 @@ export default function Checklist(props) {
         <span className={styles.Icon}>
           <DoneRoundedIcon />
         </span>
-        Unlimited changes permitted
+        Up to 3 changes permitted
       </p>
       <p className={styles.CheckList}>
         <span className={styles.Icon}>

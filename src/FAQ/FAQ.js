@@ -1,4 +1,5 @@
 import styles from "./FAQ.module.css";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import PrimarySection from "../Components/Section/PrimarySection";
 import Container from "../Components/Container/Container";
 import PageTitle from "../Components/PageTitle/PageTitle";
@@ -59,19 +60,26 @@ const faqArray = [
 
 export default function FAQ() {
   return (
-    <PrimarySection className={styles.Section}>
-      <Container>
-        <PageTitle textAlign="center" className={styles.Title}>
-          Frequently Asked Questions
-        </PageTitle>
-        <div className="col-12 col-lg-10 p-0 mx-auto">
-          {faqArray.map((faq, i) => (
-            <FAQCard key={i} question={faq.question}>
-              {faq.answer}
-            </FAQCard>
-          ))}
-        </div>
-      </Container>
-    </PrimarySection>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Frequently Asked Questions</title>
+        </Helmet>
+      </HelmetProvider>
+      <PrimarySection className={styles.Section}>
+        <Container>
+          <PageTitle textAlign="center" className={styles.Title}>
+            Frequently Asked Questions
+          </PageTitle>
+          <div className="col-12 col-lg-10 p-0 mx-auto">
+            {faqArray.map((faq, i) => (
+              <FAQCard key={i} question={faq.question}>
+                {faq.answer}
+              </FAQCard>
+            ))}
+          </div>
+        </Container>
+      </PrimarySection>
+    </>
   );
 }

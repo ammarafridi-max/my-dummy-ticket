@@ -6,7 +6,7 @@ export default function Process() {
   return (
     <PrimarySection className={styles.Section} id="process">
       <Container>
-        <h2 className="section-heading">How It Works</h2>
+        <h2 className="section-heading color-white">How It Works</h2>
         <div className="row justify-content-between">
           <Card
             number={1}

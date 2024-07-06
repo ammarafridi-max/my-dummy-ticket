@@ -5,16 +5,14 @@
   border: 1px solid transparent;
   padding: 10px 30px;
   border-radius: 5px;
-  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s,
-    transform 0.3s;
+  text-transform: capitalize;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition-duration: 0.3s;
 }
 
 .Btn:hover {
   background-color: var(--primary-color-dark);
   border-color: var(--primary-color-dark);
-  transform: translateY(-2px); /* Lift button slightly on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
 .Btn:disabled {

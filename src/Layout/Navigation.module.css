@@ -11,19 +11,13 @@
   padding: 5px 0;
 }
 
-.LogoDiv,
-.CTADiv {
+.LogoDiv {
   width: 20%;
   padding: 0;
 }
 
-.CTADiv {
-  width: fit-content;
-  padding: 0;
-}
-
 .NavLinks {
-  width: 35%;
+  width: auto;
   height: 70px;
   display: flex;
   align-items: center;
@@ -37,22 +31,30 @@
 .NavLink {
   transition-duration: 0.3s;
   padding: 10px 10px;
-  /* border-bottom: 4px solid transparent; */
   text-transform: uppercase;
   color: black;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 15px;
 }
 
 .NavLink:hover {
-  /* border-bottom: 4px solid var(--primary-color); */
   color: var(--primary-color);
 }
 
-.CTADiv {
-  align-items: center;
-  display: flex;
-  justify-content: end;
+.CTA {
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  background-color: var(--primary-color);
+  padding: 10px 25px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition-duration: 0.3s;
+}
+
+.CTA:hover {
+  background-color: var(--primary-color-dark);
 }
 
 .Currency {

@@ -8,7 +8,7 @@ export const pages = [
     link: "/#form",
   },
   {
-    name: "How it works",
+    name: "Process",
     link: "/#process",
   },
   {
@@ -18,6 +18,10 @@ export const pages = [
   {
     name: "FAQ",
     link: "/faq",
+  },
+  {
+    name: "Contact",
+    link: "https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket.",
   },
 ];
 
@@ -29,7 +33,6 @@ export default function Navigation() {
       >
         <Logo />
         <NavLinks />
-        <CTA />
       </nav>
     </header>
   );
@@ -49,24 +52,14 @@ function NavLinks() {
   return (
     <div className={styles.NavLinks}>
       {pages.map((page, i) => (
-        <a key={i} href={page.link} className={styles.NavLink}>
+        <a
+          key={i}
+          href={page.link}
+          className={`${page.name === "Contact" ? styles.CTA : styles.NavLink}`}
+        >
           {page.name}
         </a>
       ))}
-    </div>
-  );
-}
-
-function CTA() {
-  return (
-    <div className={styles.CTADiv}>
-      <a
-        href="https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket."
-        target="_blank"
-        rel="noreferrer"
-      >
-        <PrimaryButton>Contact Us</PrimaryButton>
-      </a>
     </div>
   );
 }

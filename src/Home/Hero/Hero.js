@@ -53,7 +53,7 @@ function FormContent() {
   const [formType, setFormType] = useState(<TicketForm />);
 
   return (
-    <div className="col-12 col-lg-6 m-0 p-0">
+    <div className={`col-12 col-lg-6 ${styles.Form}`}>
       {/* <div className="col-12 row m-0 p-0">
         <div
           className={`${styles.Btn} ${
@@ -67,7 +67,7 @@ function FormContent() {
           <div className={styles.BtnIcon}>
             <LocalAirportRounded />
           </div>
-          {currentForm === "ticket" && <p className={styles.BtnText}>Flight</p>}
+          <p className={styles.BtnText}>Flight</p>
         </div>
 
         <div
@@ -82,7 +82,7 @@ function FormContent() {
           <div className={styles.Icon}>
             <HotelRounded />
           </div>
-          {currentForm === "hotel" && <p className={styles.BtnText}>Hotel</p>}
+          <p className={styles.BtnText}>Hotel</p>
         </div>
       </div> */}
 

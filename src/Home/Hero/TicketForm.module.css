@@ -1,12 +1,12 @@
 .Form {
   padding: 40px;
   width: 100%;
-  border-radius: 10px 10px 10px 10px;
   background-color: white;
   margin: 0;
-  -webkit-box-shadow: 0px 0px 40px -10px rgba(200, 200, 200, 1);
-  -moz-box-shadow: 0px 0px 40px -10px rgba(200, 200, 200, 1);
-  box-shadow: 0px 0px 40px -10px rgba(200, 200, 200, 1);
+  transition-duration: 0.3s;
+  /* -webkit-box-shadow: 0px 0px 40px 10px rgba(220, 220, 220, 1);
+  -moz-box-shadow: 0px 0px 40px 10px rgba(220, 220, 220, 1);
+  box-shadow: 0px 0px 40px 10px rgba(220, 220, 220, 1); */
 }
 
 .Type {
@@ -27,7 +27,7 @@
   border-radius: 100px;
   padding: 3px;
   color: transparent;
-  border: 1px solid black;
+  border: 1.5px solid black;
 }
 
 .Active {

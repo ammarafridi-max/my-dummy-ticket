@@ -17,10 +17,6 @@
 }
 
 .Icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 100px;
-  background-color: #d1dbd5 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +24,6 @@
 }
 
 .Icon * {
-  color: #155724 !important;
-  font-size: 18px !important;
+  color: var(--primary-color) !important;
+  font-size: 25px !important;
 }

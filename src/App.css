@@ -3,7 +3,7 @@
 :root {
   --primary-color: #20b2aa;
   --primary-color-dark: #188781;
-  --primary-color-light: #e9fbfa;
+  --primary-color-light: #bce7e5;
   --grey-color: rgb(200, 200, 200);
   --grey-color-light: rgb(230, 230, 230);
   --grey-color-medium: rgb(160, 160, 160);
@@ -21,11 +21,11 @@ button,
 select,
 option {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 p {
-  font-size: 18px;
+  font-size: 16px;
   padding: 0;
   margin: 0;
 }
@@ -37,11 +37,15 @@ a {
 
 .section-heading {
   text-align: center;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 600;
   padding-bottom: 50px;
   padding-top: 0;
   margin: 0;
+}
+
+.color-white {
+  color: white;
 }
 
 .primary-color {
