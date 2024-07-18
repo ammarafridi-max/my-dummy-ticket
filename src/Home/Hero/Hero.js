@@ -12,6 +12,7 @@ import {
   HealthAndSafetyRounded,
 } from "@mui/icons-material";
 import Checklist from "../Checklist/Checklist";
+import TicketForm2 from "./TicketForm2/TicketForm2";
 
 export default function Hero() {
   return (

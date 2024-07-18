@@ -19,12 +19,12 @@ const faqArray = [
   {
     question: "What is the cost of a dummy ticket?",
     answer:
-      "We offer different prices depending on the type of ticket. One way dummy tickets cost AED 49 while return dummy tickets cost AED 69.",
+      "Our dummy tickets cost AED 49 only for both, one way and return dummy tickets.",
   },
   {
     question: "How long is your dummy ticket valid for?",
     answer:
-      "Our dummy tickets are valid for up to 4 weeks, or up to the date of flight departure if the departure date is in less than 4 weeks. If you need a dummy ticket with a longer validity, please contact us. We also offer extendable dummy tickets free of charge.",
+      "Our dummy tickets are valid for up to 2 weeks, or up to the date of flight departure if the departure date is in less than 2 weeks. If you need a dummy ticket with a longer validity, please contact us. We also offer extendable dummy tickets free of charge.",
   },
   {
     question: "How long does it take to receive my dummy ticket?",

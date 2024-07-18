@@ -10,6 +10,7 @@ import Number from "../../Components/FormElements/Number";
 import TextArea from "../../Components/FormElements/TextArea";
 import SelectAirport from "../../Components/FormElements/SelectAirport";
 import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
+import SelectDate from "../../Components/FormElements/SelectDate";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];
@@ -221,14 +222,10 @@ export default function TicketForm() {
           <Label htmlFor="departureDate" required>
             Departure Date
           </Label>
-          <Input
-            type="date"
-            value={departureDate}
-            onChange={(e) => setDepartureDate(e.target.value)}
-            name="departureDate"
-            id="departureDate"
-            required
-            min={today}
+          <SelectDate
+            selectedDate={departureDate}
+            onDateSelect={setDepartureDate}
+            minDate={today}
           />
         </div>
         {type === "Return" && (
@@ -236,14 +233,10 @@ export default function TicketForm() {
             <Label htmlFor="arrivalDate" required>
               Return Date
             </Label>
-            <Input
-              type="date"
-              value={arrivalDate}
-              onChange={(e) => setArrivalDate(e.target.value)}
-              name="arrivalDate"
-              id="arrivalDate"
-              required
-              min={departureDate}
+            <SelectDate
+              selectedDate={arrivalDate}
+              onDateSelect={setArrivalDate}
+              minDate={new Date(departureDate)}
             />
           </div>
         )}

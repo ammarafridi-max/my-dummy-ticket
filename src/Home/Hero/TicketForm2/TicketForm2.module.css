@@ -1,0 +1,52 @@
+.Form {
+  padding: 40px 40px;
+  background-color: white;
+  overflow: visible;
+  border-radius: 20px;
+}
+
+.Row {
+  display: flex;
+}
+
+.Input {
+  width: 50%;
+  margin-bottom: 15px;
+}
+
+.Type {
+  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: fit-content;
+  margin-right: 20px;
+}
+
+.Type:hover {
+  cursor: pointer;
+}
+
+.DotIcon {
+  margin-right: 8px;
+  font-size: 20px;
+  border-radius: 100px;
+  padding: 3px;
+  color: transparent;
+  border: 1.5px solid black;
+}
+
+.Active {
+  color: var(--primary-color) !important;
+  border: 2px solid var(--primary-color);
+}
+
+@media screen and (max-width: 991px) {
+  .Form {
+    padding: 40px 30px;
+  }
+  .Input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

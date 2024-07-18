@@ -21,13 +21,14 @@ button,
 select,
 option {
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 p {
   font-size: 16px;
   padding: 0;
   margin: 0;
+  font-weight: 400;
 }
 
 a {
