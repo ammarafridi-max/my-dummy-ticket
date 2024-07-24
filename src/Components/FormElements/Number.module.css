@@ -1,18 +1,13 @@
 .Div {
   width: 100%;
-  background-color: rgb(242, 242, 242);
-  padding: 10px 15px;
+  padding: 12px 15px;
   border-radius: 5px;
   position: relative;
+  border: 1.5px solid rgb(220, 220, 220);
 }
 
 .Code {
   width: 25%;
-}
-
-.Digits {
-  width: 75%;
-  padding-left: 15px;
 }
 
 .Code,
@@ -20,6 +15,11 @@
   outline: none;
   background-color: transparent;
   border: none;
+}
+
+.Digits {
+  width: 75%;
+  padding-left: 15px;
 }
 
 .Options {

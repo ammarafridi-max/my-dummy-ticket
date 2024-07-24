@@ -3,10 +3,10 @@ import "./App.css";
 import Navigation from "./Layout/Navigation";
 import MobileNavigation from "./Layout/MobileNavigation";
 import Footer from "./Layout/Footer";
-import Home from "./Home/Home";
-import FAQ from "./FAQ/FAQ";
-import PaymentSuccess from "./PaymentSuccess/PaymentSuccess";
-import ReviewDetails from "./ReviewDetails/ReviewDetails";
+import Home from "./Pages/Home/Home";
+import FAQ from "./Pages/FAQ/FAQ";
+import PaymentSuccess from "./Pages/PaymentSuccess/PaymentSuccess";
+import ReviewDetails from "./Pages/ReviewDetails/ReviewDetails";
 
 export default function App() {
   return (

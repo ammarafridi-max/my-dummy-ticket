@@ -1,8 +1,0 @@
-.block {
-  background-color: red;
-  height: 30px;
-}
-
-.block:nth-child(3) {
-  background-color: blue;
-}

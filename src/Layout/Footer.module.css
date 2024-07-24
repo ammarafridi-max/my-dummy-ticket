@@ -26,9 +26,16 @@
   font-size: 45px !important;
 }
 
+.copyrightText {
+  text-align: center;
+}
+
 @media screen and (max-width: 991px) {
   .WhatsAppIcon {
     right: 40px;
     bottom: 40px;
+  }
+  .copyrightText {
+    font-size: 13px;
   }
 }

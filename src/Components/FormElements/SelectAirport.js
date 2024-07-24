@@ -10,25 +10,14 @@ export default function SelectAirport({
 }) {
   const [query, setQuery] = useState(value);
   const [airports, setAirports] = useState([]);
-  const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [isOnFocus, setIsOnFocus] = useState(false);
   const componentRef = useRef();
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, 200); // 300ms delay
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [query]);
-
-  useEffect(() => {
-    if (debouncedQuery.length >= 3) {
-      getAirports(debouncedQuery);
+    if (query.length >= 3) {
+      getAirports(query);
     }
-  }, [debouncedQuery]);
+  }, [query]);
 
   async function getAirports(query) {
     const url = "https://airline-database.p.rapidapi.com/api/search";
@@ -80,7 +69,7 @@ export default function SelectAirport({
   }, []);
 
   function handleItemClick(airport) {
-    const selectedValue = `${airport.iata} - ${airport.name}`;
+    const selectedValue = `${airport.iata} - ${airport.city}`;
     setQuery(selectedValue);
     setIsOnFocus(false);
     onChange(selectedValue); // Call onChange prop to update parent state
@@ -113,7 +102,7 @@ export default function SelectAirport({
                 className={styles.Name}
                 onClick={() => handleItemClick(airport)}
               >
-                {airport.iata} - {airport.name}
+                {airport.iata} - {airport.city}
               </li>
             ))}
         </ul>

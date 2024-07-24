@@ -1,0 +1,158 @@
+.Form {
+  padding: 40px;
+  width: 100%;
+  background-color: white;
+  margin: 0;
+  transition-duration: 0.3s;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 0px 40px 5px rgba(220, 220, 220, 1);
+  -moz-box-shadow: 0px 0px 40px 5px rgba(220, 220, 220, 1);
+  box-shadow: 0px 0px 40px 5px rgba(220, 220, 220, 1);
+}
+
+.Type {
+  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.Type:hover {
+  cursor: pointer;
+}
+
+.DotIcon {
+  margin-right: 8px;
+  font-size: 20px;
+  border-radius: 100px;
+  padding: 3px;
+  color: transparent;
+  border: 1.5px solid black;
+}
+
+.Active {
+  color: var(--primary-color) !important;
+  border: 2px solid var(--primary-color);
+}
+
+.Alert {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.FieldTitle {
+  font-size: 15px;
+  border-bottom: 1px solid rgb(200, 200, 200);
+  padding-bottom: 5px;
+  margin: 20px 0 15px 0;
+  text-transform: capitalize;
+  color: rgb(100, 100, 100);
+}
+
+.Input {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.TextArea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.CountSection {
+  border-radius: 5px;
+  margin: 10px 0;
+  justify-content: space-between;
+}
+
+.Count {
+  width: fit-content;
+  font-size: 14.5px;
+  padding: 5px 0;
+}
+
+.Gender {
+  font-size: 14.5px;
+  text-align: center;
+  margin: auto 0;
+  margin-bottom: 10px;
+}
+
+.Age {
+  color: rgb(200, 200, 200);
+}
+
+.Counter {
+  margin: 0 auto;
+}
+
+.Title {
+  width: 20%;
+}
+
+.Name {
+  width: 40%;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.PassengerNumber {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.Total {
+  font-weight: 600;
+  color: white;
+}
+
+@media only screen and (max-width: 991px) {
+  .Form {
+    padding: 40px 30px;
+  }
+  .Row {
+    display: flex;
+  }
+  .Input {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .Count {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    border: none;
+    padding: 10px 0;
+  }
+  .Gender {
+    margin: 0;
+    margin: auto 0;
+  }
+  .Counter {
+    width: fit-content;
+    margin: 0;
+  }
+  .Title {
+    width: 35%;
+    padding-right: 2px;
+  }
+  .Name {
+    width: 65%;
+  }
+  .Name:nth-of-type(3) {
+    width: 100%;
+  }
+}

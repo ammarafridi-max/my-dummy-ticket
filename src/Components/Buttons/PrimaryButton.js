@@ -7,7 +7,20 @@ export default function PrimaryButton({
   disabled,
   children,
   href,
+  pt,
+  pb,
+  py,
+  mt,
+  mb,
+  my,
 }) {
+  const btnStyling = {
+    paddingTop: pt || py,
+    paddingBottom: pb || py,
+    marginTop: mt || my,
+    marginBottom: mb || my,
+  };
+
   return (
     <a href={href} target="_blank">
       <button
@@ -15,6 +28,7 @@ export default function PrimaryButton({
         type={type}
         className={`${styles.Btn} ${className}`}
         disabled={disabled}
+        style={btnStyling}
       >
         {children}
       </button>

@@ -5,7 +5,7 @@ export default function Label(props) {
     marginRight: props.mr || props.mx,
     marginLeft: props.ml || props.mx,
     marginTop: props.mt || props.my,
-    marginBottom: props.mb || props.my || "5px",
+    marginBottom: props.mb || props.my || "10px",
   };
 
   return (

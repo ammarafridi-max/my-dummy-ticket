@@ -1,8 +1,9 @@
 .SelectDiv {
   display: flex;
   align-items: center;
-  background-color: rgb(242, 242, 242);
-  padding: 10px 20px;
+  background-color: white;
+  border: 1.5px solid rgb(220, 220, 220);
+  padding: 0px 20px;
   border-radius: 5px;
   transition-duration: 0.3s;
   position: relative;
@@ -20,4 +21,5 @@
   border: none;
   outline: none;
   overflow: hidden;
+  padding: 12px 0;
 }

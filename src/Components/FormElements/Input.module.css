@@ -1,10 +1,11 @@
 .InputDiv {
   display: flex;
   align-items: center;
-  background-color: rgb(242, 242, 242);
-  padding: 10px 20px;
+  background-color: white;
+  padding: 0 20px;
   border-radius: 5px;
   transition-duration: 0.3s;
+  border: 1.5px solid rgb(220, 220, 220);
 }
 
 .Icon {
@@ -18,10 +19,12 @@
   border: none;
   font-size: 14.5px;
   outline: none;
+  padding: 12px 0;
 }
 
-.InputDiv:hover {
-  background-color: rgb(230, 230, 230);
+.InputDiv:hover,
+.InputDiv:focus-within {
+  border-color: var(--primary-color);
 }
 
 .Input::placeholder {

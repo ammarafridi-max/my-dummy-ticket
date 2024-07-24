@@ -12,8 +12,8 @@ export default function Footer() {
 
 function CopyrightText() {
   return (
-    <div className="text-center">
-      Copyright © 2024 My Dummy Ticket - All Rights Reserved.
+    <div className={styles.copyrightText}>
+      © 2024 TRAVL Technologies. All Rights Reserved.
     </div>
   );
 }
