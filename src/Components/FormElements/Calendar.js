@@ -25,6 +25,7 @@ const Calendar = ({ onDateClick, isDateDisabled }) => {
         <div className={`${styles.col} ${styles.colCenter}`}>
           <span>
             {currentDate.toLocaleDateString("en-US", {
+              day: "2-digit",
               month: "long",
               year: "numeric",
             })}

@@ -12,6 +12,102 @@
   font-weight: 500;
 }
 
+/* Icon */
+
+.iconWithText {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Gallery */
+
+.grid1,
+.grid2 {
+  width: 50%;
+}
+
+.grid1 div,
+.grid2 div {
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(240, 240, 240, 1);
+  -moz-box-shadow: 0px 0px 10px 5px rgba(240, 240, 240, 1);
+  box-shadow: 0px 0px 10px 5px rgba(240, 240, 240, 1);
+}
+
+.grid1 .img1 {
+  height: 150px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.grid1 .img2 {
+  height: 350px;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.grid2 .img1 {
+  height: 350px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.grid2 .img2 {
+  height: 150px;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.grid1 .img1 img {
+  width: 100%;
+  object-position: center;
+  object-fit: contain;
+}
+
+.grid1 .img2 img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.grid2 .img1 img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.grid2 .img2 img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: contain;
+}
+
+.trustpilotIcon {
+  width: 100%;
+}
+
+.travelIcon {
+  height: 100%;
+}
+
 @media screen and (max-width: 991px) {
   .ImgDiv {
     width: 90%;
@@ -26,5 +122,34 @@
     width: 90%;
     margin: 0 auto;
     margin-top: 40px;
+  }
+
+  /* Icons */
+
+  .iconWithText {
+    margin-top: 30px;
+  }
+
+  /* Gallery */
+
+  .gallery {
+    margin-top: 50px;
+  }
+
+  .grid1 .img1 {
+    height: 150px;
+    font-size: 14px;
+  }
+
+  .grid1 .img2 {
+    height: 300px;
+  }
+
+  .grid2 .img1 {
+    height: 300px;
+  }
+
+  .grid2 .img2 {
+    height: 150px;
   }
 }

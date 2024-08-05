@@ -14,7 +14,7 @@
 .IconCard h3 {
   font-size: 22px;
   margin: 20px 0;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .Icon {
@@ -44,5 +44,8 @@ p {
   }
   .IconCard:last-of-type {
     margin-bottom: 0px;
+  }
+  .IconCard h3 {
+    margin: 20px 0 10px 0;
   }
 }

@@ -1,15 +1,20 @@
+import { useState, useEffect } from "react";
 import styles from "./TicketForm2.module.css";
+import { useNavigate } from "react-router-dom";
+import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 import Input from "../../../../Components/FormElements/Input";
 import Label from "../../../../Components/FormElements/Label";
 import SelectAirport from "../../../../Components/FormElements/SelectAirport";
-import { useState } from "react";
-import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 import SelectDate from "../../../../Components/FormElements/SelectDate";
+import PrimaryButton from "../../../../Components/Buttons/PrimaryButton";
 
 export default function TicketForm2() {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [btnDisabled, setBtnDisabled] = useState(true);
   const today = new Date();
   const todayString = today.toLocaleDateString("en-US", {
-    day: "numeric",
+    day: "2-digit",
     month: "long",
     year: "numeric",
   });
@@ -18,14 +23,33 @@ export default function TicketForm2() {
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState(todayString);
   const [returnDate, setReturnDate] = useState("");
+  const url = `booking/select-flights?type=${type}&from=${from}&to=${to}&departureDate=${departureDate}${
+    returnDate && `&returnDate=${returnDate}`
+  }`;
+
+  useEffect(() => {
+    setBtnDisabled(
+      !from || !to || !departureDate || (type === "Return" && !returnDate)
+    );
+  }, [from, to, departureDate, returnDate, type]);
+
+  function handleForm(event) {
+    event.preventDefault();
+    if (from && to && departureDate && (type === "One Way" || returnDate)) {
+      navigate(url);
+    } else {
+      console.log("Please fill out all required fields.");
+    }
+  }
 
   return (
-    <form className={styles.Form}>
+    <form className={styles.Form} onSubmit={handleForm}>
       <div className="row m-0">
         <p
           className={styles.Type}
           onClick={() => {
             setType("One Way");
+            setReturnDate("");
           }}
         >
           <FaCircle
@@ -52,7 +76,7 @@ export default function TicketForm2() {
       </div>
 
       <div className="row">
-        <div className={styles.Input}>
+        <div className={`col-12 col-lg ${styles.Input}`}>
           <Label>From</Label>
           <SelectAirport
             icon={<FaPlaneDeparture />}
@@ -60,18 +84,17 @@ export default function TicketForm2() {
             onChange={setFrom}
           />
         </div>
-        <div className={styles.Input}>
+        <div className={`col-12 col-lg ${styles.Input}`}>
           <Label>To</Label>
           <SelectAirport
-            icon={<FaPlaneDeparture />}
-            value={from}
-            onChange={setFrom}
+            icon={<FaPlaneArrival />}
+            value={to}
+            onChange={setTo}
           />
         </div>
       </div>
-
       <div className="row">
-        <div className={styles.Input}>
+        <div className={`col-12 col-lg ${styles.Input}`}>
           <Label htmlFor="departureDate" required>
             Departure Date
           </Label>
@@ -82,7 +105,7 @@ export default function TicketForm2() {
           />
         </div>
         {type === "Return" && (
-          <div className={styles.Input}>
+          <div className={`col-12 col-lg ${styles.Input}`}>
             <Label>Return Date</Label>
             <SelectDate
               selectedDate={returnDate}
@@ -93,7 +116,15 @@ export default function TicketForm2() {
         )}
       </div>
 
-      <div className="col-12 col-lg-3"></div>
+      <div className="text-center">
+        <PrimaryButton
+          type="submit"
+          disabled={btnDisabled}
+          className={styles.Btn}
+        >
+          Search Flights
+        </PrimaryButton>
+      </div>
     </form>
   );
 }

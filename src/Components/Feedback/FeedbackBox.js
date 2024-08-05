@@ -2,8 +2,8 @@ import styles from "./FeedbackBox.module.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 
-export default function FeedbackBox({ children, onClick }) {
-  const [isOpen, setIsOpen] = useState(true);
+export default function FeedbackBox({ children, showFeedbackBox }) {
+  const [isOpen, setIsOpen] = useState(showFeedbackBox);
 
   function handleClick(e) {
     e.preventDefault();

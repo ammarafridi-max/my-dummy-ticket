@@ -2,14 +2,13 @@
   padding: 50px 35px;
   background-color: white;
   overflow: visible;
-  border-radius: 20px;
+  border-radius: 10px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(220, 220, 220, 1);
   -moz-box-shadow: 0px 0px 20px 0px rgba(220, 220, 220, 1);
   box-shadow: 0px 0px 20px 0px rgba(220, 220, 220, 1);
 }
 
 .Input {
-  width: 50%;
   margin-bottom: 15px;
 }
 
@@ -42,7 +41,8 @@
 }
 
 .Btn {
-  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 991px) {
@@ -51,6 +51,6 @@
   }
   .Input {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 }

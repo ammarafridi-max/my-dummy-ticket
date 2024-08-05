@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
-
 :root {
   --primary-color: #20b2aa;
   --primary-color-dark: #188781;
@@ -16,6 +14,10 @@
   padding: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 input,
 button,
 select,
@@ -29,6 +31,26 @@ p {
   padding: 0;
   margin: 0;
   font-weight: 400;
+}
+
+p.small {
+  font-size: 15px;
+}
+
+p.large {
+  font-size: 17px;
+}
+
+p.x-large {
+  font-size: 18px;
+}
+
+.semi-bold {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 a {

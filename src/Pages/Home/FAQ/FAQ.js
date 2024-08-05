@@ -4,10 +4,11 @@ import Container from "../../../Components/Container/Container";
 import FAQCard from "../../../Components/FAQCard/FAQCard";
 import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
 import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
+import { faqArray } from "../../FAQ/FAQ";
 
 export default function FAQ() {
   return (
-    <PrimarySection id="faqs" pt="0" className={styles.Section}>
+    <PrimarySection id="faq">
       <Container>
         <SectionTitle
           textAlign="center"
@@ -15,7 +16,16 @@ export default function FAQ() {
         >
           Frequently Asked Questions
         </SectionTitle>
-        <FAQCard question="What is a dummy ticket?">
+        {faqArray.map((faq, i) => {
+          while (i < 6) {
+            return (
+              <FAQCard key={i} question={faq.question}>
+                {faq.answer}
+              </FAQCard>
+            );
+          }
+        })}
+        {/* <FAQCard question="What is a dummy ticket?">
           A dummy ticket is a flight reservation used primarily for visa
           applications and proof of onward travel. It looks like a real ticket
           with a verifiable PNR number but is not intended for actual travel.
@@ -45,7 +55,7 @@ export default function FAQ() {
           Yes, our dummy tickets are suitable for all kinds of visit visa
           applications. Most of our customers use our dummy ticket for Schengen,
           Turkey, UAE, and Canada visa applications.
-        </FAQCard>
+        </FAQCard> */}
         <div className="text-center">
           <PrimaryButton mt="50px" href="/faq">
             Read More FAQs

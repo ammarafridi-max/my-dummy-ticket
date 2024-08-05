@@ -7,7 +7,17 @@
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  padding: 40px 50px;
+  padding: 30px 30px;
+}
+
+.secondary {
+  background-color: white;
+}
+
+.Title {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
 }
 
 .ImageContainer {
@@ -30,7 +40,7 @@
 .Author {
   text-align: center;
   color: var(--primary-color);
-  margin: 15px 0;
+  margin: 10px 0;
   font-weight: 600;
 }
 
@@ -41,7 +51,8 @@
 .Content p {
   font-size: 16px;
   color: rgb(0, 0, 0);
-  font-weight: 400;
+  font-weight: 300;
+  margin: 20px 0;
 }
 
 @media only screen and (max-width: 991px) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./SelectAirport.module.css";
+import debounce from "lodash.debounce";
 
 export default function SelectAirport({
   value,
@@ -8,6 +9,7 @@ export default function SelectAirport({
   className,
   icon,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState(value);
   const [airports, setAirports] = useState([]);
   const [isOnFocus, setIsOnFocus] = useState(false);
@@ -15,7 +17,7 @@ export default function SelectAirport({
 
   useEffect(() => {
     if (query.length >= 3) {
-      getAirports(query);
+      debouncedGetAirports(query);
     }
   }, [query]);
 
@@ -34,13 +36,20 @@ export default function SelectAirport({
     };
 
     try {
+      setIsLoading(true);
+      setAirports([]);
       const response = await fetch(url, options);
       const data = await response.json();
+      console.log("API Response Data: ", data.data[0]);
       setAirports(data.data[0]);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching airports: ", error);
+    } finally {
+      setIsLoading(false);
     }
   }
+
+  const debouncedGetAirports = debounce(getAirports, 0);
 
   function handleChange(e) {
     setQuery(e.target.value);
@@ -69,7 +78,7 @@ export default function SelectAirport({
   }, []);
 
   function handleItemClick(airport) {
-    const selectedValue = `${airport.iata} - ${airport.city}`;
+    const selectedValue = `${airport.city} (${airport.iata})`;
     setQuery(selectedValue);
     setIsOnFocus(false);
     onChange(selectedValue); // Call onChange prop to update parent state
@@ -92,17 +101,32 @@ export default function SelectAirport({
         <ul className={styles.List}>
           {query.length < 3 && (
             <li className={`${styles.Name} ${styles.Text}`}>
-              Enter at least {3 - query.length} characters
+              Enter at least 3 characters
             </li>
           )}
+
+          {isLoading && (
+            <li className={`${styles.Name} ${styles.Text}`}>
+              Loading airports...
+            </li>
+          )}
+
+          {airports.length === 0 && query.length >= 3 && !isLoading && (
+            <li className={`${styles.Name} ${styles.Text}`}>
+              No airports found
+            </li>
+          )}
+
           {query.length >= 3 &&
+            airports.length !== 0 &&
+            !isLoading &&
             airports.map((airport, index) => (
               <li
                 key={index}
                 className={styles.Name}
                 onClick={() => handleItemClick(airport)}
               >
-                {airport.iata} - {airport.city}
+                {airport.city} ({airport.iata})
               </li>
             ))}
         </ul>
@@ -110,3 +134,44 @@ export default function SelectAirport({
     </div>
   );
 }
+
+// async function getAirports(query) {
+//   const url = "https://airline-database.p.rapidapi.com/api/search";
+//   const data = new FormData();
+//   data.append("q", query);
+
+//   const options = {
+//     method: "POST",
+//     headers: {
+//       "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
+//       "x-rapidapi-host": "airline-database.p.rapidapi.com",
+//     },
+//     body: data,
+//   };
+
+//   try {
+//     const response = await fetch(url, options);
+//     const data = await response.json();
+//     setAirports(data.data[0]);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// const getAirports = async (query) => {
+//   try {
+//     const res = await fetch(
+//       `${process.env.REACT_APP_BACKEND_URL}/airports?keyword=${query}`
+//     );
+//     const data = await res.json();
+//     if (Array.isArray(data)) {
+//       setAirports(data);
+//     } else {
+//       setAirports([]);
+//       console.error("API response is not an array:", data);
+//     }
+//   } catch (error) {
+//     console.error("Error fetching airports:", error);
+//     setAirports([]);
+//   }
+// };

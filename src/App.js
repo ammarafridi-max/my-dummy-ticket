@@ -1,28 +1,31 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import Navigation from "./Layout/Navigation";
-import MobileNavigation from "./Layout/MobileNavigation";
-import Footer from "./Layout/Footer";
 import Home from "./Pages/Home/Home";
+import SelectFlights from "./Pages/SelectFlights/SelectFlights";
 import FAQ from "./Pages/FAQ/FAQ";
 import PaymentSuccess from "./Pages/PaymentSuccess/PaymentSuccess";
 import ReviewDetails from "./Pages/ReviewDetails/ReviewDetails";
+import BookingLayout from "./Pages/BookingLayout/BookingLayout";
+import PassengerDetails from "./Pages/PassengerDetails/PassengerDetails";
+import Layout from "./Layout/Layout";
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/faq", element: <FAQ /> },
+      { path: "/payment-successful", element: <PaymentSuccess /> },
+      {
+        path: "/booking",
+        element: <BookingLayout />,
+        children: [{ path: "select-flights", element: <SelectFlights /> }],
+      },
+      // { path: "/select-flight", element: <SelectFlights /> },
+    ],
+  },
+]);
 
 export default function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <MobileNavigation />
-        <Navigation />
-        <Routes>
-          <Route path="*" element={<Navigate to="/" />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/payment-successful" element={<PaymentSuccess />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/review" element={<ReviewDetails />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }

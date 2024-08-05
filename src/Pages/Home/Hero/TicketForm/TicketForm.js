@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import styles from "./TicketForm.module.css";
-import Error from "../../../Components/Feedback/Error";
-import Input from "../../../Components/FormElements/Input";
-import Label from "../../../Components/FormElements/Label";
-import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
-import Counter from "../../../Components/FormElements/Counter";
-import SelectTitle from "../../../Components/FormElements/SelectTitle";
-import Number from "../../../Components/FormElements/Number";
-import TextArea from "../../../Components/FormElements/TextArea";
-import SelectAirport from "../../../Components/FormElements/SelectAirport";
+import Error from "../../../../Components/Feedback/Error";
+import Input from "../../../../Components/FormElements/Input";
+import Label from "../../../../Components/FormElements/Label";
+import PrimaryButton from "../../../../Components/Buttons/PrimaryButton";
+import Counter from "../../../../Components/FormElements/Counter";
+import SelectTitle from "../../../../Components/FormElements/SelectTitle";
+import Number from "../../../../Components/FormElements/Number";
+import TextArea from "../../../../Components/FormElements/TextArea";
+import SelectAirport from "../../../../Components/FormElements/SelectAirport";
 import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
-import SelectDate from "../../../Components/FormElements/SelectDate";
+import SelectDate from "../../../../Components/FormElements/SelectDate";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];

@@ -1,3 +1,5 @@
+import styles from "./Container.module.css";
+
 export default function Container(props) {
   const containerStyle = {
     paddingTop: props.pt || props.py,
@@ -7,7 +9,7 @@ export default function Container(props) {
   };
   return (
     <div
-      className={`col-11 col-lg-10 mx-auto m-0 ${props.className}`}
+      className={`col-11 mx-auto m-0 ${props.className} ${styles.container} `}
       style={containerStyle}
     >
       {props.children}

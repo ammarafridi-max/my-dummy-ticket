@@ -5,6 +5,7 @@ import About from "./About/About";
 import FAQ from "./FAQ/FAQ.js";
 import Benefits from "./Benefits/Benefits.js";
 import Testimonials from "./Testimonials/Testimonials.js";
+import Contact from "./Contact/Contact.js";
 
 export default function Home() {
   return (
@@ -16,10 +17,11 @@ export default function Home() {
       </HelmetProvider>
       <Hero />
       <Process />
+      <About />
       <Benefits />
       <Testimonials />
       <FAQ />
-      <About />
+      <Contact />
     </div>
   );
 }

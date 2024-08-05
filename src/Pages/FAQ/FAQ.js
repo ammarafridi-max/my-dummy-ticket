@@ -5,31 +5,46 @@ import Container from "../../Components/Container/Container";
 import PageTitle from "../../Components/PageTitle/PageTitle";
 import FAQCard from "../../Components/FAQCard/FAQCard";
 
-const faqArray = [
+export const faqArray = [
   {
-    question: "What is a Dummy Ticket?",
+    question: "What is a dummy ticket?",
     answer:
       "A dummy ticket is a flight reservation used primarily for visa applications and proof of onward travel. It looks like a real ticket with a verifiable PNR number but is, in fact, a reservation and not intended for actual travel.",
   },
   {
-    question: "How can I be sure the dummy ticket is verifiable?",
+    question: "How can I verify the dummy ticket?",
     answer:
-      "Our dummy tickets are legitimate flight reservations. They can be verified directly on the airline's website using the airline reservation code and your surname.",
+      "Our dummy tickets are legitimate flight reservations. They can be verified directly on the airline's website using the airline reservation code and your surname. It's important to note that some airlines do not display reservation information on their website.",
   },
   {
-    question: "What is the cost of a dummy ticket?",
+    question: "How much does a dummy ticket cost?",
     answer:
       "Our dummy tickets cost AED 49 only for both, one way and return dummy tickets.",
   },
   {
     question: "How long is your dummy ticket valid for?",
     answer:
-      "Our dummy tickets are valid for up to 2 weeks, or up to the date of flight departure if the departure date is in less than 2 weeks. If you need a dummy ticket with a longer validity, please contact us. We also offer extendable dummy tickets free of charge.",
+      "Our dummy tickets are valid for up to 2 weeks, or up to the date of flight departure or less if the departure date is in less than 2 weeks. If you need a dummy ticket with a longer validity, please contact us. We also offer extendable dummy tickets.",
   },
   {
     question: "How long does it take to receive my dummy ticket?",
     answer:
-      "All of our dummy tickets are created and sent within 30 to 60 minutes of application time. Please note that we send dummy tickets during working hours only (09:00 AM - 09:00 PM).",
+      "All of our dummy tickets are created and sent within 10 to 15 minutes of application time. Please note that we send dummy tickets during working hours only (09:00 AM - 09:00 PM). If you need it urgently, please send us an email",
+  },
+  {
+    question: "Do dummy tickets work for Schengen visas?",
+    answer:
+      "Absolutely! Dummy tickets are basically flight reservations that allow embassies and VFS to ensure that the traveler has planned their return from the destination they're visiting. It helps gain their confidence and improves the chances of getting your Schengen visa.",
+  },
+  {
+    question: "Will my visa get rejected due to dummy tickets?",
+    answer:
+      "Not at all. Dummy tickets are completely fine and acceptable by VFS and embassies. They will improve your chances of getting your visa approved.",
+  },
+  {
+    question: "I need hotel reservations too. Can you provide that?",
+    answer:
+      "Yes, we do. We specialize in all kinds of travel documentation and assistance, which means that we provide dummy tickets, hotel reservations, travel insurance, trip itinerary and all other related documents needed to get your visa approved.",
   },
   {
     question: "What payment methods do you accept?",
@@ -39,7 +54,7 @@ const faqArray = [
   {
     question: "Is the dummy ticket suitable for all visa applications?",
     answer:
-      "Yes, our dummy tickets are suitable for visa applications, including Schengen visas, Turkey visas, Canada visas, and UAE visas.",
+      "Yes, our dummy tickets are suitable and acceptable for all kinds of visa applications, including but not limited to Schengen, Turkey, Canada, Thailand, UAE, and UK visas.",
   },
   {
     question: "What additional services do you offer?",

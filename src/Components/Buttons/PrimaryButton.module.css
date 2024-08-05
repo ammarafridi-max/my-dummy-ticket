@@ -1,8 +1,5 @@
 .Btn {
-  color: white;
   text-align: center;
-  background-color: var(--primary-color);
-  border: 1px solid transparent;
   padding: 10px 30px;
   border-radius: 5px;
   text-transform: capitalize;
@@ -10,17 +7,47 @@
   transition-duration: 0.3s;
 }
 
-.Btn:hover {
+.Primary {
+  color: white;
+  background-color: var(--primary-color);
+  border: 1px solid transparent;
+}
+
+.Primary:hover {
   background-color: var(--primary-color-dark);
   border-color: var(--primary-color-dark);
 }
 
-.Btn:disabled {
+.Primary:disabled {
+  background-color: var(--primary-color);
   opacity: 0.6;
 }
 
-.Btn:disabled:hover {
-  transform: none;
-  box-shadow: none;
-  background-color: #305e42;
+.Primary:disabled:hover {
+  background-color: var(--primary-color);
+  opacity: 0.6;
+  border-color: var(--primary-color);
+}
+
+.PrimaryOutline {
+  color: var(--primary-color);
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+}
+
+.PrimaryOutline:hover {
+  background-color: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+  color: white;
+}
+
+.PrimaryOutline:disabled {
+  background-color: var(--primary-color);
+  opacity: 0.6;
+}
+
+.PrimaryOutline:disabled:hover {
+  background-color: var(--primary-color);
+  opacity: 0.6;
+  border-color: var(--primary-color);
 }

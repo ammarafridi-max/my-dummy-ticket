@@ -17,7 +17,7 @@ export const pages = [
   },
   {
     name: "FAQ",
-    link: "/faq",
+    link: "#faq",
   },
   {
     name: "Contact",
@@ -42,7 +42,12 @@ function Logo() {
   return (
     <div className={styles.LogoDiv}>
       <a href="/">
-        <img src={logo} className={styles.Logo} alt="MyDummyTicket.ae logo" />
+        <img
+          src={logo}
+          className={styles.Logo}
+          alt="My Dummy Ticket Logo"
+          title="My Dummy Ticket Logo"
+        />
       </a>
     </div>
   );
@@ -56,6 +61,7 @@ function NavLinks() {
           key={i}
           href={page.link}
           className={`${page.name === "Contact" ? styles.CTA : styles.NavLink}`}
+          title={page.name}
         >
           {page.name}
         </a>

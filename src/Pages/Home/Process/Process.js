@@ -10,9 +10,9 @@ export default function Process() {
         <SectionTitle
           textAlign="center"
           type="secondary"
-          subtitle="Simple and hassle-free process"
+          subtitle="How it Works"
         >
-          How it works
+          Your Dummy Ticket in 3 Easy Steps
         </SectionTitle>
         <div className="row justify-content-between">
           <Card

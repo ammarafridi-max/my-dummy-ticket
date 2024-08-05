@@ -20,7 +20,7 @@ export default function FAQCard({ question, children }) {
         }`}
         onClick={toggleHidden}
       >
-        <p className={styles.Question}>{question}</p>
+        <h3 className={styles.Question}>{question}</h3>
         {className === styles.Hidden ? (
           <Add className={styles.FAQIcon} />
         ) : (
@@ -33,15 +33,3 @@ export default function FAQCard({ question, children }) {
     </div>
   );
 }
-
-// export function Question(props) {
-//     return <p className={styles.Question}>{props.children}</p>;
-//   }
-
-//   export function Answer(props) {
-//     return (
-//       <p className={styles.AnswerBox} style={{ display: props.display }}>
-//         {props.children}
-//       </p>
-//     );
-//   }

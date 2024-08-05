@@ -24,6 +24,7 @@ export default function MobileNavigation() {
               src={logo}
               className={styles.Logo}
               alt="My Dummy Ticket Logo"
+              title="My Dummy Ticket Logo"
             />
           </a>
         </div>

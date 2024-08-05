@@ -1,50 +1,42 @@
-// import styles from "./Home.module.css";
-import { useState } from "react";
+import React, { Suspense, lazy } from "react";
 import PrimarySection from "../../../Components/Section/PrimarySection";
 import Container from "../../../Components/Container/Container";
-import TicketForm from "./TicketForm";
-import HotelForm from "./HotelForm";
 import styles from "./Hero.module.css";
-import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
-import {
-  LocalAirportRounded,
-  HotelRounded,
-  HealthAndSafetyRounded,
-} from "@mui/icons-material";
-import Checklist from "../Checklist/Checklist";
-import TicketForm2 from "./TicketForm2/TicketForm2";
 
-export default function Hero() {
+// Lazy load TicketForm component
+const TicketForm = lazy(() => import("./TicketForm/TicketForm"));
+
+const Hero = () => {
   return (
     <PrimarySection className={styles.HeroSection} id="form">
-      <Container
-        className={`col-12 row justify-content-between align-items-center`}
-      >
-        <div className="col-12 col-lg-6">
+      <div className="col-12 col-lg-10 row justify-content-between align-items-center mx-auto">
+        <div className="col-10 col-lg-6 mx-auto">
           <TextContent />
         </div>
-        <div className="col-12 col-lg-6">
-          <TicketForm />
+        <div className="col-12 col-lg-6 mx-auto">
+          <Suspense fallback={<div>Loading form...</div>}>
+            <TicketForm />
+          </Suspense>
         </div>
-      </Container>
+      </div>
     </PrimarySection>
   );
-}
+};
 
-function TextContent() {
+const TextContent = React.memo(() => {
   return (
-    <div className={`${styles.Content}`}>
+    <div className={styles.Content}>
       <h1 className={styles.HeroHeading}>
-        Get your dummy ticket for
-        <span className={styles.Price}>AED 49</span>
+        Get your dummy ticket for <span className={styles.Price}>AED 49</span>
       </h1>
       <p className={styles.HeroText}>
-        Book confirmed flight reservations for visa application from licenced
+        Book confirmed flight reservations for visa application from licensed
         Dubai agency (
         <a
           href="https://app.invest.dubai.ae/DUL/98A318CC-6751-4CDB-A958-9FF407AF6049"
           target="_blank"
           rel="noreferrer"
+          title="Verify My Dummy Ticket's official license here."
         >
           verify here
         </a>
@@ -52,7 +44,9 @@ function TextContent() {
       </p>
     </div>
   );
-}
+});
+
+export default Hero;
 
 // function FormContent() {
 //   const [currentForm, setCurrentForm] = useState("ticket");

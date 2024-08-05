@@ -1,7 +1,36 @@
-.Footer {
-  padding: 30px 0;
-  background-color: #0b3e3b;
+.footerContainer {
+  background-color: var(--primary-color-dark);
+  border-radius: 5px 5px 5px 5px;
+  padding: 30px;
+}
+
+.partnerIcon {
   color: white;
+  height: 70px;
+  width: 70px;
+  margin: 0 auto;
+}
+
+/* GDS */
+
+.gdsPartners {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  margin: 0px auto 0 auto;
+}
+
+.gdsPartners div {
+  width: 10%;
+}
+
+.gdsIcon {
+  fill: white;
+}
+
+.iata {
+  width: 50%;
 }
 
 .WhatsAppIcon {
@@ -27,10 +56,19 @@
 }
 
 .copyrightText {
+  padding-top: 10px;
+  border-top: 1px solid rgb(190, 190, 190);
   text-align: center;
+  color: white;
 }
 
 @media screen and (max-width: 991px) {
+  .partnerIcon {
+    color: white;
+    height: 60px;
+    width: 60px;
+  }
+
   .WhatsAppIcon {
     right: 40px;
     bottom: 40px;

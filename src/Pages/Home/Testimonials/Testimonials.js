@@ -6,22 +6,25 @@ import {
   SectionTitle,
   Subtitle,
 } from "../../../Components/SectionTitle/SectionTitle";
-import david from "./david.png";
-import maria from "./maria.png";
-import ahmed from "./ahmed.png";
+import david from "./david.webp";
+import maria from "./maria.webp";
+import ahmed from "./ahmed.webp";
 
 const testimonials = [
   {
+    title: "Hassle-free",
     name: "David S.",
     img: david,
-    text: "My Dummy Ticket made my visa application process smooth and stress-free. Their service is reliable and highly recommended for all travelers!",
+    text: "My Dummy Ticket made my visa application process smooth and hassle-free. Their service is reliable and highly recommended for all travelers.",
   },
   {
+    title: "Reliable",
     name: "Maria K.",
     img: maria,
-    text: "Fast, reliable, and easy to use. My Dummy Ticket is a lifesaver for travel documentation. I'll definitely use their service again!",
+    text: "Fast service, reliable, and easy to book. My Dummy Ticket is a lifesaver for travel documentation. I really recommend them and will use their service again!",
   },
   {
+    title: "Lightning Fast",
     name: "Ahmed R.",
     img: ahmed,
     text: "Excellent service! Got my dummy ticket in minutes, perfect for my Schengen visa application. My Dummy Ticket truly understands travelers' needs.",
@@ -30,7 +33,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <PrimarySection pt="100px" className={styles.section}>
+    <PrimarySection pt="100px" type="secondary">
       <Container>
         <SectionTitle
           textAlign="center"
@@ -39,9 +42,13 @@ export default function Testimonials() {
           Testimonials
         </SectionTitle>
         <div className="row">
-          {testimonials.map((test) => (
-            <div className="col-12 col-lg-4">
-              <TestimonialCard name={test.name} src={test.img}>
+          {testimonials.map((test, i) => (
+            <div className="col-12 col-lg-4" key={i}>
+              <TestimonialCard
+                title={test.title}
+                name={test.name}
+                src={test.img}
+              >
                 {test.text}
               </TestimonialCard>
             </div>

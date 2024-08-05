@@ -30,7 +30,7 @@ export default function SelectDate({
 
   const handleDateClick = (date) => {
     const formattedDate = date.toLocaleDateString("en-US", {
-      day: "numeric",
+      day: "2-digit",
       month: "long",
       year: "numeric",
     });
