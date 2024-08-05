@@ -40,7 +40,6 @@ export default function SelectAirport({
       setAirports([]);
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log("API Response Data: ", data.data[0]);
       setAirports(data.data[0]);
     } catch (error) {
       console.error("Error fetching airports: ", error);
