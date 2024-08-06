@@ -8,12 +8,14 @@ import ReviewDetails from "./Pages/ReviewDetails/ReviewDetails";
 import BookingLayout from "./Pages/BookingLayout/BookingLayout";
 import PassengerDetails from "./Pages/PassengerDetails/PassengerDetails";
 import Layout from "./Layout/Layout";
+import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
+      { path: "*", element: <PageNotFound /> },
       { path: "/faq", element: <FAQ /> },
       { path: "/payment-successful", element: <PaymentSuccess /> },
       {

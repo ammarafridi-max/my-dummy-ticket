@@ -22,7 +22,7 @@ export default function Contact() {
           <div className="mt-4">
             <PrimaryButton
               mr="10px"
-              href="/https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket."
+              href="/https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket."
             >
               Chat With Us
             </PrimaryButton>

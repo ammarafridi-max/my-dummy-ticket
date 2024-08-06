@@ -1,27 +1,56 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import PrimarySection from "../../../Components/Section/PrimarySection";
 import Container from "../../../Components/Container/Container";
 import styles from "./Hero.module.css";
+import TicketForm from "./TicketForm/TicketForm";
+import HotelForm from "./HotelForm/HotelForm";
+import { IoIosAirplane } from "react-icons/io";
+import { MdHotel } from "react-icons/md";
 
-// Lazy load TicketForm component
-const TicketForm = lazy(() => import("./TicketForm/TicketForm"));
-
-const Hero = () => {
+export default function Hero() {
   return (
     <PrimarySection className={styles.HeroSection} id="form">
       <div className="col-12 col-lg-10 row justify-content-between align-items-center mx-auto">
         <div className="col-10 col-lg-6 mx-auto">
           <TextContent />
         </div>
-        <div className="col-12 col-lg-6 mx-auto">
-          <Suspense fallback={<div>Loading form...</div>}>
-            <TicketForm />
-          </Suspense>
-        </div>
+        <Form />
       </div>
     </PrimarySection>
   );
-};
+}
+
+function Form() {
+  const [currentForm, setCurrentForm] = useState("ticket");
+
+  return (
+    <div className={`col-12 col-lg-6 ${styles.form}`}>
+      <div className={`row ${styles.iconContainer}`}>
+        <div
+          className={`${styles.iconWithText} ${
+            currentForm === "ticket" && styles.active
+          }`}
+          onClick={() => setCurrentForm("ticket")}
+        >
+          <IoIosAirplane className={styles.icon} />
+          <p>Flights</p>
+        </div>
+
+        <div
+          className={`${styles.iconWithText} ${
+            currentForm === "hotel" && styles.active
+          }`}
+          onClick={() => setCurrentForm("hotel")}
+        >
+          <MdHotel className={styles.icon} />
+          <p>Hotels</p>
+        </div>
+      </div>
+      {currentForm === "ticket" && <TicketForm />}
+      {currentForm === "hotel" && <HotelForm />}
+    </div>
+  );
+}
 
 const TextContent = React.memo(() => {
   return (
@@ -45,49 +74,3 @@ const TextContent = React.memo(() => {
     </div>
   );
 });
-
-export default Hero;
-
-// function FormContent() {
-//   const [currentForm, setCurrentForm] = useState("ticket");
-//   const [formType, setFormType] = useState(<TicketForm2 />);
-
-//   return (
-//     <div className={`col-12 col-lg-12 ${styles.Form}`}>
-//       <div className="col-12 row m-0 p-0">
-//         <div
-//           className={`${styles.Btn} ${
-//             currentForm === "ticket" && styles.Active
-//           }`}
-//           onClick={() => {
-//             setFormType(<TicketForm />);
-//             setCurrentForm("ticket");
-//           }}
-//         >
-//           <div className={styles.BtnIcon}>
-//             <LocalAirportRounded />
-//           </div>
-//           <p className={styles.BtnText}>Flight</p>
-//         </div>
-
-//         <div
-//           className={`${styles.Btn} ${
-//             currentForm === "hotel" && styles.Active
-//           }`}
-//           onClick={() => {
-//             setFormType(<HotelForm />);
-//             setCurrentForm("hotel");
-//           }}
-//         >
-//           <div className={styles.Icon}>
-//             <HotelRounded />
-//           </div>
-//           <p className={styles.BtnText}>Hotel</p>
-//         </div>
-//       </div>
-
-//       {/* Form */}
-//       {formType}
-//     </div>
-//   );
-// }

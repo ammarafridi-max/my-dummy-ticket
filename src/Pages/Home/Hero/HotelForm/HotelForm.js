@@ -1,10 +1,10 @@
-import styles from "./TicketForm.module.css";
-import Input from "../../../Components/FormElements/Input";
-import Label from "../../../Components/FormElements/Label";
+import styles from "./HotelForm.module.css";
+import Input from "../../../../Components/FormElements/Input";
+import Label from "../../../../Components/FormElements/Label";
 import { useState } from "react";
-import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
-import Error from "../../../Components/Feedback/Error";
-import Counter from "../../../Components/FormElements/Counter";
+import PrimaryButton from "../../../../Components/Buttons/PrimaryButton";
+import Error from "../../../../Components/Feedback/Error";
+import Counter from "../../../../Components/FormElements/Counter";
 
 export default function HotelForm() {
   const [feedback, setFeedback] = useState();

@@ -38,47 +38,64 @@
 
 /* Form Content */
 
-.Form {
-  margin: 0;
-  padding: 0;
-  border-radius: 30px;
-  overflow: visible;
-  /* -webkit-box-shadow: 0px 0px 40px 10px rgba(220, 220, 220, 1);
-  -moz-box-shadow: 0px 0px 40px 10px rgba(220, 220, 220, 1);
-  box-shadow: 0px 0px 40px 10px rgba(220, 220, 220, 1); */
+.form {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 40px 5px rgba(220, 220, 220, 1);
+  -moz-box-shadow: 0px 0px 40px 5px rgba(220, 220, 220, 1);
+  box-shadow: 0px 0px 40px 5px rgba(220, 220, 220, 1);
 }
 
-.Btn {
+.iconContainer {
+  background-color: rgb(245, 245, 245);
+  margin-bottom: 30px;
+  border-radius: 100px;
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
+
+.iconContainer:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+.iconWithText {
   width: 50%;
-  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  padding: 15px 0;
+  font-size: 17px;
+  padding: 10px 0;
   cursor: pointer;
-  background-color: white;
+  border-radius: 100px;
 }
 
-.Active {
-  border: none;
+.active {
   background-color: var(--primary-color);
-  opacity: 1;
+}
+
+.active p {
   color: white;
 }
 
-.BtnIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100px;
-  background-color: transparent;
+.active .icon {
+  background-color: white;
+  color: var(--primary-color);
 }
 
-.BtnText {
-  display: flexbox;
-  font-size: 15px;
-  margin-left: 10px;
+.iconWithText p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.icon {
+  background-color: var(--primary-color);
+  color: white;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  border-radius: 100px;
+  margin-right: 10px;
 }
 
 @media screen and (max-width: 991px) {

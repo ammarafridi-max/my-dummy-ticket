@@ -16,6 +16,7 @@ export default function PrimaryButton({
   mr,
   ml,
   mx,
+  target,
 }) {
   const btnStyling = {
     paddingTop: pt || py,
@@ -27,7 +28,7 @@ export default function PrimaryButton({
   };
 
   return (
-    <a href={href} target="_blank" style={{ width: "100%" }}>
+    <a href={href} target={target} style={{ width: "100%" }}>
       <button
         onClick={onClick}
         type={type}

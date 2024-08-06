@@ -21,7 +21,7 @@ export const pages = [
   },
   {
     name: "Contact",
-    link: "https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket.",
+    link: "https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket.",
   },
 ];
 
