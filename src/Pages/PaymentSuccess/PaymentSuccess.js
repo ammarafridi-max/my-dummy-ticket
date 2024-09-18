@@ -1,7 +1,7 @@
 import styles from "./PaymentSuccess.module.css";
 import PrimarySection from "../../Components/Section/PrimarySection";
 import PageTitle from "../../Components/PageTitle/PageTitle";
-import img from "./sample-ticket.png";
+import img from "../../Assets/Images/sample-ticket.png";
 
 export default function PaymentSuccess() {
   return (
@@ -25,11 +25,6 @@ export default function PaymentSuccess() {
             If you also need a dummy hotel booking or a genuine travel
             insurance, contact us now.
           </p>
-          <p>
-            For your reference, here's how your flight reservation will look
-            like:
-          </p>
-          <img src={img} className={styles.Img} alt="A sample dummy ticket" />
         </div>
       </div>
     </PrimarySection>

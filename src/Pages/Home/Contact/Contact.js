@@ -2,7 +2,7 @@ import styles from "./Contact.module.css";
 import PrimarySection from "../../../Components/Section/PrimarySection";
 import Container from "../../../Components/Container/Container";
 import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
-import img from "./contact-img.png";
+import img from "../../../Assets/Images/contact-img.png";
 import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
 import PrimaryButtonOutline from "../../../Components/Buttons/PrimaryButtonOutline";
 

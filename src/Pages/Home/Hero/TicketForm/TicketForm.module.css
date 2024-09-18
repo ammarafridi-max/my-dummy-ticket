@@ -56,6 +56,9 @@
   width: 50%;
   margin-bottom: 10px;
 }
+.emailInput {
+  width: 80%;
+}
 
 .TextArea {
   width: 100%;
@@ -112,6 +115,13 @@
   color: white;
 }
 
+.errormessage {
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
 @media only screen and (max-width: 991px) {
   .Form {
     padding: 40px 30px;
@@ -122,6 +132,9 @@
   .Input {
     width: 100%;
     margin-bottom: 15px;
+  }
+  .emailInput {
+    width: 100%;
   }
   .Count {
     width: 100%;

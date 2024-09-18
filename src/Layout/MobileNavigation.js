@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { pages } from "./Navigation";
 import styles from "./MobileNavigation.module.css";
-import logo from "./logo.png";
+import logo from "../Assets/Images/logo.png";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import Container from "../Components/Container/Container";

@@ -1,9 +1,6 @@
 .testimonialCard {
   width: 100%;
   background-color: rgb(245, 245, 245);
-  /* -webkit-box-shadow: 0px 0px 5px 0px rgba(196, 196, 196, 1);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(196, 196, 196, 1);
-  box-shadow: 0px 0px 5px 0px rgba(196, 196, 196, 1); */
   border-radius: 10px;
   overflow: hidden;
   position: relative;

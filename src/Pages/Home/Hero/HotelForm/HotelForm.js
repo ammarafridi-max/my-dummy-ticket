@@ -73,7 +73,7 @@ export default function HotelForm() {
             <Error>Error submitting form. Please try again later</Error>
           );
           setFormState("Active");
-          console.log(error);
+          //console.log(error);
         });
     }
   }

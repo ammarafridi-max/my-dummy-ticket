@@ -85,4 +85,3 @@ export default function FlightInformationModal({
   );
 }
 
-// style={{ position: "relative" }}

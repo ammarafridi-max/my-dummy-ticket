@@ -23,5 +23,3 @@ export default function TestimonialCard({ title, name, src, children, type }) {
     </div>
   );
 }
-
-// alt={`Testimonial about City Tours UAE by ${name}`}

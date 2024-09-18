@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "./SelectDate.module.css";
 import { FaCalendarAlt } from "react-icons/fa";
-import Calendar from "./Calendar"; // Import the Calendar component
+import Calendar from "./Calendar";
 
 export default function SelectDate({
   selectedDate,
@@ -12,7 +12,6 @@ export default function SelectDate({
   const [showCalendar, setShowCalendar] = useState(false);
   const componentRef = useRef(null);
 
-  // Handle click outside to close the calendar
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -43,7 +42,7 @@ export default function SelectDate({
   };
 
   return (
-    <div style={{ position: "relative" }} ref={componentRef}>
+    <div ref={componentRef}>
       <div className={styles.SelectDiv}>
         <FaCalendarAlt className={styles.Icon} />
         <input

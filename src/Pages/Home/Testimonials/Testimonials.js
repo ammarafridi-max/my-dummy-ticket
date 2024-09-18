@@ -6,9 +6,9 @@ import {
   SectionTitle,
   Subtitle,
 } from "../../../Components/SectionTitle/SectionTitle";
-import david from "./david.webp";
-import maria from "./maria.webp";
-import ahmed from "./ahmed.webp";
+import david from "../../../Assets/Images/david.webp";
+import maria from "../../../Assets/Images/maria.webp";
+import ahmed from "../../../Assets/Images/ahmed.webp";
 
 const testimonials = [
   {

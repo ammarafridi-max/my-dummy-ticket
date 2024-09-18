@@ -6,7 +6,6 @@ import FAQ from "./Pages/FAQ/FAQ";
 import PaymentSuccess from "./Pages/PaymentSuccess/PaymentSuccess";
 import ReviewDetails from "./Pages/ReviewDetails/ReviewDetails";
 import BookingLayout from "./Pages/BookingLayout/BookingLayout";
-import PassengerDetails from "./Pages/PassengerDetails/PassengerDetails";
 import Layout from "./Layout/Layout";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 
@@ -21,9 +20,13 @@ const router = createBrowserRouter([
       {
         path: "/booking",
         element: <BookingLayout />,
-        children: [{ path: "select-flights", element: <SelectFlights /> }],
+        children: [
+          { path: "select-flights", element: <SelectFlights /> },
+          { path: "review-details", element: <ReviewDetails /> },
+          { path: "payment-successfull", element: <PaymentSuccess /> },
+        ],
       },
-      // { path: "/select-flight", element: <SelectFlights /> },
+      { path: "/payment-successfull", element: <PaymentSuccess /> },
     ],
   },
 ]);

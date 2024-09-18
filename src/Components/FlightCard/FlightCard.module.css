@@ -1,12 +1,14 @@
 .flightCard {
   width: 100%;
+  height:auto;
   border-radius: 5px;
   background-color: white;
   margin-bottom: 20px;
   padding: 30px 0px;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(248, 248, 248);
+  background-color: #fff;
+  /* background-color: rgb(177, 12, 12); */
   border: 5px solid rgb(248, 248, 248);
 }
 
@@ -27,12 +29,23 @@
   font-size: 12px;
   letter-spacing: 3px;
 }
-
-.flightDetail {
-  width: 67%;
-  align-items: center;
-  padding: 0 40px;
+.airline{
+  width:20%;
+  /* height: auto; */
+  /* padding: 0 20px; */
   height: fit-content;
+  /* background-color: #0056b3; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flightDetail {
+  width: 55%;
+  height: fit-content;
+  /* background-color: #666; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .borderBottom {
@@ -42,14 +55,15 @@
 }
 
 .cta {
-  width: 33%;
+  width: 25%;
   height: 100px;
   border-left: 2px solid rgb(230, 230, 230);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 40px;
+  padding: 0 20px;
+  /* background-color: aqua; */
 }
 
 .airlineLogo {
@@ -90,4 +104,568 @@
 .selectBtn {
   width: 100% !important;
   margin-top: 5px;
+}
+
+.flightCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.flightCard:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.expanded {
+  border-bottom: 1px solid #ddd;
+}
+
+.flightDetail {
+  padding: 16px;
+}
+
+.segment {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.borderBottom {
+  border-bottom: 1px solid #ddd;
+}
+
+.airlineLogo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.time, .duration {
+  text-align: center;
+}
+
+.duration {
+  font-size: 14px;
+}
+
+.viewMoreBtn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.expandedContent {
+  padding: 16px 25px;
+  background-color: #f9f9f9;
+}
+
+.boldHeading{
+  color:rgb(13, 155, 155);
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.passengerFields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.numberInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.contactInfo {
+  margin-bottom: 16px;
+}
+
+.infoText {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.emailInput, .mobileInput {
+  width: 100%;
+  padding: 8px;
+  /* border: 1px solid #ddd; */
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.finalizeBtn {
+  width: 100%;
+  padding: 12px;
+  /* background-color: #007bff; */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.finalizeBtn:hover {
+  background-color: #0056b3;
+}
+
+.viewMoreBtnBox {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.passengerCountSection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.passengerDetailsSection {
+  margin-top: 1rem;
+}
+
+.passengerFormRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ticketValidityInfo {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  /* padding: 1rem; */
+  background-color: smokewhite;
+  /* border: 1px solid #ddd; */
+}
+
+.mobileInput {
+  width: 150%;
+}
+
+.finalizeBtn {
+  /* Existing styles */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .passengerCountSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .passengerFormRow {
+    flex-direction: column;
+  }
+}
+
+.CountSection {
+  width:100%;
+  display: flex;
+  /* justify-content: space-around; */
+
+}
+
+.Count {
+  width:auto;
+}
+
+
+
+.list {
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  margin-bottom: 10px; /* Space between items */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f8f9fa; /* Light background color */
+  position: relative; /* For positioning the checkbox */
+  font-size: 16px; /* Increase font size */
+  opacity: 0.7;
+}
+
+.checkbox {
+  margin-right: 15px; /* Space between the checkbox and the text */
+  width: 20px;
+  height: 20px;
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.listItem label {
+  margin: 0; /* Remove default margin from label */
+}
+
+.listItem:hover {
+  background-color: #e9ecef; /* Slightly darker background on hover */
+}
+
+.listItem:active {
+  background-color: #dee2e6; /* Even darker background on click */
+}
+
+@media (max-width: 768px) {
+  .listItem {
+    font-size: 14px; /* Adjust font size on smaller screens */
+    padding: 10px 15px; /* Adjust padding on smaller screens */
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.ticketValidityBox {
+  display: flex;
+  gap: 10px; /* Space between the options */
+  border:1px solid #ddd;
+  border-radius: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+/* Border color */
+background-color: aqua;
+  border-radius: 8px; /* Rounded corners */
+  
+  position: relative;
+  flex: 1; /* Make all options equal width */
+}
+
+.option input[type="radio"] {
+  position: absolute;
+  opacity: 0; /* Hide the default radio button */
+}
+
+.option input[type="radio"]:checked + div {
+ 
+  background-color: var(--primary-color); /* Background color when selected */
+  color:#fff
+}
+
+.ticketValidityBox1,
+.ticketValidityBox2,
+.ticketValidityBox3 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ticketValidityBox1 {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.ticketValidityBox2 {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.ticketValidityBox3 {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.option:hover {
+  background-color: #e9ecef; /* Slightly darker background on hover */
+}
+
+.option:active {
+  background-color: #dee2e6; /* Even darker background on click */
+}
+
+@media (max-width: 768px) {
+  .ticketValidityBox {
+    flex-direction: column; /* Stack options vertically on small screens */
+  }
+
+  .option {
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 10px; /* Space between options on small screens */
+  }
+}
+/* YourStyles.module.css */
+
+.container {
+  padding: 20px 20px 20px 0px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color:var(--primary-color)
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radioInput {
+  margin-right: 10px;
+  background-color: var(--primary-color);
+}
+
+.radioText {
+  font-size: 1rem;
+}
+
+/* YourStyles.module.css */
+
+.formGroup {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 15px; 
+  margin-top: 20px; 
+  width: 50%;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column; 
+  flex: 1; 
+}
+
+.dateInput,
+.timeInput,
+.selectInput {
+  margin-top: 5px;
+  padding: 8px;
+  width: 100%; /* Full width within flex item */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dateInput:focus,
+.timeInput:focus,
+.selectInput:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.selectInput {
+  height: 38px; /* Adjust as needed */
+}
+
+.businessName {
+  color: var(--primary-color);
+  font-weight: 1000;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .formGroup {
+    flex-direction: column;
+    width: 100%; /* Stack items vertically on smaller screens */
+  }
+
+  .formLabel {
+    width: 100%; /* Ensure full width on small screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .airline, .flightDetail, .cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  .flightDetail {
+    padding: 10px;
+  }
+
+  .passengerCountSection, .passengerDetailsSection {
+    flex-direction: column;
+  }
+
+  
+
+  .ticketValidityBox {
+    flex-direction: column;
+  }
+
+  .option {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .finalizeBtn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .passengerFormRow {
+    flex-direction: column;
+  }
+  .CountSection {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    /* background-color: #0056b3; */
+  }
+
+  .Count {
+    width:100%;
+    height:auto;
+    /* background-color: #0056b3; */
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-evenly;
+  }
+
+  .Gender {
+    margin: 10px;
+    /* color: var(--primary-color); */
+  }
+
+  .Counter {
+    width:100%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+/* Base styles for the flight card */
+.flightCard {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.flightCard:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selected {
+  border: 1px solid var(--primary-color);
+  padding: 20px 0 30px 0;
+}
+
+.selectedText {
+  text-align: center;
+  background-color: var(--primary-color);
+  color: white;
+  margin-bottom: 30px;
+  padding: 5px 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.airline {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.flightDetail {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.borderBottom {
+  border-bottom: 1px solid #ddd;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.cta {
+  width: 100%;
+  border-top: 2px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.airlineLogo {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.time span {
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.duration {
+  text-align: center;
+  color: #999;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.viewMoreBtnBox {
+  text-align: center;
+}
+
+.viewMoreBtn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
 }

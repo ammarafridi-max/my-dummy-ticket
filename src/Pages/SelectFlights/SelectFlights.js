@@ -1,76 +1,63 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFlights } from "../../redux/slices/fetchFlight";
 import styles from "./SelectFlights.module.css";
-import Container from "../../Components/Container/Container";
-import PrimarySection from "../../Components/Section/PrimarySection";
 import FlightCard from "../../Components/FlightCard/FlightCard";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import { useFlights } from "../../Services/useFlights";
-import { useSearchParams } from "react-router-dom";
+import Error from "../../Components/Feedback/Error";
 
 export default function SelectFlights() {
-  const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
-  const from = encodeURIComponent(searchParams.get("from"));
-  const to = encodeURIComponent(searchParams.get("to"));
-  const departureDate = encodeURIComponent(searchParams.get("departureDate"));
-  const returnDate = encodeURIComponent(searchParams.get("returnDate"));
+  const dispatch = useDispatch();
+  const { flights, session, status, error } = useSelector(
+    (state) => state.flights
+  );
+  const [maxFlights, setMaxFlights] = useState(4);
 
-  const {
-    isLoading,
-    errorText,
-    flights,
-    showMoreFlights,
-    handleSelectFlight,
-    maxFlights,
-    selectedFlight,
-  } = useFlights(type, from, to, departureDate, returnDate, type);
+  useEffect(() => {
+    const sessionId = localStorage.getItem("SESSION_ID");
+
+    if (sessionId) {
+      dispatch(fetchFlights(sessionId));
+    }
+  }, [dispatch]);
+
+  function showMoreFlights() {
+    if (maxFlights < flights.length) {
+      setMaxFlights((cur) => cur + 5);
+    }
+  }
 
   return (
     <>
       <h2 className={styles.pageTitle}>Select Your Flight</h2>
-      {isLoading && <p>Loading flights...</p>}
-      {errorText && <p>{errorText}</p>}
-      {flights.map((flight, i) => {
-        while (i <= maxFlights) {
-          return (
-            <FlightCard
-              itineraries={flight.itineraries}
-              onSelectFlight={() => {
-                handleSelectFlight(i);
-              }}
-              selected={selectedFlight === i}
-            />
-          );
-        }
-      })}
-      {flights.length > 1 && maxFlights < 19 && (
-        <div className="text-center">
-          <PrimaryButton onClick={showMoreFlights}>More Flights</PrimaryButton>
-        </div>
+
+      {status === "loading" && <p>Loading flights...</p>}
+
+      {status === "failed" && <p>{error}</p>}
+
+      {status === "succeeded" && flights.length === 0 && (
+        <Error>No flights available</Error>
+      )}
+
+      {status === "succeeded" && flights.length > 0 && (
+        <>
+          {flights.slice(0, maxFlights).map((flight, i) => (
+            <FlightCard key={i} data={session} flight={flight} />
+          ))}
+
+          {flights.length > maxFlights && (
+            <div className="text-center">
+              <PrimaryButton onClick={showMoreFlights}>
+                More Flights
+              </PrimaryButton>
+            </div>
+          )}
+        </>
+      )}
+
+      {status === "failed" && flights.length === 0 && (
+        <Error>Something went wrong. Please try again!</Error>
       )}
     </>
   );
-}
-
-function Menu() {
-  return (
-    <div className={styles.menu}>
-      <div className={styles.menuItem}>
-        <p className={styles.stepNum}>1</p>
-        <p>Select Flights</p>
-      </div>
-      <div className={styles.menuItem}>
-        <p className={styles.stepNum}>2</p>
-        <p>Passenger Details</p>
-      </div>
-      <div className={styles.menuItem}>
-        <p className={styles.stepNum}>3</p>
-        <p>Payment</p>
-      </div>
-    </div>
-  );
-}
-
-function FlightContainer({ children }) {
-  return <div className={styles.flightContainer}>{children}</div>;
 }

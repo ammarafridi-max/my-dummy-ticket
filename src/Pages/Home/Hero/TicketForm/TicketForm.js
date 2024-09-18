@@ -1,418 +1,332 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./TicketForm.module.css";
 import Error from "../../../../Components/Feedback/Error";
-import Input from "../../../../Components/FormElements/Input";
 import Label from "../../../../Components/FormElements/Label";
 import PrimaryButton from "../../../../Components/Buttons/PrimaryButton";
 import Counter from "../../../../Components/FormElements/Counter";
-import SelectTitle from "../../../../Components/FormElements/SelectTitle";
-import Number from "../../../../Components/FormElements/Number";
 import TextArea from "../../../../Components/FormElements/TextArea";
 import SelectAirport from "../../../../Components/FormElements/SelectAirport";
-import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
+import {
+  FaPlaneDeparture,
+  FaPlaneArrival,
+  FaCircle,
+  FaEnvelope,
+  FaPhone,
+} from "react-icons/fa";
 import SelectDate from "../../../../Components/FormElements/SelectDate";
+import Input from "../../../../Components/FormElements/Input";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  searchFlights,
+  setErrorMessages,
+  setQuantity,
+} from "../../../../redux/slices/ticketFormSlice";
+import Number from "../../../../Components/FormElements/Number";
 
 export default function TicketForm() {
   const today = new Date().toISOString().split("T")[0];
-  const [feedback, setFeedback] = useState("");
-  const [formState, setFormState] = useState("Active");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const date = new Date().toLocaleDateString("default", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const { formState, feedback } = useSelector((state) => state.ticketForm);
 
-  const [passengers, setPassengers] = useState([]);
   const [type, setType] = useState("One Way");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState({ code: "", digits: "" });
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [number, setNumber] = useState({ code: "", digits: "" });
+  const [errorMessages, setErrorMessages] = useState({
+    from: "",
+    to: "",
+    departureDate: "",
+    arrivalDate: "",
+    codenumber: "",
+    digitsnumber: "",
+    quantity: "",
+  });
   const [quantity, setQuantity] = useState({
     adults: 1,
     children: 0,
     infants: 0,
   });
-  const [message, setMessage] = useState("");
-  const price = 49;
 
-  useEffect(() => {
-    const newPassengers = [];
-    let adults = 0;
-    let children = 0;
-    let infants = 0;
+  const handleForm = async (e) => {
+    e.preventDefault();
 
-    passengers.forEach((passenger) => {
-      if (passenger.type === "Adult" && adults < quantity.adults) {
-        newPassengers.push(passenger);
-        adults += 1;
-      } else if (passenger.type === "Child" && children < quantity.children) {
-        newPassengers.push(passenger);
-        children += 1;
-      } else if (passenger.type === "Infant" && infants < quantity.infants) {
-        newPassengers.push(passenger);
-        infants += 1;
+    if (!isFormValid()) {
+      return;
+    }
+
+    dispatch(
+      searchFlights({
+        type,
+        from,
+        to,
+        departureDate,
+        arrivalDate,
+        quantity,
+        number,
+      })
+    ).then((result) => {
+      if (searchFlights.fulfilled.match(result)) {
+        navigate(`/booking/select-flights`);
       }
     });
-
-    while (adults < quantity.adults) {
-      newPassengers.push({
-        type: "Adult",
-        title: "Mr.",
-        firstName: "",
-        lastName: "",
-      });
-      adults += 1;
-    }
-    while (children < quantity.children) {
-      newPassengers.push({
-        type: "Child",
-        title: "Mr.",
-        firstName: "",
-        lastName: "",
-      });
-      children += 1;
-    }
-    while (infants < quantity.infants) {
-      newPassengers.push({
-        type: "Infant",
-        title: "Mr.",
-        firstName: "",
-        lastName: "",
-      });
-      infants += 1;
-    }
-
-    setPassengers(newPassengers);
-  }, [quantity]);
-
-  const customerData = {
-    creation: {
-      date,
-      time: new Date().toLocaleTimeString(),
-    },
-    type,
-    currency: "aed",
-    price,
-    passengers,
-    email,
-    number: `${number.code}${number.digits}`,
-    from,
-    to,
-    departureDate,
-    arrivalDate,
-    quantity,
-    message,
   };
 
-  const handleForm = (e) => {
-    e.preventDefault();
+  const isFormValid = () => {
+    let valid = true;
+    let errors = { ...errorMessages };
+
+    for (let key in errors) {
+      errors[key] = "";
+    }
+
+    if (!from) {
+      errors.from = "From field is required";
+      valid = false;
+    }
+
+    if (!to) {
+      errors.to = "To field is required";
+      valid = false;
+    }
+
+    if (!departureDate) {
+      errors.departureDate = "Departure Date is required";
+      valid = false;
+    }
+
+    if (from && to && from === to) {
+      errors.from = "From and To locations cannot be the same";
+      errors.to = "From and To locations cannot be the same";
+      valid = false;
+    }
+
+    if (type === "Return" && !arrivalDate) {
+      errors.arrivalDate = "Return Date is required for round trip";
+      valid = false;
+    }
+
+    if (!number.digits) {
+      errors.codenumber = "Please enter valid phone number";
+    }
+    if (!number.code) {
+      errors.digitsnumber = "Please select phone number code ";
+    }
+
     if (
-      !email ||
-      !number.code ||
-      !number.digits ||
-      !from ||
-      !to ||
-      !departureDate
+      quantity.adults < 1 ||
+      quantity.adults + quantity.children + quantity.infants > 9
     ) {
-      setFeedback(<Error>All fields are mandatory</Error>);
+      errors.quantity =
+        "Total number of passengers cannot exceed 9 and there must be at least one adult";
+      valid = false;
+    }
+
+    setErrorMessages(errors);
+    return valid;
+  };
+
+  const handleCodeChange = async (e) => {
+    setNumber({ ...number, code: e.target.value });
+    if (e.target.value === "") {
+      setErrorMessages("Please select phone number code ");
     } else {
-      submitForm();
+      setErrorMessages("");
     }
   };
 
-  const submitForm = () => {
-    setFormState("Loading");
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/ticket`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(customerData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.url) {
-          try {
-            const url = new URL(data.url);
-            window.location.href = data.url;
-          } catch (error) {
-            throw new Error("Invalid URL provided.");
-          }
-        } else {
-          throw new Error(data.error);
-        }
-      })
-      .catch(() => {
-        setFeedback(
-          <Error>Error submitting form. Please try again later</Error>
-        );
-        setFormState("Active");
-      });
+  const handleDigitsChange = async (e) => {
+    setNumber({ ...number, digits: e.target.value });
+    if (e.target.value === "") {
+      setErrorMessages("Please enter valid phone number ");
+    } else {
+      setErrorMessages("");
+    }
   };
 
-  const updatePassenger = (index, field, value) => {
-    setPassengers((prev) =>
-      prev.map((p, i) => (i === index ? { ...p, [field]: value } : p))
-    );
+  const onQuantityChange = (type, amount) => {
+    setQuantity((q) => {
+      const newQuantity = { ...q, [type]: q[type] + amount };
+      const total =
+        newQuantity.adults + newQuantity.children + newQuantity.infants;
+
+      if (type === "adults" && newQuantity.adults < 1) return q;
+      if (type !== "adults" && newQuantity[type] < 0) return q;
+      if (total > 9) {
+        setErrorMessages((prev) => ({
+          ...prev,
+          quantity: "Total number of passengers cannot exceed 9.",
+        }));
+        return q;
+      }
+
+      setErrorMessages((prev) => ({ ...prev, quantity: "" }));
+      return newQuantity;
+    });
+  };
+
+  const handleChange = (field, value) => {
+    switch (field) {
+      case "from":
+        setFrom(value);
+        setErrorMessages((prev) => ({ ...prev, from: "" }));
+        break;
+      case "to":
+        setTo(value);
+        setErrorMessages((prev) => ({ ...prev, to: "" }));
+        break;
+      case "departureDate":
+        setDepartureDate(value);
+        setErrorMessages((prev) => ({ ...prev, departureDate: "" }));
+        break;
+      case "arrivalDate":
+        setArrivalDate(value);
+        setErrorMessages((prev) => ({ ...prev, arrivalDate: "" }));
+        break;
+      default:
+        break;
+    }
   };
 
   return (
-    <form className={styles.Form} onSubmit={handleForm}>
-      <div className={styles.Row}>
+    <div>
+      <form className={styles.Form} onSubmit={handleForm}>
+        <div className={styles.Row}>
+          <div className="row">
+            <p
+              className={styles.Type}
+              onClick={() => {
+                setType("One Way");
+                setArrivalDate("");
+              }}
+            >
+              <FaCircle
+                className={`${styles.DotIcon} ${
+                  type === "One Way" && styles.Active
+                }`}
+              />
+              One Way
+            </p>
+            <p
+              className={styles.Type}
+              onClick={() => {
+                setType("Return");
+              }}
+            >
+              <FaCircle
+                className={`${styles.DotIcon} ${
+                  type === "Return" && styles.Active
+                }`}
+              />
+              Return
+            </p>
+          </div>
+        </div>
+
         <div className="row">
-          <p
-            className={styles.Type}
-            onClick={() => {
-              setType("One Way");
-            }}
-          >
-            <FaCircle
-              className={`${styles.DotIcon} ${
-                type === "One Way" && styles.Active
-              }`}
-            />
-            One Way
-          </p>
-
-          <p
-            className={styles.Type}
-            onClick={() => {
-              setType("Return");
-            }}
-          >
-            <FaCircle
-              className={`${styles.DotIcon} ${
-                type === "Return" && styles.Active
-              }`}
-            />
-            Return
-          </p>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className={styles.Input}>
-          <Label htmlFor="from" required>
-            From
-          </Label>
-          <SelectAirport
-            icon={<FaPlaneDeparture />}
-            value={from}
-            onChange={setFrom}
-          />
-        </div>
-        <div className={styles.Input}>
-          <Label htmlFor="to" required>
-            To
-          </Label>
-          <SelectAirport
-            icon={<FaPlaneArrival />}
-            value={to}
-            onChange={setTo}
-          />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className={styles.Input}>
-          <Label htmlFor="departureDate" required>
-            Departure Date
-          </Label>
-          <SelectDate
-            selectedDate={departureDate}
-            onDateSelect={setDepartureDate}
-            minDate={today}
-          />
-        </div>
-        {type === "Return" && (
           <div className={styles.Input}>
-            <Label htmlFor="arrivalDate" required>
-              Return Date
+            <Label htmlFor="from" required>
+              From
+            </Label>
+            <SelectAirport
+              value={from}
+              onChange={(value) => handleChange("from", value)}
+              id="from"
+              icon={<FaPlaneDeparture />}
+            />
+            {errorMessages.from && <Error>{errorMessages.from}</Error>}
+          </div>
+          <div className={styles.Input}>
+            <Label htmlFor="to" required>
+              To
+            </Label>
+            <SelectAirport
+              value={to}
+              onChange={(value) => handleChange("to", value)}
+              id="to"
+              icon={<FaPlaneArrival />}
+            />
+            {errorMessages.to && <Error>{errorMessages.to}</Error>}
+          </div>
+        </div>
+
+        <div className="row">
+          <div className={styles.Input}>
+            <Label htmlFor="departureDate" required>
+              Departure Date
             </Label>
             <SelectDate
-              selectedDate={arrivalDate}
-              onDateSelect={setArrivalDate}
-              minDate={new Date(departureDate)}
+              selectedDate={departureDate}
+              onDateSelect={(value) => handleChange("departureDate", value)}
+              minDate={new Date()}
             />
+            {errorMessages.departureDate && (
+              <Error>{errorMessages.departureDate}</Error>
+            )}
           </div>
-        )}
-      </div>
-
-      <div>
-        <Count
-          adultCount={quantity.adults}
-          childrenCount={quantity.children}
-          infantCount={quantity.infants}
-          onAdultAdd={() => {
-            setQuantity((q) => ({
-              ...q,
-              adults: q.adults < 10 ? q.adults + 1 : q.adults,
-            }));
-          }}
-          onAdultSubtract={() => {
-            setQuantity((q) => ({
-              ...q,
-              adults: q.adults > 1 ? q.adults - 1 : q.adults,
-            }));
-          }}
-          onChildrenAdd={() =>
-            setQuantity((q) => ({
-              ...q,
-              children: q.children < 10 ? q.children + 1 : q.children,
-            }))
-          }
-          onChildrenSubtract={() =>
-            setQuantity((q) => ({
-              ...q,
-              children: q.children > 0 ? q.children - 1 : q.children,
-            }))
-          }
-          onInfantAdd={() =>
-            setQuantity((q) => ({
-              ...q,
-              infants: q.infants < 10 ? q.infants + 1 : q.infants,
-            }))
-          }
-          onInfantSubtract={() =>
-            setQuantity((q) => ({
-              ...q,
-              infants: q.infants > 0 ? q.infants - 1 : q.infants,
-            }))
-          }
-        />
-      </div>
-
-      {(() => {
-        let adultCount = 0;
-        let childCount = 0;
-        let infantCount = 0;
-
-        return passengers.map((passenger, index) => {
-          let label;
-          if (passenger.type === "Adult") {
-            adultCount += 1;
-            label = `Adult ${adultCount}`;
-          } else if (passenger.type === "Child") {
-            childCount += 1;
-            label = `Child ${childCount}`;
-          } else if (passenger.type === "Infant") {
-            infantCount += 1;
-            label = `Infant ${infantCount}`;
-          }
-
-          return (
-            <div key={index}>
-              <Label required>{label}</Label>
-              <div className="row mb-2">
-                <div className={styles.Title}>
-                  <SelectTitle
-                    value={passenger.title}
-                    onChange={(e) =>
-                      updatePassenger(index, "title", e.target.value)
-                    }
-                  />
-                </div>
-                <div className={styles.Name}>
-                  <Input
-                    type="text"
-                    required
-                    name={`firstName${index}`}
-                    id={`firstName${index}`}
-                    placeholder="First Name"
-                    value={passenger.firstName}
-                    onChange={(e) =>
-                      updatePassenger(index, "firstName", e.target.value)
-                    }
-                  />
-                </div>
-                <div className={styles.Name}>
-                  <Input
-                    type="text"
-                    required
-                    name={`lastName${index}`}
-                    id={`lastName${index}`}
-                    placeholder="Last Name"
-                    value={passenger.lastName}
-                    onChange={(e) =>
-                      updatePassenger(index, "lastName", e.target.value)
-                    }
-                  />
-                </div>
-              </div>
+          {type === "Return" && (
+            <div className={styles.Input}>
+              <Label htmlFor="arrivalDate" required>
+                Return Date
+              </Label>
+              <SelectDate
+                selectedDate={arrivalDate}
+                onDateSelect={(value) => handleChange("arrivalDate", value)}
+                minDate={new Date(departureDate)}
+              />
+              {errorMessages.arrivalDate && (
+                <Error>{errorMessages.arrivalDate}</Error>
+              )}
             </div>
-          );
-        });
-      })()}
-
-      <div className="row">
-        <div className={styles.Input}>
-          <Label htmlFor="email" required>
-            Email Address
-          </Label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            name="email"
-            id="email"
-            autoComplete="on"
-          />
+          )}
         </div>
-        <div className={styles.Input}>
-          <Label htmlFor="number" required>
-            Phone Number
-          </Label>
-          <Number
-            codeValue={number.code}
-            codeOnChange={(e) => setNumber({ ...number, code: e.target.value })}
-            digitsValue={number.digits}
-            digitsOnChange={(e) =>
-              setNumber({ ...number, digits: e.target.value })
-            }
-          />
+
+        <div>
+          <Count quantity={quantity} onQuantityChange={onQuantityChange} />
+          {errorMessages.quantity && <Error>{errorMessages.quantity}</Error>}
         </div>
-      </div>
 
-      <div className="row">
-        <div className={styles.TextArea}>
-          <Label optional>Special Requests</Label>
-          <TextArea
-            value={message}
-            placeholder="Special requests"
-            onChange={setMessage}
-          />
-        </div>
-      </div>
+        <div className="row">
+          <div className={styles.emailInput}>
+            <Label htmlFor="number" required>
+              Phone Number
+            </Label>
 
-      {feedback}
-
-      <div className="text-center mt-4">
-        {formState === "Active" && (
-          <PrimaryButton type="submit">
-            Submit{" "}
-            <span className={styles.Total}>
-              (AED{" "}
-              {price * (quantity.adults + quantity.children + quantity.infants)}
-              )
-            </span>
-          </PrimaryButton>
-        )}
-        {formState === "Loading" && (
-          <div className="spinner-border" role="status">
-            <span className="sr-only"></span>
+            <Number
+              codeValue={number.code}
+              codeOnChange={handleCodeChange}
+              digitsValue={number.digits}
+              digitsOnChange={handleDigitsChange}
+            />
+            {errorMessages.codenumber && (
+              <Error>{errorMessages.codenumber}</Error>
+            )}
+            {errorMessages.digitsnumber && (
+              <Error>{errorMessages.digitsnumber}</Error>
+            )}
           </div>
-        )}
-      </div>
-    </form>
+        </div>
+        <div className="text-center mt-4">
+          <PrimaryButton
+            text="Search Flights"
+            type="submit"
+            disabled={formState === "Loading"}
+          >
+            Search Flights
+          </PrimaryButton>
+        </div>
+      </form>
+    </div>
   );
 }
 
-function Count(props) {
+function Count({ quantity, onQuantityChange }) {
   return (
     <div className={`row ${styles.CountSection} p-0 mx-0`}>
       <div className={styles.Count}>
@@ -421,10 +335,10 @@ function Count(props) {
         </p>
         <Counter
           className={styles.Counter}
-          onAdd={props.onAdultAdd}
-          onSubtract={props.onAdultSubtract}
+          onAdd={() => onQuantityChange("adults", 1)}
+          onSubtract={() => onQuantityChange("adults", -1)}
         >
-          {props.adultCount}
+          {quantity.adults}
         </Counter>
       </div>
       <div className={styles.Count}>
@@ -433,10 +347,10 @@ function Count(props) {
         </p>
         <Counter
           className={styles.Counter}
-          onAdd={props.onChildrenAdd}
-          onSubtract={props.onChildrenSubtract}
+          onAdd={() => onQuantityChange("children", 1)}
+          onSubtract={() => onQuantityChange("children", -1)}
         >
-          {props.childrenCount}
+          {quantity.children}
         </Counter>
       </div>
       <div className={styles.Count}>
@@ -445,10 +359,10 @@ function Count(props) {
         </p>
         <Counter
           className={styles.Counter}
-          onAdd={props.onInfantAdd}
-          onSubtract={props.onInfantSubtract}
+          onAdd={() => onQuantityChange("infants", 1)}
+          onSubtract={() => onQuantityChange("infants", -1)}
         >
-          {props.infantCount}
+          {quantity.infants}
         </Counter>
       </div>
     </div>

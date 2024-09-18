@@ -10,7 +10,6 @@ export default function Label(props) {
 
   return (
     <label htmlFor={props.htmlFor} className={styles.Label} style={style}>
-      {/* {props.required && <span className={styles.Required}>*</span>} */}
       {props.children}
       {props.optional && <span className={styles.Optional}>(Optional)</span>}
     </label>

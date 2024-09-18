@@ -1,5 +1,5 @@
 import styles from "./Navigation.module.css";
-import logo from "./logo.png"; // replace with the actual path to your logo
+import logo from "../Assets/Images/logo.png"; // replace with the actual path to your logo
 import PrimaryButton from "../Components/Buttons/PrimaryButton"; // replace with the actual import for your PrimaryButton
 
 export const pages = [

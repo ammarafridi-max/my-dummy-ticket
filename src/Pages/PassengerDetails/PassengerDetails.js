@@ -4,6 +4,8 @@ import Counter from "../../Components/FormElements/Counter";
 import Label from "../../Components/FormElements/Label";
 import SelectTitle from "../../Components/FormElements/SelectTitle";
 import Input from "../../Components/FormElements/Input";
+import PrimaryButton from "../../Components/Buttons/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
 export default function PassengerDetails() {
   const [passengers, setPassengers] = useState([]);
@@ -13,8 +15,12 @@ export default function PassengerDetails() {
     infants: 0,
   });
 
+  const navigate = useNavigate();
+
   function handleSubmit(e) {
+    //console.log("button clicked");
     e.preventDefault();
+    navigate('/booking/review-details');
   }
 
   function updatePassenger(index, field, value) {
@@ -182,6 +188,8 @@ export default function PassengerDetails() {
             );
           });
         })()}
+
+        <PrimaryButton type="submit">Submit</PrimaryButton>
       </form>
     </>
   );

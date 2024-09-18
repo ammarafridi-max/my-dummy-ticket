@@ -7,14 +7,14 @@ export default function TextArea({
   className,
   onChange,
   placeholder,
-  defaultValue = "", // Added a defaultValue prop for initial state
+  defaultValue = "",
 }) {
   const [message, setMessage] = useState(defaultValue);
 
   function handleChange(e) {
     setMessage(e.target.value);
     if (onChange) {
-      onChange(e.target.value); // Call onChange prop to update parent state
+      onChange(e.target.value);
     }
   }
 

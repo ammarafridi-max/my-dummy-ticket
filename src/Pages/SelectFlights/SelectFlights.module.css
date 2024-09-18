@@ -1,6 +1,7 @@
-.pageTitle {
+/* .pageTitle {
   margin-bottom: 50px;
   text-align: center;
+  color:var(--primary-color);
 }
 
 .flightContainer {
@@ -44,4 +45,118 @@
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+} */
+
+
+/* Base styles for .pageTitle */
+.pageTitle {
+  margin-bottom: 50px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+/* Responsive styles for .flightContainer */
+.flightContainer {
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+/* Responsive styles for .menu */
+.menu {
+  width: 100%;
+  height: auto; /* Adjust height to fit content */
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Responsive styles for .menuItem */
+.menuItem {
+  flex: 1;
+  height: 50px;
+  border-right: 1px solid rgb(200, 200, 200);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove border-right for the last menu item */
+.menuItem:nth-of-type(3) {
+  border-right: none;
+}
+
+/* Style for step numbers */
+.stepNum {
+  width: 30px;
+  height: 30px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .flightContainer {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .menu {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .menuItem {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    padding: 10px 0;
+  }
+
+  .menuItem:last-child {
+    border-bottom: none;
+  }
+
+  .stepNum {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+  }
+
+  .flightContainer {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  .menu {
+    flex-direction: column;
+  }
+
+  .menuItem {
+    padding: 8px 0;
+  }
+
+  .stepNum {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+  }
 }

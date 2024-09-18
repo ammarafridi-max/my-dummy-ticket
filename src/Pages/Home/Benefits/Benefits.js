@@ -2,9 +2,9 @@ import Container from "../../../Components/Container/Container";
 import PrimarySection from "../../../Components/Section/PrimarySection";
 import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
 import styles from "./Benefits.module.css";
-import shieldIcon from "./shield-icon.png";
-import timeIcon from "./time-icon.png";
-import usdIcon from "./usd-icon.png";
+import shieldIcon from "../../../Assets/Images/shield-icon2.png";
+import timeIcon from "../../../Assets/Images/time-icon.png";
+import usdIcon from "../../../Assets/Images/usd-icon.png";
 import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
 
 export default function Benefits() {

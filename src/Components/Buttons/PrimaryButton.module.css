@@ -51,3 +51,9 @@
   opacity: 0.6;
   border-color: var(--primary-color);
 }
+
+@media (max-width: 600px) {
+.Primary {
+  width:100%;
+}
+}

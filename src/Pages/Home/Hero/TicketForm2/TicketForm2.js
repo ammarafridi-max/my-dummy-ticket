@@ -38,7 +38,7 @@ export default function TicketForm2() {
     if (from && to && departureDate && (type === "One Way" || returnDate)) {
       navigate(url);
     } else {
-      console.log("Please fill out all required fields.");
+      //console.log("Please fill out all required fields.");
     }
   }
 

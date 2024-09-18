@@ -8,7 +8,6 @@ export default function BookingLayout() {
     <>
       <PrimarySection py="50px">
         <Container>
-          <Menu />
           <BookingContainer>
             <Outlet />
           </BookingContainer>
@@ -25,9 +24,10 @@ function Menu() {
         <p className={styles.stepNum}>1</p>
         <p>Select Flights</p>
       </div>
+
       <div className={styles.menuItem}>
         <p className={styles.stepNum}>2</p>
-        <p>Passenger Details</p>
+        <p>Review Details</p>
       </div>
       <div className={styles.menuItem}>
         <p className={styles.stepNum}>3</p>

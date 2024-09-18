@@ -2,13 +2,13 @@ import styles from "./About.module.css";
 import PrimarySection from "../../../Components/Section/PrimarySection";
 import Container from "../../../Components/Container/Container";
 import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
-import ticketIcon from "./ticket-icon.png";
-import hotelIcon from "./hotel-icon.png";
-import shieldIcon from "./shield-icon.png";
-import trustpilot from "./trustpilot.png";
-import travelIcon from "./travel-icon.png";
-import happyTraveler1 from "./happy-traveler1.png";
-import happyTraveler2 from "./happy-traveler2.png";
+import ticketIcon from "../../../Assets/Images/ticket-icon.png";
+import hotelIcon from "../../../Assets/Images/hotel-icon.png";
+import shieldIcon from "../../../Assets/Images/shield-icon.png";
+import trustpilot from "../../../Assets/Images/trustpilot.png";
+import travelIcon from "../../../Assets/Images/travel-icon.png";
+import happyTraveler1 from "../../../Assets/Images/happy-traveler1.png";
+import happyTraveler2 from "../../../Assets/Images/happy-traveler2.png";
 
 export default function About() {
   return (

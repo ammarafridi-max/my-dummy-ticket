@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import styles from "./Number.module.css";
+
 const countryCodes = [
   { country: "United Arab Emirates", code: "971", iso: "AE" },
   { country: "Afghanistan", code: "93", iso: "AF" },
@@ -244,7 +246,9 @@ const countryCodes = [
 ];
 
 export default function Number(props) {
-  const [code, setCode] = useState(props.codeValue);
+  const { codeValue, digitsValue, codeOnChange, digitsOnChange, disabled } =
+    props;
+  const [code, setCode] = useState(codeValue);
   const [isOnFocus, setIsOnFocus] = useState(false);
 
   const filteredCodes = countryCodes.filter((country) => {
@@ -254,8 +258,10 @@ export default function Number(props) {
   });
 
   const handleCodeChange = (e) => {
-    setCode(e);
-    props.codeOnChange({ target: { value: e } });
+    if (!disabled) {
+      setCode(e);
+      codeOnChange({ target: { value: e } });
+    }
   };
 
   const componentRef = useRef();
@@ -278,28 +284,33 @@ export default function Number(props) {
   }, []);
 
   return (
-    <div className={styles.Div} ref={componentRef}>
+    <div
+      className={`${styles.Div} ${disabled ? styles.Disabled : ""}`}
+      ref={componentRef}
+    >
       <input
         type="text"
-        className={styles.Code}
+        className={`${styles.Code} ${disabled ? styles.DisabledInput : ""}`}
         id="code"
         name="code"
         value={code}
         onChange={(e) => handleCodeChange(e.target.value)}
-        onFocus={() => setIsOnFocus(true)}
-        onClick={() => setCode("")}
+        onFocus={() => !disabled && setIsOnFocus(true)}
+        onClick={() => !disabled && setCode("")}
         placeholder="Code"
+        disabled={disabled}
       />
       <input
         type="text"
-        className={styles.Digits}
+        className={`${styles.Digits} ${disabled ? styles.DisabledInput : ""}`}
         id="digits"
         name="digits"
-        value={props.digitsValue}
-        onChange={props.digitsOnChange}
+        value={digitsValue}
+        onChange={disabled ? undefined : digitsOnChange}
         placeholder="Number"
+        disabled={disabled}
       />
-      {isOnFocus && (
+      {isOnFocus && !disabled && (
         <ul className={styles.Options}>
           {filteredCodes.map((country, i) => (
             <li
@@ -318,3 +329,15 @@ export default function Number(props) {
     </div>
   );
 }
+
+Number.propTypes = {
+  codeValue: PropTypes.string.isRequired,
+  digitsValue: PropTypes.string.isRequired,
+  codeOnChange: PropTypes.func.isRequired,
+  digitsOnChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Number.defaultProps = {
+  disabled: false,
+};

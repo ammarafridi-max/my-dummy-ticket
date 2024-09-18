@@ -33,3 +33,18 @@
   font-size: 17px !important;
   color: var(--grey-color-dark);
 }
+
+
+@media only screen and (max-width: 800px) {
+  .Counter {
+    width:100%;
+  }
+  .Button {
+    width:50%;
+    text-align: center;
+  }
+
+  .Number{
+    width:50%;
+  }
+}

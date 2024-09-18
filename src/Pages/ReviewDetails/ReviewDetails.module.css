@@ -1,0 +1,138 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.box {
+  display: flex;
+  justify-content: left;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+.orderBtnBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.orderBtnBox2 {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.backbtn {
+  display: flex;
+  justify-content: start;
+  margin: 10px 40px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.section {
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 45%;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 5px;
+}
+
+.detail {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: var(--primary-color);
+}
+
+.passenger {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.buttonContainer {
+  text-align: center;
+}
+
+.section {
+  padding: 20px;
+ 
+}
+
+.sectionTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.passengerGroup {
+  margin-bottom: 20px;
+}
+
+.passengerGroupTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.passenger {
+  margin-bottom: 5px;
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .detail,
+  .passenger {
+    font-size: 0.9rem;
+  }
+  .buttonContainer {
+    width: 100%;
+  }
+  .box {
+    display: flex;
+    flex-direction: column;
+  }
+  .section {
+    width: 100%;
+  }
+  .btnBox {
+    width: 100%;
+    justify-content: center;
+    margin: 0px;
+  }
+  .backbtn {
+    margin: 0px;
+  }
+}
