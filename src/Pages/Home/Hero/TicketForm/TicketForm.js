@@ -141,14 +141,25 @@ export default function TicketForm() {
     }
   };
 
-  const handleDigitsChange = async (e) => {
-    setNumber({ ...number, digits: e.target.value });
-    if (e.target.value === "") {
-      setErrorMessages("Please enter valid phone number ");
-    } else {
+
+  const handleDigitsChange = (e) => {
+    const value = e.target.value;
+  
+    // Check if the input is empty
+    if (value === "") {
+      setErrorMessages("Please enter a valid phone number.");
+    } 
+    // Check if the input contains only numeric digits
+    else if (!/^[0-9]*$/.test(value)) {
+      setErrorMessages("Phone Number should contain only numeric digits.");
+    } 
+    // If everything is valid
+    else {
       setErrorMessages("");
+      setNumber({ ...number, digits: value });
     }
   };
+  
 
   const onQuantityChange = (type, amount) => {
     setQuantity((q) => {

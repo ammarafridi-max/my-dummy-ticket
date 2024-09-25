@@ -13,6 +13,16 @@ export default function SelectFlights() {
   );
   const [maxFlights, setMaxFlights] = useState(4);
 
+  const [expandedCardId, setExpandedCardId] = useState(null);
+
+  const handleToggleExpand = (id) => {
+    if (expandedCardId === id) {
+      setExpandedCardId(null);
+    } else {
+      setExpandedCardId(id);
+    }
+  };
+
   useEffect(() => {
     const sessionId = localStorage.getItem("SESSION_ID");
 
@@ -42,7 +52,13 @@ export default function SelectFlights() {
       {status === "succeeded" && flights.length > 0 && (
         <>
           {flights.slice(0, maxFlights).map((flight, i) => (
-            <FlightCard key={i} data={session} flight={flight} />
+            <FlightCard
+              key={i}
+              data={session}
+              flight={flight}
+              isExpanded={expandedCardId === i} 
+              onToggleExpand={() => handleToggleExpand(i)}
+            />
           ))}
 
           {flights.length > maxFlights && (

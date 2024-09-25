@@ -22,9 +22,13 @@ import SelectDate from "../FormElements/SelectDate";
 import { localBaseURL } from "../../config";
 import TextArea from "../FormElements/TextArea";
 
-export default function FlightCard({ data, flight }) {
-  //console.log("flight ->>", flight);
-
+export default function FlightCard({
+  data,
+  flight,
+  key,
+  isExpanded,
+  onToggleExpand,
+}) {
   const [airlineInfo] = flight.airlineDetails;
 
   const dispatch = useDispatch();
@@ -34,7 +38,6 @@ export default function FlightCard({ data, flight }) {
   const [airlineDetail, setAirlineDetail] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [isExpanded, setIsExpanded] = useState(false);
   const [passengers, setPassengers] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -59,9 +62,17 @@ export default function FlightCard({ data, flight }) {
   const [receiveNow, setReceiveNow] = useState(true);
   const [receiptDate, setReceiptDate] = useState("");
   const [passengerErrors, setPassengerErrors] = useState([]);
+  const [dummyPrice, setDummyPrice] = useState("49AED");
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
+    if (event.target.value === "7d") {
+      setDummyPrice("69 AED");
+    } else if (event.target.value === "14d") {
+      setDummyPrice("75 AED");
+    } else {
+      setDummyPrice("49 AED");
+    }
   };
 
   const handleDateSelect = (date) => {
@@ -83,8 +94,9 @@ export default function FlightCard({ data, flight }) {
   let adultCount = 0;
   let childCount = 0;
   let infantCount = 0;
+
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+    onToggleExpand();
   };
 
   useEffect(() => {
@@ -156,10 +168,16 @@ export default function FlightCard({ data, flight }) {
     const errors = passengers.map((passenger) => {
       let error = {};
       if (!passenger.firstName) {
-        error.firstName = "First name is required.";
+        error.firstName = "First  name is required.";
+      } else if (!passenger.firstName.match(/^[A-Za-z]+$/)) {
+        error.firstName =
+          "First Name should contain only alphabetical characters.";
       }
       if (!passenger.lastName) {
         error.lastName = "Last name is required.";
+      } else if (!passenger.lastName.match(/^[A-Za-z]+$/)) {
+        error.lastName =
+          "Last Name should contain only alphabetical characters.";
       }
       return error;
     });
@@ -249,8 +267,6 @@ export default function FlightCard({ data, flight }) {
         },
       };
 
-      //console.log("data for api ->>", formData);
-
       try {
         const result = await dispatch(
           updateFlightDetails({
@@ -311,12 +327,20 @@ export default function FlightCard({ data, flight }) {
 
     setPassengerErrors((prevErrors) => {
       const updatedErrors = [...prevErrors];
+
+      const fieldNames = {
+        firstName: "First Name",
+        lastName: "Last Name",
+      };
+
       if (field === "firstName" || field === "lastName") {
         updatedErrors[index] = {
           ...updatedErrors[index],
-          [field]: value.trim() === "" ? `${field} is required` : "",
+          [field]:
+            value.trim() === "" ? `${fieldNames[field]} is required` : "",
         };
       }
+
       return updatedErrors;
     });
   };
@@ -402,9 +426,13 @@ export default function FlightCard({ data, flight }) {
           ))}
         </div>
         <div className={styles.cta}>
-          <p className={styles.price}>
-            {flight.price.currency} {flight.price.grandTotal}
+          <p>
+            <s>
+              {" "}
+              {flight.price.currency} {flight.price.grandTotal}{" "}
+            </s>
           </p>
+          <p className={styles.price}>{dummyPrice}</p>
         </div>
         <div className={styles.viewMoreBtnBox}>
           <button className={styles.viewMoreBtn} onClick={toggleExpand}>
@@ -537,7 +565,9 @@ export default function FlightCard({ data, flight }) {
                   onChange={handleChange}
                   className={styles.radioInput}
                 />
-                <div className={styles.ticketValidityBox2}>7 days (+ $7)</div>
+                <div className={styles.ticketValidityBox2}>
+                  7 days (+ 20 AED)
+                </div>
               </label>
               <label className={styles.option}>
                 <input
@@ -548,7 +578,9 @@ export default function FlightCard({ data, flight }) {
                   onChange={handleChange}
                   className={styles.radioInput}
                 />
-                <div className={styles.ticketValidityBox3}>14 days (+ $10)</div>
+                <div className={styles.ticketValidityBox3}>
+                  14 days (+ 26 AED)
+                </div>
               </label>
             </div>
           </div>

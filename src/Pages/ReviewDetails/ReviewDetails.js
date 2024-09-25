@@ -29,17 +29,15 @@ export default function ReviewDetails() {
   const navigate = useNavigate();
   const sessionId = localStorage.getItem("SESSION_ID");
   useEffect(() => {
-  
     if (sessionId) {
       dispatch(fetchFormDetails(sessionId));
     }
   }, [dispatch]);
 
   const handleConfirm = () => {
-    if(sessionId){
+    if (sessionId) {
       dispatch(createTicket({ ...formDetails, ticketPrice }));
     }
-    
   };
 
   useEffect(() => {
@@ -107,7 +105,9 @@ export default function ReviewDetails() {
             onClick={handleNavigate}
             style={{ cursor: "pointer" }}
           >
-          <PrimaryButton><FaArrowLeftLong style={{marginRight:10}}/>    Back</PrimaryButton>  
+            <PrimaryButton>
+              <FaArrowLeftLong style={{ marginRight: 10 }} /> Back
+            </PrimaryButton>
           </span>
         </div>
         <div className={styles.container}>
@@ -128,7 +128,7 @@ export default function ReviewDetails() {
                 <strong>Phone Number:</strong> {formDetails.phoneNumber.code}{" "}
                 {formDetails.phoneNumber.digits}
               </div>
-              {formDetails.mesage && (
+              {formDetails.message && (
                 <div className={styles.detail}>
                   <strong>Message:</strong> {formDetails.message}
                 </div>
@@ -149,11 +149,7 @@ export default function ReviewDetails() {
               <div className={styles.detail}>
                 <strong>Departure Date:</strong> {formDetails.departureDate}
               </div>
-              {formDetails.arrivalDate && (
-                <div className={styles.detail}>
-                  <strong>Arrival Date:</strong> {formDetails.arrivalDate}
-                </div>
-              )}
+
               <div className={styles.detail}>
                 <strong>Departure Time:</strong>{" "}
                 {
@@ -163,11 +159,16 @@ export default function ReviewDetails() {
                   ).time
                 }
               </div>
-              <div className={styles.detail}>
-                <strong>Ticket Price:</strong>{" "}
-                {formDetails.flightDetails.price.currency}{" "}
-                {formDetails.flightDetails.price.total}
-              </div>
+
+              {formDetails.arrivalDate && (
+                <>
+                  <div className={styles.detail}>
+                    <strong>Return Date:</strong> {formDetails.arrivalDate}
+                  </div>
+                 
+                </>
+              )}
+           
             </div>
           </div>
 
@@ -196,7 +197,6 @@ export default function ReviewDetails() {
                     <strong>Receipt Date:</strong>{" "}
                     {ticketAvailability.receiptDate}
                   </div>
-                 
                 </>
               )}
             </div>
