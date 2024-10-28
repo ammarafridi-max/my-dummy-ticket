@@ -8,6 +8,8 @@ import ReviewDetails from "./Pages/ReviewDetails/ReviewDetails";
 import BookingLayout from "./Pages/BookingLayout/BookingLayout";
 import Layout from "./Layout/Layout";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the styles for toastify
 
 const router = createBrowserRouter([
   {
@@ -32,5 +34,21 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      {/* ToastContainer added here */}
+      <ToastContainer 
+        position="top-right" 
+        autoClose={5000} 
+        hideProgressBar={false} 
+        newestOnTop={false} 
+        closeOnClick 
+        rtl={false} 
+        pauseOnFocusLoss 
+        draggable 
+        pauseOnHover
+      />
+      <RouterProvider router={router} />
+    </>
+  );
 }

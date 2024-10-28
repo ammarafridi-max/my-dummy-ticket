@@ -59,19 +59,27 @@ export default function FlightCard({
     promoCode: false,
   });
 
+  const totalQuantity = data.quantity.adults + data.quantity.children + data.quantity.infants;
+  console.log("totalQuantity ->",totalQuantity);
+  
+
+  const initialPrice = 49 * totalQuantity;
+  console.log(" totalQuantity price ->>",initialPrice);
+  
+
   const [receiveNow, setReceiveNow] = useState(true);
   const [receiptDate, setReceiptDate] = useState("");
   const [passengerErrors, setPassengerErrors] = useState([]);
-  const [dummyPrice, setDummyPrice] = useState("49AED");
+  const [dummyPrice, setDummyPrice] = useState(initialPrice);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "7d") {
-      setDummyPrice("69 AED");
+      setDummyPrice(69 * totalQuantity);
     } else if (event.target.value === "14d") {
-      setDummyPrice("75 AED");
+      setDummyPrice(75 * totalQuantity);
     } else {
-      setDummyPrice("49 AED");
+      setDummyPrice(49 * totalQuantity);
     }
   };
 
@@ -432,7 +440,7 @@ export default function FlightCard({
               {flight.price.currency} {flight.price.grandTotal}{" "}
             </s>
           </p>
-          <p className={styles.price}>{dummyPrice}</p>
+          <p className={styles.price}> AED {dummyPrice}</p>
         </div>
         <div className={styles.viewMoreBtnBox}>
           <button className={styles.viewMoreBtn} onClick={toggleExpand}>

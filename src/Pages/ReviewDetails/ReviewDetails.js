@@ -12,19 +12,23 @@ import {
   FaPhone,
   FaTicket,
   FaArrowAltCircleLeft,
+  FaSpinner,
 } from "react-icons/fa";
 import { IoMdCalendar, IoMdClock, IoMdPricetag } from "react-icons/io";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { formatISOTime } from "../../Services/formatISOTime";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function ReviewDetails() {
   const dispatch = useDispatch();
   const { formDetails, ticketPrice, status } = useSelector(
     (state) => state.formDetails
   );
-  const { stripeStatus, data } = useSelector((state) => state.createTicket);
+  const { stripeStatus, data, stripeError } = useSelector(
+    (state) => state.createTicket
+  );
 
   const navigate = useNavigate();
   const sessionId = localStorage.getItem("SESSION_ID");
@@ -39,6 +43,20 @@ export default function ReviewDetails() {
       dispatch(createTicket({ ...formDetails, ticketPrice }));
     }
   };
+
+  useEffect(() => {
+    if (stripeError) {
+      toast.error(` Error: ${stripeError}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [stripeError]);
 
   useEffect(() => {
     if (stripeStatus === "succeeded" && data?.url) {
@@ -67,17 +85,20 @@ export default function ReviewDetails() {
     );
 
     const { adults, children, infants } = formDetails.quantity;
+
+    const totalQuantity = adults + children + infants;
     const ticketAvailability = formDetails.ticketAvailability;
 
     const price = parseFloat(ticketPrice);
-    let additionPrice = "Nill";
+
+    let additionPrice = 0;
     let validityText = "48 hours";
     if (formDetails.ticketValidity === "7d") {
-      additionPrice = "AED 20";
+      additionPrice = 20;
       validityText = " 7 days";
     }
     if (formDetails.ticketValidity === "14d") {
-      additionPrice = "AED 26";
+      additionPrice = 26;
       validityText = " 14 days";
     }
 
@@ -165,10 +186,8 @@ export default function ReviewDetails() {
                   <div className={styles.detail}>
                     <strong>Return Date:</strong> {formDetails.arrivalDate}
                   </div>
-                 
                 </>
               )}
-           
             </div>
           </div>
 
@@ -229,10 +248,11 @@ export default function ReviewDetails() {
               </h2>
 
               <div className={styles.detail}>
-                <strong>Base Price :</strong> AED 49
+                <strong>Base Price :</strong> AED {49 * totalQuantity}
               </div>
               <div className={styles.detail}>
-                <strong>Additional Price :</strong> {additionPrice}
+                <strong>Additional Price :</strong> 
+                {additionPrice === 0 ? ("Nill"):( "AED", additionPrice * totalQuantity)}
               </div>
               <p className={styles.sectionTitle}></p>
 
@@ -244,9 +264,22 @@ export default function ReviewDetails() {
           </div>
 
           <div className={styles.btnBox}>
+           
             <div className={styles.buttonContainer}>
-              <PrimaryButton onClick={handleConfirm}>
-                Proceed To Payment (AED {price}){" "}
+              <PrimaryButton
+                onClick={handleConfirm}
+                disabled={stripeStatus === "loading"}
+              >
+                {stripeStatus === "loading" ? (
+                  <>
+                    <span className={styles.loader}>
+                      <FaSpinner />
+                    </span>{" "}
+                    Processing...
+                  </>
+                ) : (
+                  <>Proceed To Payment (AED {price})</>
+                )}
               </PrimaryButton>
             </div>
           </div>

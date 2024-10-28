@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { localBaseURL } from "../../config";
+import { toast } from "react-toastify";
+
 const sessionId = localStorage.getItem("SESSION_ID");
 export const createTicket = createAsyncThunk(
   "createTicket/createTicket",
@@ -21,7 +23,7 @@ export const createTicket = createAsyncThunk(
         return rejectWithValue(response.data.message);
       }
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An error occurred");
+      return rejectWithValue(error.response?.data || "An unexpected error occurred.");
     }
   }
 );
