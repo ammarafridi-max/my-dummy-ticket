@@ -1,9 +1,9 @@
-import styles from "./FAQCard.module.css";
+import styles from "./FAQAccordion.module.css";
 import { useState } from "react";
 import { Add } from "@mui/icons-material";
 import { Remove } from "@mui/icons-material";
 
-export default function FAQCard({ question, children }) {
+export default function FAQAccordion({ question, children }) {
   const [className, setClassName] = useState(styles.Hidden);
 
   function toggleHidden() {
@@ -13,18 +13,18 @@ export default function FAQCard({ question, children }) {
   }
 
   return (
-    <div className={styles.FAQCard}>
+    <div className={styles.accordion}>
       <div
-        className={`${styles.QuestionBox} ${
+        className={`${styles.questionDiv} ${
           className === styles.Show && styles.Active
         }`}
         onClick={toggleHidden}
       >
-        <h3 className={styles.Question}>{question}</h3>
+        <h3 className={styles.question}>{question}</h3>
         {className === styles.Hidden ? (
-          <Add className={styles.FAQIcon} />
+          <Add className={styles.icon} />
         ) : (
-          <Remove className={styles.FAQIcon} />
+          <Remove className={styles.icon} />
         )}
       </div>
       {children && (

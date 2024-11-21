@@ -3,6 +3,7 @@
   -moz-box-shadow: 0px 0px 49px 0px rgba(0, 0, 0, 1);
   box-shadow: 0px 0px 49px 0px rgba(0, 0, 0, 1);
   background-color: white;
+  border-bottom: 1px solid rgb(230, 230, 230);
   z-index: 0;
 }
 
@@ -30,7 +31,7 @@
 
 .NavLink {
   transition-duration: 0.3s;
-  padding: 10px 10px;
+  padding: 10px 7.5px;
   text-transform: uppercase;
   color: black;
   font-size: 14px;

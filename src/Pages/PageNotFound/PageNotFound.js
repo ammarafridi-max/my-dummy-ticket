@@ -1,7 +1,7 @@
-import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import PrimaryButtonOutline from "../../Components/Buttons/PrimaryButtonOutline";
-import Container from "../../Components/Container/Container";
-import PrimarySection from "../../Components/Section/PrimarySection";
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import PrimaryButtonOutline from "../../components/Buttons/PrimaryButtonOutline";
+import Container from "../../components/Container/Container";
+import PrimarySection from "../../components/Section/PrimarySection";
 import styles from "./PageNotFound.module.css";
 
 export default function PageNotFound() {

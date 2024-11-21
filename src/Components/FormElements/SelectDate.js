@@ -28,12 +28,7 @@ export default function SelectDate({
   }, [componentRef]);
 
   const handleDateClick = (date) => {
-    const formattedDate = date.toLocaleDateString("en-US", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
-    onDateSelect(formattedDate);
+    onDateSelect(date);
     setShowCalendar(false);
   };
 

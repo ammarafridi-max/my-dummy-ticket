@@ -1,10 +1,10 @@
 import styles from "./HotelForm.module.css";
-import Input from "../../../../Components/FormElements/Input";
-import Label from "../../../../Components/FormElements/Label";
+import Input from "../../../../components/FormElements/Input";
+import Label from "../../../../components/FormElements/Label";
 import { useState } from "react";
-import PrimaryButton from "../../../../Components/Buttons/PrimaryButton";
-import Error from "../../../../Components/Feedback/Error";
-import Counter from "../../../../Components/FormElements/Counter";
+import PrimaryButton from "../../../../components/Buttons/PrimaryButton";
+import Error from "../../../../components/Feedback/Error";
+import Counter from "../../../../components/FormElements/Counter";
 
 export default function HotelForm() {
   const [feedback, setFeedback] = useState();

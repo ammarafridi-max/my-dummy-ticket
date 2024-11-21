@@ -9,12 +9,13 @@
 }
 
 .Icon {
+  width: 5%;
   margin-right: 20px;
   font-size: 15px;
 }
 
 .Input {
-  width: 100%;
+  width: 95%;
   background-color: transparent;
   border: none;
   font-size: 14.5px;
@@ -31,7 +32,6 @@
   color: rgb(150, 150, 150);
   font-size: 14px;
 }
-
 
 @media only screen and (max-width: 991px) {
   .InputDiv {

@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { localBaseURL } from "../../config";
+import { baseURL } from "../../config";
 
 export const updateFlightDetails = createAsyncThunk(
   "flight/updateFlightDetails",
   async ({ sessionId, flightData }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `${localBaseURL}/api/ticket/updateFormDetails`,
+        `${baseURL}/api/ticket/updateFormDetails`,
         { flightData },
         {
           headers: {

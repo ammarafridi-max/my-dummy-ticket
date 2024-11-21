@@ -1,14 +1,14 @@
-import Container from "../../../Components/Container/Container";
-import PrimarySection from "../../../Components/Section/PrimarySection";
+import Container from "../../../components/Container/Container";
+import PrimarySection from "../../../components/Section/PrimarySection";
 import styles from "./Testimonials.module.css";
-import TestimonialCard from "../../../Components/TestimonialCard/TestimonialCard";
+import TestimonialCard from "../../../components/TestimonialCard/TestimonialCard";
 import {
   SectionTitle,
   Subtitle,
-} from "../../../Components/SectionTitle/SectionTitle";
-import david from "../../../Assets/Images/david.webp";
-import maria from "../../../Assets/Images/maria.webp";
-import ahmed from "../../../Assets/Images/ahmed.webp";
+} from "../../../components/SectionTitle/SectionTitle";
+import david from "../../../assets/Images/david.webp";
+import maria from "../../../assets/Images/maria.webp";
+import ahmed from "../../../assets/Images/ahmed.webp";
 
 const testimonials = [
   {
@@ -33,7 +33,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <PrimarySection pt="100px" type="secondary">
+    <PrimarySection pt="100px" backgroundColor="white">
       <Container>
         <SectionTitle
           textAlign="center"

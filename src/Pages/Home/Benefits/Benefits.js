@@ -1,11 +1,11 @@
-import Container from "../../../Components/Container/Container";
-import PrimarySection from "../../../Components/Section/PrimarySection";
-import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
+import Container from "../../../components/Container/Container";
+import PrimarySection from "../../../components/Section/PrimarySection";
+import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import styles from "./Benefits.module.css";
-import shieldIcon from "../../../Assets/Images/shield-icon2.png";
-import timeIcon from "../../../Assets/Images/time-icon.png";
-import usdIcon from "../../../Assets/Images/usd-icon.png";
-import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
+import shieldIcon from "../../../assets/Images/shield-icon2.png";
+import timeIcon from "../../../assets/Images/time-icon.png";
+import usdIcon from "../../../assets/Images/usd-icon.png";
+import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
 
 export default function Benefits() {
   return (

@@ -1,50 +1,54 @@
-.Counter {
-  width: fit-content;
+.counter {
+  width: 33%;
+}
+
+.count {
   display: flex;
-  font-size: 14px;
-  border: 1px solid var(--grey-color);
+  justify-content: space-between;
+  align-items: center;
   border-radius: 5px;
+  padding: 10px 12px;
+  border: 1px solid rgb(220, 220, 220);
 }
 
-.Number {
-  width: 75px;
-  text-align: center;
-  font-size: 15px;
-  color: var(--grey-color-dark);
-  margin: auto 0;
-}
-
-.Button {
+.count p {
+  margin: 0;
   padding: 0;
-  background-color: transparent;
-  border: none;
-  font-size: 12px;
-  border-right: 1px solid var(--grey-color);
-  padding: 5px;
+  font-size: 14.5px;
+}
+
+.icon {
+  font-size: 20px;
   cursor: pointer;
 }
 
-.Button:nth-of-type(3) {
-  border-right: none;
-  border-left: 1px solid var(--grey-color);
+.ageGroup p {
+  font-size: 14.5px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+  font-weight: 400;
 }
 
-.Button * {
-  font-size: 17px !important;
-  color: var(--grey-color-dark);
+.ageGroup span {
+  color: rgb(180, 180, 180);
 }
 
-
-@media only screen and (max-width: 800px) {
-  .Counter {
-    width:100%;
+@media screen and (max-width: 991px) {
+  .counter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
   }
-  .Button {
-    width:50%;
-    text-align: center;
+  .ageGroup {
+    width: 50%;
   }
-
-  .Number{
-    width:50%;
+  .ageGroup p {
+    text-align: left;
+  }
+  .count {
+    width: 50%;
   }
 }

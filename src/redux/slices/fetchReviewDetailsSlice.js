@@ -1,19 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { localBaseURL } from "../../config";
+import { baseURL } from "../../config";
 
 export const fetchFormDetails = createAsyncThunk(
   "formDetails/fetchFormDetails",
   async (sessionId, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `${localBaseURL}/api/ticket/getFormDetails`,
-        {
-          headers: {
-            "X-Session-ID": sessionId,
-          },
-        }
-      );
+      const response = await axios.get(`${baseURL}/api/ticket/getFormDetails`, {
+        headers: {
+          "X-Session-ID": sessionId,
+        },
+      });
       if (response.status === 200) {
         return response.data;
       }

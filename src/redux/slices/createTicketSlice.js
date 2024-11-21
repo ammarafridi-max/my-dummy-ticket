@@ -1,15 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { localBaseURL } from "../../config";
-import { toast } from "react-toastify";
+import { baseURL } from "../../config";
 
-const sessionId = localStorage.getItem("SESSION_ID");
 export const createTicket = createAsyncThunk(
   "createTicket/createTicket",
   async (ticketDetails, { rejectWithValue }) => {
     try {
+      const sessionId = localStorage.getItem("SESSION_ID");
+      if (!sessionId) {
+        return rejectWithValue(
+          "Session ID is missing. Please restart the process."
+        );
+      }
       const response = await axios.post(
-        `${localBaseURL}/api/ticket/buy-ticket`,
+        `${baseURL}/api/ticket/buy-ticket`,
         ticketDetails,
         {
           headers: {
@@ -23,7 +27,9 @@ export const createTicket = createAsyncThunk(
         return rejectWithValue(response.data.message);
       }
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An unexpected error occurred.");
+      return rejectWithValue(
+        error.response?.data || "An unexpected error occurred."
+      );
     }
   }
 );

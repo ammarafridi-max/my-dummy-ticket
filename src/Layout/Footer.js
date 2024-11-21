@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 import { WhatsApp } from "@mui/icons-material";
-import Container from "../Components/Container/Container";
-import PrimarySection from "../Components/Section/PrimarySection";
+import Container from "../components/Container/Container";
+import PrimarySection from "../components/Section/PrimarySection";
 import {
   FaStripe,
   FaGooglePay,
@@ -9,16 +9,14 @@ import {
   FaCcVisa,
   FaCcMastercard,
 } from "react-icons/fa";
-import iata from "./iata.svg";
 
 export default function Footer() {
   return (
     <footer>
-      <PrimarySection py="0" pb="50px">
+      <PrimarySection py="50px">
         <Container className={styles.footerContainer}>
           <PartnerImages />
           <CopyrightText />
-          <Chat />
         </Container>
       </PrimarySection>
     </footer>
@@ -27,13 +25,12 @@ export default function Footer() {
 
 function PartnerImages() {
   return (
-    <div className="col-12 col-md-6 col-lg-6 text-center mx-auto row justify-content-center">
+    <div className={styles.partnerImgs}>
       <FaStripe className={styles.partnerIcon} />
       <FaGooglePay className={styles.partnerIcon} />
       <FaApplePay className={styles.partnerIcon} />
       <FaCcVisa className={styles.partnerIcon} />
       <FaCcMastercard className={styles.partnerIcon} />
-      {/* <Iata /> */}
     </div>
   );
 }
@@ -56,9 +53,9 @@ function GdsPartners() {
 
 function CopyrightText() {
   return (
-    <div className={styles.copyrightText}>
+    <p className={styles.copyrightText}>
       © 2024 TRAVL Technologies. All Rights Reserved.
-    </div>
+    </p>
   );
 }
 

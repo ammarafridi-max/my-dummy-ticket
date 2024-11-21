@@ -1,25 +1,27 @@
 .Div {
   width: 100%;
-  padding: 12px 15px;
+  padding: 10px 15px;
   border-radius: 5px;
   position: relative;
-  border: 1.5px solid rgb(220, 220, 220);
+  border: 1px solid rgb(220, 220, 220);
 }
 
 .Code {
-  width: 25%;
+  width: 10%;
+}
+
+.Digits {
+  width: 90%;
+  padding-left: 15px;
 }
 
 .Code,
 .Digits {
+  font-size: 14.5px;
+  font-weight: 400;
   outline: none;
   background-color: transparent;
   border: none;
-}
-
-.Digits {
-  width: 75%;
-  padding-left: 15px;
 }
 
 .Options {
@@ -32,7 +34,7 @@
   overflow: scroll;
   background-color: white;
   margin-top: 15px;
-  border: 2px solid rgb(242, 242, 242);
+  border: 1px solid rgb(242, 242, 242);
   border-radius: 10px;
   z-index: 1000;
 }
@@ -51,33 +53,22 @@
 }
 
 .Digits {
-  border-left: 2px solid rgb(200, 200, 200);
+  border-left: 1px solid rgb(200, 200, 200);
 }
 
 @media screen and (max-width: 991px) {
-  .Select {
-    width: 15%;
-  }
   .Code {
-    width: 15%;
+    width: 20%;
   }
 
   .Digits {
-    width: 85%;
+    width: 80%;
     padding-left: 15px;
   }
 }
 
-
-/* Number.module.css */
-
 .Div {
   position: relative;
-  /* Other styles */
-}
-
-.Code, .Digits {
-  /* Common styles for input fields */
 }
 
 .Disabled {
@@ -85,15 +76,7 @@
 }
 
 .DisabledInput {
-  color:#000;
+  color: #000;
   cursor: not-allowed;
   pointer-events: none; /* Disable all mouse interactions */
-}
-
-.Options {
-  /* Styles for options dropdown */
-}
-
-.Option {
-  /* Styles for individual option items */
 }

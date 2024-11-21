@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import airportsReducer from "./slices/airportsSlice";
+import airportsReducer from "./slices/fetchAirports";
 import ticketFormReducer from "./slices/ticketFormSlice";
 import flightReducer from "./slices/fetchFlight";
 import selectedFlightReducer from "./slices/selectFlightSlice";

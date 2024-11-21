@@ -1,34 +1,30 @@
 import styles from "./Process.module.css";
-import PrimarySection from "../../../Components/Section/PrimarySection";
-import Container from "../../../Components/Container/Container";
-import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
+import PrimarySection from "../../../components/Section/PrimarySection";
+import Container from "../../../components/Container/Container";
+import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
 
 export default function Process() {
   return (
-    <PrimarySection className={styles.Section} id="process">
+    <PrimarySection pt="0">
       <Container>
-        <SectionTitle
-          textAlign="center"
-          type="secondary"
-          subtitle="How it Works"
-        >
+        <SectionTitle textAlign="center" subtitle="How it Works" mb="50px">
           Your Dummy Ticket in 3 Easy Steps
         </SectionTitle>
         <div className="row justify-content-between">
           <Card
             number={1}
-            title="Submit"
-            text="Fill the online form with travelers' names, contact details, preferred date and travel route."
+            title="Select"
+            text="Enter your route and dates, select your desired flight and enter all the details listed on our form."
           />
           <Card
             number={2}
             title="Pay"
-            text="Once your details are entered, you will be directed to Stripe's secure Checkout page."
+            text="Once you confirm the details, you can then proceed to payment using Stripe's Checkout"
           />
           <Card
             number={3}
             title="Receive"
-            text="Receive your verifiable dummy flight ticket as a PDF file via both email and WhatsApp instantly."
+            text="After your payment is confirmed, you'll receive your dummy ticket instantly via email."
           />
         </div>
       </Container>
@@ -39,7 +35,7 @@ export default function Process() {
 function Card(props) {
   return (
     <div className={styles.Card}>
-      <div className={`row ${styles.CardRow}`}>
+      <div className={`row align-items-center`}>
         <div className="col-2 col-lg-2">
           <div className={styles.NumberDiv}>
             <p className={styles.Number}>{props.number}</p>

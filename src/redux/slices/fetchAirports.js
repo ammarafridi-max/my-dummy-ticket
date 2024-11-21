@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { localBaseURL } from "../../config";
+import { baseURL } from "../../config";
+
+// GET AIRPORTS LIST
 
 const initialState = {
   airports: [],
@@ -12,7 +14,7 @@ export const fetchAirports = createAsyncThunk(
   "airports/fetchAirports",
   async (query) => {
     const response = await axios.get(
-      `${localBaseURL}/api/airports?keyword=${query}`
+      `${baseURL}/api/airports?keyword=${query}`
     );
     return response.data.result;
   }

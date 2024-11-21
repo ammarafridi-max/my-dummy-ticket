@@ -1,14 +1,14 @@
-.FAQCard {
+.accordion {
   padding-bottom: 20px;
   background-color: transparent;
 }
 
-.QuestionBox {
+.questionDiv {
   display: flex;
   align-items: center;
   color: black;
   background-color: white;
-  padding: 20px 30px;
+  padding: 15px 20px;
   border-radius: 10px;
   transition-duration: 0.3s;
   -webkit-box-shadow: 0px 0px 10px 2px rgba(240, 240, 240, 1);
@@ -16,14 +16,14 @@
   box-shadow: 0px 0px 10px 2px rgba(240, 240, 240, 1);
 }
 
-.QuestionBox:hover {
+.questionDiv:hover {
   cursor: pointer;
   -webkit-box-shadow: 0px 0px 15px 2px rgba(220, 220, 220, 1);
   -moz-box-shadow: 0px 0px 15px 2px rgba(220, 220, 220, 1);
   box-shadow: 0px 0px 15px 2px rgba(220, 220, 220, 1);
 }
 
-.Question {
+.questionDiv .question {
   width: 80%;
   margin: 0;
   font-size: 17px;
@@ -35,13 +35,13 @@
   font-weight: 700 !important;
 }
 
-.FAQIcon {
+.icon {
   width: fit-content;
   margin: 0 0 0 auto;
 }
 
 .Answer {
-  padding: 0 30px;
+  padding: 0 10px;
   transition-duration: 0.3s;
   color: rgb(50, 50, 50);
   font-size: 17px;
@@ -56,44 +56,9 @@
   padding: 20px 30px 0 30px;
 }
 
-/* Accordion */
-
-.questionDiv {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 30px;
-  background-color: white;
-  -webkit-box-shadow: 0px 0px 10px 2px rgba(240, 240, 240, 1);
-  -moz-box-shadow: 0px 0px 10px 2px rgba(240, 240, 240, 1);
-  box-shadow: 0px 0px 10px 2px rgba(240, 240, 240, 1);
-}
-
-.question {
-  margin: 0;
-  width: 80%;
-  font-size: 17px;
-  font-weight: 400;
-}
-
-.answerDiv {
-  padding: 10px 30px;
-}
-
-.showAnswer {
-  height: 100%;
-  transition-duration: 0.3s;
-}
-
-.hideAnswer {
-  height: 0;
-  overflow: hidden;
-  transition-duration: 0.3s;
-}
-
 @media screen and (max-width: 991px) {
   .Question,
   .Answer {
-    font-size: 18px;
+    font-size: 16px;
   }
 }

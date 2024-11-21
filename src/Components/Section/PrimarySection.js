@@ -1,17 +1,26 @@
-export default function PrimarySection(props) {
+export default function PrimarySection({
+  pt,
+  pb,
+  py,
+  mt,
+  mb,
+  my,
+  backgroundColor = "rgb(248, 248, 248)",
+  className,
+  id,
+  children,
+}) {
   const sectionStyle = {
-    paddingTop: props.pt || props.py || "100px",
-    paddingBottom: props.pb || props.py || "100px",
-    marginTop: props.mt || props.my,
-    marginBottom: props.mb || props.my,
-    backgroundColor:
-      props.type === "secondary" ? "white" : "rgb(248, 248, 248)",
-    color: props.backgroundColor === "primary" ? "white" : "black",
+    paddingTop: pt || py || "100px",
+    paddingBottom: pb || py || "100px",
+    marginTop: mt || my,
+    marginBottom: mb || my,
+    backgroundColor: backgroundColor,
   };
 
   return (
-    <section style={sectionStyle} className={props.className} id={props.id}>
-      {props.children}
+    <section style={sectionStyle} className={className} id={id}>
+      {children}
     </section>
   );
 }

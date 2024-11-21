@@ -1,32 +1,73 @@
 import styles from "./PaymentSuccess.module.css";
-import PrimarySection from "../../Components/Section/PrimarySection";
-import PageTitle from "../../Components/PageTitle/PageTitle";
-import img from "../../Assets/Images/sample-ticket.png";
+import PrimarySection from "../../components/Section/PrimarySection";
+import { useEffect } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 export default function PaymentSuccess() {
+  // const [searchParams] = useSearchParams();
+  // const sessionId = searchParams.get("sessionId");
+  // const navigate = useNavigate();
+
+  // if (!sessionId) {
+  //   navigate("/");
+  // }
+
+  // useEffect(() => {
+  //   async function confirmPayment() {
+  //     try {
+  //       const res = await fetch(
+  //         `${process.env.REACT_APP_BACKEND_URL}/api/ticket/updatePaymentStatus`,
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             sessionId: sessionId,
+  //             status: "PAYMENT_DONE",
+  //           }),
+  //         }
+  //       );
+  //       if (!res.ok) {
+  //         throw new Error("Failed to update payment status");
+  //       }
+  //       const data = await res.json();
+  //       console.log("Payment status updated:", data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //     }
+  //   }
+  //   confirmPayment();
+  // }, []);
+
   return (
-    <PrimarySection py="100px">
-      <div className="col-10 col-lg-8 mx-auto">
-        <PageTitle textAlign="center">Payment Successful</PageTitle>
-        <div className={styles.Text}>
-          <p>Thank you for booking your dummy ticket with us!</p>
-          <p>
-            We are working on your flight reservation and will have it sent to
-            your email address as a PDF file.
-          </p>
-          <p>
-            In the meanwhile, if you have any queries, feel free to{" "}
-            <a href="https://api.whatsapp.com/send?phone=971506045355&text=Hi.%20I%20need%20a%20dummy%20ticket.">
-              message us
-            </a>
-            , or <a href="mailto:info@mydummyticket.ae">email us.</a>
-          </p>
-          <p>
-            If you also need a dummy hotel booking or a genuine travel
-            insurance, contact us now.
-          </p>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Payment Successfully Processed</title>
+        </Helmet>
+      </HelmetProvider>
+      <PrimarySection pb="50px" mb="0">
+        <div className="col-10 col-lg-8 mx-auto">
+          <h1 className={styles.title}>Thank You for Your Booking!</h1>
+          <div className={styles.Text}>
+            <p>
+              Your payment has been successfully processed. We appreciate your
+              trust in us for your travel needs.
+            </p>
+            <h2>What next?</h2>
+            <p>
+              You’ll soon receive a confirmation email with your dummy ticket
+              attached. Please check your inbox and spam folder. Ensure all the
+              details on your dummy ticket are correct. If you spot any error or
+              wrong information, contact us immediately.
+            </p>
+          </div>
         </div>
-      </div>
-    </PrimarySection>
+      </PrimarySection>
+    </>
   );
 }

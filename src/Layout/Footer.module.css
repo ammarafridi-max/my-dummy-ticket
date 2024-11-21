@@ -2,37 +2,23 @@
   background-color: var(--primary-color-dark);
   border-radius: 5px 5px 5px 5px;
   padding: 30px;
-  width:98%;
+}
+
+/* Partner */
+
+.partnerImgs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
 .partnerIcon {
   color: white;
-  height: 70px;
-  width: 70px;
-  margin: 0 auto;
+  font-size: 40px;
 }
 
-/* GDS */
-
-.gdsPartners {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 75%;
-  margin: 0px auto 0 auto;
-}
-
-.gdsPartners div {
-  width: 10%;
-}
-
-.gdsIcon {
-  fill: white;
-}
-
-.iata {
-  width: 50%;
-}
+/* WhatsApp Icon */
 
 .WhatsAppIcon {
   width: 70px;
@@ -58,9 +44,11 @@
 
 .copyrightText {
   padding-top: 10px;
-  border-top: 1px solid rgb(190, 190, 190);
+  margin-top: 10px;
+  border-top: 1px solid rgb(200, 200, 200);
   text-align: center;
   color: white;
+  font-weight: 300;
 }
 
 @media screen and (max-width: 991px) {

@@ -1,24 +1,40 @@
 import styles from "./Input.module.css";
 
-export default function Input(props) {
+export default function Input({
+  icon,
+  type,
+  placeholder,
+  value,
+  style,
+  onClick,
+  onChange,
+  onFocus,
+  id,
+  name,
+  autoComplete,
+  pattern,
+  min,
+  max,
+  className,
+}) {
   return (
-    <div className={styles.InputDiv}>
-      {props.icon && <span className={styles.Icon}>{props.icon}</span>}
+    <div className={`${styles.InputDiv} ${className}`}>
+      {icon && <span className={styles.Icon}>{icon}</span>}
       <input
-        type={props.type}
+        type={type}
         className={styles.Input}
-        placeholder={props.placeholder}
-        value={props.value}
-        style={props.style}
-        onClick={props.onClick}
-        onChange={props.onChange}
-        onFocus={props.onFocus}
-        id={props.id}
-        name={props.name}
-        autoComplete={props.autoComplete}
-        pattern={props.pattern}
-        min={props.min}
-        max={props.max}
+        placeholder={placeholder}
+        value={value}
+        style={style}
+        onClick={onClick}
+        onChange={onChange}
+        onFocus={onFocus}
+        id={id}
+        name={name}
+        autoComplete={autoComplete}
+        pattern={pattern}
+        min={min}
+        max={max}
       />
     </div>
   );

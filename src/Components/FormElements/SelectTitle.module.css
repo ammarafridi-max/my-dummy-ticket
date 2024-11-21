@@ -1,24 +1,23 @@
 .dropdownContainer {
   position: relative;
-  padding: 1px 10px;
-  width: auto;
   background-color: white;
   border-radius: 5px;
   border: 1.5px solid rgb(220, 220, 220);
   cursor: pointer;
+  padding: 0;
+}
+
+.dropdownContainer:hover {
+  border: 1px solid var(--primary-color);
 }
 
 .selectedItem {
-  padding: 12px;
-  font-size: 16px;
+  padding: 12px 20px;
+  font-size: 14.5px;
   color: #333;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.selectedItem:hover {
-  background-color: #f1f1f1;
+  gap: 10px;
 }
 
 .dropdownMenu {
@@ -28,7 +27,6 @@
   left: 0;
   background-color: white;
   border-radius: 5px;
-
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }

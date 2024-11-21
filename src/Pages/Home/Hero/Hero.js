@@ -1,17 +1,14 @@
-import React, { Suspense, lazy, useState } from "react";
-import PrimarySection from "../../../Components/Section/PrimarySection";
-import Container from "../../../Components/Container/Container";
+import React, { useState } from "react";
+import PrimarySection from "../../../components/Section/PrimarySection";
 import styles from "./Hero.module.css";
 import TicketForm from "./TicketForm/TicketForm";
 import HotelForm from "./HotelForm/HotelForm";
-import { IoIosAirplane } from "react-icons/io";
-import { MdHotel } from "react-icons/md";
 
 export default function Hero() {
   return (
     <PrimarySection className={styles.HeroSection} id="form">
-      <div className="col-12 col-lg-10 row justify-content-between align-items-center mx-auto">
-        <div className="col-10 col-lg-6 mx-auto">
+      <div className="col-11 col-lg-10 row justify-content-between align-items-center mx-auto">
+        <div className="col-12 col-lg-6 mx-auto">
           <TextContent />
         </div>
         <Form />
@@ -25,7 +22,7 @@ function Form() {
 
   return (
     <div className={`col-12 col-lg-6 ${styles.form}`}>
-      <div className={`row ${styles.iconContainer}`}>
+      {/* <div className={`row ${styles.iconContainer}`}>
         <div
           className={`${styles.iconWithText} ${
             currentForm === "ticket" && styles.active
@@ -45,7 +42,7 @@ function Form() {
           <MdHotel className={styles.icon} />
           <p>Hotels</p>
         </div>
-      </div>
+      </div> */}
       {currentForm === "ticket" && <TicketForm />}
       {currentForm === "hotel" && <HotelForm />}
     </div>
@@ -56,7 +53,7 @@ const TextContent = React.memo(() => {
   return (
     <div className={styles.Content}>
       <h1 className={styles.HeroHeading}>
-        Get your dummy ticket for <span className={styles.Price}>AED 49</span>
+        Get your dummy ticket From <span className={styles.Price}>AED 49</span>
       </h1>
       <p className={styles.HeroText}>
         Book confirmed flight reservations for visa application from licensed

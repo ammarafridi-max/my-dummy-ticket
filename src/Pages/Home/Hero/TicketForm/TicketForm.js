@@ -1,243 +1,121 @@
 import React, { useState } from "react";
+import { formatDate } from "../../../../utils/formatDate";
 import styles from "./TicketForm.module.css";
-import Error from "../../../../Components/Feedback/Error";
-import Label from "../../../../Components/FormElements/Label";
-import PrimaryButton from "../../../../Components/Buttons/PrimaryButton";
-import Counter from "../../../../Components/FormElements/Counter";
-import TextArea from "../../../../Components/FormElements/TextArea";
-import SelectAirport from "../../../../Components/FormElements/SelectAirport";
-import {
-  FaPlaneDeparture,
-  FaPlaneArrival,
-  FaCircle,
-  FaEnvelope,
-  FaPhone,
-} from "react-icons/fa";
-import SelectDate from "../../../../Components/FormElements/SelectDate";
-import Input from "../../../../Components/FormElements/Input";
+import Error from "../../../../components/Feedback/Error";
+import Label from "../../../../components/FormElements/Label";
+import PrimaryButton from "../../../../components/Buttons/PrimaryButton";
+import Counter from "../../../../components/FormElements/Counter";
+import SelectAirport from "../../../../components/FormElements/SelectAirport";
+import SelectDate from "../../../../components/FormElements/SelectDate";
+import Number from "../../../../components/FormElements/Number";
+import { FaPlaneDeparture, FaPlaneArrival, FaCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  searchFlights,
-  setErrorMessages,
-  setQuantity,
-} from "../../../../redux/slices/ticketFormSlice";
-import Number from "../../../../Components/FormElements/Number";
+import { searchFlights } from "../../../../redux/slices/ticketFormSlice";
 
 export default function TicketForm() {
-  const today = new Date().toISOString().split("T")[0];
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { formState, feedback } = useSelector((state) => state.ticketForm);
-
+  const { formState } = useSelector((state) => state.ticketForm);
   const [type, setType] = useState("One Way");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
-  const [arrivalDate, setArrivalDate] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [returnDate, setReturnDate] = useState();
   const [number, setNumber] = useState({ code: "", digits: "" });
-  const [errorMessages, setErrorMessages] = useState({
-    from: "",
-    to: "",
-    departureDate: "",
-    arrivalDate: "",
-    codenumber: "",
-    digitsnumber: "",
-    quantity: "",
-  });
+  const [errorMessages, setErrorMessages] = useState({});
   const [quantity, setQuantity] = useState({
     adults: 1,
     children: 0,
     infants: 0,
   });
 
-  const handleForm = async (e) => {
-    e.preventDefault();
-
-    if (!isFormValid()) {
-      return;
-    }
-
-    dispatch(
-      searchFlights({
-        type,
-        from,
-        to,
-        departureDate,
-        arrivalDate,
-        quantity,
-        number,
-      })
-    ).then((result) => {
-      if (searchFlights.fulfilled.match(result)) {
-        navigate(`/booking/select-flights`);
-      }
-    });
-  };
-
   const isFormValid = () => {
-    let valid = true;
-    let errors = { ...errorMessages };
-
-    for (let key in errors) {
-      errors[key] = "";
-    }
-
-    if (!from) {
-      errors.from = "From field is required";
-      valid = false;
-    }
-
-    if (!to) {
-      errors.to = "To field is required";
-      valid = false;
-    }
-
-    if (!departureDate) {
-      errors.departureDate = "Departure Date is required";
-      valid = false;
-    }
-
-    if (from && to && from === to) {
-      errors.from = "From and To locations cannot be the same";
-      errors.to = "From and To locations cannot be the same";
-      valid = false;
-    }
-
-    if (type === "Return" && !arrivalDate) {
-      errors.arrivalDate = "Return Date is required for round trip";
-      valid = false;
-    }
-
-    if (!number.digits) {
-      errors.codenumber = "Please enter valid phone number";
-    }
-    if (!number.code) {
-      errors.digitsnumber = "Please select phone number code ";
-    }
-
+    const errors = {};
+    if (!from) errors.from = "From field is required";
+    if (!to) errors.to = "To field is required";
+    if (!departureDate) errors.departureDate = "Departure Date is required";
+    if (from === to) errors.to = "From and To locations cannot be the same";
+    if (type === "Return" && !returnDate)
+      errors.returnDate = "Return Date is required";
+    if (!number.digits) errors.codenumber = "Please enter a valid phone number";
+    if (!number.code) errors.digitsnumber = "Please select phone number code";
     if (
       quantity.adults < 1 ||
       quantity.adults + quantity.children + quantity.infants > 9
     ) {
       errors.quantity =
-        "Total number of passengers cannot exceed 9 and there must be at least one adult";
-      valid = false;
+        "Total passengers cannot exceed 9, with at least one adult";
     }
-
     setErrorMessages(errors);
-    return valid;
+    return Object.keys(errors).length === 0;
   };
 
-  const handleCodeChange = async (e) => {
-    setNumber({ ...number, code: e.target.value });
-    if (e.target.value === "") {
-      setErrorMessages("Please select phone number code ");
-    } else {
-      setErrorMessages("");
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // const data = {
+    //   type,
+    //   from,
+    //   to,
+    //   departureDate,
+    //   returnDate,
+    //   number,
+    //   quantity,
+    // };
+    // console.log(data);
+    if (isFormValid()) {
+      dispatch(
+        searchFlights({
+          type,
+          from,
+          to,
+          departureDate,
+          number,
+          quantity,
+          ...(type === "Return" && returnDate ? { returnDate } : {}),
+        })
+      ).then((result) => {
+        if (searchFlights.fulfilled.match(result)) {
+          navigate(`/booking/select-flights`);
+        }
+      });
     }
   };
 
-
-  const handleDigitsChange = (e) => {
-    const value = e.target.value;
-  
-    // Check if the input is empty
-    if (value === "") {
-      setErrorMessages("Please enter a valid phone number.");
-    } 
-    // Check if the input contains only numeric digits
-    else if (!/^[0-9]*$/.test(value)) {
-      setErrorMessages("Phone Number should contain only numeric digits.");
-    } 
-    // If everything is valid
-    else {
-      setErrorMessages("");
-      setNumber({ ...number, digits: value });
-    }
-  };
-  
-
-  const onQuantityChange = (type, amount) => {
-    setQuantity((q) => {
-      const newQuantity = { ...q, [type]: q[type] + amount };
-      const total =
-        newQuantity.adults + newQuantity.children + newQuantity.infants;
-
-      if (type === "adults" && newQuantity.adults < 1) return q;
-      if (type !== "adults" && newQuantity[type] < 0) return q;
-      if (total > 9) {
-        setErrorMessages((prev) => ({
-          ...prev,
-          quantity: "Total number of passengers cannot exceed 9.",
-        }));
-        return q;
+  const handleQuantityChange = (field, value) => {
+    setQuantity((prev) => {
+      const updated = { ...prev, [field]: prev[field] + value };
+      const total = updated.adults + updated.children + updated.infants;
+      if (total <= 9 && updated.adults >= 1) {
+        setErrorMessages((e) => ({ ...e, quantity: "" }));
+        return updated;
       }
-
-      setErrorMessages((prev) => ({ ...prev, quantity: "" }));
-      return newQuantity;
+      setErrorMessages((e) => ({
+        ...e,
+        quantity: "Total passengers cannot be less than 1 and exceed 9.",
+      }));
+      return prev;
     });
-  };
-
-  const handleChange = (field, value) => {
-    switch (field) {
-      case "from":
-        setFrom(value);
-        setErrorMessages((prev) => ({ ...prev, from: "" }));
-        break;
-      case "to":
-        setTo(value);
-        setErrorMessages((prev) => ({ ...prev, to: "" }));
-        break;
-      case "departureDate":
-        setDepartureDate(value);
-        setErrorMessages((prev) => ({ ...prev, departureDate: "" }));
-        break;
-      case "arrivalDate":
-        setArrivalDate(value);
-        setErrorMessages((prev) => ({ ...prev, arrivalDate: "" }));
-        break;
-      default:
-        break;
-    }
   };
 
   return (
     <div>
-      <form className={styles.Form} onSubmit={handleForm}>
-        <div className={styles.Row}>
-          <div className="row">
+      <form className={styles.form} onSubmit={handleFormSubmit}>
+        <div className="row">
+          {["One Way", "Return"].map((tripType) => (
             <p
-              className={styles.Type}
-              onClick={() => {
-                setType("One Way");
-                setArrivalDate("");
-              }}
+              key={tripType}
+              className={styles.type}
+              onClick={() => setType(tripType)}
             >
               <FaCircle
                 className={`${styles.DotIcon} ${
-                  type === "One Way" && styles.Active
+                  type === tripType && styles.Active
                 }`}
               />
-              One Way
+              {tripType}
             </p>
-            <p
-              className={styles.Type}
-              onClick={() => {
-                setType("Return");
-              }}
-            >
-              <FaCircle
-                className={`${styles.DotIcon} ${
-                  type === "Return" && styles.Active
-                }`}
-              />
-              Return
-            </p>
-          </div>
+          ))}
         </div>
 
         <div className="row">
@@ -247,8 +125,7 @@ export default function TicketForm() {
             </Label>
             <SelectAirport
               value={from}
-              onChange={(value) => handleChange("from", value)}
-              id="from"
+              onChange={(value) => setFrom(value)}
               icon={<FaPlaneDeparture />}
             />
             {errorMessages.from && <Error>{errorMessages.from}</Error>}
@@ -259,8 +136,7 @@ export default function TicketForm() {
             </Label>
             <SelectAirport
               value={to}
-              onChange={(value) => handleChange("to", value)}
-              id="to"
+              onChange={(value) => setTo(value)}
               icon={<FaPlaneArrival />}
             />
             {errorMessages.to && <Error>{errorMessages.to}</Error>}
@@ -273,8 +149,8 @@ export default function TicketForm() {
               Departure Date
             </Label>
             <SelectDate
-              selectedDate={departureDate}
-              onDateSelect={(value) => handleChange("departureDate", value)}
+              selectedDate={departureDate && formatDate(departureDate)}
+              onDateSelect={setDepartureDate}
               minDate={new Date()}
             />
             {errorMessages.departureDate && (
@@ -283,46 +159,43 @@ export default function TicketForm() {
           </div>
           {type === "Return" && (
             <div className={styles.Input}>
-              <Label htmlFor="arrivalDate" required>
+              <Label htmlFor="returnDate" required>
                 Return Date
               </Label>
               <SelectDate
-                selectedDate={arrivalDate}
-                onDateSelect={(value) => handleChange("arrivalDate", value)}
+                selectedDate={returnDate && formatDate(returnDate)}
+                onDateSelect={setReturnDate}
                 minDate={new Date(departureDate)}
               />
-              {errorMessages.arrivalDate && (
-                <Error>{errorMessages.arrivalDate}</Error>
+              {errorMessages.returnDate && (
+                <Error>{errorMessages.returnDate}</Error>
               )}
             </div>
           )}
         </div>
 
-        <div>
-          <Count quantity={quantity} onQuantityChange={onQuantityChange} />
-          {errorMessages.quantity && <Error>{errorMessages.quantity}</Error>}
-        </div>
+        <QuantityCounter
+          quantity={quantity}
+          onQuantityChange={handleQuantityChange}
+          error={errorMessages.quantity}
+        />
 
-        <div className="row">
-          <div className={styles.emailInput}>
-            <Label htmlFor="number" required>
-              Phone Number
-            </Label>
+        <Label htmlFor="number" required>
+          Phone Number
+        </Label>
+        <Number
+          codeValue={number.code}
+          codeOnChange={(e) => setNumber({ ...number, code: e.target.value })}
+          digitsValue={number.digits}
+          digitsOnChange={(e) =>
+            setNumber({ ...number, digits: e.target.value })
+          }
+        />
+        {errorMessages.codenumber && <Error>{errorMessages.codenumber}</Error>}
+        {errorMessages.digitsnumber && (
+          <Error>{errorMessages.digitsnumber}</Error>
+        )}
 
-            <Number
-              codeValue={number.code}
-              codeOnChange={handleCodeChange}
-              digitsValue={number.digits}
-              digitsOnChange={handleDigitsChange}
-            />
-            {errorMessages.codenumber && (
-              <Error>{errorMessages.codenumber}</Error>
-            )}
-            {errorMessages.digitsnumber && (
-              <Error>{errorMessages.digitsnumber}</Error>
-            )}
-          </div>
-        </div>
         <div className="text-center mt-4">
           <PrimaryButton
             text="Search Flights"
@@ -337,45 +210,27 @@ export default function TicketForm() {
   );
 }
 
-function Count({ quantity, onQuantityChange }) {
+function QuantityCounter({ quantity, onQuantityChange, error }) {
+  const categories = [
+    { label: "Adults", ageRange: "(12+)", field: "adults" },
+    { label: "Children", ageRange: "(2 - 11)", field: "children" },
+    { label: "Infants", ageRange: "(0 - 1)", field: "infants" },
+  ];
+
   return (
-    <div className={`row ${styles.CountSection} p-0 mx-0`}>
-      <div className={styles.Count}>
-        <p className={styles.Gender}>
-          Adults <span className={styles.Age}>(12+)</span>
-        </p>
-        <Counter
-          className={styles.Counter}
-          onAdd={() => onQuantityChange("adults", 1)}
-          onSubtract={() => onQuantityChange("adults", -1)}
-        >
-          {quantity.adults}
-        </Counter>
+    <>
+      <div className={styles.CountSection}>
+        {categories.map(({ label, ageRange, field }) => (
+          <Counter
+            ageGroup={label}
+            age={ageRange}
+            onAdd={() => onQuantityChange(field, 1)}
+            onSubtract={() => onQuantityChange(field, -1)}
+            value={quantity[field]}
+          />
+        ))}
       </div>
-      <div className={styles.Count}>
-        <p className={styles.Gender}>
-          Children <span className={styles.Age}>(2 - 11)</span>
-        </p>
-        <Counter
-          className={styles.Counter}
-          onAdd={() => onQuantityChange("children", 1)}
-          onSubtract={() => onQuantityChange("children", -1)}
-        >
-          {quantity.children}
-        </Counter>
-      </div>
-      <div className={styles.Count}>
-        <p className={styles.Gender}>
-          Infants <span className={styles.Age}>(0 - 1)</span>
-        </p>
-        <Counter
-          className={styles.Counter}
-          onAdd={() => onQuantityChange("infants", 1)}
-          onSubtract={() => onQuantityChange("infants", -1)}
-        >
-          {quantity.infants}
-        </Counter>
-      </div>
-    </div>
+      {error && <Error>{error}</Error>}
+    </>
   );
 }

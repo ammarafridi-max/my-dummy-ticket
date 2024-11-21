@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import debounce from "lodash.debounce";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAirports } from "../../redux/slices/airportsSlice";
 import styles from "./SelectAirport.module.css";
 
 export default function SelectAirport({
@@ -11,18 +8,46 @@ export default function SelectAirport({
   className,
   icon,
 }) {
-  const [query, setQuery] = useState(value?.address?.cityName || ""); 
-  const [selectedAirport, setSelectedAirport] = useState(value || null); 
+  const [query, setQuery] = useState("");
+  const [selectedAirport, setSelectedAirport] = useState(value || null);
   const [isOnFocus, setIsOnFocus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [airports, setAirports] = useState([]);
   const componentRef = useRef();
-  const dispatch = useDispatch();
 
-  const { airports, isLoading } = useSelector((state) => state.airports);
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    setIsOnFocus(true);
+    onChange(null);
+  };
+
+  const handleClick = () => {
+    setIsOnFocus(true);
+  };
+
+  const handleItemClick = (airport) => {
+    setQuery(`${airport.address.cityName} (${airport.iataCode})`);
+    setSelectedAirport(airport);
+    setIsOnFocus(false);
+    onChange(`${airport.address.cityName} (${airport.iataCode})`);
+  };
 
   useEffect(() => {
-    if (query.length > 2) {
-      debouncedFetchAirports(query);
+    async function fetchAirports() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/airports?keyword=${query}`
+        );
+        const data = await res.json();
+        setAirports(data.result);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     }
+    if (query.length > 2) fetchAirports();
   }, [query]);
 
   useEffect(() => {
@@ -39,27 +64,6 @@ export default function SelectAirport({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const debouncedFetchAirports = debounce((query) => {
-    dispatch(fetchAirports(query));
-  }, 300);
-
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    setIsOnFocus(true);
-    onChange(null); 
-  };
-
-  const handleClick = () => {
-    setIsOnFocus(true);
-  };
-
-  const handleItemClick = (airport) => {
-    setQuery(`${airport.address.cityName} (${airport.iataCode})`);
-    setSelectedAirport(airport);
-    setIsOnFocus(false);
-    onChange(`${airport.address.cityName} (${airport.iataCode})`);
-  };
 
   return (
     <div

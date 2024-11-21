@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { pages } from "./Navigation";
 import styles from "./MobileNavigation.module.css";
-import logo from "../Assets/Images/logo.png";
+import logo from "../assets/Images/logo.png";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseIcon from "@mui/icons-material/Close";
-import Container from "../Components/Container/Container";
+import Container from "../components/Container/Container";
 
 export default function MobileNavigation() {
   const [menuOpen, setMenuOpen] = useState(false);

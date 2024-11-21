@@ -1,9 +1,9 @@
 import styles from "./FAQ.module.css";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import PrimarySection from "../../Components/Section/PrimarySection";
-import Container from "../../Components/Container/Container";
-import PageTitle from "../../Components/PageTitle/PageTitle";
-import FAQCard from "../../Components/FAQCard/FAQCard";
+import PrimarySection from "../../components/Section/PrimarySection";
+import Container from "../../components/Container/Container";
+import PageTitle from "../../components/Typography/PageTitle";
+import FAQAccordion from "../../components/FAQAccordion/FAQAccordion";
 
 export const faqArray = [
   {
@@ -64,7 +64,7 @@ export const faqArray = [
   {
     question: "How can I contact customer support?",
     answer:
-      "You can contact us through multiple channels. You can choose to WhatsApp us (click on the WhatsApp icon to the bottom right of your screen), call us on +971506045355, or email us at info@mydummyticket.ae",
+      "You can contact us by sending us an email us at info@mydummyticket.ae",
   },
   {
     question: "Is there a money-back guarantee?",
@@ -88,9 +88,9 @@ export default function FAQ() {
           </PageTitle>
           <div className="col-12 col-lg-10 p-0 mx-auto">
             {faqArray.map((faq, i) => (
-              <FAQCard key={i} question={faq.question}>
+              <FAQAccordion key={i} question={faq.question}>
                 {faq.answer}
-              </FAQCard>
+              </FAQAccordion>
             ))}
           </div>
         </Container>

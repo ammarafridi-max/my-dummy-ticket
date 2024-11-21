@@ -39,10 +39,8 @@ export function useFlights(type, from, to, departureDate, returnDate) {
         );
         const data = await res.json();
         if (!data.length) setErrorText("No flights found");
-        console.log(data);
         setFlights(data);
       } catch (error) {
-        console.log(error);
         setErrorText("Could not load flights");
       } finally {
         setIsLoading(false);

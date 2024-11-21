@@ -1,7 +1,7 @@
 export function formatISOTime(isoString) {
   const dateObj = new Date(isoString);
 
-  const year = dateObj.getFullYear();
+  // const year = dateObj.getFullYear();
   const monthNames = [
     "January",
     "February",
@@ -16,7 +16,7 @@ export function formatISOTime(isoString) {
     "November",
     "December",
   ];
-  const month = monthNames[dateObj.getMonth()];
+  const month = String(monthNames[dateObj.getMonth()]).padStart(1, "3");
   const day = String(dateObj.getDate()).padStart(1, "0");
 
   const hours = String(dateObj.getHours()).padStart(2, "0");

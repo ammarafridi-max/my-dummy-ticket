@@ -1,6 +1,5 @@
 import styles from "./Navigation.module.css";
-import logo from "../Assets/Images/logo.png"; // replace with the actual path to your logo
-import PrimaryButton from "../Components/Buttons/PrimaryButton"; // replace with the actual import for your PrimaryButton
+import logo from "../assets/Images/logo.png"; // replace with the actual path to your logo
 
 export const pages = [
   {
@@ -20,8 +19,8 @@ export const pages = [
     link: "#faq",
   },
   {
-    name: "Contact",
-    link: "https://api.whatsapp.com/send?phone=971569964924&text=Hi.%20I%20need%20a%20dummy%20ticket.",
+    name: "Contact Us",
+    link: "mailto:info@mydummyticket.ae",
   },
 ];
 
@@ -60,7 +59,9 @@ function NavLinks() {
         <a
           key={i}
           href={page.link}
-          className={`${page.name === "Contact" ? styles.CTA : styles.NavLink}`}
+          className={`${
+            page.name === "Contact Us" ? styles.CTA : styles.NavLink
+          }`}
           title={page.name}
         >
           {page.name}

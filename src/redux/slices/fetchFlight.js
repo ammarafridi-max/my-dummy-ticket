@@ -1,23 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { localBaseURL } from "../../config";
+import { baseURL } from "../../config";
+
+// GET FLIGHT DETAILS (booking/select-flights)
 
 export const fetchFlights = createAsyncThunk(
   "flights/fetchFlights",
   async (sessionId) => {
     try {
-      const response = await axios.get(
-        `${localBaseURL}/api/flights/fetchFlights`,
-        {
-          headers: {
-            "X-Session-ID": sessionId,
-          },
-        }
-      );
+      const response = await axios.get(`${baseURL}/api/flights/fetchFlights`, {
+        headers: {
+          "X-Session-ID": sessionId,
+        },
+      });
       return response.data;
     } catch (error) {
       throw new Error(
-        error.response?.data?.message || "Failed to fetch flights"
+        error.response?.data?.message || "Failed to load flights"
       );
     }
   }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./SelectTitle.module.css";
 import { FaUser, FaUserCircle, FaUserAlt, FaUserTie } from "react-icons/fa";
 
-export default function SelectTitle({ value, onChange }) {
+export default function SelectTitle({ value, onChange, className }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const titles = [
@@ -17,15 +17,12 @@ export default function SelectTitle({ value, onChange }) {
   };
 
   return (
-    <div className={styles.dropdownContainer}>
+    <div className={`${styles.dropdownContainer} ${className}`}>
       <div className={styles.selectedItem} onClick={() => setIsOpen(!isOpen)}>
-        <span>
-          {" "}
-          {titles.find((title) => title.value === value)?.icon || (
-            <FaUser />
-          )}{" "}
-        </span>
-        <span style={{ marginLeft: 15 }}> {value}</span>
+        {/* <span className={styles.icon}>
+          {titles.find((title) => title.value === value)?.icon || <FaUser />}
+        </span> */}
+        <span>{value}</span>
       </div>
       {isOpen && (
         <div className={styles.dropdownMenu}>
@@ -35,7 +32,7 @@ export default function SelectTitle({ value, onChange }) {
               className={styles.dropdownItem}
               onClick={() => handleSelect(title.value)}
             >
-              {title.icon} {title.value}
+              {title.value}
             </div>
           ))}
         </div>

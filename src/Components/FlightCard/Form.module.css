@@ -1,0 +1,154 @@
+.form {
+  margin-top: 10px;
+  padding: 50px 50px;
+  border-radius: 10px;
+  background-color: rgb(245, 245, 245);
+}
+
+.passengersInfoSection {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.passengerData {
+  width: 50%;
+}
+
+.passengerFields {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+}
+
+.title {
+  width: 20%;
+}
+
+.firstName {
+  width: 40%;
+}
+
+.lastName {
+  width: 40%;
+}
+
+.contactSection {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.emailInput,
+.mobileInput {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* Receipt */
+
+.receiptSection {
+  margin-bottom: 20px;
+}
+
+.radioGroup {
+  display: block;
+}
+
+.radioLabel {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.finalizeBtn {
+  width: 100%;
+  padding: 12px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.ticketValiditySection {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: transparent;
+}
+
+.ticketValidityBox {
+  display: flex;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  position: relative;
+  flex: 1;
+}
+
+.option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.option input[type="radio"]:checked + div {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: 1px solid var(--primary-color);
+}
+
+.ticketValidityBox1,
+.ticketValidityBox2,
+.ticketValidityBox3 {
+  display: flex;
+  align-items: center;
+  font-size: 14.5px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.option:hover {
+  background-color: #e9ecef; /* Slightly darker background on hover */
+}
+
+.option:active {
+  background-color: #dee2e6; /* Even darker background on click */
+}
+
+@media screen and (max-width: 991px) {
+  .form {
+    padding: 50px 30px;
+  }
+  .passengerData {
+    width: 100%;
+  }
+  .passengerFields {
+    display: block;
+  }
+  .title {
+    width: 100%;
+  }
+  .firstName {
+    width: 100%;
+  }
+  .lastName {
+    width: 100%;
+  }
+  .ticketValidityBox {
+    display: block;
+  }
+}

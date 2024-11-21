@@ -1,24 +1,24 @@
 import styles from "./About.module.css";
-import PrimarySection from "../../../Components/Section/PrimarySection";
-import Container from "../../../Components/Container/Container";
-import { SectionTitle } from "../../../Components/SectionTitle/SectionTitle";
-import ticketIcon from "../../../Assets/Images/ticket-icon.png";
-import hotelIcon from "../../../Assets/Images/hotel-icon.png";
-import shieldIcon from "../../../Assets/Images/shield-icon.png";
-import trustpilot from "../../../Assets/Images/trustpilot.png";
-import travelIcon from "../../../Assets/Images/travel-icon.png";
-import happyTraveler1 from "../../../Assets/Images/happy-traveler1.png";
-import happyTraveler2 from "../../../Assets/Images/happy-traveler2.png";
+import PrimarySection from "../../../components/Section/PrimarySection";
+import Container from "../../../components/Container/Container";
+import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
+import ticketIcon from "../../../assets/Images/ticket-icon.png";
+import hotelIcon from "../../../assets/Images/hotel-icon.png";
+import shieldIcon from "../../../assets/Images/shield-icon.png";
+import trustpilot from "../../../assets/Images/trustpilot.png";
+import travelIcon from "../../../assets/Images/travel-icon.png";
+import happyTraveler1 from "../../../assets/Images/happy-traveler1.png";
+import happyTraveler2 from "../../../assets/Images/happy-traveler2.png";
 
 export default function About() {
   return (
-    <PrimarySection id="about" type="secondary">
+    <PrimarySection id="about" backgroundColor="white">
       <Container className="row justify-content-between">
         <div className="col-12 col-md-6 col-lg-7">
           <SectionTitle mb="40px" subtitle="About My Dummy Ticket">
             Who We Are
           </SectionTitle>
-          <p className="x-large">
+          <p>
             MyDummyTicket.ae is a service of Travl Technologies LLC, a licenced
             travel agency based in Dubai, UAE. We provide travel services to
             thousands of happy customers every year including air tickets, hotel
@@ -51,7 +51,7 @@ function IconWithText({ src, title, description }) {
   return (
     <div className={styles.iconWithText}>
       <img src={src} className={styles.icon} />
-      <p className="large">
+      <p>
         <span className="semi-bold">{title}: </span>
         {description}
       </p>

@@ -1,16 +1,19 @@
 import styles from "./Counter.module.css";
-import { Remove, Add } from "@mui/icons-material";
+import { IoIosRemove, IoIosAdd } from "react-icons/io";
 
-export default function Counter({ children, onAdd, onSubtract, className }) {
+export default function Counter({ ageGroup, age, onAdd, onSubtract, value }) {
   return (
-    <div className={`${styles.Counter} ${className}`}>
-      <p className={styles.Button} onClick={onSubtract}>
-        <Remove />
-      </p>
-      <p className={styles.Number}>{children}</p>
-      <p className={styles.Button} onClick={onAdd}>
-        <Add />
-      </p>
+    <div className={styles.counter}>
+      <div className={styles.ageGroup}>
+        <p>
+          {ageGroup} <span>{age}</span>
+        </p>
+      </div>
+      <div className={styles.count}>
+        <IoIosRemove onClick={onSubtract} className={styles.icon} />
+        <p className={styles.Number}>{value}</p>
+        <IoIosAdd onClick={onAdd} className={styles.icon} />
+      </div>
     </div>
   );
 }

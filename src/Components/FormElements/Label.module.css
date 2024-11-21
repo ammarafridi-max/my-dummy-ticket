@@ -3,6 +3,7 @@
   font-weight: 500;
   color: var(--primary-color-dark);
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .Required {

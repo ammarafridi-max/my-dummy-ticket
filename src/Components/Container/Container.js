@@ -1,18 +1,25 @@
-import styles from "./Container.module.css";
-
-export default function Container(props) {
+export default function Container({
+  pt,
+  pb,
+  py,
+  mt,
+  mb,
+  my,
+  className,
+  children,
+}) {
   const containerStyle = {
-    paddingTop: props.pt || props.py,
-    paddingBottom: props.pb || props.py,
-    marginTop: props.mt || props.my,
-    marginBottom: props.mb || props.my,
+    paddingTop: pt || py,
+    paddingBottom: pb || py,
+    marginTop: mt || my,
+    marginBottom: mb || my,
   };
   return (
     <div
-      className={`col-11 mx-auto m-0 ${props.className} ${styles.container} `}
+      className={`col-11 col-lg-10 mx-auto m-0 ${className} `}
       style={containerStyle}
     >
-      {props.children}
+      {children}
     </div>
   );
 }

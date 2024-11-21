@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { localBaseURL } from "../../config";
+import { baseURL } from "../../config";
 
 const initialState = {
   formState: "Active",
@@ -11,20 +11,21 @@ export const searchFlights = createAsyncThunk(
   "ticketForm/searchFlights",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        `${localBaseURL}/api/ticket/createForm`,
+      const res = await axios.post(
+        `${baseURL}/api/ticket/createForm`,
         formData
       );
 
-      if (response.status === 200 && response.data.sessionId) {
-        localStorage.setItem("SESSION_ID", response.data.sessionId);
-        return response.data;
+      if (res.status === 200 && res.data.sessionId) {
+        localStorage.setItem("SESSION_ID", res.data.sessionId);
+        return res.data;
       } else {
         return rejectWithValue(
-          "Unexpected response status: " + response.data.message
+          res.data.message || "Unexpected response status"
         );
       }
     } catch (error) {
+      console.error("Error searching flights:", error);
       return rejectWithValue("Failed to submit ticket form");
     }
   }
