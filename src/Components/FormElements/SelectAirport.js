@@ -8,12 +8,23 @@ export default function SelectAirport({
   className,
   icon,
 }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(value || "");
   const [selectedAirport, setSelectedAirport] = useState(value || null);
   const [isOnFocus, setIsOnFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [airports, setAirports] = useState([]);
   const componentRef = useRef();
+  // const { airports, isLoading } = useSelector((state) => state.airports);
+
+  // const debouncedFetchAirports = debounce((query) => {
+  //   dispatch(fetchAirports(query));
+  // }, 300);
+
+  // useEffect(() => {
+  //   if (query.length > 2) {
+  //     debouncedFetchAirports(query);
+  //   }
+  // }, [query]);
 
   const handleChange = (e) => {
     setQuery(e.target.value);

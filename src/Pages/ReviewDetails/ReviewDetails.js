@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFormDetails } from "../../redux/slices/fetchReviewDetailsSlice";
-import { createTicket } from "../../redux/slices/createTicketSlice";
+import { fetchFormDetails } from "../../redux/slices/fetchTicketDetails";
+import { createTicket } from "../../redux/slices/createTicket";
 import styles from "./ReviewDetails.module.css";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { FaSpinner } from "react-icons/fa";

@@ -1,7 +1,7 @@
 import styles from "./SelectFlights.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFlights } from "../../redux/slices/fetchFlight";
+import { fetchFlights, resetFlights } from "../../redux/slices/fetchFlights";
 import FlightCard from "../../components/FlightCard/FlightCard";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import Container from "../../components/Container/Container";
@@ -12,43 +12,26 @@ import { Helmet } from "react-helmet";
 
 export default function SelectFlights() {
   const dispatch = useDispatch();
-  const { flights, session, status } = useSelector((state) => state.flights);
+  const { flights, session, status, error } = useSelector(
+    (state) => state.flights
+  );
+  const { formData } = useSelector((state) => state.ticketForm);
   const [maxFlights, setMaxFlights] = useState(5);
   const [expandedCardId, setExpandedCardId] = useState(null);
+
   const handleToggleExpand = (id) => {
-    if (expandedCardId === id) {
-      setExpandedCardId(null);
-    } else {
-      setExpandedCardId(id);
-    }
+    setExpandedCardId((prevId) => (prevId === id ? null : id));
   };
 
   useEffect(() => {
-    const sessionId = localStorage.getItem("SESSION_ID");
-    if (sessionId) {
-      dispatch(fetchFlights(sessionId));
-    }
-  }, [dispatch]);
+    dispatch(fetchFlights(formData));
+  }, [dispatch, formData]);
 
-  function showMoreFlights() {
-    if (maxFlights < flights.length) {
+  const showMoreFlights = () => {
+    if (maxFlights < flights?.length) {
       setMaxFlights((cur) => cur + 5);
     }
-  }
-
-  const excludedAirlines = [];
-
-  function getFilteredFlights(flights) {
-    return flights.filter((flight) =>
-      flight.itineraries.every((itinerary) =>
-        itinerary.segments.every(
-          (segment) => !excludedAirlines.includes(segment.carrierCode)
-        )
-      )
-    );
-  }
-
-  const filteredFlight = getFilteredFlights(flights);
+  };
 
   return (
     <>
@@ -65,12 +48,12 @@ export default function SelectFlights() {
             <Skeleton />
           </>
         )}
-        {status === "succeeded" && filteredFlight.length === 0 && (
+        {status === "succeeded" && flights?.length === 0 && (
           <Error>No flights available</Error>
         )}
-        {status === "succeeded" && filteredFlight.length > 0 && (
+        {status === "succeeded" && flights?.length > 0 && (
           <>
-            {filteredFlight.slice(0, maxFlights).map((flight, i) => (
+            {flights.slice(0, maxFlights).map((flight, i) => (
               <FlightCard
                 key={i}
                 data={session}
@@ -88,10 +71,24 @@ export default function SelectFlights() {
             )}
           </>
         )}
-        {status === "failed" && flights.length === 0 && (
-          <Error>Something went wrong. Please try again!</Error>
+        {status === "failed" && (
+          <Error>{error || "Failed to load flights"}</Error>
         )}
       </Container>
     </>
   );
 }
+
+// const excludedAirlines = [];
+
+// function getFilteredFlights(flights) {
+//   return flights.filter((flight) =>
+//     flight.itineraries.every((itinerary) =>
+//       itinerary.segments.every(
+//         (segment) => !excludedAirlines.includes(segment.carrierCode)
+//       )
+//     )
+//   );
+// }
+
+// const filteredFlight = getFilteredFlights(flights);

@@ -1,5 +1,4 @@
 import styles from "./TestimonialCard.module.css";
-import img from "./david.png";
 
 export default function TestimonialCard({ title, name, src, children, type }) {
   return (

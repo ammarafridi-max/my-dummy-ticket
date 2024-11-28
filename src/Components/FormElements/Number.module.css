@@ -4,14 +4,15 @@
   border-radius: 5px;
   position: relative;
   border: 1px solid rgb(220, 220, 220);
+  background-color: white;
 }
 
 .Code {
-  width: 10%;
+  width: 15%;
 }
 
 .Digits {
-  width: 90%;
+  width: 85%;
   padding-left: 15px;
 }
 

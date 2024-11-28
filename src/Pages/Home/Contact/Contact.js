@@ -4,7 +4,6 @@ import Container from "../../../components/Container/Container";
 import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
 import img from "../../../assets/Images/contact-img.png";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
-import PrimaryButtonOutline from "../../../components/Buttons/PrimaryButtonOutline";
 
 export default function Contact() {
   return (
@@ -22,7 +21,11 @@ export default function Contact() {
           <ContactButtons />
         </div>
         <div className="col-12 col-lg-5">
-          <img src={img} className={styles.img} />
+          <img
+            src={img}
+            className={styles.img}
+            alt="Contact My Dummy Ticket Now"
+          />
         </div>
       </Container>
     </PrimarySection>

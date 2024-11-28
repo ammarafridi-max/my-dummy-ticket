@@ -2,6 +2,27 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseURL } from "../../config";
 
+const initialState = {
+  type: "",
+  from: "",
+  to: "",
+  departureDate: "",
+  returnDate: "",
+  quantity: { adults: 1, children: 0, infants: 0 },
+  passengers: [],
+  email: "",
+  phoneNumber: "",
+  message: "",
+  flightDetails: { departureFlight: "", returnFlight: "" },
+  status: "REVIEW_ORDER",
+  tickeValidity: "48 Hours",
+  ticketAvailability: {
+    immediate: true,
+    receiptDate: null,
+  },
+  totalAmount: 0,
+};
+
 export const updateFlightDetails = createAsyncThunk(
   "flight/updateFlightDetails",
   async ({ sessionId, flightData }, { rejectWithValue }) => {

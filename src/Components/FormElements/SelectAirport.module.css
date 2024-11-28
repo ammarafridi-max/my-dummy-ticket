@@ -11,16 +11,17 @@
 }
 
 .Icon {
-  font-size: 14.5px;
+  font-size: 16px;
 }
 
 .Input {
   width: 100%;
-  padding: 12px 20px;
+  padding: 12px 15px;
+  padding-right: 0;
   background-color: transparent;
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 14.5px;
   transition: border-color 0.3s ease;
 }
 

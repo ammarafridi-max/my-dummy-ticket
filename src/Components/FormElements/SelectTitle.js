@@ -1,15 +1,10 @@
 import { useState } from "react";
 import styles from "./SelectTitle.module.css";
-import { FaUser, FaUserCircle, FaUserAlt, FaUserTie } from "react-icons/fa";
 
 export default function SelectTitle({ value, onChange, className }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const titles = [
-    { value: "Mr.", icon: <FaUserTie /> },
-    { value: "Mrs.", icon: <FaUserCircle /> },
-    { value: "Ms.", icon: <FaUserAlt /> },
-  ];
+  const titles = [{ value: "Mr." }, { value: "Mrs." }, { value: "Ms." }];
 
   const handleSelect = (title) => {
     onChange({ target: { value: title } });

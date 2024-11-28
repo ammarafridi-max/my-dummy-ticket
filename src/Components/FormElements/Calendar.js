@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import styles from "./Calendar.module.css"; // Using CSS Modules
 import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
+// Helper function to format dates to "yyyy-mm-dd"
+const formatToDateString = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 const Calendar = ({ onDateClick, isDateDisabled }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -25,7 +33,6 @@ const Calendar = ({ onDateClick, isDateDisabled }) => {
         <div className={`${styles.col} ${styles.colCenter}`}>
           <span>
             {currentDate.toLocaleDateString("en-US", {
-              day: "2-digit",
               month: "long",
               year: "numeric",
             })}
@@ -86,6 +93,7 @@ const Calendar = ({ onDateClick, isDateDisabled }) => {
       for (let i = 0; i < 7; i++) {
         const dayClone = new Date(day); // Clone the date object here
         const disabled = isDateDisabled && isDateDisabled(dayClone);
+        const formattedDate = formatToDateString(dayClone); // Format to "yyyy-mm-dd"
         days.push(
           <div
             className={`${styles.col} ${styles.cell} ${
@@ -93,8 +101,8 @@ const Calendar = ({ onDateClick, isDateDisabled }) => {
                 ? styles.disabled
                 : ""
             } ${disabled ? styles.disabled : ""}`}
-            key={dayClone.toISOString()}
-            onClick={() => !disabled && onDateClick(dayClone)} // Call onDateClick with the selected date if not disabled
+            key={formattedDate}
+            onClick={() => !disabled && onDateClick(formattedDate)} // Pass formatted date
           >
             <span className={styles.number}>{dayClone.getDate()}</span>
           </div>

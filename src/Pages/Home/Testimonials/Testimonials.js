@@ -1,11 +1,7 @@
 import Container from "../../../components/Container/Container";
 import PrimarySection from "../../../components/Section/PrimarySection";
-import styles from "./Testimonials.module.css";
 import TestimonialCard from "../../../components/TestimonialCard/TestimonialCard";
-import {
-  SectionTitle,
-  Subtitle,
-} from "../../../components/SectionTitle/SectionTitle";
+import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
 import david from "../../../assets/Images/david.webp";
 import maria from "../../../assets/Images/maria.webp";
 import ahmed from "../../../assets/Images/ahmed.webp";

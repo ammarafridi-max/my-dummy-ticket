@@ -10,7 +10,9 @@ import {
   selectFlightError,
 } from "../../redux/slices/selectFlightSlice";
 import FlightDetails from "./FlightDetails";
+import { baseURL } from "../../config";
 
+// Utility function for generating passengers
 function generatePassengerList(quantity) {
   const passengers = [];
   [
@@ -25,48 +27,48 @@ function generatePassengerList(quantity) {
   return passengers;
 }
 
-export default function FlightCard({
-  data,
-  flight,
-  isExpanded,
-  onToggleExpand,
-}) {
-  const totalQuantity = data.quantity.adults + data.quantity.children;
+export default function FlightCard({ flight, isExpanded, onToggleExpand }) {
   const dispatch = useDispatch();
-  const flightError = useSelector(selectFlightError);
   const navigate = useNavigate();
+  const flightError = useSelector(selectFlightError);
+  const { formData } = useSelector((state) => state.ticketForm);
+
+  // State variables
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState({ code: "", digits: "" });
   const [passengers, setPassengers] = useState([]);
   const [passengerErrors, setPassengerErrors] = useState([]);
   const [ticketValidity, setTicketValidity] = useState("48 Hours");
   const [receiveNow, setReceiveNow] = useState(true);
   const [receiptDate, setReceiptDate] = useState("");
-  const [dummyPrice, setDummyPrice] = useState(49 * totalQuantity);
+  const [dummyPrice, setDummyPrice] = useState(
+    49 * (formData.quantity.adults + formData.quantity.children)
+  );
   const [errorMessage, setErrorMessage] = useState("");
+
   const departureFlight = `${flight.itineraries[0].segments[0].carrierCode} ${flight.itineraries[0].segments[0].number}`;
   const returnFlight =
-    data.type === "Return" &&
-    `${flight.itineraries[1]?.segments[0].carrierCode} ${flight.itineraries[1]?.segments[0].number}`;
+    formData.type === "Return"
+      ? `${flight.itineraries[1]?.segments[0].carrierCode} ${flight.itineraries[1]?.segments[0].number}`
+      : null;
 
+  // Update passengers on formData change
   useEffect(() => {
-    setPassengers(generatePassengerList(data.quantity));
-  }, [data]);
+    setPassengers(generatePassengerList(formData.quantity));
+  }, [formData]);
 
-  // Input changes handling
-
+  // Handlers
   const handleUpdatePassenger = (index, field, value) => {
     setPassengers((prev) =>
       prev.map((p, i) => (i === index ? { ...p, [field]: value } : p))
     );
     setPassengerErrors((prevErrors) => {
       const updatedErrors = [...prevErrors];
-      const fieldNames = { firstName: "First Name", lastName: "Last Name" };
       if (field === "firstName" || field === "lastName") {
         updatedErrors[index] = {
           ...updatedErrors[index],
-          [field]:
-            value.trim() === "" ? `${fieldNames[field]} is required` : "",
+          [field]: value.trim() ? "" : `${field} is required`,
         };
       }
       return updatedErrors;
@@ -74,30 +76,26 @@ export default function FlightCard({
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const value = e.target.value;
+    setEmail(value);
   };
 
-  function handleValidityChange(e) {
-    setTicketValidity(e.target.value);
+  const handleValidityChange = (e) => {
+    const validity = e.target.value;
+    setTicketValidity(validity);
     setDummyPrice(
-      e.target.value === "7 Days"
-        ? 69 * totalQuantity
-        : e.target.value === "14 Days"
-        ? 75 * totalQuantity
-        : 49 * totalQuantity
+      validity === "7 Days"
+        ? 69 * (formData.quantity.adults + formData.quantity.children)
+        : validity === "14 Days"
+        ? 75 * (formData.quantity.adults + formData.quantity.children)
+        : 49 * (formData.quantity.adults + formData.quantity.children)
     );
-  }
-
-  const handleSelectDate = (date) => {
-    setReceiptDate(date);
   };
 
-  // Form validation
+  const handleSelectDate = (date) => setReceiptDate(date);
 
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/.test(email);
-  }
-
+  // Validation functions
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/.test(email);
   const validatePassengers = () => {
     const errors = passengers.map(({ firstName, lastName }) => ({
       firstName: firstName
@@ -114,10 +112,7 @@ export default function FlightCard({
     setPassengerErrors(errors);
     return errors.every((err) => !Object.values(err).some(Boolean));
   };
-
-  const validateReceiptInfo = () => {
-    return receiveNow || receiptDate;
-  };
+  const validateReceiptInfo = () => receiveNow || receiptDate;
 
   const validateForm = () => {
     const isValid = [
@@ -130,48 +125,56 @@ export default function FlightCard({
   };
 
   // Submit form
-
   const handleSubmit = async () => {
-    const formData = {
-      type: data.type,
+    const { type, from, to, departureDate, returnDate, quantity } = formData;
+
+    const updatedFormData = {
+      type,
       passengers,
       email,
-      phoneNumber: data.phoneNumber,
+      phoneNumber,
       message,
-      from: data.from,
-      to: data.to,
-      flightDetails: {
-        departureFlight: departureFlight,
-        returnFlight: returnFlight || null,
-      },
-      departureDate: formatDate(data.departureDate),
-      returnDate: formatDate(data.returnDate),
-      quantity: data.quantity,
-      ticketValidity: ticketValidity,
+      from,
+      to,
+      flightDetails: { departureFlight, returnFlight },
+      departureDate,
+      returnDate,
+      quantity,
+      status: "REVIEW_ORDER",
+      ticketValidity,
       ticketAvailability: {
         immediate: receiveNow,
         receiptDate: !receiveNow ? receiptDate : null,
       },
       totalAmount: dummyPrice,
     };
+
     if (validateForm()) {
       try {
-        const result = await dispatch(
-          updateFlightDetails({
-            sessionId: data.sessionId,
-            flightData: formData,
-          })
-        ).unwrap();
-        if (result.status === 200) navigate("/booking/review-details");
-        else console.error("Failed to update flight details:", result.message);
+        const res = await fetch(`${baseURL}/api/ticket/create-ticket`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedFormData),
+        });
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const data = await res.json();
+        localStorage.setItem("SESSION_ID", data.sessionId);
+        console.log("Ticket created:", data);
+        navigate("/booking/review-details");
       } catch (error) {
         console.error("Error:", error);
+        alert("Failed to create the ticket. Please try again.");
       }
+    } else {
+      console.log("Validation failed");
     }
   };
 
   return (
     <div className={styles.container}>
+      {/* Flight Details */}
       <div className="row align-items-center justify-content-between">
         <div className="col-12 col-lg-9">
           {flight.itineraries.map((itinerary) => (
@@ -190,15 +193,18 @@ export default function FlightCard({
         </div>
       </div>
 
+      {/* Form */}
       {isExpanded && (
         <Form
-          data={data}
+          formData={formData}
           passengers={passengers}
-          adultCount={data.quantity.adults}
-          childCount={data.quantity.children}
-          infantCount={data.quantity.infants}
+          adultCount={formData.quantity.adults}
+          childCount={formData.quantity.children}
+          infantCount={formData.quantity.infants}
           email={email}
           setEmail={setEmail}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
           ticketValidity={ticketValidity}
           receiptDate={receiptDate}
           receiveNow={receiveNow}
@@ -219,5 +225,3 @@ export default function FlightCard({
     </div>
   );
 }
-
-// FlightDetails Component

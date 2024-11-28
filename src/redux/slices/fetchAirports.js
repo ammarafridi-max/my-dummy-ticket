@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseURL } from "../../config";
 
-// GET AIRPORTS LIST
+// This slice fetches a list of airports based on the user's query.
+// Currently, it is inactive as I have moved the fetch request to the
+// SelectAirport component.
 
 const initialState = {
   airports: [],

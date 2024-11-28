@@ -27,7 +27,7 @@ export default function PrimaryButtonOutline({
   };
 
   return (
-    <a href={href} target="_blank" style={{ width: "100%" }}>
+    <a href={href} target="_blank" style={{ width: "100%" }} rel="noreferrer">
       <button
         onClick={onClick}
         type={type}

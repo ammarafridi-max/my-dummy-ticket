@@ -1,19 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { baseURL } from "../../config";
 
 export const fetchFormDetails = createAsyncThunk(
   "formDetails/fetchFormDetails",
   async (sessionId, thunkAPI) => {
     try {
-      const response = await axios.get(`${baseURL}/api/ticket/getFormDetails`, {
-        headers: {
-          "X-Session-ID": sessionId,
-        },
+      const res = await fetch(`${baseURL}/api/ticket/get-form-details`, {
+        headers: { "X-Session-ID": sessionId },
       });
-      if (response.status === 200) {
-        return response.data;
-      }
+      if (!res.ok) throw new Error("An error occurred");
+      const data = await res.json();
+      console.log(data);
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
@@ -36,8 +34,8 @@ const formDetailsSlice = createSlice({
       })
       .addCase(fetchFormDetails.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.formDetails = action.payload.result;
-        state.ticketPrice = action.payload.ticketPrice;
+        state.formDetails = action.payload; // Match API response
+        state.ticketPrice = action.payload?.ticketPrice || null; // Fallback to null
       })
       .addCase(fetchFormDetails.rejected, (state, action) => {
         state.status = "failed";

@@ -1,11 +1,7 @@
 .Error {
   width: 100%;
-  padding: 10px;
-  margin-top: 15px;
   border-radius: 5px;
-  margin-bottom: 20px;
-  font-size: 15px;
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
+  margin: 5px 0 5px 0;
+  font-size: 14px;
+  color: #aa2734;
 }
