@@ -100,9 +100,8 @@ function Success({ currency, amount }) {
           has been successfully processed.
         </p>
         <p>
-          We are processing your order and will email it to you as a PDF attachment in 10 - 15
-          minutes. Kindly ensure all details are correct. If you spot any error, please let us know
-          by replying to the email.
+          You will recieve a receipt of your payment by email, followed by your dummy ticket in a
+          second email shortly afterwards. Please remember to check your Spam folder too.
         </p>
       </div>
     </div>
