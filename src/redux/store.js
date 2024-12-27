@@ -1,16 +1,16 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import ticketFormReducer from "./slices/ticketFormSlice";
-import flightReducer from "./slices/fetchFlights";
-import selectedFlightReducer from "./slices/selectFlightSlice";
-import formDetailsReducer from "./slices/fetchTicketDetails";
-import createTicketReducer from "./slices/createTicket";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import ticketFormReducer from './slices/ticketFormSlice';
+import flightReducer from './slices/fetchFlights';
+import selectedFlightReducer from './slices/selectFlightSlice';
+import formDetailsReducer from './slices/fetchTicketDetails';
+import createTicketReducer from './slices/createTicket';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
-  whitelist: ["ticketForm", "flights", "formDetails"],
+  whitelist: ['flights', 'formDetails'],
 };
 
 const rootReducer = combineReducers({

@@ -1,7 +1,7 @@
-import styles from "./Process.module.css";
-import PrimarySection from "../../../components/Section/PrimarySection";
-import Container from "../../../components/Container/Container";
-import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
+import styles from './Process.module.css';
+import PrimarySection from '../../../components/Section/PrimarySection';
+import Container from '../../../components/Container/Container';
+import { SectionTitle } from '../../../components/SectionTitle/SectionTitle';
 
 export default function Process() {
   return (
@@ -24,7 +24,7 @@ export default function Process() {
           <Card
             number={3}
             title="Receive"
-            text="After your payment is confirmed, you'll receive your dummy ticket instantly via email."
+            text="After your payment is confirmed, you'll receive your dummy ticket in 10 minutes via email."
           />
         </div>
       </Container>

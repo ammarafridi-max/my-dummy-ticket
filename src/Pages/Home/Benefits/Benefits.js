@@ -1,19 +1,19 @@
-import Container from "../../../components/Container/Container";
-import PrimarySection from "../../../components/Section/PrimarySection";
-import PrimaryButton from "../../../components/Buttons/PrimaryButton";
-import styles from "./Benefits.module.css";
-import shieldIcon from "../../../assets/Images/shield-icon2.png";
-import timeIcon from "../../../assets/Images/time-icon.png";
-import usdIcon from "../../../assets/Images/usd-icon.png";
-import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
+import Container from '../../../components/Container/Container';
+import PrimarySection from '../../../components/Section/PrimarySection';
+import PrimaryButton from '../../../components/Buttons/PrimaryButton';
+import styles from './Benefits.module.css';
+import shieldIcon from '../../../assets/Images/shield-icon2.png';
+import timeIcon from '../../../assets/Images/time-icon.png';
+import usdIcon from '../../../assets/Images/usd-icon.png';
+import Paragraph from '../../../components/Typography/Paragraph';
 
 export default function Benefits() {
   return (
-    <PrimarySection>
+    <PrimarySection py="75px">
       <Container>
-        <SectionTitle subtitle="Trusted Service Provider" textAlign="center">
+        {/* <SectionTitle subtitle="Trusted Service Provider" textAlign="center">
           Why Choose My Dummy Ticket?
-        </SectionTitle>
+        </SectionTitle> */}
         <div className="row m-0 p-0 justify-content-between">
           <IconCard
             icon={shieldIcon}
@@ -51,7 +51,9 @@ function IconCard({ icon, title, text, alt }) {
         <img src={icon} alt={alt} title={alt} />
       </div>
       <h3>{title}</h3>
-      <p>{text}</p>
+      <Paragraph textAlign="center" fontSize="16px">
+        {text}
+      </Paragraph>
     </div>
   );
 }

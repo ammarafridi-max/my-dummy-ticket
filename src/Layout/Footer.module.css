@@ -4,13 +4,25 @@
   padding: 30px;
 }
 
+/* Footer links */
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 /* Partner */
 
-.partnerImgs{
+.partnerImgs {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  margin-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 .partnerIcon {

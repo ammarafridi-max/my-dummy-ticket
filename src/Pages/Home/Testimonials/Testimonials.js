@@ -1,56 +1,105 @@
-import Container from "../../../components/Container/Container";
-import PrimarySection from "../../../components/Section/PrimarySection";
-import TestimonialCard from "../../../components/TestimonialCard/TestimonialCard";
-import { SectionTitle } from "../../../components/SectionTitle/SectionTitle";
-import david from "../../../assets/Images/david.webp";
-import maria from "../../../assets/Images/maria.webp";
-import ahmed from "../../../assets/Images/ahmed.webp";
+import styles from './Testimonials.module.css';
+import { useEffect, useState } from 'react';
+import { HiStar } from 'react-icons/hi2';
+import { FaCircleChevronLeft, FaCircleChevronRight } from 'react-icons/fa6';
+import testimonialImage from '../../../assets/Images/testimonial.png';
+import Container from '../../../components/Container/Container';
+import PrimarySection from '../../../components/Section/PrimarySection';
+import SectionTitle from '../../../components/Typography/SectionTitle';
+import Paragraph from '../../../components/Typography/Paragraph';
 
 const testimonials = [
   {
-    title: "Hassle-free",
-    name: "David S.",
-    img: david,
-    text: "My Dummy Ticket made my visa application process smooth and hassle-free. Their service is reliable and highly recommended for all travelers.",
+    id: 1,
+    author: 'Justin D-Souza',
+    text: 'Well first would like to appriciate Umar for all this help at non working hours to be precise 7am today get my dummy ticket issued without any trouble just few hours from my travel. Appreciate the assistance. Keep up the good job and assistance.',
+    rating: 5,
   },
   {
-    title: "Reliable",
-    name: "Maria K.",
-    img: maria,
-    text: "Fast service, reliable, and easy to book. My Dummy Ticket is a lifesaver for travel documentation. I really recommend them and will use their service again!",
+    id: 2,
+    author: 'Waseem Moosa K.',
+    text: 'The booking confirmation was instant, and I received all the necessary details in my email immediately. I also liked how transparent the pricing was—no hidden fees, which made the whole experience even more pleasant. The customer service team was also very responsive and helpful with any questions I had.',
+    rating: 5,
   },
   {
-    title: "Lightning Fast",
-    name: "Ahmed R.",
-    img: ahmed,
-    text: "Excellent service! Got my dummy ticket in minutes, perfect for my Schengen visa application. My Dummy Ticket truly understands travelers' needs.",
+    id: 3,
+    author: 'Tricia Domingo',
+    text: 'Thanks Omar for your assistance with our dummy tickets. We were approved a Schengen Multiple Entry visa! We will definitely get in touch with you again when we apply for another visa in the future.',
+    rating: 5,
   },
 ];
 
 export default function Testimonials() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  function handleIncrease() {
+    if (activeIndex < testimonials.length - 1) {
+      setActiveIndex((index) => index + 1);
+    } else {
+      setActiveIndex(0);
+    }
+  }
+
+  function handleDecrease() {
+    if (activeIndex > 0) {
+      setActiveIndex((index) => index - 1);
+    } else {
+      setActiveIndex(testimonials.length - 1);
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex < testimonials.length - 1 ? prevIndex + 1 : 0));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
+
   return (
     <PrimarySection pt="100px" backgroundColor="white">
       <Container>
-        <SectionTitle
-          textAlign="center"
-          subtitle="What our customers say about us"
-        >
+        <SectionTitle textAlign="center" subtitle="What our customers say about us">
           Testimonials
         </SectionTitle>
-        <div className="row">
-          {testimonials.map((test, i) => (
-            <div className="col-12 col-lg-4" key={i}>
-              <TestimonialCard
-                title={test.title}
-                name={test.name}
-                src={test.img}
-              >
-                {test.text}
-              </TestimonialCard>
+        <div className={styles.container}>
+          <div className={styles.image}>
+            <img src={testimonialImage} />
+          </div>
+          <div className={styles.slider}>
+            <span>
+              <FaCircleChevronLeft className={styles.chevronLeft} onClick={handleDecrease} />
+            </span>
+            <div>
+              <Card
+                text={testimonials[activeIndex].text}
+                author={testimonials[activeIndex].author}
+                rating={testimonials[activeIndex].rating}
+              />
             </div>
-          ))}
+            <span>
+              <FaCircleChevronRight className={styles.chevronRight} onClick={handleIncrease} />
+            </span>
+          </div>
         </div>
       </Container>
     </PrimarySection>
+  );
+}
+
+function Card({ text, author, rating }) {
+  return (
+    <div>
+      <Paragraph fontWeight="300" fontSize="20px" className={styles.testimonialText}>
+        {text}
+      </Paragraph>
+      <div className={styles.author}>
+        <Paragraph fontWeight={500} fontSize="20px">
+          {author}
+        </Paragraph>
+      </div>
+      {Array.from({ length: rating }, () => (
+        <HiStar className={styles.starIcon} />
+      ))}
+    </div>
   );
 }

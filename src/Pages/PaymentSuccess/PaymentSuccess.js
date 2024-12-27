@@ -1,15 +1,15 @@
-import styles from "./PaymentSuccess.module.css";
-import PrimarySection from "../../components/Section/PrimarySection";
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-import { Helmet } from "react-helmet";
-import { baseURL } from "../../config";
-import Loading from "../../components/Loading/Loading";
+import styles from './PaymentSuccess.module.css';
+import PrimarySection from '../../components/Section/PrimarySection';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
+import { baseURL } from '../../config';
+import Loading from '../../components/Loading/Loading';
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get("sessionId");
+  const sessionId = searchParams.get('sessionId');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [ticketData, setTicketData] = useState({});
@@ -21,11 +21,10 @@ export default function PaymentSuccess() {
       try {
         setIsLoading(true);
         const res = await fetch(`${baseURL}/api/ticket/get-form-details`, {
-          headers: { "X-Session-ID": sessionId },
+          headers: { 'X-Session-ID': sessionId },
         });
-        if (!res.ok) throw new Error("Could not fetch data");
+        if (!res.ok) throw new Error('Could not fetch data');
         const data = await res.json();
-        console.log(data);
         setError(false);
         setTicketData(data.data);
       } catch (error) {
@@ -37,25 +36,28 @@ export default function PaymentSuccess() {
     }
 
     fetchData();
+  }, [sessionId]);
 
-    // Google Ads Conversion Tracking
+  // Google Ads Conversion Tracking
 
+  useEffect(() => {
     if (!error && amount && currency && sessionId) {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: "purchase",
+        event: 'purchase',
         ecommerce: {
           transaction_id: sessionId,
-          value: amount,
+          value: parseFloat(amount),
           currency: currency,
         },
-        send_to: "AW-16572643061/hMxgCK7muLEZEPXtud49",
+        send_to: 'AW-16572643061/hMxgCK7muLEZEPXtud49',
       });
     }
-  }, [sessionId, amount, currency]);
+  }, [error, amount, currency, sessionId]);
 
   return (
     <>
+      {isLoading && <Loading />}
       <HelmetProvider>
         <Helmet>
           <title>Payment Successfully Processed</title>
@@ -78,8 +80,8 @@ function Error() {
       <h1>Payment Not Found!</h1>
       <p>We could not locate a payment associated with your transaction.</p>
       <p>
-        If you’ve already made a payment, please contact us with your
-        transaction details at reservation@citytours.ae.
+        If you’ve already made a payment, please contact us with your transaction details at
+        reservation@citytours.ae.
       </p>
     </div>
   );
@@ -91,19 +93,16 @@ function Success({ currency, amount }) {
       <h1 className={styles.title}>Thank You for Your Booking!</h1>
       <div className={styles.Text}>
         <p>
-          Your payment of{" "}
+          Your payment of{' '}
           <strong>
             {currency} {amount}
-          </strong>{" "}
-          has been successfully processed. We appreciate your trust in us for
-          your travel needs.
+          </strong>{' '}
+          has been successfully processed.
         </p>
-        <h2>What next?</h2>
         <p>
-          You’ll soon receive a confirmation email with your dummy ticket
-          attached. Please check your inbox and spam folder. Ensure all the
-          details on your dummy ticket are correct. If you spot any error or
-          wrong information, contact us immediately.
+          We are processing your order and will email it to you as a PDF attachment in 10 - 15
+          minutes. Kindly ensure all details are correct. If you spot any error, please let us know
+          by replying to the email.
         </p>
       </div>
     </div>

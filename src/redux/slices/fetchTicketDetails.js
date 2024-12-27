@@ -1,16 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseURL } from "../../config";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { baseURL } from '../../config';
 
 export const fetchFormDetails = createAsyncThunk(
-  "formDetails/fetchFormDetails",
+  'formDetails/fetchFormDetails',
   async (sessionId, thunkAPI) => {
     try {
       const res = await fetch(`${baseURL}/api/ticket/get-form-details`, {
-        headers: { "X-Session-ID": sessionId },
+        headers: { 'X-Session-ID': sessionId },
       });
-      if (!res.ok) throw new Error("An error occurred");
+      if (!res.ok) throw new Error('An error occurred');
       const data = await res.json();
-      console.log(data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -19,26 +18,26 @@ export const fetchFormDetails = createAsyncThunk(
 );
 
 const formDetailsSlice = createSlice({
-  name: "formDetails",
+  name: 'formDetails',
   initialState: {
     formDetails: null,
     ticketPrice: null,
-    status: "idle",
+    status: 'idle',
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFormDetails.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchFormDetails.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.formDetails = action.payload; // Match API response
         state.ticketPrice = action.payload?.ticketPrice || null; // Fallback to null
       })
       .addCase(fetchFormDetails.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.payload;
       });
   },
