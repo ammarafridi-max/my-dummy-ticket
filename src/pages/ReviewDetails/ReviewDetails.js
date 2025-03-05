@@ -20,8 +20,6 @@ export default function ReviewDetails() {
   const navigate = useNavigate();
   const sessionId = localStorage.getItem('SESSION_ID');
 
-  console.log(formDetails);
-
   let additionalPrice = 0;
   let validityText = '48 Hours';
 

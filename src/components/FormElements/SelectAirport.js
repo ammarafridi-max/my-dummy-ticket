@@ -99,7 +99,6 @@ export default function SelectAirport({ value, onChange, id, icon }) {
           `${process.env.REACT_APP_BACKEND_URL}/api/airports?keyword=${query}`
         );
         const data = await res.json();
-        console.log(data);
         setAirports(data?.result);
       } catch (error) {
         console.error(error);

@@ -35,7 +35,15 @@ export default function HotelForm() {
     e.preventDefault();
 
     // Check if data is incomplete
-    if (!firstName || !lastName || !email || !number || !city || !checkinDate || !checkoutDate) {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !number ||
+      !city ||
+      !checkinDate ||
+      !checkoutDate
+    ) {
       setFeedback(<Error>All fields are mandatory</Error>);
 
       // Proceed to sending data to backend
@@ -61,9 +69,10 @@ export default function HotelForm() {
           window.location.href = `${data.url}`;
         })
         .catch((error) => {
-          setFeedback(<Error>Error submitting form. Please try again later</Error>);
+          setFeedback(
+            <Error>Error submitting form. Please try again later</Error>
+          );
           setFormState('Active');
-          //console.log(error);
         });
     }
   }

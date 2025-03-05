@@ -69,7 +69,6 @@ export function useHandleForm(flight) {
 
   const handleValidityChange = (e) => {
     const validity = e.target.value;
-    console.log(validity);
     setTicketValidity(validity);
     setDummyPrice(
       validity === '7 Days'
@@ -143,8 +142,6 @@ export function useHandleForm(flight) {
       },
       totalAmount: dummyPrice,
     };
-
-    console.log(updatedFormData);
 
     if (validateForm()) {
       try {
