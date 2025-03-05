@@ -1,0 +1,46 @@
+.title {
+  font-size: 40px;
+  text-align: center;
+}
+
+.Text {
+  text-align: center;
+}
+
+.Text p {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.Text h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* Error */
+
+.errorContainer {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorContainer h1 {
+  margin-bottom: 20px;
+}
+
+.errorContainer p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 991px) {
+  .title {
+    font-size: 36px;
+  }
+}
