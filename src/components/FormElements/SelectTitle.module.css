@@ -2,13 +2,8 @@
   position: relative;
   background-color: white;
   border-radius: 5px;
-  border: 1.5px solid rgb(220, 220, 220);
   cursor: pointer;
   padding: 0;
-}
-
-.dropdownContainer:hover {
-  border: 1px solid var(--primary-color-500);
 }
 
 .selectedItem {
@@ -41,7 +36,7 @@
 }
 
 .dropdownItem:hover {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-600);
   color: #ffff;
 }
 

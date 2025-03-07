@@ -5,7 +5,7 @@ import TicketForm from './TicketForm';
 import Container from '../../components/Container/Container';
 import PageTitle from '../../components/Typography/PageTitle';
 
-const Row = styled.div`
+const StyledContainer = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,14 +16,14 @@ const Row = styled.div`
 `;
 
 const LeftContent = styled.div`
-  width: 50%;
+  width: 52%;
   @media screen and (max-width: 991px) {
     width: 100%;
   }
 `;
 
 const RightContent = styled.div`
-  width: 50%;
+  width: 48%;
   background-color: white;
   padding: 40px;
   border-radius: 20px;
@@ -33,6 +33,13 @@ const RightContent = styled.div`
   @media screen and (max-width: 991px) {
     width: 100%;
     padding: 30px;
+  }
+`;
+
+const Title = styled(PageTitle)`
+  font-size: 40px;
+  @media screen and (max-width: 991px) {
+    font-size: 36px;
   }
 `;
 
@@ -46,6 +53,7 @@ const Text = styled.p`
   font-weight: 500;
   line-height: 1.7;
   @media screen and (max-width: 991px) {
+    font-size: 18px;
     margin: 20px 0;
   }
 `;
@@ -53,32 +61,30 @@ const Text = styled.p`
 export default function Hero() {
   return (
     <PrimarySection pt="50px" pb="50px" id="form">
-      <Container>
-        <Row>
-          <LeftContent>
-            <PageTitle fontSize="40px">
-              Get your dummy ticket From <Price>AED 49</Price>
-            </PageTitle>
-            <Text>
-              Book confirmed flight reservations for visa application from
-              licensed Dubai agency (
-              <a
-                href="https://app.invest.dubai.ae/DUL/98A318CC-6751-4CDB-A958-9FF407AF6049"
-                target="_blank"
-                rel="noreferrer"
-                title="Verify My Dummy Ticket's official license here."
-              >
-                verify here
-              </a>
-              ). All bookings have a PNR code that you can check on airline
-              websites.
-            </Text>
-          </LeftContent>
-          <RightContent>
-            <TicketForm />
-          </RightContent>
-        </Row>
-      </Container>
+      <StyledContainer>
+        <LeftContent>
+          <Title>
+            Get your dummy ticket From <Price>AED 49</Price>
+          </Title>
+          <Text>
+            Book confirmed flight reservations for visa application from
+            licensed Dubai agency (
+            <a
+              href="https://app.invest.dubai.ae/DUL/98A318CC-6751-4CDB-A958-9FF407AF6049"
+              target="_blank"
+              rel="noreferrer"
+              title="Verify My Dummy Ticket's official license here."
+            >
+              verify here
+            </a>
+            ). All bookings have a PNR code that you can check on airline
+            websites.
+          </Text>
+        </LeftContent>
+        <RightContent>
+          <TicketForm />
+        </RightContent>
+      </StyledContainer>
     </PrimarySection>
   );
 }

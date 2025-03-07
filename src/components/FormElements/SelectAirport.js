@@ -1,28 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { baseURL } from '../../config';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   background-color: white;
-  padding: 0 15px;
+  padding: 0px 15px;
   border-radius: var(--input-radius-md);
   transition-duration: 0.3s;
   position: relative;
-  width: 100%;
+  margin: 0;
   box-shadow: var(--input-box-shadow);
   -webkit-box-shadow: var(--input-box-shadow);
   -moz-box-shadow: var(--input-box-shadow);
 `;
 
 const Icon = styled.span`
-  font-size: 16px;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
 `;
 
 const Input = styled.input`
-  width: 100%;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 12px 15px;
-  font-weight: 600;
+  font-weight: 500;
   padding-right: 0;
   background-color: transparent;
   border: none;
@@ -95,9 +100,7 @@ export default function SelectAirport({ value, onChange, id, icon }) {
     async function fetchAirports() {
       try {
         setIsLoading(true);
-        const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/airports?keyword=${query}`
-        );
+        const res = await fetch(`${baseURL}/api/airports?keyword=${query}`);
         const data = await res.json();
         setAirports(data?.result);
       } catch (error) {

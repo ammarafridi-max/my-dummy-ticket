@@ -39,11 +39,12 @@ const QuestionDiv = styled.div`
   justify-content: space-between;
   font-size: 30px;
   transition-duration: 0.3s;
+  box-sizing: border-box;
   cursor: pointer;
 
   &:hover {
     background-color: ${({ showAnswer }) =>
-      showAnswer ? 'var(--primary-color-500)' : 'var(--grey-color-300)'};
+      showAnswer ? 'var(--primary-color-500)' : 'var(--grey-color-200)'};
   }
 
   & span {

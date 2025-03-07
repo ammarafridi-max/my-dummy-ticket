@@ -5,7 +5,9 @@ import Label from './Label';
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
   @media screen and (max-width: 991px) {
     width: 100%;
   }

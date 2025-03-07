@@ -15,8 +15,8 @@ import happyTraveler2 from '../../assets/images/happy-traveler2.png';
 
 const StyledContainer = styled(Container)`
   display: flex;
-  gap: 20px;
   align-items: center;
+  gap: 20px;
   @media screen and (max-width: 991px) {
     display: block;
   }
@@ -24,14 +24,17 @@ const StyledContainer = styled(Container)`
 
 const LeftContainer = styled.div`
   width: 58%;
+  padding: 0px;
   @media screen and (max-width: 991px) {
     width: 100%;
   }
 `;
 
 export default function About() {
+  console.log(process.env);
+
   return (
-    <PrimarySection id="about" pt="100px" pb="0">
+    <PrimarySection id="about" pt="0px" pb="100px">
       <StyledContainer>
         <LeftContainer>
           <SectionTitle mb="30px" subtitle="About My Dummy Ticket">
@@ -68,12 +71,13 @@ export default function About() {
 
 const GalleryContainer = styled.div`
   width: 42%;
-  height: 500px;
+  min-height: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   padding: 0px;
   @media screen and (max-width: 991px) {
+    min-height: 400px;
     margin-top: 50px;
     width: 100%;
   }
@@ -91,54 +95,28 @@ const Col2 = styled.div`
   gap: 15px;
 `;
 
-const Img1Container = styled.div`
-  background-color: white;
+const SmallImage = styled.div`
+  background-color: var(--grey-color-100);
   border-radius: 5px;
-  height: 27%;
+  height: 20%;
+  padding: 30px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   & img {
     width: 100%;
+    height: 100%;
     object-fit: contain;
-    padding: 20px;
   }
 `;
 
-const Img2Container = styled.div`
+const LargeImage = styled.div`
   background-color: white;
   border-radius: 5px;
-  height: 73%;
+  height: 80%;
   overflow: hidden;
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-`;
-
-const Img3Container = styled.div`
-  background-color: white;
-  border-radius: 5px;
-  height: 73%;
-  overflow: hidden;
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const Img4Container = styled.div`
-  background-color: white;
-  border-radius: 5px;
-  height: 27%;
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 20px;
   }
 `;
 
@@ -146,20 +124,20 @@ function Gallery() {
   return (
     <GalleryContainer>
       <Col1>
-        <Img1Container>
+        <SmallImage>
           <img src={trustpilot} />
-        </Img1Container>
-        <Img2Container>
+        </SmallImage>
+        <LargeImage>
           <img src={happyTraveler1} />
-        </Img2Container>
+        </LargeImage>
       </Col1>
       <Col2>
-        <Img3Container>
+        <LargeImage>
           <img src={happyTraveler2} />
-        </Img3Container>
-        <Img4Container>
+        </LargeImage>
+        <SmallImage>
           <img src={travelIcon} />
-        </Img4Container>
+        </SmallImage>
       </Col2>
     </GalleryContainer>
   );

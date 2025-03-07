@@ -10,7 +10,9 @@ const Nav = styled.nav`
   @media only screen and (max-width: 991px) {
     display: block;
     padding: 15px 0;
-    border-bottom: 1px solid rgb(220, 220, 220);
+    box-shadow: 0px 0px 20px -5px rgba(200, 200, 200, 1);
+    -moz-box-shadow: 0px 0px 20px -5px rgba(200, 200, 200, 1);
+    -webkit-box-shadow: 0px 0px 20px -5px rgba(200, 200, 200, 1);
   }
 `;
 

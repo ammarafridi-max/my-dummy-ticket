@@ -13,7 +13,6 @@ import Counter from '../../components/FormElements/Counter';
 import Error from '../../components/Feedback/Error';
 
 const Form = styled.form`
-  width: 100%;
   margin: 0;
   transition-duration: 0.3s;
   border-radius: 15px;
@@ -37,7 +36,7 @@ const CircleIcon = styled(FaCircle)`
   border-radius: 100px;
   padding: 3px;
   color: transparent;
-  border: 1.5px solid black;
+  border: 2px solid black;
   &.active {
     color: var(--primary-color-600) !important;
     border: 2px solid var(--primary-color-600);
@@ -56,7 +55,7 @@ const TypeRow = styled(Row)`
   @media only screen and (max-width: 991px) {
     display: flex;
     flex-direction: row;
-    gap: 0px;
+    gap: 10px;
   }
 `;
 
@@ -66,11 +65,19 @@ const FormRow = styled.div`
   display: flex;
   flex-direction: column;
   @media only screen and (max-width: 991px) {
-    display: block;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 `;
+
+const ButtonDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const SearchButton = styled(PrimaryButton)``;
 
 export default function TicketForm() {
   const dispatch = useDispatch();
@@ -216,11 +223,9 @@ export default function TicketForm() {
         onQuantityChange={handleQuantityChange}
       />
 
-      <div className="text-center mt-4">
-        <PrimaryButton text="Search Flights" type="submit">
-          Search Flights
-        </PrimaryButton>
-      </div>
+      <ButtonDiv>
+        <SearchButton type="submit">Search Flights</SearchButton>
+      </ButtonDiv>
     </Form>
   );
 }

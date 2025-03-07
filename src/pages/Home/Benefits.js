@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { HiClock, HiCheckCircle, HiCurrencyDollar } from 'react-icons/hi2';
+import {
+  HiOutlineClock,
+  HiOutlineCurrencyDollar,
+  HiCheck,
+} from 'react-icons/hi2';
 import Container from '../../components/Container/Container';
 import PrimarySection from '../../components/Section/PrimarySection';
 import Paragraph from '../../components/Typography/Paragraph';
@@ -15,25 +19,21 @@ const Row = styled.div`
 
 export default function Benefits() {
   return (
-    <PrimarySection
-      backgroundColor="var(--primary-color-700)"
-      pt="50px"
-      pb="50px"
-    >
+    <PrimarySection py="0">
       <Container>
         <Row>
           <IconCard
-            icon={<HiCheckCircle />}
+            icon={<HiCheck />}
             title="Reliable"
             text="We use official airline reservation systems to create genuine and verifiable dummy tickets, ensuring they are accepted by consulates and embassies worldwide."
           />
           <IconCard
-            icon={<HiClock />}
+            icon={<HiOutlineClock />}
             title="Quick"
             text="Our streamlined process lets you receive a verifiable dummy ticket instantly. Simply complete a short form, and your ticket will be delivered via email within minutes."
           />
           <IconCard
-            icon={<HiCurrencyDollar />}
+            icon={<HiOutlineCurrencyDollar />}
             title="Affordable"
             text="Starting at only AED 49, we provide high-quality dummy tickets at the best rates, making them accessible and affordable for everyone."
           />
@@ -55,18 +55,24 @@ const Card = styled.div`
 `;
 
 const H3 = styled.h3`
-  font-size: 22px;
-  margin: 10px 0 17.5px 0;
+  font-size: 20px;
+  margin: 18px 0;
   padding: 0;
-  font-weight: 500;
-  color: white;
+  font-weight: 700;
 `;
 
 const IconDiv = styled.div`
-  color: white;
-  font-size: 35px;
-  overflow: hidden;
+  width: fit-content;
+  font-size: 30px;
+  color: var(--primary-color-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color-200);
   margin: 0 auto;
+  padding: 15px;
+  border-radius: 100px;
+  overflow: hidden;
 `;
 
 function IconCard({ icon, title, text }) {
@@ -74,7 +80,7 @@ function IconCard({ icon, title, text }) {
     <Card>
       <IconDiv>{icon}</IconDiv>
       <H3>{title}</H3>
-      <Paragraph color="white" textAlign="center" fontSize="17px">
+      <Paragraph textAlign="center" fontSize="17px" fontWeight="300">
         {text}
       </Paragraph>
     </Card>

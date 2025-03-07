@@ -57,7 +57,7 @@ export const faqArray = [
   {
     question: 'How can I contact customer support?',
     answer:
-      'You can contact us by sending us an email us at info@dummyticket365.com',
+      'You can contact us by sending us an email us at info@mydummyticket.ae',
   },
   {
     question: 'Is there a money-back guarantee?',

@@ -4,11 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchFlights } from '../../redux/slices/fetchFlights';
 import FlightCard from '../../components/FlightCard/FlightCard';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
-import Container from '../../components/Container/Container';
-import PrimarySection from '../../components/Section/PrimarySection';
 import Error from '../../components/Feedback/Error';
 import Skeleton from '../../components/FlightCard/Skeleton';
 import FlightError from '../../components/Feedback/FlightError';
+import styled from 'styled-components';
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function SelectFlights() {
   const dispatch = useDispatch();
@@ -58,11 +63,11 @@ export default function SelectFlights() {
             />
           ))}
           {flights.length > maxFlights && (
-            <div className="text-center">
+            <ButtonDiv>
               <PrimaryButton onClick={showMoreFlights}>
                 More Flights
               </PrimaryButton>
-            </div>
+            </ButtonDiv>
           )}
         </>
       )}

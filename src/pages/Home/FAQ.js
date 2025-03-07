@@ -4,6 +4,13 @@ import PrimarySection from '../../components/Section/PrimarySection';
 import Container from '../../components/Container/Container';
 import FAQAccordion from '../../components/FAQAccordion/FAQAccordion';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import styled from 'styled-components';
+
+const ButtonDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default function FAQ() {
   return (
@@ -25,11 +32,11 @@ export default function FAQ() {
             );
           }
         })}
-        <div className="text-center m-0 p-0">
+        <ButtonDiv>
           <PrimaryButton as="a" mt="30px" href="/faq">
             Read More FAQs
           </PrimaryButton>
-        </div>
+        </ButtonDiv>
       </Container>
     </PrimarySection>
   );

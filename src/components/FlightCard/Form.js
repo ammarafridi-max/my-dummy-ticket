@@ -29,10 +29,9 @@ const SubmitButtonDiv = styled.div`
 
 const FormRow = styled.div`
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
   @media screen and (max-width: 991px) {
-    gap: 0px;
+    display: block;
   }
 `;
 
@@ -113,6 +112,9 @@ const PassengerFields = styled.div`
 
 const Title = styled(SelectTitle)`
   width: 20%;
+  box-shadow: var(--input-box-shadow-sm);
+  -webkit-box-shadow: var(--input-box-shadow-sm);
+  -moz-box-shadow: var(--input-box-shadow-sm);
   @media screen and (max-width: 991px) {
     width: 100%;
     margin-bottom: 10px;
@@ -221,14 +223,18 @@ function ContactDetails({
 }
 
 const TicketValidityWrapper = styled.div`
-  margin-top: 10px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const TicketValidityBox = styled.div`
   display: flex;
   border-radius: 5px;
   overflow: hidden;
-  border: 1.5px solid rgb(220, 220, 220);
+  box-shadow: var(--input-box-shadow-sm);
+  -webkit-box-shadow: var(--input-box-shadow-sm);
+  -moz-box-shadow: var(--input-box-shadow-sm);
   @media screen and (max-width: 991px) {
     display: block;
   }
@@ -303,6 +309,8 @@ function TicketValidityOptions({ ticketValidity, handleValidityChange }) {
 
 const ReceiptWrapper = styled.div`
   margin: 20px 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const RadioGroup = styled.div`

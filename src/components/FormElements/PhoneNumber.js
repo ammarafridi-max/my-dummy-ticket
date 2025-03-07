@@ -4,7 +4,9 @@ import Number from './Number';
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
   @media screen and (max-width: 991px) {
     width: 100%;
   }
@@ -18,9 +20,13 @@ export default function PhoneNumber({ phoneNumber, setPhoneNumber }) {
       </Label>
       <Number
         codeValue={phoneNumber.code}
-        codeOnChange={(e) => setPhoneNumber({ ...phoneNumber, code: e.target.value })}
+        codeOnChange={(e) =>
+          setPhoneNumber({ ...phoneNumber, code: e.target.value })
+        }
         digitsValue={phoneNumber.digits}
-        digitsOnChange={(e) => setPhoneNumber({ ...phoneNumber, digits: e.target.value })}
+        digitsOnChange={(e) =>
+          setPhoneNumber({ ...phoneNumber, digits: e.target.value })
+        }
       />
     </Wrapper>
   );

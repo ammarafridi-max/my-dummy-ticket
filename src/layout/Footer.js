@@ -19,6 +19,7 @@ const StyledContainer = styled(Container)`
   border-radius: 20px;
   padding: 30px;
   background-color: var(--primary-color-600);
+  box-sizing: border-box;
 `;
 
 const PartnerImagesContainer = styled.div`

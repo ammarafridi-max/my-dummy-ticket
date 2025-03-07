@@ -15,8 +15,8 @@ export default function Home() {
       </Helmet>
       <Hero />
       <Process />
-      <Benefits />
       <About />
+      <Benefits />
       <Testimonials />
       <FAQ />
       <Contact />

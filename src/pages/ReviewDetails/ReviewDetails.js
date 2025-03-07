@@ -10,6 +10,13 @@ import { FaSpinner } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import PageTitle from '../../components/Typography/PageTitle';
+import styled from 'styled-components';
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function ReviewDetails() {
   const dispatch = useDispatch();
@@ -281,7 +288,7 @@ function OrderTotalDetail({ totalQuantity, additionalPrice, totalAmount }) {
 
 function ProceedButton({ handleConfirm, stripeStatus, totalAmount }) {
   return (
-    <div className="text-center">
+    <ButtonDiv>
       <PrimaryButton
         onClick={handleConfirm}
         disabled={stripeStatus === 'loading'}
@@ -297,6 +304,6 @@ function ProceedButton({ handleConfirm, stripeStatus, totalAmount }) {
           <>Proceed To Payment (AED {totalAmount})</>
         )}
       </PrimaryButton>
-    </div>
+    </ButtonDiv>
   );
 }

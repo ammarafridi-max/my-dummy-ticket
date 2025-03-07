@@ -1,31 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const InputDiv = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 15px;
   background-color: white;
   font-weight: 500;
-  padding: 0 20px;
+  padding: 0 15px;
   border-radius: 5px;
   transition-duration: 0.3s;
-  border: 1.5px solid rgb(220, 220, 220);
-
+  box-shadow: var(--input-box-shadow-sm);
+  -webkit-box-shadow: var(--input-box-shadow-sm);
+  -moz-box-shadow: var(--input-box-shadow-sm);
   &:hover,
   &:focus-within {
     border-color: var(--primary-color-500);
   }
-
   @media only screen and (max-width: 991px) {
     width: 100%;
     margin-bottom: 10px;
   }
 `;
 
-const Icon = styled.span`
-  width: 5%;
-  margin-right: 20px;
-  font-size: 15px;
+const Icon = styled.div`
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & * {
+    font-size: 15px;
+  }
 `;
 
 const InputField = styled.input`
@@ -35,7 +40,6 @@ const InputField = styled.input`
   font-size: 14.5px;
   outline: none;
   padding: 12px 0;
-
   &::placeholder {
     color: rgb(150, 150, 150);
     font-size: 14px;
@@ -61,7 +65,7 @@ export default function Input({
   disabled,
 }) {
   return (
-    <InputDiv style={style}>
+    <Wrapper style={style}>
       {icon && <Icon>{icon}</Icon>}
       <InputField
         type={type}
@@ -79,6 +83,6 @@ export default function Input({
         disabled={disabled}
         className={className}
       />
-    </InputDiv>
+    </Wrapper>
   );
 }

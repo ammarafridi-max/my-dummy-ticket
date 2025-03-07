@@ -14,11 +14,12 @@ const Row = styled.div`
 `;
 
 const StepDiv = styled.div`
-  height: 250px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--grey-color-100);
   & h3 {
     color: black;
     font-weight: 600;
@@ -32,7 +33,8 @@ const StepDiv = styled.div`
     text-align: center;
   }
   @media screen and (max-width: 991px) {
-    height: 250px;
+    height: 230px;
+    padding: 25px 60px 0px 60px !important;
     & p {
       font-size: 17px;
     }
@@ -40,35 +42,26 @@ const StepDiv = styled.div`
 `;
 
 const Step1Div = styled(StepDiv)`
-  clip-path: polygon(100% 0%, 85% 50%, 100% 100%, 15% 100%, 0% 50%, 15% 0);
-  background-color: var(--grey-color-200);
-  padding: 30px 75px 30px 45px;
+  clip-path: polygon(90% 0, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+  padding: 30px 45px 30px 55px;
   @media screen and (max-width: 991px) {
     clip-path: polygon(50% 20%, 100% 0, 100% 80%, 50% 100%, 0 80%, 0 0);
-    padding: 20px;
-    padding-bottom: 0;
   }
 `;
 
 const Step2Div = styled(StepDiv)`
-  clip-path: polygon(85% 0, 100% 50%, 85% 100%, 15% 100%, 0% 50%, 15% 0);
-  background-color: var(--grey-color-200);
-  padding: 30px 60px 30px 60px;
+  clip-path: polygon(90% 0, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+  padding: 30px 45px 30px 55px;
   @media screen and (max-width: 991px) {
     clip-path: polygon(50% 20%, 100% 0, 100% 80%, 50% 100%, 0 80%, 0 0);
-    padding: 20px;
-    padding-bottom: 0;
   }
 `;
 
 const Step3Div = styled(StepDiv)`
-  clip-path: polygon(85% 0, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
-  background-color: var(--grey-color-200);
-  padding: 30px 45px 30px 75px;
+  clip-path: polygon(90% 0, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+  padding: 30px 45px 30px 55px;
   @media screen and (max-width: 991px) {
     clip-path: polygon(50% 20%, 100% 0, 100% 80%, 50% 100%, 0 80%, 0 0);
-    padding: 20px;
-    padding-bottom: 0;
   }
 `;
 

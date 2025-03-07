@@ -5,11 +5,13 @@ import { countryCodes } from '../../assets/data/countryCodes';
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 10px 15px;
+  padding: 11px 15px;
   border-radius: 5px;
   position: relative;
-  border: 1px solid rgb(220, 220, 220);
   background-color: white;
+  box-shadow: var(--input-box-shadow-sm);
+  -webkit-box-shadow: var(--input-box-shadow-sm);
+  -moz-box-shadow: var(--input-box-shadow-sm);
   ${(props) =>
     props.disabled &&
     `
@@ -23,7 +25,8 @@ const Input = styled.input`
   outline: none;
   background-color: transparent;
   border: none;
-  padding-left: ${(props) => (props.type === 'text' && props.id === 'digits' ? '15px' : '0')};
+  padding-left: ${(props) =>
+    props.type === 'text' && props.id === 'digits' ? '15px' : '0'};
   ${(props) =>
     props.disabled &&
     `
@@ -35,6 +38,7 @@ const Input = styled.input`
 
 const CodeInput = styled(Input)`
   width: 15%;
+  font-size: 14.5px;
   border-right: 1px solid rgb(200, 200, 200);
   @media screen and (max-width: 991px) {
     width: 20%;
@@ -43,6 +47,7 @@ const CodeInput = styled(Input)`
 
 const DigitsInput = styled(Input)`
   width: 85%;
+  font-size: 14.5px;
   @media screen and (max-width: 991px) {
     width: 80%;
   }
@@ -81,12 +86,20 @@ const Option = styled.li`
   }
 `;
 
-export default function Number({ codeValue, digitsValue, codeOnChange, digitsOnChange, disabled }) {
+export default function Number({
+  codeValue,
+  digitsValue,
+  codeOnChange,
+  digitsOnChange,
+  disabled,
+}) {
   const [code, setCode] = useState(codeValue);
   const [isOnFocus, setIsOnFocus] = useState(false);
 
   const filteredCodes = countryCodes.filter((country) => {
-    return `${country.country} (+${country.code})`.toLowerCase().includes(code.toLowerCase());
+    return `${country.country} (+${country.code})`
+      .toLowerCase()
+      .includes(code.toLowerCase());
   });
 
   const handleCodeChange = (e) => {
@@ -100,7 +113,10 @@ export default function Number({ codeValue, digitsValue, codeOnChange, digitsOnC
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target)
+      ) {
         setIsOnFocus(false);
       }
     };

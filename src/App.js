@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import '@fontsource-variable/nunito';
 import './App.css';
 import Layout from './layout/Layout';
 import BookingLayout from './pages/BookingLayout/BookingLayout';
