@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import img from '../../assets/images/contact-img.png';
+import img from '../../assets/images/contact-img.webp';
 import PrimarySection from '../../components/Section/PrimarySection';
 import Container from '../../components/Container/Container';
 import SectionTitle from '../../components/Typography/SectionTitle';

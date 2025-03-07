@@ -8,10 +8,10 @@ import PrimarySection from '../../components/Section/PrimarySection';
 import Container from '../../components/Container/Container';
 import SectionTitle from '../../components/Typography/SectionTitle';
 import Paragraph from '../../components/Typography/Paragraph';
-import trustpilot from '../../assets/images/trustpilot.png';
-import travelIcon from '../../assets/images/travel-icon.png';
-import happyTraveler1 from '../../assets/images/happy-traveler1.png';
-import happyTraveler2 from '../../assets/images/happy-traveler2.png';
+import trustpilot from '../../assets/images/trustpilot.webp';
+import travelIcon from '../../assets/images/travel-icon.webp';
+import happyTraveler1 from '../../assets/images/happy-traveler1.webp';
+import happyTraveler2 from '../../assets/images/happy-traveler2.webp';
 
 const StyledContainer = styled(Container)`
   display: flex;
@@ -125,18 +125,30 @@ function Gallery() {
     <GalleryContainer>
       <Col1>
         <SmallImage>
-          <img src={trustpilot} />
+          <img
+            src={trustpilot}
+            alt="My Dummy Ticket has received over 50 reviews on Trustpilot, with an average rating of 4.5+"
+          />
         </SmallImage>
         <LargeImage>
-          <img src={happyTraveler1} />
+          <img
+            src={happyTraveler1}
+            alt="A happy couple receiving their Schengen visa"
+          />
         </LargeImage>
       </Col1>
       <Col2>
         <LargeImage>
-          <img src={happyTraveler2} />
+          <img
+            src={happyTraveler2}
+            alt="A happy couple with their passports, dummy tickets, and other related documents for their visa appointment"
+          />
         </LargeImage>
         <SmallImage>
-          <img src={travelIcon} />
+          <img
+            src={travelIcon}
+            alt="Dummy tickets, hotel reservations, and travel insurance"
+          />
         </SmallImage>
       </Col2>
     </GalleryContainer>

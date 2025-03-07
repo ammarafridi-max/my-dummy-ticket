@@ -1,4 +1,4 @@
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo.webp';
 import styled from 'styled-components';
 import Container from '../components/Container/Container';
 

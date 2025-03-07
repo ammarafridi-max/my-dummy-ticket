@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { pages } from './Navigation';
 import { HiOutlineXMark, HiOutlineBars3 } from 'react-icons/hi2';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo.webp';
 import Container from '../components/Container/Container';
 import styled from 'styled-components';
 
@@ -61,7 +61,7 @@ export default function MobileNavigation() {
             title="My Dummy Ticket Logo"
           />
         </LogoDiv>
-        <Button onClick={handleClick}>
+        <Button onClick={handleClick} name="mobileMenu">
           {menuOpen ? <HiOutlineXMark /> : <HiOutlineBars3 />}
         </Button>
       </StyledContainer>
