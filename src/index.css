@@ -1,0 +1,127 @@
+:root {
+  --primary-color-100: #e0f7f6; /* subtle, light background */
+  --primary-color-200: #b8ecea;
+  --primary-color-300: #89e0de;
+  --primary-color-400: #56d0cd;
+  --primary-color-500: #1fb7ae; /* primary */
+  --primary-color-600: #1aa298;
+  --primary-color-700: #168d83;
+  --primary-color-800: #12796f;
+  --primary-color-900: #0e655d; /* deep accent */
+  --accent-color-50: #e2f7fb;
+  --accent-color-100: #ffece8;
+  --accent-color-200: #ffd0c5;
+  --accent-color-300: #ffb3a1;
+  --accent-color-400: #ff8f75;
+  --accent-color-500: #ff603a; /* Base */
+  --accent-color-600: #e7441d;
+  --accent-color-700: #c42700;
+  --accent-color-800: #a12000;
+  --accent-color-900: #701700;
+  --grey-color-50: rgb(248, 248, 248);
+  --grey-color-100: rgb(240, 240, 240);
+  --grey-color-200: rgb(226, 226, 226);
+  --grey-color-300: rgb(210, 210, 210);
+  --grey-color-400: rgb(195, 195, 195);
+  --grey-color-500: rgb(180, 180, 180);
+  --grey-color-600: rgb(150, 150, 150);
+  --grey-color-700: rgb(120, 120, 120);
+  --grey-color-800: rgb(90, 90, 90);
+  --grey-color-900: rgb(60, 60, 60);
+  --grey-color-950: rgb(30, 30, 30);
+  --input-radius-sm: 5px;
+  --input-radius-md: 8px;
+  --input-radius-lg: 10px;
+  --input-box-shadow: 0px 0px 5px -1px var(--grey-color-600);
+  --input-box-shadow-sm: 0px 0px 5px -1px var(--grey-color-600);
+  --input-box-shadow-focus: 0px 0px 8px 0px var(--grey-color-600);
+  --input-box-shadow-sm-focus: 0px 0px 8px 0px var(--grey-color-600);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Variable';
+}
+
+body {
+  overflow-x: hidden;
+  background-color: rgb(255, 255, 255);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Merriweather' !important;
+}
+
+input,
+label,
+button,
+select,
+option,
+p,
+a {
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Nunito Variable';
+}
+
+p {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+}
+
+p.small {
+  font-size: 15px;
+}
+
+p.large {
+  font-size: 17px;
+}
+
+p.x-large {
+  font-size: 18px;
+}
+
+.semi-bold {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+a {
+  color: var(--primary-color-700);
+  text-decoration: none;
+}
+
+.section-heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 600;
+  padding-bottom: 50px;
+  padding-top: 0;
+  margin: 0;
+}
+
+.color-white {
+  color: white;
+}
+
+.primary-color {
+  color: var(--primary-color-500);
+}
+
+@media only screen and (max-width: 991.5px) {
+  .section-heading {
+    font-size: 32px;
+  }
+}
