@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { baseURL } from '../../config';
+import { BASEURL } from '../../config';
 
 export const fetchFormDetails = createAsyncThunk(
   'formDetails/fetchFormDetails',
   async (sessionId, thunkAPI) => {
     try {
-      const res = await fetch(`${baseURL}/api/ticket/${sessionId}`);
+      const res = await fetch(`${BASEURL}/api/ticket/${sessionId}`);
       if (!res.ok) throw new Error('An error occurred');
       const data = await res.json();
       return data.data;
@@ -23,7 +23,6 @@ const formDetailsSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFormDetails.pending, (state) => {

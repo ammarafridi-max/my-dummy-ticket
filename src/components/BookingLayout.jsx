@@ -1,105 +1,96 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import { HiChevronRight } from 'react-icons/hi2';
+import { Link } from 'react-router-dom';
 import PrimarySection from './PrimarySection';
-
-const Body = styled.div`
-  width: 70%;
-  margin: 0 auto;
-  @media screen and (max-width: 991px) {
-    width: 90%;
-  }
-`;
 
 export default function BookingLayout() {
   return (
-    <PrimarySection pt="0" pb="0">
-      <Body>
+    <PrimarySection className="bg-gray-100 pb-20">
+      <div className="w-[95%] md:w-[70%] mx-auto">
         <Menu />
         <Outlet />
-      </Body>
+      </div>
     </PrimarySection>
   );
 }
 
-const MenuContainer = styled.div`
-  background-color: white;
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px -1px rgba(190, 190, 190, 1);
-  -webkit-box-shadow: 0px 0px 10px -1px rgba(190, 190, 190, 1);
-  -moz-box-shadow: 0px 0px 10px -1px rgba(190, 190, 190, 1);
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  @media screen and (max-width: 991px) {
-    flex-direction: column;
-    overflow: scroll;
-  }
-`;
-
-const MenuItem = styled.button`
-  width: 33%;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  outline: none;
-  background-color: white;
-  &.active {
-    border-radius: 5px;
-    background-color: var(--primary-color-500);
-    color: white;
-  }
-  @media screen and (max-width: 991px) {
-    width: 100%;
-    justify-content: start;
-  }
-`;
-
-const Step = styled.p`
-  width: 30px;
-  height: 30px;
-  background-color: var(--primary-color-100);
-  color: var(--primary-color-600);
-  border-radius: 100px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-`;
-
 function Menu() {
   const { pathname } = useLocation();
+  const steps = [
+    {
+      id: 1,
+      name: 'Select Flights',
+      pathname: '/booking/select-flights',
+    },
+    {
+      id: 2,
+      name: 'Review Details',
+      pathname: '/booking/review-details',
+    },
+    {
+      id: 3,
+      name: 'Payment',
+      pathname: '/booking/payment',
+    },
+  ];
+  const currentIndex = steps.findIndex((step) => step.pathname === pathname);
 
   return (
-    <MenuContainer>
-      <MenuItem
-        className={pathname === '/booking/select-flights' ? 'active' : ''}
-      >
-        <Step>1</Step>
-        <p>Select Flights</p>
-      </MenuItem>
-
-      <MenuItem
-        className={pathname === '/booking/review-details' ? 'active' : ''}
-      >
-        <Step>2</Step>
-        <p>Review Details</p>
-      </MenuItem>
-
-      <MenuItem>
-        <Step>3</Step>
-        <p>Payment</p>
-      </MenuItem>
-    </MenuContainer>
+    <div className="w-full pt-6 pb-6 md:pt-10 md:pb-10 flex items-center justify-center gap-3 md:gap-5 rounded-sm bg-transparent">
+      {steps.map((step, i) => (
+        <React.Fragment key={i}>
+          <Link
+            key={i}
+            className="w-fit p-0 font-nunito flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 bg-transparent text-gray-700 cursor-pointer"
+            to={currentIndex >= i ? step.pathname : '#'}
+          >
+            <p
+              className={`w-[25px] h-[25px] hidden md:flex md:w-[30px] md:h-[30px] text-[11px] md:text-[15px] text-primary-900 rounded-full font-semibold items-center justify-center ${pathname === step.pathname ? 'bg-accent-500 text-white' : 'bg-gray-800 text-white'}  `}
+            >
+              {i + 1}
+            </p>
+            <span
+              className={`text-[14px] md:text-[17px] ${pathname === step.pathname ? 'font-semibold text-accent-500' : 'font-normal'}`}
+            >
+              {step.name}
+            </span>
+          </Link>
+          {i < steps.length - 1 && (
+            <HiChevronRight className="text-gray-400 text-xl md:text-2xl" />
+          )}
+        </React.Fragment>
+      ))}
+    </div>
   );
 }
+
+const obj = {
+  departureFlight: {
+    segments: [
+      {
+        from: 'DXB',
+        fromTerminal: '3',
+        to: 'LHR',
+        toTerminal: '1',
+        departure: '2025-09-09T14:15:00',
+        arrival: '2025-09-09T18:40:00',
+        carrierCode: 'EK',
+        flightNumber: 3,
+        aircraftCode: '388',
+        duration: 'PT7H25M',
+      },
+      {
+        from: 'LHR',
+        fromTerminal: '1',
+        to: 'ATH',
+        toTerminal: '1',
+        departure: '2025-09-09T14:15:00',
+        arrival: '2025-09-09T18:40:00',
+        carrierCode: 'EK',
+        flightNumber: 3,
+        aircraftCode: '388',
+      },
+    ],
+  },
+};

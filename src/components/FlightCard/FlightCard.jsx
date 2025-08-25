@@ -1,87 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import Form from './Form';
 import Itinerary from './Itinerary';
 import PrimaryButtonOutline from '../PrimaryButtonOutline';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  background-color: white;
-  margin-bottom: 20px;
-  padding: 0px 15px;
-  box-shadow: 0px 0px 5px 1px rgba(220, 220, 220, 1);
-  -webkit-box-shadow: 0px 0px 5px 1px rgba(220, 220, 220, 1);
-  -moz-box-shadow: 0px 0px 5px 1px rgba(220, 220, 220, 1);
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 50px;
-  @media screen and (max-width: 991px) {
-    display: block;
-  }
-`;
-
-const ItineraryContainer = styled.div`
-  width: 70%;
-  @media screen and (max-width: 991px) {
-    width: 100%;
-  }
-`;
-
-const CTAContainer = styled.div`
-  width: 30%;
-  padding: 25px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  & button {
-    width: 100%;
-    padding: 8px 0;
-    border-radius: 5px;
-  }
-  @media screen and (max-width: 991px) {
-    width: 100%;
-    & button {
-      padding: 10px 0;
-    }
-  }
-`;
-
-const Price = styled.h6`
-  font-weight: 800;
-  font-size: 16px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5px;
-  & span {
-    color: var(--grey-color-500);
-    font-weight: 400;
-    font-size: 16px;
-    margin-right: 5px;
-  }
-  @media screen and (max-width: 991px) {
-    margin: 0;
-    width: 100%;
-    font-size: 18px;
-    padding: 5px 0;
-    margin-bottom: 10px;
-    border-top: 1px solid rgb(200, 200, 200);
-    border-bottom: 1px solid rgb(200, 200, 200);
-  }
-`;
-
 export default function FlightCard({ flight, isExpanded, onSelectFlight }) {
   return (
-    <Wrapper>
-      <Row>
-        <ItineraryContainer>
+    <div className="w-full rounded-2xl bg-white mb-5 p-3 md:p-3.75 transition-[box-shadow_0.3s_ease] shadow-(--flight-shadow) hover:shadow-(--flight-shadow-hover)">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-1 md:gap-7.5">
+        <div className="w-full flex-1 px-3">
           {flight?.itineraries?.map((itinerary, i) => (
             <Itinerary
               key={i}
@@ -89,15 +15,23 @@ export default function FlightCard({ flight, isExpanded, onSelectFlight }) {
               airlineInfo={flight.airlineDetails[0]}
             />
           ))}
-        </ItineraryContainer>
-        <CTAContainer>
-          <Price>AED 49 / person</Price>
-          <PrimaryButtonOutline onClick={onSelectFlight} disabled={isExpanded}>
+        </div>
+
+        <div className="w-full md:w-1/4 flex md:block pt-1 md:pt-2.5 md:border-t-0 px-3">
+          <div className="w-[40%] md:w-full flex flex-col md:flex-row gap-1 items-baseline justify-center font-nunito text-left md:text-center md:py-2">
+            <p className="text-lg font-bold text-black mb-[-8px]">AED 49</p>
+            <p className="text-sm font-light text-gray-400">/ person</p>
+          </div>
+          <PrimaryButtonOutline
+            className="w-[60%] md:w-full"
+            onClick={onSelectFlight}
+            disabled={isExpanded}
+          >
             {isExpanded ? 'Selected' : 'Select Flight'}
           </PrimaryButtonOutline>
-        </CTAContainer>
-      </Row>
+        </div>
+      </div>
       {isExpanded && <Form flight={flight} />}
-    </Wrapper>
+    </div>
   );
 }

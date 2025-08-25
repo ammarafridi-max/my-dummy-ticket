@@ -2,140 +2,49 @@ import React from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { formatISODuration } from '../../utils/formatISODuration';
 import { formatISOTime } from '../../utils/formatISOTime';
-import { baseURL } from '../../config';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  width: 100%;
-  background-color: white;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  &:nth-of-type(2) {
-    border-top: 1px solid rgb(200, 200, 200);
-    margin-bottom: 0px;
-  }
-  @media screen and (max-width: 991px) {
-    gap: 30px;
-  }
-`;
+import { BASEURL } from '../../config';
 
 export default function Itinerary({ itinerary, airlineInfo }) {
   return (
-    <Wrapper>
-      <AirlineLogo airlineInfo={airlineInfo} />
-      <DepartureData itinerary={itinerary} />
-      <Duration itinerary={itinerary} />
-      <ReturnData itinerary={itinerary} />
-    </Wrapper>
+    <div className="w-full bg-white py-4 flex items-center justify-between md:justify-center gap-6 md:gap-10 nth-of-type-[2]:border-t-1 nth-of-type-[2]:border-t-gray-300">
+      <div className="w-[60px] h-[60px] flex flex-col justify-center align-middle">
+        <img
+          src={`${BASEURL}${airlineInfo.logo}` || ''}
+          alt={`${airlineInfo.commonName} Logo`}
+          className="object-contain"
+        />
+      </div>
+      <div className="flex items-center justify-between md:justify-center gap-3 md:gap-8 font-nunito">
+        <DepartureData itinerary={itinerary} />
+        <Duration itinerary={itinerary} />
+        <ReturnData itinerary={itinerary} />
+      </div>
+    </div>
   );
 }
-
-const AirlineLogoDiv = styled.div`
-  width: 60px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & img {
-    width: 100%;
-  }
-`;
-
-function AirlineLogo({ airlineInfo }) {
-  return (
-    <AirlineLogoDiv>
-      <img
-        src={`${baseURL}${airlineInfo.logo}` || ''}
-        alt={`${airlineInfo.commonName} Logo`}
-      />
-    </AirlineLogoDiv>
-  );
-}
-
-const DepartureDataDiv = styled.div`
-  width: fit-content;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1;
-  & span {
-    font-size: 13px;
-    font-weight: 400;
-  }
-  @media screen and (max-width: 991px) {
-    font-size: 16px;
-    & span {
-      font-size: 14px;
-    }
-  }
-`;
 
 function DepartureData({ itinerary }) {
   return (
-    <DepartureDataDiv>
+    <div className="w-[80px] text-left md:text-center text-md md:text-lg font-bold leading-4.5">
       {itinerary?.segments[0].departure.iataCode}
       <br />
-      <span>{formatISOTime(itinerary?.segments[0].departure.at).date}</span>
+      <span className="text-[13px] md:text-[14px] font-light">
+        {formatISOTime(itinerary?.segments[0].departure.at).date}
+      </span>
       <br />
-      <span>{formatISOTime(itinerary?.segments[0].departure.at).time}</span>
-    </DepartureDataDiv>
+      <span className="text-[13px] md:text-[14px] font-light">
+        {formatISOTime(itinerary?.segments[0].departure.at).time}
+      </span>
+    </div>
   );
 }
-
-const DurationDiv = styled.div`
-  width: fit-content;
-  height: fit-content;
-  text-align: center;
-  color: rgb(150, 150, 150);
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.2;
-`;
-
-function Duration({ itinerary }) {
-  return (
-    <DurationDiv>
-      <span>{formatISODuration(itinerary.duration)}</span>
-      <br />
-      <FaArrowRightLong />
-      <br />
-      {itinerary.segments.length === 1 && <span>Non-stop</span>}
-      {itinerary.segments.length === 2 && (
-        <span>Stop in {itinerary.segments.at(0).arrival.iataCode}</span>
-      )}
-      {itinerary.segments.length >= 3 && <span>Multiple stops</span>}
-    </DurationDiv>
-  );
-}
-
-const ReturnDataDiv = styled.div`
-  width: fit-content;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1;
-  & span {
-    font-size: 13px;
-    font-weight: 400;
-  }
-  @media screen and (max-width: 991px) {
-    font-size: 16px;
-    & span {
-      font-size: 14px;
-    }
-  }
-`;
 
 function ReturnData({ itinerary }) {
   return (
-    <ReturnDataDiv>
+    <div className="w-[80px] text-right md:text-center text-md md:text-lg font-bold leading-4.5">
       {itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}
       <br />
-      <span>
+      <span className="text-[13px] md:text-[14px] font-light">
         {
           formatISOTime(
             itinerary.segments[itinerary.segments.length - 1].arrival.at
@@ -143,13 +52,30 @@ function ReturnData({ itinerary }) {
         }
       </span>
       <br />
-      <span>
+      <span className="text-[13px] md:text-[14px] font-light">
         {
           formatISOTime(
             itinerary.segments[itinerary.segments.length - 1].arrival.at
           ).time
         }
       </span>
-    </ReturnDataDiv>
+    </div>
+  );
+}
+
+function Duration({ itinerary }) {
+  return (
+    <div className="w-fit h-fit text-center text-gray-400 text-[12px] md:text-sm font-nunito">
+      <span>{formatISODuration(itinerary.duration)}</span>
+      <p className="flex align-middle justify-center">
+        <FaArrowRightLong />
+      </p>
+      <span>
+        {itinerary.segments.length === 1 && 'Non-Stop'}
+        {itinerary.segments.length === 2 &&
+          `Stops in ${itinerary.segments.at(0).arrival.iataCode}`}
+        {itinerary.segments.length >= 3 && 'Multiple Stops'}
+      </span>
+    </div>
   );
 }

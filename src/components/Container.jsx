@@ -1,11 +1,7 @@
-import styled from 'styled-components';
-
-const Container = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  @media only screen and (max-width: 991px) {
-    width: 90%;
-  }
-`;
-
-export default Container;
+export default function Container({ children, className }) {
+  return (
+    <div className={`w-[90%] md:w-[85%] lg:w-[80%] mx-auto ${className}`}>
+      {children}
+    </div>
+  );
+}

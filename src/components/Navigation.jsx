@@ -1,97 +1,43 @@
 import Container from './Container';
-import styled from 'styled-components';
 
 export const pages = [
   { name: 'Process', link: '/#process' },
   { name: 'About', link: '/#about' },
-  { name: 'FAQ', link: '#faq' },
-  { name: 'Contact', link: 'mailto:info@dummyticket365.com' },
+  { name: 'Benefits', link: '/#benefits' },
+  { name: 'FAQs', link: '/#faq' },
   { name: 'Book Now', link: '/#form', cta: true },
+  { name: 'Email Us', link: 'mailto:info@dummyticket365.com' },
 ];
 
 export default function Navigation() {
   return (
-    <Header>
+    <header className="hidden lg:block bg-transparent py-2">
       <Container>
-        <Nav>
-          <LogoContainer />
-          <NavLinks />
-        </Nav>
+        <nav className="flex items-center justify-between py-1.25">
+          <div className="w-[21%] p-0">
+            <a href="/">
+              <img
+                src="/logo.webp"
+                alt="My Dummy Ticket Logo"
+                title="My Dummy Ticket Logo"
+                className="w-full h-full object-contain"
+              />
+            </a>
+          </div>
+          <div className="w-auto flex items-center justify-between gap-5">
+            {pages.map((page, i) => (
+              <a
+                className="text-[17px] font-semibold text-gray-700 capitalize py-2.5 px-1.25 duration-300 hover:text-accent-500 last:pr-0"
+                key={i}
+                href={page.link}
+                title={page.name}
+              >
+                {page.name}
+              </a>
+            ))}
+          </div>
+        </nav>
       </Container>
-    </Header>
+    </header>
   );
 }
-
-function LogoContainer() {
-  return (
-    <LogoDiv>
-      <a href="/">
-        <img
-          src="/logo.png"
-          alt="Dummy Ticket 365 Logo"
-          title="Dummy Ticket 365 Logo"
-        />
-      </a>
-    </LogoDiv>
-  );
-}
-
-function NavLinks() {
-  return (
-    <StyledNavLinks>
-      {pages.map((page, i) => (
-        <StyledNavLink key={i} href={page.link} title={page.name}>
-          {page.name}
-        </StyledNavLink>
-      ))}
-    </StyledNavLinks>
-  );
-}
-
-const Header = styled.header`
-  background-color: transparent;
-  padding: 10px 0;
-  /* box-shadow: 0px 0px 20px 0px rgba(200, 200, 200, 1);
-  -moz-box-shadow: 0px 0px 20px 0px rgba(200, 200, 200, 1);
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(200, 200, 200, 1); */
-  @media only screen and (max-width: 991px) {
-    display: none;
-  }
-`;
-
-const LogoDiv = styled.div`
-  width: 24%;
-  padding: 0;
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 0;
-`;
-
-const StyledNavLinks = styled.div`
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const StyledNavLink = styled.a`
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--grey-color-800);
-  text-transform: uppercase;
-  padding: 10px 5px;
-  margin-right: 15px;
-  transition-duration: 0.3s;
-  &:hover {
-    color: var(--primary-color-500);
-  }
-`;

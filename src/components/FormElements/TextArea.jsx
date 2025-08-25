@@ -8,6 +8,7 @@ const TextArea = styled.textarea`
   border: 1.5px solid rgb(220, 220, 220);
   height: 150px;
   transition: 0.3s;
+  background-color: white;
   &:focus-visible {
     outline: none;
   }

@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
 
 const formatToDateString = (date) => {
@@ -9,181 +8,85 @@ const formatToDateString = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-const CalendarWrapper = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 1000;
-
-  @media screen and (max-width: 991px) {
-    max-width: 350px;
-  }
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 12px 20px;
-  background-color: var(--primary-color-500);
-  color: white;
-  font-weight: 500;
-
-  @media screen and (max-width: 991px) {
-    padding: 8px 16px;
-  }
-`;
-
-const Col = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  text-align: center;
-`;
-
-const Icon = styled.div`
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: white;
-`;
-
-const DaysRow = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 10px 0;
-  background-color: #f1f1f1;
-  font-weight: 400;
-  font-size: 14px;
-  margin-bottom: 10px;
-
-  @media screen and (max-width: 991px) {
-    font-size: 0.8rem;
-  }
-`;
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const Row = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const Cell = styled.div`
-  flex: 1;
-  min-height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-
-  ${({ isDisabled, isOutOfMonth }) =>
-    (isDisabled || isOutOfMonth) &&
-    `
-    cursor: auto;
-    color: #aaa;
-    background-color: white ;
-  `}
-
-  &:hover .number {
-    background-color: var(--primary-color-500);
-    color: white;
-  }
-
-  @media screen and (max-width: 991px) {
-    font-size: 0.8rem;
-  }
-`;
-
-const Number = styled.span`
-  padding: 5px;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(240, 240, 240);
-  transition: background-color 0.2s ease, color 0.2s ease;
-  &:hover {
-    background-color: var(--primary-color-500);
-    color: white;
-  }
-
-  @media screen and (max-width: 991px) {
-    width: 35px;
-    height: 35px;
-  }
-`;
-
-const Calendar = ({ onDateClick, isDateDisabled }) => {
+export default function Calendar({
+  onDateClick,
+  isDateDisabled,
+  showCalendar,
+  setShowCalendar,
+}) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const componentRef = useRef(null);
+
+  const handleMonthChange = (delta) => {
+    setCurrentDate((prev) => {
+      const newDate = new Date(prev);
+      newDate.setMonth(newDate.getMonth() + delta);
+      return newDate;
+    });
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target)
+      ) {
+        setShowCalendar(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [componentRef]);
 
   const renderHeader = () => (
-    <Header>
-      <Col>
-        <Icon
-          onClick={() =>
-            setCurrentDate((prevDate) => {
-              const newDate = new Date(prevDate);
-              newDate.setMonth(newDate.getMonth() - 1);
-              return newDate;
-            })
-          }
-        >
-          <FaChevronCircleLeft />
-        </Icon>
-      </Col>
-      <Col>
+    <div className="flex justify-between w-full p-4 bg-primary-700 text-white font-medium font-nunito text-sm sm:text-base">
+      <div
+        className="flex-1 flex justify-start items-center cursor-pointer text-2xl"
+        onClick={() => handleMonthChange(-1)}
+      >
+        <FaChevronCircleLeft />
+      </div>
+      <div className="flex-1 flex justify-center items-center text-center text-lg">
         {currentDate.toLocaleDateString('en-US', {
           month: 'long',
           year: 'numeric',
         })}
-      </Col>
-      <Col>
-        <Icon
-          onClick={() =>
-            setCurrentDate((prevDate) => {
-              const newDate = new Date(prevDate);
-              newDate.setMonth(newDate.getMonth() + 1);
-              return newDate;
-            })
-          }
-        >
-          <FaChevronCircleRight />
-        </Icon>
-      </Col>
-    </Header>
+      </div>
+      <div
+        className="flex-1 flex justify-end items-center cursor-pointer text-2xl"
+        onClick={() => handleMonthChange(1)}
+      >
+        <FaChevronCircleRight />
+      </div>
+    </div>
   );
 
   const renderDays = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     return (
-      <DaysRow>
+      <div className="flex w-full py-2 bg-gray-100 text-[14px] sm:text-[13px] font-normal mb-0">
         {days.map((day) => (
-          <Col key={day}>{day}</Col>
+          <div key={day} className="flex-1 text-center">
+            {day}
+          </div>
         ))}
-      </DaysRow>
+      </div>
     );
   };
 
   const renderCells = () => {
-    const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    const monthStart = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      1
+    );
+    const monthEnd = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    );
     const startDate = new Date(monthStart);
     startDate.setDate(startDate.getDate() - startDate.getDay());
     const endDate = new Date(monthEnd);
@@ -201,31 +104,49 @@ const Calendar = ({ onDateClick, isDateDisabled }) => {
         const isOutOfMonth = dayClone.getMonth() !== currentDate.getMonth();
 
         days.push(
-          <Cell
+          <div
             key={formattedDate}
-            isDisabled={isDisabled}
-            isOutOfMonth={isOutOfMonth}
             onClick={() => !isDisabled && onDateClick(formattedDate)}
+            className={`flex-1 min-h-[50px] flex items-center justify-center text-sm sm:text-xs cursor-pointer transition m-1
+              ${isDisabled || isOutOfMonth ? 'text-gray-400 bg-white cursor-default' : 'bg-white'}
+               hover:text-white`}
           >
-            <Number>{dayClone.getDate()}</Number>
-          </Cell>
+            <span
+              className={`flex items-center justify-center w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-gray-200 transition
+                ${isDisabled || isOutOfMonth ? 'bg-white' : ''}
+                hover:bg-primary-500 hover:text-white`}
+            >
+              {dayClone.getDate()}
+            </span>
+          </div>
         );
         day.setDate(day.getDate() + 1);
       }
-      rows.push(<Row key={day.toISOString()}>{days}</Row>);
+
+      rows.push(
+        <div key={day.toISOString()} className="flex w-full">
+          {days}
+        </div>
+      );
       days = [];
     }
 
-    return <Body>{rows}</Body>;
+    return <div className="flex flex-col w-full">{rows}</div>;
   };
 
   return (
-    <CalendarWrapper>
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
-    </CalendarWrapper>
+    <div
+      className="fixed inset-0 z-[1000] bg-black/60 flex items-center justify-center px-4 font-nunito"
+      onClick={() => setShowCalendar(false)}
+    >
+      <div
+        className="w-full max-w-[360px] sm:max-w-[350px] bg-white rounded-lg shadow-lg overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {renderHeader()}
+        {renderDays()}
+        {renderCells()}
+      </div>
+    </div>
   );
-};
-
-export default Calendar;
+}

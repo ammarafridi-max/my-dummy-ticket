@@ -1,71 +1,32 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import { HiOutlinePlus, HiOutlineMinus } from 'react-icons/hi2';
+import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 
 export default function FAQAccordion({ question, children }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
-  function toggleAnswer() {
-    setShowAnswer((show) => !show);
-  }
-
   return (
-    <AccordionContainer>
-      <QuestionDiv showAnswer={showAnswer} onClick={toggleAnswer}>
-        <span>{question}</span>
-        {showAnswer ? <HiOutlineMinus /> : <HiOutlinePlus />}
-      </QuestionDiv>
-      <AnswerDiv showAnswer={showAnswer}>{children}</AnswerDiv>
-    </AccordionContainer>
+    <div className="w-full mb-5">
+      <button
+        onClick={() => setShowAnswer((prev) => !prev)}
+        className={`w-full rounded-lg px-5 py-3 grid grid-cols-[1fr_auto] gap-4 items-center text-left text-md duration-300 cursor-pointer ${
+          showAnswer
+            ? 'bg-primary-500 text-white'
+            : 'bg-gray-100 text-black hover:bg-primary-100 hover:shadow-sm'
+        }`}
+      >
+        <span className="text-base sm:text-lg">{question}</span>
+        {showAnswer ? (
+          <HiOutlineMinus className="text-xl sm:text-2xl" />
+        ) : (
+          <HiOutlinePlus className="text-xl sm:text-2xl" />
+        )}
+      </button>
+
+      {showAnswer && (
+        <div className="font-nunito mt-3 px-5 text-gray-700 text-md sm:text-lg duration-300">
+          {children}
+        </div>
+      )}
+    </div>
   );
 }
-
-const AccordionContainer = styled.div`
-  margin-bottom: 20px;
-  width: 100%;
-`;
-
-const QuestionDiv = styled.div`
-  width: 100%;
-  background-color: ${({ showAnswer }) =>
-    showAnswer ? 'var(--primary-color-500)' : 'var(--grey-color-100)'};
-  color: ${({ showAnswer }) => (showAnswer ? 'white' : 'black')};
-  border-radius: 10px;
-  padding: 12.5px 25px;
-  display: grid;
-  grid-template-columns: 11fr auto;
-  gap: 15px;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 30px;
-  transition-duration: 0.3s;
-  box-sizing: border-box;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${({ showAnswer }) =>
-      showAnswer ? 'var(--primary-color-500)' : 'var(--grey-color-200)'};
-  }
-
-  & span {
-    font-size: 18px;
-  }
-
-  @media screen and (max-width: 991px) {
-    font-size: 25px;
-    & span {
-      font-size: 17px;
-    }
-  }
-`;
-
-const AnswerDiv = styled.div`
-  padding: ${({ showAnswer }) =>
-    showAnswer ? '20px 25px 10px 25px' : '0px 25px'};
-  height: ${({ showAnswer }) => (showAnswer ? 'fit-content' : '0px')};
-  overflow: hidden;
-  transition-duration: 0.3s;
-  color: black;
-  font-size: 17px;
-  font-weight: 300;
-`;

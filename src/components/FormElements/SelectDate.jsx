@@ -1,44 +1,13 @@
-'use client';
 import { useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Calendar from './Calendar';
-import { CalendarDaysIcon } from 'lucide-react';
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 0px 15px;
-  border-radius: var(--input-radius-md);
-  transition-duration: 0.3s;
-  position: relative;
-  margin: 0;
-  box-shadow: var(--input-box-shadow);
-  -webkit-box-shadow: var(--input-box-shadow);
-  -moz-box-shadow: var(--input-box-shadow);
-`;
-
-const Icon = styled(CalendarDaysIcon)`
-  font-size: 16px;
-  margin: 0;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  padding: 12px 15px;
-  padding-right: 0;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  overflow: hidden;
-`;
+import InputWithIcon from './InputWithIcon';
 
 export default function SelectDate({
   selectedDate,
   onDateSelect,
   minDate,
   placeholder,
+  icon,
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const componentRef = useRef(null);
@@ -58,32 +27,26 @@ export default function SelectDate({
     };
   }, [componentRef]);
 
-  const handleDateClick = (date) => {
-    onDateSelect(date);
-    setShowCalendar(false);
-  };
-
-  const isDateDisabled = (date) => {
-    return minDate && date < minDate;
-  };
-
   return (
     <div ref={componentRef}>
-      <Wrapper>
-        <CalendarDaysIcon size={22} />
-        <Input
-          type="text"
-          placeholder={placeholder || 'Select date...'}
-          value={selectedDate}
-          onFocus={() => setShowCalendar(true)}
-          readOnly
-        />
-      </Wrapper>
+      <InputWithIcon
+        icon={icon}
+        type="text"
+        placeholder={placeholder || 'Select date...'}
+        value={selectedDate}
+        onFocus={() => setShowCalendar(true)}
+        readOnly
+      />
       {showCalendar && (
         <div>
           <Calendar
-            onDateClick={handleDateClick}
-            isDateDisabled={isDateDisabled}
+            onDateClick={(date) => {
+              onDateSelect(date);
+              setShowCalendar(false);
+            }}
+            showCalendar={showCalendar}
+            setShowCalendar={setShowCalendar}
+            isDateDisabled={(date) => minDate && date < minDate}
           />
         </div>
       )}

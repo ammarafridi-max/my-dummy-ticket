@@ -1,23 +1,12 @@
 import { FaEnvelope } from 'react-icons/fa';
-import styled from 'styled-components';
-import Input from './Input';
 import Label from './Label';
-
-const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  @media screen and (max-width: 991px) {
-    width: 100%;
-  }
-`;
+import InputWithIcon from './InputWithIcon';
 
 export default function Email({ email, handleEmailChange }) {
   return (
-    <Wrapper>
+    <div className="w-full mt-3 flex flex-col">
       <Label htmlFor="email">Email Address</Label>
-      <Input
+      <InputWithIcon
         type="email"
         value={email}
         onChange={handleEmailChange}
@@ -28,6 +17,6 @@ export default function Email({ email, handleEmailChange }) {
         icon={<FaEnvelope />}
         placeholder="Enter email address"
       />
-    </Wrapper>
+    </div>
   );
 }

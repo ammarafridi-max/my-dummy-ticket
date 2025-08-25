@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+@import 'tailwindcss';
+
 :root {
   --primary-color-100: #e0f7f6; /* subtle, light background */
   --primary-color-200: #b8ecea;
@@ -38,25 +44,44 @@
   --input-box-shadow-sm-focus: 0px 0px 8px 0px var(--grey-color-600);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Nunito Variable';
+@theme {
+  --color-primary-50: #e5eef8;
+  --color-primary-100: #e0f7f6;
+  --color-primary-200: #b8ecea;
+  --color-primary-300: #89e0de;
+  --color-primary-400: #56d0cd;
+  --color-primary-500: #1fb7ae; /* Base */
+  --color-primary-600: #1aa298;
+  --color-primary-700: #168d83;
+  --color-primary-800: #12796f;
+  --color-primary-900: #0e655d;
+  --color-accent-50: #e2f7fb;
+  --color-accent-100: #ffece8;
+  --color-accent-200: #ffd0c5;
+  --color-accent-300: #ffb3a1;
+  --color-accent-400: #ff8f75;
+  --color-accent-500: #ff603a; /* Base */
+  --color-accent-600: #e7441d;
+  --color-accent-700: #c42700;
+  --color-accent-800: #a12000;
+  --color-accent-900: #701700;
+  --font-nunito: 'Nunito Variable';
+  --font-merriweather: 'Merriweather';
+  --rounded-input-sm: 5px;
+  --rounded-input-md: 8px;
+  --rounded-input-lg: 10px;
+  --input-box-shadow: 0px 0px 5px -1px var(--grey-color-600);
+  --input-box-shadow-sm: 0px 0px 5px -1px var(--grey-color-600);
+  --input-box-shadow-focus: 0px 0px 8px 0px var(--grey-color-600);
+  --input-box-shadow-sm-focus: 0px 0px 8px 0px var(--grey-color-600);
+  --form-shadow: 0px 0px 20px 1px rgba(219, 219, 219, 1);
+  --flight-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  --flight-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
 body {
   overflow-x: hidden;
   background-color: rgb(255, 255, 255);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Merriweather' !important;
 }
 
 input,
@@ -66,40 +91,10 @@ select,
 option,
 p,
 a {
-  font-weight: 400;
-  font-size: 14px;
   font-family: 'Nunito Variable';
 }
 
-p {
-  font-size: 16px;
-  padding: 0;
-  margin: 0;
-  font-weight: 400;
-}
-
-p.small {
-  font-size: 15px;
-}
-
-p.large {
-  font-size: 17px;
-}
-
-p.x-large {
-  font-size: 18px;
-}
-
-.semi-bold {
-  font-weight: 500;
-}
-
-.bold {
-  font-weight: 600;
-}
-
 a {
-  color: var(--primary-color-700);
   text-decoration: none;
 }
 

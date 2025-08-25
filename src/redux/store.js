@@ -1,16 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import availableFlightsReducer from './slices/flights';
-import selectedFlightReducer from './slices/selectFlight';
+import flightsSlice from './slices/flights';
 import formDetailsReducer from './slices/fetchTicketDetails';
-import createTicketReducer from './slices/createTicket';
-import passengerDetailsReducer from './slices/passengerDetailsSlice';
+import stripePaymentReducer from './slices/stripePayment';
+import ticketFormSlice from './slices/ticketFormSlice';
 
 const rootReducer = combineReducers({
-  availableFlights: availableFlightsReducer,
-  flight: selectedFlightReducer,
+  flights: flightsSlice,
+  ticketForm: ticketFormSlice,
   formDetails: formDetailsReducer,
-  createTicket: createTicketReducer,
-  passengerDetails: passengerDetailsReducer,
+  payment: stripePaymentReducer,
 });
 
 const store = configureStore({
