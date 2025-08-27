@@ -6,6 +6,7 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import Layout from './components/Layout';
 import BookingLayout from './components/BookingLayout';
 import Home from './pages/Home';
+import FlightReservation from './pages/FlightReservation';
 import PageNotFound from './pages/PageNotFound';
 import FAQ from './pages/FAQ';
 import SelectFlights from './pages/SelectFlights';
@@ -28,7 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="flight-reservation" element={<FlightReservation />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="booking" element={<BookingLayout />}>
               <Route path="select-flights" element={<SelectFlights />} />
@@ -40,6 +41,7 @@ function App() {
               element={<TermsAndConditions />}
             />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

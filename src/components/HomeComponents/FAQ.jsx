@@ -3,7 +3,7 @@ import SectionTitle from '../SectionTitle';
 import PrimarySection from '../PrimarySection';
 import Container from '../Container';
 import FAQAccordion from '../FAQAccordion';
-import PrimaryButton from '../PrimaryButton';
+import PrimaryLink from '../PrimaryLink';
 
 export default function FAQ() {
   return (
@@ -26,9 +26,7 @@ export default function FAQ() {
           }
         })}
         <div className="flex items-center justify-center">
-          <PrimaryButton as="a" mt="30px" href="/faq">
-            Read More FAQs
-          </PrimaryButton>
+          <PrimaryLink to="/faq">Read More FAQs</PrimaryLink>
         </div>
       </Container>
     </PrimarySection>

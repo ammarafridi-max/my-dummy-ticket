@@ -3,6 +3,7 @@ import Container from '../Container';
 import SectionTitle from '../SectionTitle';
 import PrimaryButton from '../PrimaryButton';
 import Paragraph from '../Paragraph';
+import PrimaryLink from '../PrimaryLink';
 
 export default function Contact() {
   return (
@@ -14,20 +15,20 @@ export default function Contact() {
             <SectionTitle subtitle="Still got questions?" mb={5}>
               Contact Us Now!
             </SectionTitle>
-            <p className="text-xl font-nunito font-light">
+            <p className="text-lg font-nunito font-light mb-5">
               Still have questions or doubts about our service? Feel free to
               send us an email. We'd be happy to help you out.
             </p>
-            <PrimaryButton href="mailto:info@mydummyticket.ae" className="mt-5">
+            <PrimaryLink to="mailto:info@mydummyticket.ae">
               Send Us An Email
-            </PrimaryButton>
+            </PrimaryLink>
           </div>
 
           {/* Image */}
           <div className="w-full md:w-2/5">
             <img
               src="/contact-img.webp"
-              alt="Contact Dummy Ticket 365 Now"
+              alt="Contact My Dummy Ticket Now"
               className="w-full h-full object-cover rounded-[5px_50px_5px_50px]"
             />
           </div>

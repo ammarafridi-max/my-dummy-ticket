@@ -6,7 +6,7 @@ export const pages = [
   { name: 'Benefits', link: '/#benefits' },
   { name: 'FAQs', link: '/#faq' },
   { name: 'Book Now', link: '/#form', cta: true },
-  { name: 'Email Us', link: 'mailto:info@dummyticket365.com' },
+  { name: 'Email Us', link: 'mailto:info@mydummyticket.ae' },
 ];
 
 export default function Navigation() {

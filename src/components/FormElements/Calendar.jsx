@@ -1,3 +1,9 @@
+import {
+  ChevronLeft,
+  ChevronRight,
+  CircleChevronLeft,
+  CircleChevronRight,
+} from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
 
@@ -41,25 +47,23 @@ export default function Calendar({
   }, [componentRef]);
 
   const renderHeader = () => (
-    <div className="flex justify-between w-full p-4 bg-primary-700 text-white font-medium font-nunito text-sm sm:text-base">
-      <div
-        className="flex-1 flex justify-start items-center cursor-pointer text-2xl"
-        onClick={() => handleMonthChange(-1)}
-      >
-        <FaChevronCircleLeft />
-      </div>
-      <div className="flex-1 flex justify-center items-center text-center text-lg">
+    <div className="flex justify-between items-center gap-3 w-full p-4 bg-gray-300 font-medium font-nunito text-sm sm:text-base">
+      <p className="flex-1 text-left text-md text-gray-800 font-bold">
         {currentDate.toLocaleDateString('en-US', {
           month: 'long',
           year: 'numeric',
         })}
-      </div>
-      <div
-        className="flex-1 flex justify-end items-center cursor-pointer text-2xl"
+      </p>
+      <ChevronLeft
+        size={28}
+        className="cursor-pointer duration-300 text-gray-400 hover:text-primary-700"
+        onClick={() => handleMonthChange(-1)}
+      />
+      <ChevronRight
+        size={28}
+        className="cursor-pointer duration-300 text-gray-400 hover:text-primary-700"
         onClick={() => handleMonthChange(1)}
-      >
-        <FaChevronCircleRight />
-      </div>
+      />
     </div>
   );
 
@@ -107,14 +111,12 @@ export default function Calendar({
           <div
             key={formattedDate}
             onClick={() => !isDisabled && onDateClick(formattedDate)}
-            className={`flex-1 min-h-[50px] flex items-center justify-center text-sm sm:text-xs cursor-pointer transition m-1
-              ${isDisabled || isOutOfMonth ? 'text-gray-400 bg-white cursor-default' : 'bg-white'}
-               hover:text-white`}
+            className="flex-1 min-h-[40px] flex items-center justify-center text-sm sm:text-xs transition m-1"
           >
             <span
-              className={`flex items-center justify-center w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-gray-200 transition
-                ${isDisabled || isOutOfMonth ? 'bg-white' : ''}
-                hover:bg-primary-500 hover:text-white`}
+              className={`flex items-center justify-center w-10 h-10 sm:w-9 sm:h-9 rounded-full  transition
+                ${isDisabled || isOutOfMonth ? 'text-gray-300 bg-white cursor-not-allowed' : 'bg-transparent border-1 border-gray-300 hover:bg-primary-500 hover:text-white hover:border-primary-500 cursor-pointer'}
+                 `}
             >
               {dayClone.getDate()}
             </span>

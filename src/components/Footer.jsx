@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
         <div>
           <div className="text-center text-white font-light text-[14px] md:text-[16px]">
-            © 2024 TRAVL Technologies. All Rights Reserved.
+            © 2025 TRAVL Technologies. All Rights Reserved.
           </div>
           <div className="flex items-center justify-center gap-2.5 text-[14px] font-bold text-white">
             <a href="/terms-and-conditions" className="color-white">

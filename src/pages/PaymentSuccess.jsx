@@ -11,6 +11,7 @@ import Container from '../components/Container';
 import Paragraph from '../components/Paragraph';
 import PageTitle from '../components/PageTitle';
 import Loading from '../components/Loading';
+import { formatDate } from '../utils/formatDate';
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
@@ -60,6 +61,7 @@ export default function PaymentSuccess() {
       currency={currency}
       amount={amount}
       sessionId={sessionId}
+      ticketData={ticketData}
     />
   );
 }
@@ -100,6 +102,7 @@ function Success({
   currency,
   amount,
   sessionId,
+  ticketData,
 }) {
   let price = 0;
   if (ticketValidity === '2 Days') {
@@ -111,7 +114,7 @@ function Success({
   }
 
   useEffect(() => {
-    if (currency && amount) {
+    if (currency && amount && import.meta.env.MODE === 'production') {
       trackPurchaseEvent({
         currency,
         value: amount,
@@ -141,11 +144,21 @@ function Success({
             </strong>{' '}
             has been successfully processed.
           </Text>
-          <Text textAlign="center" fontSize="22px" mb="25px">
-            You will recieve a receipt of your payment by email, followed by
-            your dummy ticket in a second email shortly afterwards. Please
-            remember to check your spam folder too.
-          </Text>
+          {!ticketData?.ticketDelivery?.immediate && (
+            <Text textAlign="center" fontSize="22px" mb="25px">
+              Your dummy ticket will be sent to your email address on{' '}
+              {formatDate(ticketData?.ticketDelivery?.deliveryDate)} since you
+              selected the later delivery option. An email regarding the same
+              has been sent your email address, as well.
+            </Text>
+          )}
+          {ticketData?.ticketDelivery?.immediate && (
+            <Text textAlign="center" fontSize="22px" mb="25px">
+              You will recieve a receipt of your payment by email, followed by
+              your dummy ticket in a second email shortly afterwards. Please
+              remember to check your spam folder too.
+            </Text>
+          )}
         </Container>
       </PrimarySection>
     </>

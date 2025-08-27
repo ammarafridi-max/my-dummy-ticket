@@ -44,8 +44,8 @@ export default function Form() {
     email,
     phoneNumber,
     ticketValidity,
-    receiveNow,
-    receiptDate,
+    deliverNow,
+    deliveryDate,
     message,
     passengerErrors,
     errorMessage,
@@ -72,7 +72,7 @@ export default function Form() {
         return true;
       }
 
-      if (!receiveNow && !receiptDate) {
+      if (!deliverNow && !deliveryDate) {
         return true;
       }
 
@@ -80,7 +80,7 @@ export default function Form() {
     };
 
     setIsSubmitDisabled(hasEmptyFields());
-  }, [passengers, email, phoneNumber, receiveNow, receiptDate]);
+  }, [passengers, email, phoneNumber, deliverNow, deliveryDate]);
 
   const handleUpdatePassenger = (index, field, value) => {
     dispatch(
@@ -149,13 +149,13 @@ export default function Form() {
         handleValidityChange={handleValidityChange}
       />
       <ReceiptOptions
-        receiveNow={receiveNow}
-        setReceiveNow={(value) =>
-          dispatch(updateField({ field: 'receiveNow', value }))
+        deliverNow={deliverNow}
+        setDeliverNow={(value) =>
+          dispatch(updateField({ field: 'deliverNow', value }))
         }
-        receiptDate={receiptDate}
-        setReceiptDate={(date) =>
-          dispatch(updateField({ field: 'receiptDate', value: date }))
+        deliveryDate={deliveryDate}
+        setDeliveryDate={(date) =>
+          dispatch(updateField({ field: 'deliveryDate', value: date }))
         }
       />
       <Message
@@ -168,7 +168,7 @@ export default function Form() {
       <PrimaryButton
         className="w-full mt-5"
         onClick={handleSubmit}
-        disabled={loading}
+        disabled={loading || isSubmitDisabled}
       >
         {loading ? 'Processing...' : 'Review Your Information'}
       </PrimaryButton>
@@ -338,21 +338,21 @@ function TicketValidityOptions({ ticketValidity }) {
 }
 
 function ReceiptOptions({
-  receiveNow,
-  receiptDate,
-  setReceiveNow,
-  setReceiptDate,
+  deliverNow,
+  deliveryDate,
+  setDeliverNow,
+  setDeliveryDate,
 }) {
   return (
     <div className="flex flex-col my-5">
-      <Label>Receive Ticket On</Label>
+      <Label>Deliver Ticket On</Label>
       <div>
         <div className="flex items-center gap-3 mb-1.25 text-[15px] font-nunito">
           <input
             type="radio"
             name="receiveTicket"
-            checked={receiveNow}
-            onChange={() => setReceiveNow(true)}
+            checked={deliverNow}
+            onChange={() => setDeliverNow(true)}
           />
           <span>I need it now</span>
         </div>
@@ -360,20 +360,20 @@ function ReceiptOptions({
           <input
             type="radio"
             name="receiveTicket"
-            checked={!receiveNow}
-            onChange={() => setReceiveNow(false)}
+            checked={!deliverNow}
+            onChange={() => setDeliverNow(false)}
           />
           <span>I need it on a later date</span>
         </div>
       </div>
-      {!receiveNow && (
+      {!deliverNow && (
         <FormRow>
           <FormItem>
             <SelectDate
-              selectedDate={receiptDate && formatDate(receiptDate)}
-              onDateSelect={setReceiptDate}
+              selectedDate={deliveryDate && formatDate(deliveryDate)}
+              onDateSelect={setDeliveryDate}
               minDate={new Date()}
-              placeholder="Select receipt date"
+              placeholder="Select delivery date"
             />
           </FormItem>
         </FormRow>

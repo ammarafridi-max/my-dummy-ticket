@@ -18,13 +18,13 @@ const initialState = {
   departureDate: '',
   returnDate: '',
   quantity: { adults: 1, children: 0, infants: 0 },
-  ticketPrice: 13,
+  ticketPrice: 49,
   passengers: [],
   email,
   phoneNumber,
   ticketValidity: '2 Days',
-  receiveNow: true,
-  receiptDate: '',
+  deliverNow: true,
+  deliveryDate: '',
   message: '',
   paymentStatus: 'UNPAID',
   departureFlight: '',
@@ -189,8 +189,8 @@ export const submitFormData = createAsyncThunk(
       departureFlight,
       returnFlight,
       ticketValidity,
-      receiveNow,
-      receiptDate,
+      deliverNow,
+      deliveryDate,
     } = state.ticketForm;
 
     const payload = {
@@ -206,9 +206,9 @@ export const submitFormData = createAsyncThunk(
       message,
       paymentStatus,
       ticketValidity,
-      ticketAvailability: {
-        immediate: receiveNow,
-        receiptDate: receiveNow ? null : receiptDate,
+      ticketDelivery: {
+        immediate: deliverNow,
+        deliveryDate: deliverNow ? null : deliveryDate,
       },
       flightDetails: {
         departureFlight,

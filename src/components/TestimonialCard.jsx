@@ -6,7 +6,7 @@ export default function TestimonialCard({
   purpose,
 }) {
   return (
-    <div className="min-w-80 w-full bg-gray-100 rounded-lg overflow-hidden relative py-7.5 px-7 shadow-md">
+    <div className="min-w-80 w-full bg-gray-100 rounded-lg relative py-7.5 px-7">
       <h3 className="text-lg text-left font-bold font-merriweather">{title}</h3>
       <p className="text-left font-light text-md my-5">{children}</p>
       <div className="w-full flex justify-start items-center">

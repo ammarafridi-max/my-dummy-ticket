@@ -8,10 +8,10 @@ export default function FAQAccordion({ question, children }) {
     <div className="w-full mb-5">
       <button
         onClick={() => setShowAnswer((prev) => !prev)}
-        className={`w-full rounded-lg px-5 py-3 grid grid-cols-[1fr_auto] gap-4 items-center text-left text-md duration-300 cursor-pointer ${
+        className={`w-full rounded-lg px-5 py-3 grid grid-cols-[1fr_auto] gap-4 items-center text-left text-md duration-300 cursor-pointer shadow-lg ${
           showAnswer
             ? 'bg-primary-500 text-white'
-            : 'bg-gray-100 text-black hover:bg-primary-100 hover:shadow-sm'
+            : 'bg-gray-100 text-black hover:shadow-sm'
         }`}
       >
         <span className="text-base sm:text-lg">{question}</span>

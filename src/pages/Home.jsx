@@ -11,11 +11,6 @@ import Contact from '../components/HomeComponents/Contact';
 import Airlines from '../components/HomeComponents/Airlines';
 
 export default function Home() {
-  const canonical =
-    import.meta.env.MODE === 'development'
-      ? 'http://localhost:5173'
-      : 'https://www.dummyticket365.com';
-
   useEffect(() => {
     trackPageView();
   }, []);
@@ -26,7 +21,7 @@ export default function Home() {
         <title>
           Dummy Ticket from AED 49 | Verifiable, Quick | My Dummy Ticket
         </title>
-        <link rel="canonical" href={canonical} />
+        <link rel="canonical" href="https://www.mydummyticket.ae" />
         <meta name="robots" content="index, follow" />
         <meta
           name="description"

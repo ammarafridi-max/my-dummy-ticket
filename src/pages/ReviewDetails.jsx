@@ -10,39 +10,29 @@ import { trackBeginCheckout } from '../utils/analytics';
 import styled from 'styled-components';
 import PrimaryButton from '../components/PrimaryButton';
 
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
+function Box({ children }) {
+  return (
+    <div className="flex flex-col md:flex-row justify-between gap-3.75">
+      {children}
+    </div>
+  );
+}
 
-  @media (max-width: 991px) {
-    flex-direction: column;
-  }
-`;
+function Section({ children }) {
+  return (
+    <div className="w-full md:w-[50%] mb-3.75 p-5 rounded-xl shadow-md bg-white font-nunito">
+      {children}
+    </div>
+  );
+}
 
-const Section = styled.div`
-  width: 50%;
-  margin-bottom: 15px;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px 0px rgb(220, 220, 220);
-  background-color: white;
-  font-family: 'Nunito Variable';
-
-  @media (max-width: 991px) {
-    width: 100%;
-  }
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  font-weight: 700;
-  @media (max-width: 991px) {
-    font-size: 1.2rem;
-  }
-`;
+function SectionTitle({ children }) {
+  return (
+    <h2 className="text-[20px] md:text-2xl mb-2.5 pb-1.25 font-bold">
+      {children}
+    </h2>
+  );
+}
 
 const Detail = styled.div`
   margin-bottom: 4px;
@@ -86,7 +76,7 @@ export default function ReviewDetails() {
 
   const { adults = 0, children = 0 } = formDetails?.quantity || {};
   const totalQuantity = adults + children;
-  const ticketAvailability = formDetails?.ticketAvailability || {};
+  const ticketDelivery = formDetails?.ticketDelivery || {};
   const totalAmount = ticketPrice * totalQuantity;
 
   useEffect(() => {
@@ -145,10 +135,10 @@ export default function ReviewDetails() {
     }
 
     let availability;
-    if (formDetails?.ticketAvailability?.immediate === true) {
+    if (formDetails?.ticketDelivery?.immediate === true) {
       availability = true;
     }
-    if (formDetails?.ticketAvailability?.immediate === false) {
+    if (formDetails?.ticketDelivery?.immediate === false) {
       availability = false;
     }
 
@@ -171,19 +161,14 @@ export default function ReviewDetails() {
         </div>
 
         <div className="block md:flex md:gap-4">
-          <TicketAvailabilityDetail
-            validityText={validityText}
-            availability={availability}
-            ticketAvailability={ticketAvailability}
-          />
           <PassengerDetail groupedPassengers={groupedPassengers} />
+          <OrderTotalDetail
+            totalQuantity={totalQuantity}
+            totalAmount={totalAmount}
+            ticketPrice={ticketPrice}
+          />
         </div>
 
-        <OrderTotalDetail
-          totalQuantity={totalQuantity}
-          totalAmount={totalAmount}
-          ticketPrice={ticketPrice}
-        />
         <ProceedButton
           handleConfirm={handleConfirm}
           stripeStatus={stripeStatus}
@@ -196,7 +181,7 @@ export default function ReviewDetails() {
   return <>{content}</>;
 }
 
-function BookingDetailBox({ formDetails, statusText }) {
+function BookingDetailBox({ formDetails }) {
   return (
     <Section>
       <SectionTitle>Booking Details</SectionTitle>
@@ -221,9 +206,15 @@ function BookingDetailBox({ formDetails, statusText }) {
       <Detail>
         <span>Ticket Validity:</span> {formDetails.ticketValidity}
       </Detail>
-      {/* <Detail>
-        <span>Ticket Delivery:</span> {formDetails.ticketValidity}
-      </Detail> */}
+      <Detail>
+        <span>Delivery Type:</span>{' '}
+        {formDetails?.ticketDelivery?.immediate ? 'Immediate' : 'Later'}
+      </Detail>
+      {!formDetails?.ticketDelivery?.immediate && (
+        <Detail>
+          <span>Delivery Date:</span> {formatDate(ticketDelivery.deliveryDate)}
+        </Detail>
+      )}
     </Section>
   );
 }
@@ -270,23 +261,11 @@ function FlightDetailBox({
 function TicketAvailabilityDetail({
   validityText,
   availability,
-  ticketAvailability,
+  ticketDelivery,
 }) {
   return (
     <Section>
       <SectionTitle>Ticket Detail</SectionTitle>
-      <Detail>
-        <span>Ticket Validity:</span> {validityText}
-      </Detail>
-      <Detail>
-        <span>Delivery Type:</span> {availability ? 'Immediate' : 'Later'}
-      </Detail>
-      {!availability && (
-        <Detail>
-          <span>Delivery Date:</span>{' '}
-          {formatDate(ticketAvailability.receiptDate)}
-        </Detail>
-      )}
     </Section>
   );
 }
@@ -313,20 +292,18 @@ function PassengerDetail({ groupedPassengers }) {
 
 function OrderTotalDetail({ totalQuantity, ticketPrice, totalAmount }) {
   return (
-    <Box>
-      <Section>
-        <SectionTitle>Order Total</SectionTitle>
-        <Detail>
-          <span>Dummy Ticket Price:</span> AED {ticketPrice}
-        </Detail>
-        <Detail>
-          <span>Number of Passengers:</span> {totalQuantity}
-        </Detail>
-        <Detail>
-          <span>Total:</span> AED {totalAmount}
-        </Detail>
-      </Section>
-    </Box>
+    <Section>
+      <SectionTitle>Order Total</SectionTitle>
+      <Detail>
+        <span>Dummy Ticket Price:</span> AED {ticketPrice}
+      </Detail>
+      <Detail>
+        <span>Number of Passengers:</span> {totalQuantity}
+      </Detail>
+      <Detail>
+        <span>Total:</span> AED {totalAmount}
+      </Detail>
+    </Section>
   );
 }
 

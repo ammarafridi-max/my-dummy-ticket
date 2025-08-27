@@ -12,16 +12,17 @@ export default function FAQ() {
       <Helmet>
         <title>Frequently Asked Questions</title>
       </Helmet>
-      <PrimarySection py="50px" pb="10px" mb="0">
-        <Container>
-          <PageTitle textAlign="center" mb="50px">
-            Frequently Asked Questions
-          </PageTitle>
-          {faqArray.map((faq, i) => (
-            <FAQAccordion key={i} question={faq.question}>
-              {faq.answer}
-            </FAQAccordion>
-          ))}
+      <PrimarySection className="pt-10 pb-10">
+        <Container className="block md:grid md:grid-cols-[8fr_4fr]">
+          <div>
+            <PageTitle className="mb-10">Frequently Asked Questions</PageTitle>
+            {faqArray.map((faq, i) => (
+              <FAQAccordion key={i} question={faq.question}>
+                {faq.answer}
+              </FAQAccordion>
+            ))}
+          </div>
+          <div></div>
         </Container>
       </PrimarySection>
     </>

@@ -8,7 +8,7 @@ import PrimarySection from '../PrimarySection';
 
 export default function Benefits({ keyword = 'dummy ticket' }) {
   return (
-    <PrimarySection className="pt-20" id="benefits">
+    <PrimarySection className="pt-20 pb-20" id="benefits">
       <Container>
         <div className="block md:grid md:grid-cols-3 gap-10">
           <IconCard

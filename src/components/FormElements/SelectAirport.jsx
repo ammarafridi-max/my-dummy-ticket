@@ -17,7 +17,6 @@ export default function SelectAirport({ value, onChange, id, icon }) {
 
     try {
       setIsLoading(true);
-      console.log(BASEURL);
       const res = await fetch(`${BASEURL}/api/airports?keyword=${keyword}`);
       const data = await res.json();
       setAirports(data?.result || []);
