@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { formatISODuration } from '../../utils/formatISODuration';
 import { formatISOTime } from '../../utils/formatISOTime';
@@ -24,16 +25,17 @@ export default function Itinerary({ itinerary, airlineInfo }) {
 }
 
 function DepartureData({ itinerary }) {
+  console.log(itinerary);
+
   return (
     <div className="w-[80px] text-left md:text-center text-md md:text-lg font-bold leading-4.5">
-      {itinerary?.segments[0].departure.iataCode}
-      <br />
+      <p className="mb-1">{itinerary?.segments[0].departure.iataCode}</p>
       <span className="text-[13px] md:text-[14px] font-light">
-        {formatISOTime(itinerary?.segments[0].departure.at).date}
+        {format(new Date(itinerary?.segments[0].departure.at), 'dd MMM')}
       </span>
       <br />
       <span className="text-[13px] md:text-[14px] font-light">
-        {formatISOTime(itinerary?.segments[0].departure.at).time}
+        {format(new Date(itinerary?.segments[0].departure.at), 'HH:mm')}
       </span>
     </div>
   );
@@ -42,22 +44,25 @@ function DepartureData({ itinerary }) {
 function ReturnData({ itinerary }) {
   return (
     <div className="w-[80px] text-right md:text-center text-md md:text-lg font-bold leading-4.5">
-      {itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}
-      <br />
+      <p className="mb-1">
+        {itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}
+      </p>
       <span className="text-[13px] md:text-[14px] font-light">
-        {
-          formatISOTime(
+        {format(
+          new Date(
             itinerary.segments[itinerary.segments.length - 1].arrival.at
-          ).date
-        }
+          ),
+          'dd MMM'
+        )}
       </span>
       <br />
       <span className="text-[13px] md:text-[14px] font-light">
-        {
-          formatISOTime(
+        {format(
+          new Date(
             itinerary.segments[itinerary.segments.length - 1].arrival.at
-          ).time
-        }
+          ),
+          'HH:mm'
+        )}
       </span>
     </div>
   );

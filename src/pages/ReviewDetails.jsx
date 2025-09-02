@@ -7,16 +7,8 @@ import { fetchFormDetails } from '../redux/slices/fetchTicketDetails';
 import { formatDate } from '../utils/formatDate';
 import { Helmet } from 'react-helmet-async';
 import { trackBeginCheckout } from '../utils/analytics';
-import styled from 'styled-components';
 import PrimaryButton from '../components/PrimaryButton';
-
-function Box({ children }) {
-  return (
-    <div className="flex flex-col md:flex-row justify-between gap-3.75">
-      {children}
-    </div>
-  );
-}
+import Loading from '../components/Loading';
 
 function Section({ children }) {
   return (
@@ -34,49 +26,27 @@ function SectionTitle({ children }) {
   );
 }
 
-const Detail = styled.div`
-  margin-bottom: 4px;
-  font-size: 1rem;
-  display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 991px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const PassengerInfo = styled.div`
-  margin-bottom: 8px;
-  font-size: 1rem;
-
-  @media (max-width: 991px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const LoadingText = styled.p`
-  text-align: center;
-  font-size: 1.2rem;
-  color: var(--primary-color);
-`;
+function Detail({ children }) {
+  return (
+    <div className="mb-1 text-[0.9rem] md:text-[1rem] flex justify-between">
+      {children}
+    </div>
+  );
+}
 
 export default function ReviewDetails() {
   const dispatch = useDispatch();
   const { formDetails, status } = useSelector((state) => state.formDetails);
-  const { type, ticketPrice, quantity, ticketValidity } = useSelector(
+  const { type, ticketPrice, quantity } = useSelector(
     (state) => state.ticketForm
   );
   const { stripeStatus, data, stripeError } = useSelector(
     (state) => state.payment
   );
-  const navigate = useNavigate();
   const sessionId = localStorage.getItem('SESSION_ID');
 
-  let validityText = '2 Days';
-
-  const { adults = 0, children = 0 } = formDetails?.quantity || {};
-  const totalQuantity = adults + children;
-  const ticketDelivery = formDetails?.ticketDelivery || {};
+  const totalQuantity =
+    formDetails?.quantity?.adults + formDetails?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;
 
   useEffect(() => {
@@ -114,71 +84,41 @@ export default function ReviewDetails() {
     }
   }, [stripeStatus, data]);
 
-  let content;
+  const groupedPassengers =
+    formDetails?.passengers?.reduce((acc, passenger) => {
+      if (!acc[passenger.type]) {
+        acc[passenger.type] = [];
+      }
+      acc[passenger.type].push(passenger);
+      return acc;
+    }, {}) || {};
 
-  if (status === 'loading') {
-    content = <LoadingText>Loading...</LoadingText>;
-  } else if (status === 'succeeded' && formDetails) {
-    const groupedPassengers =
-      formDetails?.passengers?.reduce((acc, passenger) => {
-        if (!acc[passenger.type]) {
-          acc[passenger.type] = [];
-        }
-        acc[passenger.type].push(passenger);
-        return acc;
-      }, {}) || {};
+  if (status === 'loading') return <Loading />;
 
-    let statusText;
-
-    if (formDetails?.paymentStatus === 'UNPAID') {
-      statusText = 'Unpaid';
-    }
-
-    let availability;
-    if (formDetails?.ticketDelivery?.immediate === true) {
-      availability = true;
-    }
-    if (formDetails?.ticketDelivery?.immediate === false) {
-      availability = false;
-    }
-
-    content = (
-      <>
-        <Helmet>
-          <title>Review Your Information</title>
-        </Helmet>
-
-        <div className="block md:flex md:gap-4">
-          <BookingDetailBox formDetails={formDetails} statusText={statusText} />
-          <FlightDetailBox
-            from={formDetails.from}
-            to={formDetails.to}
-            departureDate={formDetails.departureDate}
-            returnDate={formDetails.returnDate}
-            departureFlight={formDetails.flightDetails.departureFlight}
-            returnFlight={formDetails.flightDetails.returnFlight}
-          />
-        </div>
-
-        <div className="block md:flex md:gap-4">
-          <PassengerDetail groupedPassengers={groupedPassengers} />
-          <OrderTotalDetail
-            totalQuantity={totalQuantity}
-            totalAmount={totalAmount}
-            ticketPrice={ticketPrice}
-          />
-        </div>
-
-        <ProceedButton
-          handleConfirm={handleConfirm}
-          stripeStatus={stripeStatus}
+  return (
+    <>
+      <Helmet>
+        <title>Review Your Information</title>
+      </Helmet>
+      <div className="block md:flex md:gap-4">
+        <BookingDetailBox formDetails={formDetails} />
+        <FlightDetailBox formDetails={formDetails} />
+      </div>
+      <div className="block md:flex md:gap-4">
+        <PassengerDetail groupedPassengers={groupedPassengers} />
+        <OrderTotalDetail
+          totalQuantity={totalQuantity}
           totalAmount={totalAmount}
+          ticketPrice={ticketPrice}
         />
-      </>
-    );
-  }
-
-  return <>{content}</>;
+      </div>
+      <ProceedButton
+        handleConfirm={handleConfirm}
+        stripeStatus={stripeStatus}
+        totalAmount={totalAmount}
+      />
+    </>
+  );
 }
 
 function BookingDetailBox({ formDetails }) {
@@ -186,25 +126,25 @@ function BookingDetailBox({ formDetails }) {
     <Section>
       <SectionTitle>Booking Details</SectionTitle>
       <Detail>
-        <span>Booking Date:</span> {formatDate(formDetails.createdAt)}
+        <span>Booking Date:</span> {formatDate(formDetails?.createdAt)}
       </Detail>
       <Detail>
-        <span>Email:</span> {formDetails.email}
+        <span>Email:</span> {formDetails?.email}
       </Detail>
       <Detail>
-        <span>Phone Number:</span> {formDetails.phoneNumber.code}
-        {formDetails.phoneNumber.digits}
+        <span>Phone Number:</span> {formDetails?.phoneNumber.code}
+        {formDetails?.phoneNumber.digits}
       </Detail>
-      {formDetails.message && (
+      {formDetails?.message && (
         <Detail>
-          <span>Message:</span> {formDetails.message}
+          <span>Message:</span> {formDetails?.message}
         </Detail>
       )}
       <Detail>
         <span>Status:</span> Payment Pending
       </Detail>
       <Detail>
-        <span>Ticket Validity:</span> {formDetails.ticketValidity}
+        <span>Ticket Validity:</span> {formDetails?.ticketValidity}
       </Detail>
       <Detail>
         <span>Delivery Type:</span>{' '}
@@ -212,60 +152,44 @@ function BookingDetailBox({ formDetails }) {
       </Detail>
       {!formDetails?.ticketDelivery?.immediate && (
         <Detail>
-          <span>Delivery Date:</span> {formatDate(ticketDelivery.deliveryDate)}
+          <span>Delivery Date:</span>{' '}
+          {formatDate(formDetails?.ticketDelivery?.deliveryDate)}
         </Detail>
       )}
     </Section>
   );
 }
 
-function FlightDetailBox({
-  from,
-  to,
-  departureDate,
-  returnDate,
-  departureFlight,
-  returnFlight,
-}) {
+function FlightDetailBox({ formDetails }) {
   return (
     <Section>
       <SectionTitle>Flight Information</SectionTitle>
       <Detail>
-        <span>From:</span> {from}
+        <span>From:</span> {formDetails?.from}
       </Detail>
       <Detail>
-        <span>To:</span> {to}
+        <span>To:</span> {formDetails?.to}
       </Detail>
       <Detail>
-        <span>Departure Date:</span> {formatDate(departureDate)}
+        <span>Departure Date:</span> {formatDate(formDetails?.departureDate)}
       </Detail>
       <Detail>
-        <span>Departure Flight:</span> {departureFlight.segments[0].carrierCode}{' '}
-        {departureFlight.segments[0].flightNumber}
+        <span>Departure Flight:</span>{' '}
+        {formDetails?.flightDetails?.departureFlight.segments[0].carrierCode}{' '}
+        {formDetails?.flightDetails?.departureFlight.segments[0].flightNumber}
       </Detail>
-      {returnDate && (
+      {formDetails?.returnDate && (
         <Detail>
-          <span>Return Date:</span> {formatDate(returnDate)}
+          <span>Return Date:</span> {formatDate(formDetails?.returnDate)}
         </Detail>
       )}
-      {returnFlight && (
+      {formDetails?.flightDetails.returnFlight && (
         <Detail>
-          <span>Return Flight:</span> {returnFlight.segments[0].carrierCode}{' '}
-          {returnFlight.segments[0].flightNumber}
+          <span>Return Flight:</span>{' '}
+          {formDetails?.flightDetails?.returnFlight.segments[0].carrierCode}{' '}
+          {formDetails?.flightDetails?.returnFlight.segments[0].flightNumber}
         </Detail>
       )}
-    </Section>
-  );
-}
-
-function TicketAvailabilityDetail({
-  validityText,
-  availability,
-  ticketDelivery,
-}) {
-  return (
-    <Section>
-      <SectionTitle>Ticket Detail</SectionTitle>
     </Section>
   );
 }
@@ -277,12 +201,12 @@ function PassengerDetail({ groupedPassengers }) {
       {Object.keys(groupedPassengers).map((type) => (
         <div key={type}>
           {groupedPassengers[type].map((passenger, index) => (
-            <PassengerInfo key={index}>
+            <Detail key={index}>
               <span>
                 {type} {index + 1}:
               </span>{' '}
               {passenger.title} {passenger.firstName} {passenger.lastName}
-            </PassengerInfo>
+            </Detail>
           ))}
         </div>
       ))}
@@ -298,7 +222,7 @@ function OrderTotalDetail({ totalQuantity, ticketPrice, totalAmount }) {
         <span>Dummy Ticket Price:</span> AED {ticketPrice}
       </Detail>
       <Detail>
-        <span>Number of Passengers:</span> {totalQuantity}
+        <span>Number of Passengers (excl. infants):</span> {totalQuantity}
       </Detail>
       <Detail>
         <span>Total:</span> AED {totalAmount}

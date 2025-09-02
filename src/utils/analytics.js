@@ -1,7 +1,9 @@
 import ReactGA from 'react-ga4';
 
 export function initializeGA() {
-  ReactGA.initialize(import.meta.env.VITE_GA4_MEASUREMENT_ID);
+  if (import.meta.env.MODE === 'production') {
+    ReactGA.initialize(import.meta.env.VITE_GA4_MEASUREMENT_ID);
+  }
 }
 
 export const trackPageView = (path = window.location.pathname) => {
@@ -16,14 +18,16 @@ export const trackFlightSearch = ({
   returnDate,
   quantity,
 }) => {
-  ReactGA.event('flight_search', {
-    type,
-    from,
-    to,
-    departureDate,
-    returnDate: returnDate || null,
-    passengers: quantity.adults + quantity.children,
-  });
+  if (import.meta.env.MODE === 'production') {
+    ReactGA.event('flight_search', {
+      type,
+      from,
+      to,
+      departureDate,
+      returnDate: returnDate || null,
+      passengers: quantity.adults + quantity.children,
+    });
+  }
 };
 
 export const trackFlightFormSubmission = ({
@@ -33,21 +37,25 @@ export const trackFlightFormSubmission = ({
   ticketValidity,
   flightDetails,
 }) => {
-  ReactGA.event('flight_form_submission', {
-    passengers,
-    email,
-    phoneNumber,
-    ticketValidity,
-    flightDetails,
-  });
+  if (import.meta.env.MODE === 'production') {
+    ReactGA.event('flight_form_submission', {
+      passengers,
+      email,
+      phoneNumber,
+      ticketValidity,
+      flightDetails,
+    });
+  }
 };
 
 export const trackBeginCheckout = ({ currency, value, items }) => {
-  ReactGA.event('begin_checkout', {
-    currency,
-    value,
-    items,
-  });
+  if (import.meta.env.MODE === 'production') {
+    ReactGA.event('begin_checkout', {
+      currency,
+      value,
+      items,
+    });
+  }
 };
 
 export const trackPurchaseEvent = ({
@@ -56,10 +64,12 @@ export const trackPurchaseEvent = ({
   sessionId,
   items = [{ item_name: 'Flight reservation', price: 13, quantity: 1 }],
 }) => {
-  ReactGA.event('purchase', {
-    transaction_id: sessionId,
-    value,
-    currency,
-    items,
-  });
+  if (import.meta.env.MODE === 'production') {
+    ReactGA.event('purchase', {
+      transaction_id: sessionId,
+      value,
+      currency,
+      items,
+    });
+  }
 };
