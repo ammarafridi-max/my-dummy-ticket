@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource-variable/nunito": "^5.2.5",
     "@fontsource/merriweather": "^5.2.7",
+    "@fontsource/outfit": "^5.2.6",
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.12",
     "axios": "^1.9.0",

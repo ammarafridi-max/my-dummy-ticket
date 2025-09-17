@@ -84,8 +84,8 @@ function Error() {
           <Text textAlign="center" fontSize="22px">
             If you've already made a payment, please contact us with your
             transaction details at{' '}
-            <Link href="mailto:info@dummyticket365.com">
-              info@dummyticket365.com
+            <Link href="mailto:info@mydummyticket.ae">
+              info@mydummyticket.ae
             </Link>
             .
           </Text>
