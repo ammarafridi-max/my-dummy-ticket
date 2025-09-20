@@ -9,7 +9,7 @@ export default function Counter({ ageGroup, age, onAdd, onSubtract, value }) {
           {age}
         </span>
       </div>
-      <div className="w-[45%] md:w-full flex justify-between items-center py-2.5 px-3 bg-white rounded-lg shadow-(--input-box-shadow)">
+      <div className="w-[45%] md:w-full flex justify-between items-center py-2.5 px-3 bg-white rounded-md border border-gray-300">
         <IoIosRemove
           onClick={onSubtract}
           className="text-[20px] cursor-pointer"

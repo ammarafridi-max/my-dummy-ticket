@@ -1,38 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BASEURL } from '../../config';
 import InputWithIcon from './InputWithIcon';
+import { useAirports } from '../../hooks/useAirports';
 
 export default function SelectAirport({ value, onChange, id, icon }) {
   const [query, setQuery] = useState(value || '');
-  const [airports, setAirports] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { airports, isLoadingAirports } = useAirports(query);
   const componentRef = useRef();
-
-  const fetchAirports = async (keyword) => {
-    if (keyword.trim().length < 3) {
-      setAirports([]);
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      const res = await fetch(`${BASEURL}/api/airports?keyword=${keyword}`);
-      const data = await res.json();
-      setAirports(data?.result || []);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
     setQuery(inputValue);
     onChange(null);
     setIsOpen(true);
-    fetchAirports(inputValue);
   };
 
   const handleSelect = (airport) => {
@@ -72,18 +53,18 @@ export default function SelectAirport({ value, onChange, id, icon }) {
 
       {/* Dropdown */}
       {isOpen && (
-        <ul className="absolute top-full left-0 w-full max-h-[300px] mt-2 overflow-y-auto rounded-md shadow-lg bg-white z-[1000] text-sm">
-          {isLoading && <ListItem>Loading airports...</ListItem>}
+        <ul className="absolute top-full left-0 w-full min-h-[150px] max-h-[300px] mt-2 overflow-y-auto rounded-md border border-gray-300 bg-white z-[1000] text-sm">
+          {isLoadingAirports && <ListItem>Loading airports...</ListItem>}
 
-          {!isLoading && query.trim().length < 3 && (
+          {!isLoadingAirports && query.trim().length < 3 && (
             <ListItem>Enter at least 3 characters</ListItem>
           )}
 
-          {!isLoading && query.trim().length >= 3 && airports.length === 0 && (
-            <ListItem>No airports found</ListItem>
-          )}
+          {!isLoadingAirports &&
+            query.trim().length >= 3 &&
+            airports.length === 0 && <ListItem>No airports found</ListItem>}
 
-          {!isLoading &&
+          {!isLoadingAirports &&
             airports.map((airport) => (
               <ListItem
                 key={airport.iataCode}

@@ -16,6 +16,16 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { useEffect } from 'react';
 import { initializeGA } from './utils/analytics';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ScrollToTop from './components/ScrollToTop';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 300 * 1000,
+    },
+  },
+});
 
 function App() {
   useEffect(() => {
@@ -25,26 +35,32 @@ function App() {
   return (
     <HelmetProvider>
       <ToastContainer transition={Zoom} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="flight-reservation" element={<FlightReservation />} />
-            <Route path="faq" element={<FAQ />} />
-            <Route path="booking" element={<BookingLayout />}>
-              <Route path="select-flights" element={<SelectFlights />} />
-              <Route path="review-details" element={<ReviewDetails />} />
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route
+                path="flight-reservation"
+                element={<FlightReservation />}
+              />
+              <Route path="faq" element={<FAQ />} />
+              <Route path="booking" element={<BookingLayout />}>
+                <Route path="select-flights" element={<SelectFlights />} />
+                <Route path="review-details" element={<ReviewDetails />} />
+              </Route>
+              <Route path="payment-successful" element={<PaymentSuccess />} />
+              <Route
+                path="terms-and-conditions"
+                element={<TermsAndConditions />}
+              />
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
-            <Route path="payment-successful" element={<PaymentSuccess />} />
-            <Route
-              path="terms-and-conditions"
-              element={<TermsAndConditions />}
-            />
-            <Route path="privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </HelmetProvider>
   );
 }

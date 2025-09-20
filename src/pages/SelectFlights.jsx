@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFlights } from '../redux/slices/flights';
 import {
   initializePassengers,
   transformItinerary,
   updateField,
 } from '../redux/slices/ticketFormSlice';
 import { Helmet } from 'react-helmet-async';
+import { useFlights } from '../hooks/useFlights';
 import FlightCard from '../components/FlightCard/FlightCard';
 import PrimaryButton from '../components/PrimaryButton';
 import Error from '../components/Error';
@@ -20,7 +20,14 @@ export default function SelectFlights() {
   const { type, from, to, departureDate, returnDate, quantity } = useSelector(
     (state) => state.ticketForm
   );
-  const { flights, status } = useSelector((state) => state.flights);
+  const { flights, isLoadingFlights, isErrorFlights } = useFlights({
+    type,
+    from,
+    to,
+    departureDate,
+    returnDate,
+    quantity,
+  });
 
   const handleToggleExpand = (id) => {
     setExpandedCardId((prevId) => (prevId === id ? null : id));
@@ -31,19 +38,6 @@ export default function SelectFlights() {
       dispatch(initializePassengers());
     }
   }, [dispatch, quantity]);
-
-  useEffect(() => {
-    dispatch(
-      fetchFlights({
-        type,
-        from,
-        to,
-        departureDate,
-        returnDate,
-        quantity,
-      })
-    );
-  }, [dispatch, type, from, to, departureDate, returnDate, quantity]);
 
   const showMoreFlights = () => {
     if (maxFlights < flights?.length) {
@@ -70,14 +64,12 @@ export default function SelectFlights() {
       <Helmet>
         <title>Select Flights</title>
       </Helmet>
-      {status === 'loading' &&
+      {isLoadingFlights &&
         Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} />)}
 
-      {status === 'succeeded' && flights?.length === 0 && (
-        <Error>No flights available</Error>
-      )}
+      {isErrorFlights && <FlightError />}
 
-      {status === 'succeeded' && flights?.length > 0 && (
+      {flights?.length > 0 && (
         <>
           {flights.slice(0, maxFlights).map((flight, index) => (
             <FlightCard
@@ -96,7 +88,8 @@ export default function SelectFlights() {
           )}
         </>
       )}
-      {status === 'failed' && <FlightError />}
+
+      {flights?.length === 0 && <Error>No flights available</Error>}
     </>
   );
 }

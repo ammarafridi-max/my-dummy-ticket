@@ -1,69 +1,30 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { BASEURL } from '../config';
-import { Check, X } from 'lucide-react';
+import { useDummyTicket } from '../hooks/useDummyTicket';
 import { trackPurchaseEvent } from '../utils/analytics';
+import { formatDate } from '../utils/formatDate';
+import { Helmet } from 'react-helmet-async';
+import { Check, X } from 'lucide-react';
 import styled from 'styled-components';
 import PrimarySection from '../components/PrimarySection';
 import Container from '../components/Container';
 import Paragraph from '../components/Paragraph';
 import PageTitle from '../components/PageTitle';
 import Loading from '../components/Loading';
-import { formatDate } from '../utils/formatDate';
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('sessionId');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [ticketData, setTicketData] = useState({});
-  const type = ticketData?.type;
-  const quantity =
-    ticketData?.quantity?.adults + ticketData?.quantity?.children;
-  const ticketValidity = ticketData?.ticketValidity;
-  const currency = ticketData?.amountPaid?.currency;
-  const amount = ticketData?.amountPaid?.amount;
+  const { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket } =
+    useDummyTicket(sessionId);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${BASEURL}/api/ticket/${sessionId}`);
-        if (!res.ok) throw new Error('Could not fetch data');
-        const data = await res.json();
+  if (isLoadingDummyTicket) return <Loading />;
 
-        if (data?.data?.paymentStatus === 'UNPAID') return setError(true);
+  if (isErrorDummyTicket || dummyTicket?.paymentStatus === 'UNPAUD')
+    return <Error />;
 
-        setError(false);
-        setTicketData(data.data);
-      } catch (error) {
-        console.error(error);
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchData();
-  }, [sessionId]);
-
-  if (isLoading) return <Loading />;
-
-  if (error) return <Error />;
-
-  return (
-    <Success
-      type={type}
-      quantity={quantity}
-      ticketValidity={ticketValidity}
-      currency={currency}
-      amount={amount}
-      sessionId={sessionId}
-      ticketData={ticketData}
-    />
-  );
+  return <Success sessionId={sessionId} dummyTicket={dummyTicket} />;
 }
 
 function Error() {
@@ -95,15 +56,14 @@ function Error() {
   );
 }
 
-function Success({
-  type,
-  quantity,
-  ticketValidity,
-  currency,
-  amount,
-  sessionId,
-  ticketData,
-}) {
+function Success({ sessionId, dummyTicket }) {
+  const type = dummyTicket?.type;
+  const quantity =
+    dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
+  const ticketValidity = dummyTicket?.ticketValidity;
+  const currency = dummyTicket?.amountPaid?.currency;
+  const amount = dummyTicket?.amountPaid?.amount;
+
   let price = 0;
   if (ticketValidity === '2 Days') {
     price = 49;
@@ -144,15 +104,15 @@ function Success({
             </strong>{' '}
             has been successfully processed.
           </Text>
-          {!ticketData?.ticketDelivery?.immediate && (
+          {!dummyTicket?.ticketDelivery?.immediate && (
             <Text textAlign="center" fontSize="22px" mb="25px">
               Your dummy ticket will be sent to your email address on{' '}
-              {formatDate(ticketData?.ticketDelivery?.deliveryDate)} since you
+              {formatDate(dummyTicket?.ticketDelivery?.deliveryDate)} since you
               selected the later delivery option. An email regarding the same
               has been sent your email address, as well.
             </Text>
           )}
-          {ticketData?.ticketDelivery?.immediate && (
+          {dummyTicket?.ticketDelivery?.immediate && (
             <Text textAlign="center" fontSize="22px" mb="25px">
               You will recieve a receipt of your payment by email, followed by
               your dummy ticket in a second email shortly afterwards. Please

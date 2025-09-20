@@ -25,8 +25,6 @@ export default function Itinerary({ itinerary, airlineInfo }) {
 }
 
 function DepartureData({ itinerary }) {
-  console.log(itinerary);
-
   return (
     <div className="w-[80px] text-left md:text-center text-md md:text-lg font-bold leading-4.5">
       <p className="mb-1">{itinerary?.segments[0].departure.iataCode}</p>

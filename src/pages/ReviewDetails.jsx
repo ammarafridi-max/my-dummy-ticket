@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { createStipePaymentLink } from '../redux/slices/stripePayment';
-import { fetchFormDetails } from '../redux/slices/fetchTicketDetails';
 import { formatDate } from '../utils/formatDate';
 import { Helmet } from 'react-helmet-async';
 import { trackBeginCheckout } from '../utils/analytics';
+import { useStripePaymentURL } from '../hooks/useStripePaymentURL';
 import PrimaryButton from '../components/PrimaryButton';
 import Loading from '../components/Loading';
+import { useDummyTicket } from '../hooks/useDummyTicket';
 
 function Section({ children }) {
   return (
@@ -35,25 +34,22 @@ function Detail({ children }) {
 }
 
 export default function ReviewDetails() {
-  const dispatch = useDispatch();
-  const { formDetails, status } = useSelector((state) => state.formDetails);
   const { type, ticketPrice, quantity } = useSelector(
     (state) => state.ticketForm
   );
-  const { stripeStatus, data, stripeError } = useSelector(
-    (state) => state.payment
-  );
   const sessionId = localStorage.getItem('SESSION_ID');
+  const {
+    url,
+    createStripePayment,
+    isLoadingStripePaymentURL,
+    isErrorStripePaymentURL,
+  } = useStripePaymentURL();
+  const { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket } =
+    useDummyTicket(sessionId);
 
   const totalQuantity =
-    formDetails?.quantity?.adults + formDetails?.quantity?.children;
+    dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;
-
-  useEffect(() => {
-    if (sessionId) {
-      dispatch(fetchFormDetails(sessionId));
-    }
-  }, [dispatch]);
 
   const handleConfirm = () => {
     if (sessionId) {
@@ -68,24 +64,24 @@ export default function ReviewDetails() {
           },
         ],
       });
-      dispatch(createStipePaymentLink({ ...formDetails, totalAmount }));
+      createStripePayment({ ...dummyTicket, totalAmount });
     }
   };
 
   useEffect(() => {
-    if (stripeError) {
-      toast.error('An error occurred while processing your payment');
+    if (isErrorStripePaymentURL) {
+      toast.error('Could not get payment URL. Please send us an email.');
     }
-  }, [stripeError]);
+  }, [isErrorStripePaymentURL]);
 
   useEffect(() => {
-    if (stripeStatus === 'succeeded' && data?.url) {
-      window.location.href = data.url;
+    if (url) {
+      window.location.href = url;
     }
-  }, [stripeStatus, data]);
+  }, [url]);
 
   const groupedPassengers =
-    formDetails?.passengers?.reduce((acc, passenger) => {
+    dummyTicket?.passengers?.reduce((acc, passenger) => {
       if (!acc[passenger.type]) {
         acc[passenger.type] = [];
       }
@@ -93,7 +89,7 @@ export default function ReviewDetails() {
       return acc;
     }, {}) || {};
 
-  if (status === 'loading') return <Loading />;
+  if (isLoadingDummyTicket) return <Loading />;
 
   return (
     <>
@@ -101,8 +97,8 @@ export default function ReviewDetails() {
         <title>Review Your Information</title>
       </Helmet>
       <div className="block md:flex md:gap-4">
-        <BookingDetailBox formDetails={formDetails} />
-        <FlightDetailBox formDetails={formDetails} />
+        <BookingDetailBox dummyTicket={dummyTicket} />
+        <FlightDetailBox dummyTicket={dummyTicket} />
       </div>
       <div className="block md:flex md:gap-4">
         <PassengerDetail groupedPassengers={groupedPassengers} />
@@ -114,80 +110,80 @@ export default function ReviewDetails() {
       </div>
       <ProceedButton
         handleConfirm={handleConfirm}
-        stripeStatus={stripeStatus}
+        isLoadingStripePaymentURL={isLoadingStripePaymentURL}
         totalAmount={totalAmount}
       />
     </>
   );
 }
 
-function BookingDetailBox({ formDetails }) {
+function BookingDetailBox({ dummyTicket }) {
   return (
     <Section>
       <SectionTitle>Booking Details</SectionTitle>
       <Detail>
-        <span>Booking Date:</span> {formatDate(formDetails?.createdAt)}
+        <span>Booking Date:</span> {formatDate(dummyTicket?.createdAt)}
       </Detail>
       <Detail>
-        <span>Email:</span> {formDetails?.email}
+        <span>Email:</span> {dummyTicket?.email}
       </Detail>
       <Detail>
-        <span>Phone Number:</span> {formDetails?.phoneNumber.code}
-        {formDetails?.phoneNumber.digits}
+        <span>Phone Number:</span> {dummyTicket?.phoneNumber.code}
+        {dummyTicket?.phoneNumber.digits}
       </Detail>
-      {formDetails?.message && (
+      {dummyTicket?.message && (
         <Detail>
-          <span>Message:</span> {formDetails?.message}
+          <span>Message:</span> {dummyTicket?.message}
         </Detail>
       )}
       <Detail>
         <span>Status:</span> Payment Pending
       </Detail>
       <Detail>
-        <span>Ticket Validity:</span> {formDetails?.ticketValidity}
+        <span>Ticket Validity:</span> {dummyTicket?.ticketValidity}
       </Detail>
       <Detail>
         <span>Delivery Type:</span>{' '}
-        {formDetails?.ticketDelivery?.immediate ? 'Immediate' : 'Later'}
+        {dummyTicket?.ticketDelivery?.immediate ? 'Immediate' : 'Later'}
       </Detail>
-      {!formDetails?.ticketDelivery?.immediate && (
+      {!dummyTicket?.ticketDelivery?.immediate && (
         <Detail>
           <span>Delivery Date:</span>{' '}
-          {formatDate(formDetails?.ticketDelivery?.deliveryDate)}
+          {formatDate(dummyTicket?.ticketDelivery?.deliveryDate)}
         </Detail>
       )}
     </Section>
   );
 }
 
-function FlightDetailBox({ formDetails }) {
+function FlightDetailBox({ dummyTicket }) {
   return (
     <Section>
       <SectionTitle>Flight Information</SectionTitle>
       <Detail>
-        <span>From:</span> {formDetails?.from}
+        <span>From:</span> {dummyTicket?.from}
       </Detail>
       <Detail>
-        <span>To:</span> {formDetails?.to}
+        <span>To:</span> {dummyTicket?.to}
       </Detail>
       <Detail>
-        <span>Departure Date:</span> {formatDate(formDetails?.departureDate)}
+        <span>Departure Date:</span> {formatDate(dummyTicket?.departureDate)}
       </Detail>
       <Detail>
         <span>Departure Flight:</span>{' '}
-        {formDetails?.flightDetails?.departureFlight.segments[0].carrierCode}{' '}
-        {formDetails?.flightDetails?.departureFlight.segments[0].flightNumber}
+        {dummyTicket?.flightDetails?.departureFlight.segments[0].carrierCode}{' '}
+        {dummyTicket?.flightDetails?.departureFlight.segments[0].flightNumber}
       </Detail>
-      {formDetails?.returnDate && (
+      {dummyTicket?.returnDate && (
         <Detail>
-          <span>Return Date:</span> {formatDate(formDetails?.returnDate)}
+          <span>Return Date:</span> {formatDate(dummyTicket?.returnDate)}
         </Detail>
       )}
-      {formDetails?.flightDetails.returnFlight && (
+      {dummyTicket?.flightDetails.returnFlight && (
         <Detail>
           <span>Return Flight:</span>{' '}
-          {formDetails?.flightDetails?.returnFlight.segments[0].carrierCode}{' '}
-          {formDetails?.flightDetails?.returnFlight.segments[0].flightNumber}
+          {dummyTicket?.flightDetails?.returnFlight.segments[0].carrierCode}{' '}
+          {dummyTicket?.flightDetails?.returnFlight.segments[0].flightNumber}
         </Detail>
       )}
     </Section>
@@ -231,14 +227,18 @@ function OrderTotalDetail({ totalQuantity, ticketPrice, totalAmount }) {
   );
 }
 
-function ProceedButton({ handleConfirm, stripeStatus, totalAmount }) {
+function ProceedButton({
+  handleConfirm,
+  isLoadingStripePaymentURL,
+  totalAmount,
+}) {
   return (
     <div className="flex items-center justify-center">
       <PrimaryButton
         onClick={handleConfirm}
-        disabled={stripeStatus === 'loading'}
+        disabled={isLoadingStripePaymentURL}
       >
-        {stripeStatus === 'loading'
+        {isLoadingStripePaymentURL
           ? 'Processing...'
           : `Proceed To Payment (AED ${totalAmount})`}
       </PrimaryButton>

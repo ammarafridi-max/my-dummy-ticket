@@ -12,7 +12,7 @@ export default function Hero({
       <Container className="block lg:flex py-2.5 lg:py-7.5 items-center justify-between gap">
         <div className="w-full lg:w-[55%]">
           <PageTitle>{title}</PageTitle>
-          <p className="text-[17px] lg:text-[20px] font-regular lg:font-light mt-4 mb-7">
+          <p className="text-[17px] md:text-[19px] font-regular lg:font-light leading-7 mt-4 mb-7">
             {subtitle}
           </p>
         </div>

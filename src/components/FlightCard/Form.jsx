@@ -314,7 +314,7 @@ function TicketValidityOptions({ ticketValidity }) {
   return (
     <div className="flex flex-col mt-3.75">
       <Label htmlFor="ticketValidity">Choose Ticket Validity</Label>
-      <div className="block md:flex rounded-md overflow-hidden shadow-(--input-box-shadow)">
+      <div className="block md:flex rounded-md overflow-hidden border-1 border-gray-300">
         {options.map((option, index) => (
           <Option key={index}>
             <input
