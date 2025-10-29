@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { faqArray } from '../data/faqs';
+import { faqArray, formatFaqArray } from '../data/faqs';
 import PrimarySection from '../components/PrimarySection';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
@@ -16,7 +16,7 @@ export default function FAQ() {
         <Container className="block md:grid md:grid-cols-[8fr_4fr]">
           <div>
             <PageTitle className="mb-10">Frequently Asked Questions</PageTitle>
-            {faqArray.map((faq, i) => (
+            {formatFaqArray(faqArray, 'dummy ticket').map((faq, i) => (
               <FAQAccordion key={i} question={faq.question}>
                 {faq.answer}
               </FAQAccordion>

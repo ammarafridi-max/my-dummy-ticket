@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BASEURL } from '../../config';
 import InputWithIcon from './InputWithIcon';
 import { useAirports } from '../../hooks/useAirports';
 

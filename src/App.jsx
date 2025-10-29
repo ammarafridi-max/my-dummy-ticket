@@ -1,11 +1,20 @@
 import '@fontsource-variable/nunito';
 import '@fontsource/merriweather';
+import { useEffect } from 'react';
+import { initializeGA } from './utils/analytics';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer, Zoom } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ScrollToTop from './components/ScrollToTop';
+
+// Layout
 import Layout from './components/Layout';
 import BookingLayout from './components/BookingLayout';
+
+// Pages
 import Home from './pages/Home';
+import DummyTicket from './pages/DummyTicket';
 import FlightReservation from './pages/FlightReservation';
 import PageNotFound from './pages/PageNotFound';
 import FAQ from './pages/FAQ';
@@ -14,10 +23,8 @@ import ReviewDetails from './pages/ReviewDetails';
 import PaymentSuccess from './pages/PaymentSuccess';
 import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-import { useEffect } from 'react';
-import { initializeGA } from './utils/analytics';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ScrollToTop from './components/ScrollToTop';
+import Sitemap from './pages/Sitemap';
+import OnwardTicket from './pages/OnwardTicket';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,22 +48,25 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
+              <Route path="dummy-ticket" element={<DummyTicket />} />
+              <Route path="onward-ticket" element={<OnwardTicket />} />
+              <Route path="*" element={<PageNotFound />} />
               <Route
                 path="flight-reservation"
                 element={<FlightReservation />}
               />
+              <Route path="sitemap" element={<Sitemap />} />
               <Route path="faq" element={<FAQ />} />
-              <Route path="booking" element={<BookingLayout />}>
-                <Route path="select-flights" element={<SelectFlights />} />
-                <Route path="review-details" element={<ReviewDetails />} />
-              </Route>
               <Route path="payment-successful" element={<PaymentSuccess />} />
               <Route
                 path="terms-and-conditions"
                 element={<TermsAndConditions />}
               />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="*" element={<PageNotFound />} />
+              <Route path="booking" element={<BookingLayout />}>
+                <Route path="select-flights" element={<SelectFlights />} />
+                <Route path="review-details" element={<ReviewDetails />} />
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

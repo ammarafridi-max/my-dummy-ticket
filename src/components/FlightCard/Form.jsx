@@ -265,35 +265,14 @@ function ContactDetails({
   );
 }
 
-const Option = styled.label`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  background-color: white;
-  position: relative;
-  flex: 1;
-  & input[type='radio'] {
-    position: absolute;
-    opacity: 0;
-  }
-  & input[type='radio']:checked + div {
-    background-color: var(--primary-color-500);
-    color: #fff;
-    border: 1px solid var(--primary-color-500);
-  }
-  & input[type='radio']:checked + div span {
-    color: var(--primary-color-100);
-  }
-  &:active {
-    background-color: #dee2e6;
-  }
-  &:hover {
-    background-color: #e9ecef;
-  }
-`;
-
 function TicketValidityOptions({ ticketValidity }) {
   const dispatch = useDispatch();
+
+  const options = [
+    { value: '2 Days', label: '2 Days', price: 49 },
+    { value: '7 Days', label: '7 Days', price: 69 },
+    { value: '14 Days', label: '14 Days', price: 79 },
+  ];
 
   const handleChange = (e) => {
     dispatch(
@@ -305,33 +284,45 @@ function TicketValidityOptions({ ticketValidity }) {
     );
   };
 
-  const options = [
-    { value: '2 Days', label: '2 Days', price: 49 },
-    { value: '7 Days', label: '7 Days', price: 69 },
-    { value: '14 Days', label: '14 Days', price: 79 },
-  ];
-
   return (
-    <div className="flex flex-col mt-3.75">
+    <div className="flex flex-col mt-3.5">
       <Label htmlFor="ticketValidity">Choose Ticket Validity</Label>
-      <div className="block md:flex rounded-md overflow-hidden border-1 border-gray-300">
-        {options.map((option, index) => (
-          <Option key={index}>
-            <input
-              type="radio"
-              name="ticketValidity"
-              value={option.value}
-              checked={ticketValidity === option.value}
-              onChange={handleChange} // Use the local handleChange
-            />
-            <div className="w-full h-full p-3 md:p-2.5 bg-transparent flex items-center text-[15px] font-semibold border-2 border-transparent">
-              {option.label} -{' '}
-              <span className="text-gray-400 font-medium ml-0.75">
-                AED {option?.price} / person
-              </span>
-            </div>
-          </Option>
-        ))}
+
+      <div className="block md:flex rounded-md overflow-hidden border border-gray-300 mt-2">
+        {options.map((option, index) => {
+          const isSelected = ticketValidity === option.value;
+
+          return (
+            <label
+              key={index}
+              className={`relative flex flex-1 cursor-pointer transition-colors duration-200 
+                ${isSelected ? 'bg-primary-500 text-white border-primary-500' : 'bg-white text-gray-800'}
+                hover:bg-gray-100 active:bg-gray-200`}
+            >
+              <input
+                type="radio"
+                name="ticketValidity"
+                value={option.value}
+                checked={isSelected}
+                onChange={handleChange}
+                className="absolute opacity-0"
+              />
+              <div
+                className={`w-full h-full p-3 md:p-2.5 flex items-center gap-1 text-[15px] font-semibold border-2 border-transparent`}
+              >
+                <span>{option.label}</span>
+                <span>-</span>
+                <span
+                  className={`text-sm font-medium ${
+                    isSelected ? 'text-primary-100' : 'text-gray-400'
+                  }`}
+                >
+                  AED {option.price} / person
+                </span>
+              </div>
+            </label>
+          );
+        })}
       </div>
     </div>
   );

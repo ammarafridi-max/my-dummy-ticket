@@ -9,9 +9,7 @@ export default function FlightReservation() {
   return (
     <>
       <Helmet>
-        <title>
-          Flight Reservation from AED 49 | Instant, Legit, Verifiable | Book Now
-        </title>
+        <title>Flight Reservation from AED 49 | Book Now!</title>
         <link
           rel="canonical"
           href="https://www.mydummyticket.ae/flight-reservation"
@@ -19,11 +17,11 @@ export default function FlightReservation() {
         <meta name="robots" content="index, follow" />
         <meta
           name="description"
-          content="Travelers use our flight reservations for various purposes, including visa applications. Book yours with My Dummy Ticket. Starting from AED 49."
+          content="Our flight reservations are used by travelers for various purposes, including visa applications. Book yours with MDT now. Starting from AED 49."
         />
       </Helmet>
       <Hero
-        title="Flight Reservations from AED 49. Instant & Legit."
+        title="Flight Reservation from AED 49. Instant & Legit."
         subtitle="Book your flight reservation with us and travel stress-free and with great flexibility. Our reservations are used by thousands every month and come with a valid PNR that can be verified on reservation systems."
       />
       <Process />

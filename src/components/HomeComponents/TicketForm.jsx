@@ -88,7 +88,7 @@ export default function TicketForm() {
 
   return (
     <form
-      className="m-0 py-7 px-4 md:p-6 rounded-2xl shadow-(--form-shadow)"
+      className="m-0 py-7 px-4 md:p-6 rounded-2xl shadow-(--form-shadow) bg-white"
       onSubmit={handleFormSubmit}
     >
       <div className="flex gap-2.5">

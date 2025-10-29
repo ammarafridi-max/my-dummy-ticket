@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { trackPageView } from '../utils/analytics';
+import { faqArray, formatFaqArray } from '../data/faqs';
+import { formatTestimonialsArray, testimonials } from '../data/testimonials';
 import Hero from '../components/HomeComponents/Hero';
 import Process from '../components/HomeComponents/Process';
 import About from '../components/HomeComponents/About';
@@ -8,7 +10,6 @@ import FAQ from '../components/HomeComponents/FAQ';
 import Benefits from '../components/HomeComponents/Benefits';
 import Testimonials from '../components/HomeComponents/Testimonials';
 import Contact from '../components/HomeComponents/Contact';
-import Airlines from '../components/HomeComponents/Airlines';
 
 export default function Home() {
   useEffect(() => {
@@ -32,9 +33,10 @@ export default function Home() {
       <Process />
       <About />
       <Benefits />
-      <Testimonials />
-      <FAQ />
-      <Airlines />
+      <Testimonials
+        testimonials={formatTestimonialsArray(testimonials, 'dummy ticket')}
+      />
+      <FAQ faqs={formatFaqArray(faqArray, 'dummy ticket')} />
       <Contact />
     </>
   );

@@ -1,11 +1,38 @@
 import { Link } from 'react-router-dom';
 
-export default function PrimaryLink({ children, ...props }) {
+export default function PrimaryLink({
+  children,
+  className = '',
+  disabled = false,
+  to,
+  size = 'medium',
+  ...props
+}) {
+  let newClassName =
+    className +
+    ' inline-block text-center text-white no-underline rounded-lg capitalize bg-accent-500 hover:bg-accent-600 border border-solid border-accent-500 cursor-pointer duration-300 disabled:bg-accent-500/50 disabled:opacity-60 disabled:cursor-auto disabled:hover:bg-accent-500';
+
+  if (size === 'large') {
+    newClassName +=
+      ' text-[15px] md:text-[18px] font-medium font-outfit py-3 px-5';
+  } else if (size === 'small') {
+    newClassName +=
+      ' text-[12px] md:text-[14px] font-light font-outfit py-2 px-4';
+  } else {
+    newClassName +=
+      ' text-[14px] md:text-[16px] font-regular font-outfit py-2.5 px-5';
+  }
+
+  if (disabled) {
+    return (
+      <span className={newClassName} aria-disabled="true" {...props}>
+        {children}
+      </span>
+    );
+  }
+
   return (
-    <Link
-      className="box-border text-center text-white text-[15px] no-underline font-semibold py-2.5 px-5 rounded-md capitalize bg-accent-500 hover:bg-accent-600 border border-solid border-accent-500 cursor-pointer duration-300 disabled:bg-accent-500 disabled:opacity-60 disabled:cursor-auto disabled:hover:bg-accent-500"
-      {...props}
-    >
+    <Link className={newClassName} to={to} {...props}>
       {children}
     </Link>
   );

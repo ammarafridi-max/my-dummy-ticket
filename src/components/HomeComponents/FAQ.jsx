@@ -1,13 +1,12 @@
-import { faqArray } from '../../data/faqs';
 import SectionTitle from '../SectionTitle';
 import PrimarySection from '../PrimarySection';
 import Container from '../Container';
 import FAQAccordion from '../FAQAccordion';
 import PrimaryLink from '../PrimaryLink';
 
-export default function FAQ() {
+export default function FAQ({ faqs }) {
   return (
-    <PrimarySection id="faq" className="pt-25">
+    <PrimarySection id="faq" className="pt-15">
       <Container>
         <SectionTitle
           textAlign="center"
@@ -16,7 +15,7 @@ export default function FAQ() {
         >
           Frequently Asked Questions
         </SectionTitle>
-        {faqArray.map((faq, i) => {
+        {faqs?.map((faq, i) => {
           while (i < 6) {
             return (
               <FAQAccordion key={i} question={faq.question}>
@@ -25,8 +24,10 @@ export default function FAQ() {
             );
           }
         })}
-        <div className="flex items-center justify-center">
-          <PrimaryLink to="/faq">Read More FAQs</PrimaryLink>
+        <div className="flex items-center justify-center mt-10">
+          <PrimaryLink size="small" to="/faq">
+            Read More FAQs
+          </PrimaryLink>
         </div>
       </Container>
     </PrimarySection>

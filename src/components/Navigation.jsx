@@ -5,36 +5,50 @@ export const pages = [
   { name: 'About', link: '/#about' },
   { name: 'Benefits', link: '/#benefits' },
   { name: 'FAQs', link: '/#faq' },
-  { name: 'Book Now', link: '/#form', cta: true },
   { name: 'Email Us', link: 'mailto:info@mydummyticket.ae' },
+  { name: 'Book Now', link: '/#form', cta: true },
 ];
 
 export default function Navigation() {
   return (
-    <header className="hidden lg:block bg-transparent py-2">
+    <header className="hidden lg:block bg-white/80 backdrop-blur-sm py-2 shadow-sm sticky top-0 z-50">
       <Container>
-        <nav className="flex items-center justify-between py-1.25">
-          <div className="w-[21%] p-0">
-            <a href="/">
+        <nav className="flex items-center justify-between py-2 font-outfit">
+          {/* Logo */}
+          <div className="w-[200px] flex-shrink-0">
+            <a href="/" className="block">
               <img
                 src="/logo.webp"
-                alt="My Dummy Ticket Logo"
-                title="My Dummy Ticket Logo"
-                className="w-full h-full object-contain"
+                alt="MDT Logo"
+                title="MDT"
+                className="w-full h-auto object-contain"
               />
             </a>
           </div>
-          <div className="w-auto flex items-center justify-between gap-5">
-            {pages.map((page, i) => (
-              <a
-                className="text-[17px] font-semibold text-gray-700 capitalize py-2.5 px-1.25 duration-300 hover:text-accent-500 last:pr-0"
-                key={i}
-                href={page.link}
-                title={page.name}
-              >
-                {page.name}
-              </a>
-            ))}
+
+          {/* Nav Links */}
+          <div className="flex items-center gap-7">
+            {pages.map((page, i) =>
+              page.cta ? (
+                <a
+                  key={i}
+                  href={page.link}
+                  title={page.name}
+                  className="bg-accent-500 text-white px-5 py-2 rounded-lg text-[16px] font-normal transition-all duration-300 hover:bg-[#e65e00]"
+                >
+                  {page.name}
+                </a>
+              ) : (
+                <a
+                  key={i}
+                  href={page.link}
+                  title={page.name}
+                  className="text-[16px] font-normal text-gray-700 capitalize transition-colors duration-300 hover:text-[#ff6b00]"
+                >
+                  {page.name}
+                </a>
+              )
+            )}
           </div>
         </nav>
       </Container>

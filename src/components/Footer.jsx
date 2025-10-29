@@ -4,32 +4,42 @@ import {
   FaApplePay,
   FaCcVisa,
   FaCcMastercard,
+  FaCircle,
 } from 'react-icons/fa';
 import Container from './Container';
 
 export default function Footer() {
   return (
-    <footer className="py-5 bg-primary-700">
-      <Container className="py-7.5 bg-transparent box-border font-nunito">
-        <div className="w-full gap-3 md:gap-5 mx-auto mb-3.5 pb-3.5 flex items-center justify-center border-b-1 border-solid border-gray-200 ">
+    <footer className="bg-gray-900 text-gray-300 font-nunito">
+      <Container className="py-10 md:py-12">
+        {/* Payment Icons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pb-6 border-b border-gray-700">
           {icons.map((icon, i) => (
-            <div key={i} className="text-white text-[35px] md:text-[40px]">
+            <div
+              key={i}
+              className="text-gray-300 text-[34px] md:text-[40px] hover:text-white transition-colors duration-200"
+            >
               {icon}
             </div>
           ))}
         </div>
-        <div>
-          <div className="text-center text-white font-light text-[14px] md:text-[16px]">
-            © 2025 TRAVL Technologies. All Rights Reserved.
+
+        {/* Links & Copyright */}
+        <div className="mt-6 space-y-3 text-center">
+          <div className="text-[14px] text-gray-400">
+            © 2025{' '}
+            <span className="text-white font-medium">TRAVL Technologies</span>.
+            All Rights Reserved.
           </div>
-          <div className="flex items-center justify-center gap-2.5 text-[14px] font-bold text-white">
-            <a href="/terms-and-conditions" className="color-white">
+
+          <div className="flex items-center justify-center flex-wrap gap-2 text-[14px] text-gray-400">
+            <FooterLink href="/terms-and-conditions">
               Terms & Conditions
-            </a>
-            <span>|</span>
-            <a href="/privacy-policy" className="color-white">
-              Privacy Policy
-            </a>
+            </FooterLink>
+            <FaCircle className="text-[5px]" />
+            <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+            <FaCircle className="text-[5px]" />
+            <FooterLink href="/sitemap">Sitemap</FooterLink>
           </div>
         </div>
       </Container>
@@ -37,10 +47,18 @@ export default function Footer() {
   );
 }
 
+function FooterLink({ href, children }) {
+  return (
+    <a href={href} className="hover:text-white transition-colors duration-200">
+      {children}
+    </a>
+  );
+}
+
 const icons = [
-  <FaStripe />,
-  <FaGooglePay />,
-  <FaApplePay />,
-  <FaCcVisa />,
-  <FaCcMastercard />,
+  <FaStripe key="stripe" />,
+  <FaGooglePay key="gpay" />,
+  <FaApplePay key="applepay" />,
+  <FaCcVisa key="visa" />,
+  <FaCcMastercard key="mastercard" />,
 ];
