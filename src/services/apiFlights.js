@@ -1,7 +1,7 @@
-import { BASEURL } from '../config';
+import { BACKEND } from '../config';
 
 export async function getFlightsApi(formData) {
-  const response = await fetch(`${BASEURL}/api/flights`, {
+  const response = await fetch(`${BACKEND}/api/flights`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

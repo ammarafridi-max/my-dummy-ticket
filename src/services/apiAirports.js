@@ -1,7 +1,7 @@
-import { BASEURL } from '../config';
+import { BACKEND } from '../config';
 
 export async function getAirportsApi(query) {
-  const res = await fetch(`${BASEURL}/api/airports?keyword=${query}`);
+  const res = await fetch(`${BACKEND}/api/airports?keyword=${query}`);
 
   if (!res.ok) {
     const err = await res.json();
