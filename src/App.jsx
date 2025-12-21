@@ -25,6 +25,9 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Sitemap from './pages/Sitemap';
 import OnwardTicket from './pages/OnwardTicket';
+import DummyTicketForSchengenVisa from './pages/DummyTicketForSchengenVisa';
+import BlogPost from './pages/BlogPost';
+import Blog from './pages/Blog';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,20 +52,17 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="dummy-ticket" element={<DummyTicket />} />
+              <Route path="dummy-ticket-schengen-visa" element={<DummyTicketForSchengenVisa />} />
               <Route path="onward-ticket" element={<OnwardTicket />} />
+              <Route path="flight-reservation" element={<FlightReservation />} />
               <Route path="*" element={<PageNotFound />} />
-              <Route
-                path="flight-reservation"
-                element={<FlightReservation />}
-              />
               <Route path="sitemap" element={<Sitemap />} />
               <Route path="faq" element={<FAQ />} />
               <Route path="payment-successful" element={<PaymentSuccess />} />
-              <Route
-                path="terms-and-conditions"
-                element={<TermsAndConditions />}
-              />
+              <Route path="terms-and-conditions" element={<TermsAndConditions />} />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="booking" element={<BookingLayout />}>
                 <Route path="select-flights" element={<SelectFlights />} />
                 <Route path="review-details" element={<ReviewDetails />} />
