@@ -6,10 +6,6 @@ export function initializeGA() {
   }
 }
 
-export const trackPageView = (path = window.location.pathname) => {
-  ReactGA.send({ hitType: 'pageview', page: path });
-};
-
 export const trackFlightSearch = ({
   type,
   from,
