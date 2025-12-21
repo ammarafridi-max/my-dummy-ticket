@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { BASEURL } from '../../config';
+import { BACKEND } from '../../config';
 import { formatISODuration } from '../../utils/formatISODuration';
 import { trackFlightFormSubmission } from '../../utils/analytics';
 
@@ -227,7 +227,7 @@ export const submitFormData = createAsyncThunk(
           returnFlight: payload.flightDetails?.returnFlight || null,
         },
       });
-      const res = await fetch(`${BASEURL}/api/ticket`, {
+      const res = await fetch(`${BACKEND}/api/ticket`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
