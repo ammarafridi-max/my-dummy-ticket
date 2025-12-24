@@ -1,45 +1,38 @@
-import {
-  HiOutlineClock,
-  HiOutlineCurrencyDollar,
-  HiCheck,
-} from 'react-icons/hi2';
 import Container from '../Container';
 import PrimarySection from '../PrimarySection';
+import SectionTitle from '../SectionTitle';
 
-export default function Benefits({ keyword = 'dummy ticket' }) {
+export default function Benefits({
+  title = 'Why Choose My Dummy Ticket?',
+  subtitle = 'Trusted supplier based in Dubai',
+  benefits,
+}) {
   return (
-    <PrimarySection className="pt-20" id="benefits">
+    <PrimarySection className="pt-5 pb-15 lg:pb-20 lg:pt-10" id="benefits">
       <Container>
+        <SectionTitle textAlign="center" subtitle={subtitle} mb="7">
+          {title}
+        </SectionTitle>
         <div className="flex flex-col gap-8 md:grid md:grid-cols-3 md:gap-10">
-          <IconCard
-            icon={<HiCheck />}
-            title="Reliable"
-            text={`We issue ${keyword}s through official airline systems, ensuring they are 100% genuine, verifiable, and widely accepted by embassies and consulates.`}
-          />
-          <IconCard
-            icon={<HiOutlineClock />}
-            title="Fast Delivery"
-            text={`With our fast and automated system, you’ll receive your verifiable ${keyword} by email within minutes—no long waits, no complications.`}
-          />
-          <IconCard
-            icon={<HiOutlineCurrencyDollar />}
-            title="Great Value"
-            text={`Starting from just USD 13, our ${keyword}s combine affordability with professional quality, helping travelers save money without compromising reliability.`}
-          />
+          {benefits.map((item, i) => (
+            <div className="w-full md:mb-0 font-outfit" key={i}>
+              <div className="w-10 h-10 flex items-center justify-center bg-white text-primary-500 border border-primary-500 text-md font-medium font-outfit rounded-full">
+                <item.icon />
+              </div>
+              <h3 className="text-[19px] lg:text-[20px] font-[400] capitalize my-4 p-0">
+                {item?.title}
+              </h3>
+              <p className="text-[16px] text-gray-900/70 font-light leading-6.5">{item?.text}</p>
+            </div>
+          ))}
         </div>
       </Container>
     </PrimarySection>
   );
 }
 
-function IconCard({ icon, title, text }) {
-  return (
-    <div className="w-full text-left md:text-center md:mb-0">
-      <div className="flex items-center justify-center w-fit text-2xl text-primary-500 bg-primary-50 p-3 md:mx-auto rounded-full overflow-hidden">
-        {icon}
-      </div>
-      <h3 className="text-lg mt-3 mb-2 p-0 font-medium font-outfit">{title}</h3>
-      <p className="text-[16px] font-light leading-6">{text}</p>
-    </div>
-  );
-}
+// function IconCard({ icon, title, text }) {
+//   return (
+
+//   );
+// }
