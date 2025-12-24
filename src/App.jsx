@@ -14,8 +14,9 @@ import BookingLayout from './components/BookingLayout';
 
 // Pages
 import Home from './pages/Home';
-import DummyTicket from './pages/DummyTicket';
 import FlightReservation from './pages/FlightReservation';
+import DummyTicketForSchengenVisa from './pages/DummyTicketForSchengenVisa';
+import OnwardTicket from './pages/OnwardTicket';
 import PageNotFound from './pages/PageNotFound';
 import FAQ from './pages/FAQ';
 import SelectFlights from './pages/SelectFlights';
@@ -24,8 +25,6 @@ import PaymentSuccess from './pages/PaymentSuccess';
 import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Sitemap from './pages/Sitemap';
-import OnwardTicket from './pages/OnwardTicket';
-import DummyTicketForSchengenVisa from './pages/DummyTicketForSchengenVisa';
 import BlogPost from './pages/BlogPost';
 import Blog from './pages/Blog';
 
@@ -51,7 +50,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="dummy-ticket" element={<DummyTicket />} />
               <Route path="dummy-ticket-schengen-visa" element={<DummyTicketForSchengenVisa />} />
               <Route path="onward-ticket" element={<OnwardTicket />} />
               <Route path="flight-reservation" element={<FlightReservation />} />

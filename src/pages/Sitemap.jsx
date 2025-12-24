@@ -12,8 +12,8 @@ const pages = [
     href: '/flight-reservation',
   },
   {
-    name: 'Dummy Ticket',
-    href: '/dummy-ticket',
+    name: 'Dummy Ticket For Schengen Visa',
+    href: '/dummy-ticket-schengen-visa',
   },
   {
     name: 'Onward Ticket',
@@ -22,6 +22,10 @@ const pages = [
   {
     name: 'Frequently Asked Questions',
     href: '/faq',
+  },
+  {
+    name: 'Blog',
+    href: '/blog',
   },
   {
     name: 'Terms and Conditions',
@@ -42,10 +46,9 @@ export default function Sitemap() {
 
           <ul className="mt-6 font-outfit list-disc list-inside text-gray-800 space-y-3 text-[16px]">
             {pages?.map((page, i) => (
-              <li key={i}>
-                <strong>{page?.name}</strong> —{' '}
-                <a href={page?.href} className="text-[#ff6b00] hover:underline">
-                  https://www.mydummyticket.ae{page?.href}
+              <li key={i} className="flex gap-3">
+                <a href={page?.href} className="text-accent-500 hover:underline">
+                  {page?.name}
                 </a>
               </li>
             ))}
