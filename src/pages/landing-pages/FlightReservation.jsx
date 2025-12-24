@@ -1,15 +1,15 @@
 import { lazy, Suspense } from 'react';
-import { faqArray, formatFaqArray } from '../data/faqs';
-import { testimonials } from '../data/testimonials';
+import { faqArray, formatFaqArray } from '../../data/faqs';
+import { testimonials } from '../../data/testimonials';
 import { Helmet } from 'react-helmet-async';
 import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi2';
-import Hero from '../components/HomeComponents/Hero';
-const Process = lazy(() => import('../components/HomeComponents/Process'));
-const About = lazy(() => import('../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../components/HomeComponents/Benefits'));
-const Testimonials = lazy(() => import('../components/HomeComponents/Testimonials'));
-const FAQ = lazy(() => import('../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../components/HomeComponents/Contact'));
+import Hero from '../../components/HomeComponents/Hero';
+const Process = lazy(() => import('../../components/HomeComponents/Process'));
+const About = lazy(() => import('../../components/HomeComponents/About'));
+const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
+const Testimonials = lazy(() => import('../../components/HomeComponents/Testimonials'));
+const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
+const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
 
 const keyword = 'flight reservation';
 

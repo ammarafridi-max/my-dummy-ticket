@@ -7,12 +7,12 @@ import {
   FaMoneyBillWave,
   FaShieldAlt,
 } from 'react-icons/fa';
-import Hero from '../components/HomeComponents/Hero';
-import Process from '../components/HomeComponents/Process';
-import Benefits from '../components/HomeComponents/Benefits';
-import About from '../components/HomeComponents/About';
-import FAQ from '../components/HomeComponents/FAQ';
-import Contact from '../components/HomeComponents/Contact';
+import Hero from '../../components/HomeComponents/Hero';
+import Process from '../../components/HomeComponents/Process';
+import Benefits from '../../components/HomeComponents/Benefits';
+import About from '../../components/HomeComponents/About';
+import FAQ from '../../components/HomeComponents/FAQ';
+import Contact from '../../components/HomeComponents/Contact';
 
 const benefits = [
   {
@@ -49,8 +49,7 @@ const benefits = [
 
 const faqs = [
   {
-    question:
-      'Is it mandatory to show a flight reservation for a Schengen visa application?',
+    question: 'Is it mandatory to show a flight reservation for a Schengen visa application?',
     answer:
       'Yes, most Schengen embassies and visa centers require a confirmed or reserved return flight itinerary as proof of onward and return travel when applying for a Schengen visa. A flight reservation helps visa officers assess your travel plan without requiring you to purchase a non-refundable ticket.',
   },
@@ -70,8 +69,7 @@ const faqs = [
       'Our dummy tickets for Schengen visa applications are available with flexible validity options of 48 hours, 7 days, or 14 days. This allows you to choose a validity period that matches your visa appointment and document submission timeline.',
   },
   {
-    question:
-      'When should I order a dummy ticket for my Schengen visa appointment?',
+    question: 'When should I order a dummy ticket for my Schengen visa appointment?',
     answer:
       'It is recommended to order your dummy ticket one to three days before your Schengen visa appointment so the reservation remains active during verification. For urgent or last-minute appointments, same-day express delivery is also available.',
   },
@@ -86,13 +84,8 @@ export default function DummyTicketForSchengenVisa() {
   return (
     <>
       <Helmet>
-        <title>
-          Dummy Ticket for Schengen Visa From AED 49 | Accepted by VFS
-        </title>
-        <link
-          rel="canonical"
-          href="https://www.mydummyticket/dummy-ticket-schengen-visa"
-        />
+        <title>Dummy Ticket for Schengen Visa From AED 49 | Accepted by VFS</title>
+        <link rel="canonical" href="https://www.mydummyticket/dummy-ticket-schengen-visa" />
         <meta name="robots" content="index, follow" />
         <meta
           name="description"

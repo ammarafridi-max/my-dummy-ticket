@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { useBlog } from '../hooks/useBlogBySlug';
+import { useBlog } from '../../hooks/useBlogBySlug';
 import { Helmet } from 'react-helmet-async';
-import PrimarySection from '../components/PrimarySection';
-import Container from '../components/Container';
-import Breadcrumb from '../components/Breadcrumb';
+import PrimarySection from '../../components/PrimarySection';
+import Container from '../../components/Container';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function BlogPost() {
   const { slug } = useParams();

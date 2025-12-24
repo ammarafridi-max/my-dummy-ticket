@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { formatDate } from '../utils/formatDate';
+import { formatDate } from '../../utils/formatDate';
 import { Helmet } from 'react-helmet-async';
-import { trackBeginCheckout } from '../utils/analytics';
-import { useStripePaymentURL } from '../hooks/useStripePaymentURL';
-import PrimaryButton from '../components/PrimaryButton';
-import Loading from '../components/Loading';
-import { useDummyTicket } from '../hooks/useDummyTicket';
+import { trackBeginCheckout } from '../../utils/analytics';
+import { useStripePaymentURL } from '../../hooks/useStripePaymentURL';
+import PrimaryButton from '../../components/PrimaryButton';
+import Loading from '../../components/Loading';
+import { useDummyTicket } from '../../hooks/useDummyTicket';
 
 function Section({ children }) {
   return (
@@ -18,37 +18,21 @@ function Section({ children }) {
 }
 
 function SectionTitle({ children }) {
-  return (
-    <h2 className="text-[20px] md:text-2xl mb-2.5 pb-1.25 font-bold">
-      {children}
-    </h2>
-  );
+  return <h2 className="text-[20px] md:text-2xl mb-2.5 pb-1.25 font-bold">{children}</h2>;
 }
 
 function Detail({ children }) {
-  return (
-    <div className="mb-1 text-[0.9rem] md:text-[1rem] flex justify-between">
-      {children}
-    </div>
-  );
+  return <div className="mb-1 text-[0.9rem] md:text-[1rem] flex justify-between">{children}</div>;
 }
 
 export default function ReviewDetails() {
-  const { type, ticketPrice, quantity } = useSelector(
-    (state) => state.ticketForm
-  );
+  const { type, ticketPrice, quantity } = useSelector(state => state.ticketForm);
   const sessionId = localStorage.getItem('SESSION_ID');
-  const {
-    url,
-    createStripePayment,
-    isLoadingStripePaymentURL,
-    isErrorStripePaymentURL,
-  } = useStripePaymentURL();
-  const { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket } =
-    useDummyTicket(sessionId);
+  const { url, createStripePayment, isLoadingStripePaymentURL, isErrorStripePaymentURL } =
+    useStripePaymentURL();
+  const { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket } = useDummyTicket(sessionId);
 
-  const totalQuantity =
-    dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
+  const totalQuantity = dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;
 
   const handleConfirm = () => {
@@ -143,13 +127,11 @@ function BookingDetailBox({ dummyTicket }) {
         <span>Ticket Validity:</span> {dummyTicket?.ticketValidity}
       </Detail>
       <Detail>
-        <span>Delivery Type:</span>{' '}
-        {dummyTicket?.ticketDelivery?.immediate ? 'Immediate' : 'Later'}
+        <span>Delivery Type:</span> {dummyTicket?.ticketDelivery?.immediate ? 'Immediate' : 'Later'}
       </Detail>
       {!dummyTicket?.ticketDelivery?.immediate && (
         <Detail>
-          <span>Delivery Date:</span>{' '}
-          {formatDate(dummyTicket?.ticketDelivery?.deliveryDate)}
+          <span>Delivery Date:</span> {formatDate(dummyTicket?.ticketDelivery?.deliveryDate)}
         </Detail>
       )}
     </Section>
@@ -194,7 +176,7 @@ function PassengerDetail({ groupedPassengers }) {
   return (
     <Section>
       <SectionTitle>Passenger Information</SectionTitle>
-      {Object.keys(groupedPassengers).map((type) => (
+      {Object.keys(groupedPassengers).map(type => (
         <div key={type}>
           {groupedPassengers[type].map((passenger, index) => (
             <Detail key={index}>
@@ -227,20 +209,11 @@ function OrderTotalDetail({ totalQuantity, ticketPrice, totalAmount }) {
   );
 }
 
-function ProceedButton({
-  handleConfirm,
-  isLoadingStripePaymentURL,
-  totalAmount,
-}) {
+function ProceedButton({ handleConfirm, isLoadingStripePaymentURL, totalAmount }) {
   return (
     <div className="flex items-center justify-center">
-      <PrimaryButton
-        onClick={handleConfirm}
-        disabled={isLoadingStripePaymentURL}
-      >
-        {isLoadingStripePaymentURL
-          ? 'Processing...'
-          : `Proceed To Payment (AED ${totalAmount})`}
+      <PrimaryButton onClick={handleConfirm} disabled={isLoadingStripePaymentURL}>
+        {isLoadingStripePaymentURL ? 'Processing...' : `Proceed To Payment (AED ${totalAmount})`}
       </PrimaryButton>
     </div>
   );

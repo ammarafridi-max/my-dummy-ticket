@@ -1,17 +1,17 @@
 import { lazy, Suspense } from 'react';
+import { faqArray, formatFaqArray } from '../../data/faqs';
 import { Helmet } from 'react-helmet-async';
-import { faqArray, formatFaqArray } from '../data/faqs';
-import { HiOutlineClock, HiOutlineCurrencyDollar, HiCheck } from 'react-icons/hi2';
-import Hero from '../components/HomeComponents/Hero';
-const Process = lazy(() => import('../components/HomeComponents/Process'));
-const About = lazy(() => import('../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../components/HomeComponents/Benefits'));
-const Testimonials = lazy(() => import('../components/HomeComponents/Testimonials'));
-const FAQ = lazy(() => import('../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../components/HomeComponents/Contact'));
-const BlogPosts = lazy(() => import('../components/HomeComponents/BlogPosts'));
+import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi';
+import Hero from '../../components/HomeComponents/Hero';
+const Process = lazy(() => import('../../components/HomeComponents/Process'));
+const About = lazy(() => import('../../components/HomeComponents/About'));
+const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
+const Testimonials = lazy(() => import('../../components/HomeComponents/Testimonials'));
+const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
+const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
+const BlogPosts = lazy(() => import('../../components/HomeComponents/BlogPosts'));
 
-const keyword = 'dummy ticket';
+const keyword = 'onward ticket';
 
 const testimonials = [
   {
@@ -32,7 +32,7 @@ const testimonials = [
     title: 'Super Fast',
     name: 'Ahmed R.',
     img: '/ahmed.webp',
-    text: 'The entire experience with MDT was seamless from start to finish. I got my {keyword} within minutes, and it worked perfectly for my Schengen visa. Fast response, clear instructions, and great support — highly recommend to travelers in need.',
+    text: 'The entire experience with MDT was seamless from start to finish. I got my onward ticket within minutes, and it worked perfectly for my Schengen visa. Fast response, clear instructions, and great support — highly recommend to travelers in need.',
     purpose: 'Frequent Flyer from India',
   },
 ];
@@ -40,37 +40,37 @@ const testimonials = [
 const benefits = [
   {
     title: 'Accepted by VFS',
-    text: 'We issue {keyword}s through official airline systems, ensuring they are 100% genuine, verifiable, and widely accepted by embassies and consulates.',
+    text: 'We issue onward tickets through official airline systems, ensuring they are 100% genuine, verifiable, and widely accepted by embassies and consulates.',
     icon: HiCheck,
   },
   {
     title: 'Instant Delivery',
-    text: 'Our automated process ensures you receive your {keyword} by email within minutes—quick, seamless, and completely hassle-free.',
+    text: 'Our automated process ensures you receive your onward ticket by email within minutes—quick, seamless, and completely hassle-free.',
     icon: HiOutlineClock,
   },
   {
     title: 'Great Value',
-    text: 'Starting from just AED 49, we offer high-quality, embassy-compliant {keyword}s at an affordable price, so you save money without sacrificing reliability.',
+    text: 'Starting from just AED 49, we offer high-quality, embassy-compliant onward tickets at an affordable price, so you save money without sacrificing reliability.',
     icon: HiOutlineCurrencyDollar,
   },
 ];
 
 const pageData = {
   meta: {
-    title: 'Dummy Ticket from AED 49 | Verifiable, Quick | My Dummy Ticket',
+    title: 'Onward Ticket From AED 49 | Instant, Genuine, & Affordable',
     description:
-      'Dummy tickets are flight reservations travelers use for various purposes, including visa applications. Book yours with My Dummy Ticket. Starting from AED 49.',
-    canonical: 'https://www.mydummyticket.ae',
+      'Travelers use onward tickets for travel purposes, such as to show as proof of onward travel at airports. Book yours with us now. Starting from USD 13.',
+    canonical: 'https://www.mydummyticket.ae/onward-ticket',
   },
   sections: {
     hero: {
-      title: 'Dummy Ticket From AED 49. Verifiable and Legit.',
+      title: 'Book a Your Onward Ticket from AED 49.',
       subtitle:
-        'Book verifiable dummy tickets for visa applications. All legitimate reservations come with a PNR code that can be verified directly on airline websites.',
+        'Get onward tickets issued through official airline systems with a valid, verifiable PNR. Our flight reservations are legitimate bookings created for travel documentation purposes, not fake or falsified tickets.',
     },
     process: {
-      title: 'Simple, Hassle-Free Process',
-      subtitle: 'How it Works',
+      title: 'Your Onward Ticket, Ready in 3 Easy Steps',
+      subtitle: 'How To Book Your Reservation',
       keyword,
     },
     about: {
@@ -100,7 +100,7 @@ const pageData = {
   },
 };
 
-export default function Home() {
+export default function OnwardTicket() {
   return (
     <>
       <Helmet>

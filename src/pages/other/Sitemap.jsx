@@ -1,6 +1,6 @@
-import Container from '../components/Container';
-import PageTitle from '../components/PageTitle';
-import PrimarySection from '../components/PrimarySection';
+import Container from '../../components/Container';
+import PageTitle from '../../components/PageTitle';
+import PrimarySection from '../../components/PrimarySection';
 
 const pages = [
   {

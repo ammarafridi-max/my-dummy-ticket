@@ -1,6 +1,6 @@
-import PrimaryButton from '../components/PrimaryButton';
-import Container from '../components/Container';
-import PrimarySection from '../components/PrimarySection';
+import PrimaryButton from '../../components/PrimaryButton';
+import Container from '../../components/Container';
+import PrimarySection from '../../components/PrimarySection';
 
 export default function PageNotFound() {
   return (
