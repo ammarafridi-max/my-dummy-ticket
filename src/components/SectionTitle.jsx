@@ -2,23 +2,23 @@ export default function SectionTitle({
   textAlign = 'left',
   children,
   subtitle,
-  className,
-  mb = '8',
+  className = 'mb-10 lg:mb-12',
+  type = 'primary',
 }) {
+  const isCenter = textAlign === 'center';
+
+  let h2ClassName = `
+    text-gray-900 text-[28px] lg:text-[34px] font-normal font-outfit leading-10 capitalize mb-3 ${isCenter ? 'mx-auto text-left lg:text-center' : 'text-left'}
+  `;
+
+  let pClassName = `
+    text-gray-500 text-[16px] lg:text-[16px] font-light font-outfit ${isCenter ? 'mx-auto text-left lg:text-center' : 'text-left'}
+  `;
+
   return (
-    <div className={`leading-7 mb-${mb} ${className}`}>
-      {subtitle && (
-        <p
-          className={`text-[14px] md:text-[16px] text-primary-500 font-normal font-outfit uppercase ${textAlign === 'center' ? 'text-left md:text-center' : 'text-left'}`}
-        >
-          {subtitle}
-        </p>
-      )}
-      <h2
-        className={`text-[26px] md:text-[30px] text-black font-medium font-outfit capitalize ${textAlign === 'center' ? 'text-left md:text-center' : 'text-left'}`}
-      >
-        {children}
-      </h2>
+    <div className={className}>
+      <h2 className={h2ClassName}>{children}</h2>
+      {subtitle && <p className={pClassName}>{subtitle}</p>}
     </div>
   );
 }
