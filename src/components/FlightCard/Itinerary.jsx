@@ -3,14 +3,14 @@ import { format } from 'date-fns';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { formatISODuration } from '../../utils/formatISODuration';
 import { formatISOTime } from '../../utils/formatISOTime';
-import { BASEURL } from '../../config';
+import { BACKEND } from '../../config';
 
 export default function Itinerary({ itinerary, airlineInfo }) {
   return (
     <div className="w-full bg-white py-4 flex items-center justify-between md:justify-center gap-6 md:gap-10 nth-of-type-[2]:border-t-1 nth-of-type-[2]:border-t-gray-300">
       <div className="w-[60px] h-[60px] flex flex-col justify-center align-middle">
         <img
-          src={`${BASEURL}${airlineInfo.logo}` || ''}
+          src={`${BACKEND}${airlineInfo.logo}` || ''}
           alt={`${airlineInfo.commonName} Logo`}
           className="object-contain"
         />
