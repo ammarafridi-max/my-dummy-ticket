@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ScrollToTop from '../components/ScrollToTop';
 
 // Layout
-import AppLayout from '../layout/AppLayout';
-import BookingLayout from '../layout/BookingLayout';
+import AppLayout from '../layouts/AppLayout';
+import BookingLayout from '../layouts/BookingLayout';
 
 // Landing Pages
 import Home from '../pages/landing-pages/Home';
