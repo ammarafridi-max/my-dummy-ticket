@@ -2,7 +2,7 @@ export const faqArray = [
   {
     question: 'What is a {keyword}?',
     answer:
-      'A {keyword} is a flight reservation used mostly for visa applications as proof of onward travel. It is a flight reservation with a verifiable PNR. It cannot be used to travel, though.',
+      'A {keyword} is a genuine booking issued on airline systems with a valid PNR, commonly used to demonstrate confirmed travel plans for trip-planning purposes.',
   },
   {
     question: 'How can I verify the {keyword}?',
@@ -25,19 +25,19 @@ export const faqArray = [
       'All of our {keyword}s are created and sent within 10 to 15 minutes of application time. Please note that we send {keyword}s during working hours only (09:00 AM - 09:00 PM). If you need it urgently, please send us an email',
   },
   {
-    question: 'Do {keyword}s work for Schengen visas?',
+    question: 'Do {keyword}s work for Schengen applications?',
     answer:
-      "Absolutely! {keyword}s are flight reservations that allow embassies and VFS to ensure that the traveler has planned their return from the destination they're visiting. It helps gain their confidence and improves the chances of getting your Schengen visa.",
+      'Yes. Our {keyword}s meet documentation requirements requested by embassies and application centers, including VFS. They provide verified proof of travel intent and itinerary, increasing your chances of approval.',
   },
   {
-    question: 'Will my visa get rejected due to {keyword}s?',
+    question: 'Will my application get rejected due to {keyword}s?',
     answer:
-      'Not at all. {keyword}s are completely fine and accepted by VFS and embassies. They will improve your chances of getting your visa approved.',
+      'Not at all. {keyword}s are completely fine and accepted by VFS and embassies. They will improve your chances of getting your application approved.',
   },
   {
     question: 'I need hotel reservations too. Can you provide that?',
     answer:
-      "Yes, we do. We specialize in all kinds of travel documentation and assistance, which means that we provide flight reservations, hotel reservations, travel insurance, trip itinerary and all other related documents needed to get your visa approved. Please send us an email with the trip details and we'll be happy to make you a hotel reservation.",
+      "Yes, we do. We specialize in all kinds of travel documentation and assistance, which means that we provide flight reservations, hotel reservations, travel insurance, trip itinerary and all other related documents needed to get your applications approved. Please send us an email with the trip details and we'll be happy to make you a hotel reservation.",
   },
   {
     question: 'What payment methods do you accept?',
@@ -45,19 +45,18 @@ export const faqArray = [
       "We accept multiple payment methods. You can choose to pay on our website through Stripe's secure Checkout application or transfer money through a payment link (available on request).",
   },
   {
-    question: 'Is the {keyword} suitable for all visa applications?',
+    question: 'Is the {keyword} suitable for all travel applications?',
     answer:
-      'Yes, our {keyword}s are suitable and acceptable for all kinds of visa applications, including but not limited to Schengen, Turkey, Canada, Thailand, UAE, and UK visas.',
+      'Yes, our {keyword}s are suitable and acceptable for all kinds of travel applications, including but not limited to Schengen, Turkey, Canada, Thailand, UAE, and UK.',
   },
   {
     question: 'What additional services do you offer?',
     answer:
-      'Besides {keyword}s, we also offer dummy hotel bookings, travel insurance (genuine and official), visa assistance, and airport transfer arrangement.',
+      'Besides {keyword}s, we also offer hotel reservations, travel insurance (genuine and official), travel documentation assistance, and airport transfer arrangement.',
   },
   {
     question: 'How can I contact customer support?',
-    answer:
-      'You can contact us by sending us an email us at info@mydummyticket.ae',
+    answer: 'You can contact us by sending us an email us at info@mydummyticket.ae',
   },
   {
     question: 'Is there a money-back guarantee?',
@@ -65,10 +64,10 @@ export const faqArray = [
   },
 ];
 
-export function formatFaqArray(arr, keyword) {
-  const newFaqs = arr.map((arr) => {
-    const question = arr.question.replace('{keyword}', keyword);
-    const answer = arr.answer.replace('{keyword}', keyword);
+export function formatFaqArray(arr, keyword = 'dummy ticket') {
+  const newFaqs = arr.map(arr => {
+    const question = arr.question.replaceAll('{keyword}', keyword);
+    const answer = arr.answer.replaceAll('{keyword}', keyword);
     return { question, answer };
   });
 
