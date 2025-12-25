@@ -2,20 +2,21 @@ import React from 'react';
 import { format } from 'date-fns';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { formatISODuration } from '../../utils/formatISODuration';
-import { formatISOTime } from '../../utils/formatISOTime';
 import { BACKEND } from '../../config';
 
 export default function Itinerary({ itinerary, airlineInfo }) {
+  const imgSrc = `${BACKEND}${airlineInfo.logo}`;
+
   return (
-    <div className="w-full bg-white py-4 flex items-center justify-between md:justify-center gap-6 md:gap-10 nth-of-type-[2]:border-t-1 nth-of-type-[2]:border-t-gray-300">
+    <div className="w-full bg-white py-4 flex items-center justify-between lg:justify-center gap-6 lg:gap-10 nth-of-type-[2]:border-t-1 nth-of-type-[2]:border-t-gray-300">
       <div className="w-[60px] h-[60px] flex flex-col justify-center align-middle">
         <img
-          src={`${BACKEND}${airlineInfo.logo}` || ''}
-          alt={`${airlineInfo.commonName} Logo`}
-          className="object-contain"
+          src={imgSrc || ''}
+          alt={`${airlineInfo.commonName}`}
+          className="object-contain text-[10px] "
         />
       </div>
-      <div className="flex items-center justify-between md:justify-center gap-3 md:gap-8 font-nunito">
+      <div className="flex items-center justify-between lg:justify-center gap-3 lg:gap-8 font-nunito">
         <DepartureData itinerary={itinerary} />
         <Duration itinerary={itinerary} />
         <ReturnData itinerary={itinerary} />
@@ -26,13 +27,13 @@ export default function Itinerary({ itinerary, airlineInfo }) {
 
 function DepartureData({ itinerary }) {
   return (
-    <div className="w-[80px] text-left md:text-center text-md md:text-lg font-bold leading-4.5">
+    <div className="w-[80px] text-left lg:text-center text-md lg:text-lg font-medium leading-4.5">
       <p className="mb-1">{itinerary?.segments[0].departure.iataCode}</p>
-      <span className="text-[13px] md:text-[14px] font-light">
+      <span className="text-[13px] lg:text-[14px] font-extralight">
         {format(new Date(itinerary?.segments[0].departure.at), 'dd MMM')}
       </span>
       <br />
-      <span className="text-[13px] md:text-[14px] font-light">
+      <span className="text-[13px] lg:text-[14px] font-extralight">
         {format(new Date(itinerary?.segments[0].departure.at), 'HH:mm')}
       </span>
     </div>
@@ -41,26 +42,14 @@ function DepartureData({ itinerary }) {
 
 function ReturnData({ itinerary }) {
   return (
-    <div className="w-[80px] text-right md:text-center text-md md:text-lg font-bold leading-4.5">
-      <p className="mb-1">
-        {itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}
-      </p>
-      <span className="text-[13px] md:text-[14px] font-light">
-        {format(
-          new Date(
-            itinerary.segments[itinerary.segments.length - 1].arrival.at
-          ),
-          'dd MMM'
-        )}
+    <div className="w-[80px] text-right lg:text-center text-md lg:text-lg font-medium leading-4.5">
+      <p className="mb-1">{itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}</p>
+      <span className="text-[13px] lg:text-[14px] font-extralight">
+        {format(new Date(itinerary.segments[itinerary.segments.length - 1].arrival.at), 'dd MMM')}
       </span>
       <br />
-      <span className="text-[13px] md:text-[14px] font-light">
-        {format(
-          new Date(
-            itinerary.segments[itinerary.segments.length - 1].arrival.at
-          ),
-          'HH:mm'
-        )}
+      <span className="text-[13px] lg:text-[14px] font-extralight">
+        {format(new Date(itinerary.segments[itinerary.segments.length - 1].arrival.at), 'HH:mm')}
       </span>
     </div>
   );
@@ -68,15 +57,14 @@ function ReturnData({ itinerary }) {
 
 function Duration({ itinerary }) {
   return (
-    <div className="w-fit h-fit text-center text-gray-400 text-[12px] md:text-sm font-nunito">
+    <div className="w-fit h-fit text-center text-gray-400 text-[12px] lg:text-sm font-nunito">
       <span>{formatISODuration(itinerary.duration)}</span>
       <p className="flex align-middle justify-center">
         <FaArrowRightLong />
       </p>
       <span>
         {itinerary.segments.length === 1 && 'Non-Stop'}
-        {itinerary.segments.length === 2 &&
-          `Stops in ${itinerary.segments.at(0).arrival.iataCode}`}
+        {itinerary.segments.length === 2 && `Stops in ${itinerary.segments.at(0).arrival.iataCode}`}
         {itinerary.segments.length >= 3 && 'Multiple Stops'}
       </span>
     </div>
