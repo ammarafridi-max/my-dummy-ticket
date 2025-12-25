@@ -1,13 +1,12 @@
-export default function Label({ children, htmlFor, optional, className }) {
+export default function Label({ children, htmlFor, optional, required, className }) {
   return (
     <label
-      className={`text-[14px] md:text-[14px] font-medium text-black uppercase mb-1.25 ${className}`}
+      className={`text-[14px] md:text-[14px] font-medium text-black/80 uppercase mb-1.25 ${className}`}
       htmlFor={htmlFor}
     >
       {children}
-      {optional && (
-        <span className="ml-0.75 text-gray-400 font-normal">(Optional)</span>
-      )}
+      {optional && <span className="ml-0.75 text-gray-400 font-normal">(Optional)</span>}
+      {required && <span className="ml-0.75 text-red-600 font-normal">*</span>}
     </label>
   );
 }

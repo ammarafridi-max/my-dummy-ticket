@@ -1,20 +1,8 @@
-import styled from 'styled-components';
-
-const TextArea = styled.textarea`
-  font-size: 15px;
-  width: 100%;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: 1.5px solid rgb(220, 220, 220);
-  height: 150px;
-  transition: 0.3s;
-  background-color: white;
-  &:focus-visible {
-    outline: none;
-  }
-  &::placeholder {
-    color: var(--grey-color-500);
-  }
-`;
-
-export default TextArea;
+export default function TextArea({ ...props }) {
+  return (
+    <textarea
+      className="w-full h-40 bg-white border border-gray-300 py-2.5 px-5 rounded-lg font-light text-[14.5px] outline-0 duration-300 placeholder:text-gray-500"
+      {...props}
+    />
+  );
+}

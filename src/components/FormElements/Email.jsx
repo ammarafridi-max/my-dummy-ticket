@@ -5,7 +5,9 @@ import InputWithIcon from './InputWithIcon';
 export default function Email({ email, handleEmailChange }) {
   return (
     <div className="w-full mt-3 flex flex-col">
-      <Label htmlFor="email">Email Address</Label>
+      <Label htmlFor="email" required>
+        Email Address
+      </Label>
       <InputWithIcon
         type="email"
         value={email}

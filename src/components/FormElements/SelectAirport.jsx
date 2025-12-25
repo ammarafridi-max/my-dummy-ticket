@@ -8,21 +8,21 @@ export default function SelectAirport({ value, onChange, id, icon }) {
   const { airports, isLoadingAirports } = useAirports(query);
   const componentRef = useRef();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const inputValue = e.target.value;
     setQuery(inputValue);
     onChange(null);
     setIsOpen(true);
   };
 
-  const handleSelect = (airport) => {
+  const handleSelect = airport => {
     const display = `${airport.address.cityName} (${airport.iataCode})`;
     setQuery(display);
     setIsOpen(false);
     onChange(display);
   };
 
-  const handleClickOutside = (e) => {
+  const handleClickOutside = e => {
     if (componentRef.current && !componentRef.current.contains(e.target)) {
       setIsOpen(false);
     }
@@ -59,12 +59,12 @@ export default function SelectAirport({ value, onChange, id, icon }) {
             <ListItem>Enter at least 3 characters</ListItem>
           )}
 
-          {!isLoadingAirports &&
-            query.trim().length >= 3 &&
-            airports.length === 0 && <ListItem>No airports found</ListItem>}
+          {!isLoadingAirports && query.trim().length >= 3 && airports.length === 0 && (
+            <ListItem>No airports found</ListItem>
+          )}
 
           {!isLoadingAirports &&
-            airports.map((airport) => (
+            airports.map(airport => (
               <ListItem
                 key={airport.iataCode}
                 onClick={() => handleSelect(airport)}
@@ -82,7 +82,7 @@ export default function SelectAirport({ value, onChange, id, icon }) {
 function ListItem({ children, className, ...props }) {
   return (
     <li
-      className={`px-5 py-2 font-nunito cursor-pointer transition-colors ${className}`}
+      className={`px-3 py-2 font-nunito font-light cursor-pointer transition-colors text-[14px] ${className}`}
       {...props}
     >
       {children}
