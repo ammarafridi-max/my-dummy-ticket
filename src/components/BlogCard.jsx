@@ -14,13 +14,13 @@ export default function BlogCard({ blog }) {
         <img src={coverImageUrl} className="object-cover object-center" loading="lazy" />
       </div>
       <div className="py-5 px-5">
-        <div className="flex items-center font-outfit font-extralight text-[11px] text-gray-400">
+        <div className="flex items-center font-outfit font-extralight text-[12px] text-gray-500">
           <span>{format(new Date(createdAt), 'dd MMM yyyy')}</span>
           <DotIcon />
           <span>{readingTime} mins</span>
         </div>
-        <h3 className="font-outfit font-medium mt-1 mb-2 leading-6">{title}</h3>
-        <p className="font-outfit font-extralight text-sm text-gray-500">
+        <h3 className="font-outfit font-medium mt-1 mb-2 leading-6 text-lg">{title}</h3>
+        <p className="font-outfit font-extralight text-md text-gray-600">
           {excerpt.slice(0, 90)}...
         </p>
       </div>

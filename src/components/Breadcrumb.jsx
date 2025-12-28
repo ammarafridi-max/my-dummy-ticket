@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 
 export default function Breadcrumb({ paths = [] }) {
   return (
-    <nav className="flex items-center text-sm text-gray-400 gap-2">
+    <nav className="text-sm text-gray-400">
       {paths.map((path, index) => (
-        <div key={index} className="flex items-center gap-2 font-light">
-          {index !== 0 && <span>/</span>}
+        <span key={index} className="font-light">
+          {index !== 0 && <span className="mx-3">/</span>}
           {index === paths.length - 1 ? (
             <span className="text-gray-900">{path.label}</span>
           ) : (
@@ -13,7 +13,7 @@ export default function Breadcrumb({ paths = [] }) {
               {path.label}
             </Link>
           )}
-        </div>
+        </span>
       ))}
     </nav>
   );
