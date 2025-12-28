@@ -9,6 +9,7 @@ import BookingLayout from '../layouts/BookingLayout';
 import Home from '../pages/landing-pages/Home';
 import FlightReservation from '../pages/landing-pages/FlightReservation';
 import DummyTicketForSchengenVisa from '../pages/landing-pages/DummyTicketForSchengenVisa';
+import DummyTicketForUSVisa from '../pages/landing-pages/DummyTicketForUSVisa';
 import OnwardTicket from '../pages/landing-pages/OnwardTicket';
 
 // Booking Pages
@@ -39,6 +40,7 @@ export default function AppRoutes() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="dummy-ticket-schengen-visa" element={<DummyTicketForSchengenVisa />} />
+          <Route path="dummy-ticket-us-visa" element={<DummyTicketForUSVisa />} />
           <Route path="onward-ticket" element={<OnwardTicket />} />
           <Route path="flight-reservation" element={<FlightReservation />} />
           <Route path="*" element={<PageNotFound />} />
