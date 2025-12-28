@@ -19,7 +19,7 @@ export default function TicketForm() {
   const dispatch = useDispatch();
   const [errorMessages, setErrorMessages] = useState({});
   const { type, from, to, departureDate, returnDate, quantity } = useSelector(
-    (state) => state.ticketForm
+    state => state.ticketForm
   );
 
   const isFormValid = () => {
@@ -39,10 +39,7 @@ export default function TicketForm() {
       toast.error('Return date is required');
       return false;
     }
-    if (
-      quantity.adults < 1 ||
-      quantity.adults + quantity.children + quantity.infants > 9
-    ) {
+    if (quantity.adults < 1 || quantity.adults + quantity.children + quantity.infants > 9) {
       toast.error('Return date is required');
       return false;
     }
@@ -59,9 +56,7 @@ export default function TicketForm() {
       [field]: quantity[field] + value,
     };
     const totalPassengers =
-      updatedQuantity.adults +
-      updatedQuantity.children +
-      updatedQuantity.infants;
+      updatedQuantity.adults + updatedQuantity.children + updatedQuantity.infants;
 
     if (totalPassengers > 9 || updatedQuantity.adults < 1) {
       toast.error('Total passengers cannot be less than 1 or exceed 9.');
@@ -70,7 +65,7 @@ export default function TicketForm() {
     dispatch(updateField({ field: 'quantity', value: updatedQuantity }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = e => {
     e.preventDefault();
     localStorage.setItem('routes', JSON.stringify({ from, to }));
     if (isFormValid()) {
@@ -92,14 +87,14 @@ export default function TicketForm() {
       onSubmit={handleFormSubmit}
     >
       <div className="flex gap-2.5">
-        {['One Way', 'Return'].map((tripType) => (
+        {['One Way', 'Return'].map(tripType => (
           <div
-            className="text-[14.5px] w-fit flex items-center mb-5 cursor-pointer"
+            className="text-[14.5px] w-fit flex items-center mb-5 cursor-pointer font-light"
             key={tripType}
             onClick={() => handleFieldChange('type', tripType)}
           >
             <FaCircle
-              className={`mr-2 p-0.75 text-xl rounded-full border-2 border-solid border-black ${type === tripType ? 'text-black' : 'text-transparent'}`}
+              className={`mr-2 p-0.75 text-lg rounded-full border border-solid border-black ${type === tripType ? 'text-black' : 'text-transparent'}`}
             />
             {tripType}
           </div>
@@ -108,23 +103,19 @@ export default function TicketForm() {
 
       <div className="block md:flex gap-3 md:gap-3.5">
         <div className="w-full md:w-[50%] flex flex-col mb-3 md:mb-3">
-          <Label htmlFor="from" required>
-            From
-          </Label>
+          <Label htmlFor="from">From</Label>
           <SelectAirport
             value={from ? from : ''}
-            onChange={(airport) => handleFieldChange('from', airport)}
+            onChange={airport => handleFieldChange('from', airport)}
             icon={<PlaneTakeoff size={20} />}
           />
           {errorMessages?.from && <Error>{errorMessages.from}</Error>}
         </div>
         <div className="w-full md:w-[50%] flex flex-col mb-3 md:mb-3">
-          <Label htmlFor="to" required>
-            To
-          </Label>
+          <Label htmlFor="to">To</Label>
           <SelectAirport
             value={to ? to : ''}
-            onChange={(airport) => handleFieldChange('to', airport)}
+            onChange={airport => handleFieldChange('to', airport)}
             icon={<PlaneLandingIcon size={20} />}
           />
           {errorMessages?.to && <Error>{errorMessages.to}</Error>}
@@ -135,50 +126,37 @@ export default function TicketForm() {
         <div
           className={`w-full flex flex-col mb-3 md:mb-3 ${type === 'Return' ? 'md:w-[50%]' : 'md:w-full'}`}
         >
-          <Label htmlFor="departureDate" required>
-            Departure Date
-          </Label>
+          <Label htmlFor="departureDate">Departure Date</Label>
           <SelectDate
             selectedDate={departureDate && formatDate(departureDate)}
-            onDateSelect={(date) => handleFieldChange('departureDate', date)}
+            onDateSelect={date => handleFieldChange('departureDate', date)}
             minDate={new Date()}
             icon={<CalendarDaysIcon size={20} />}
           />
-          {errorMessages?.departureDate && (
-            <Error>{errorMessages.departureDate}</Error>
-          )}
+          {errorMessages?.departureDate && <Error>{errorMessages.departureDate}</Error>}
         </div>
 
         {type === 'Return' && (
           <div className="w-full md:w-[50%] flex flex-col mb-3 md:mb-3">
-            <Label htmlFor="returnDate" required>
-              Return Date
-            </Label>
+            <Label htmlFor="returnDate">Return Date</Label>
             <SelectDate
               selectedDate={returnDate && formatDate(returnDate)}
-              onDateSelect={(date) => handleFieldChange('returnDate', date)}
+              onDateSelect={date => handleFieldChange('returnDate', date)}
               minDate={new Date(departureDate)}
               icon={<CalendarDaysIcon size={20} />}
             />
-            {errorMessages?.returnDate && (
-              <Error>{errorMessages.returnDate}</Error>
-            )}
+            {errorMessages?.returnDate && <Error>{errorMessages.returnDate}</Error>}
           </div>
         )}
       </div>
 
-      <QuantityCounter
-        quantity={quantity}
-        onQuantityChange={handleQuantityChange}
-      />
+      <QuantityCounter quantity={quantity} onQuantityChange={handleQuantityChange} />
 
       <div className="w-full flex mt-5">
         <PrimaryButton
           className="w-full"
           type="submit"
-          disabled={
-            !from || !to || !departureDate || (type === 'Return' && !returnDate)
-          }
+          disabled={!from || !to || !departureDate || (type === 'Return' && !returnDate)}
           onClick={handleFormSubmit}
         >
           Search Flights

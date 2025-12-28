@@ -9,7 +9,7 @@ export default function MobileNavigation() {
   return (
     <nav className="block lg:hidden py-3 relative z-50">
       <Container className="flex justify-between items-center">
-        <a href="/" className="w-40 h-auto flex items-center">
+        <a href="/" className="w-45 h-auto flex items-center">
           <img
             src="/logo.webp"
             alt="MDT Logo"

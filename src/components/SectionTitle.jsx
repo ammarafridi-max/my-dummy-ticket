@@ -12,7 +12,7 @@ export default function SectionTitle({
   `;
 
   let pClassName = `
-    text-gray-500 text-[16px] lg:text-[16px] font-light font-outfit ${isCenter ? 'mx-auto text-left lg:text-center' : 'text-left'}
+    md:w-220 text-gray-500 text-[16px] lg:text-[17px] font-extralight font-outfit ${isCenter ? 'mx-auto text-left lg:text-center' : 'text-left'}
   `;
 
   return (
