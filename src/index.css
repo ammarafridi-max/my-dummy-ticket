@@ -54,21 +54,26 @@ a {
 
 .blog_post h2 {
   font-size: 28px;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 25px;
 }
 
 .blog_post h3 {
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 25px;
 }
 
 .blog_post p {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   margin-bottom: 25px;
   line-height: 32px;
+}
+
+.blog_post a {
+  color: var(--color-primary-500);
+  font-weight: 400;
 }
 
 .blog_post ol,
@@ -78,7 +83,7 @@ a {
 
 .blog_post li {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   margin: 8px 0;
   margin-left: 20px;
   padding-left: 10px;
@@ -87,4 +92,12 @@ a {
 
 .blog_post li:nth-last-of-type {
   margin-bottom: 0;
+}
+
+@media (width < 1024px) {
+  .blog_post p,
+  .blog_post li {
+    font-size: 16px;
+    line-height: 28px;
+  }
 }
