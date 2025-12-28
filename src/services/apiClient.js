@@ -32,7 +32,7 @@ export async function apiFetch(path, options = {}) {
 export async function apiUpload(path, formData, method = 'POST') {
   const res = await fetch(`${BACKEND}${path}`, {
     method,
-    credentials: 'include', // 🔥 MUST HAVE
+    credentials: 'include',
     body: formData,
   });
 
