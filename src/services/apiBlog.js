@@ -1,12 +1,11 @@
-import { BACKEND } from '../config';
 import { apiFetch } from './apiClient';
 
 const URL = `/api/blogs`;
 
 export async function getAllBlogsApi() {
-  return await apiFetch(URL);
+  return await apiFetch(`${URL}?status=published`);
 }
 
-export function getBlogBySlugApi(slug) {
-  return apiFetch(`${URL}/slug/${encodeURIComponent(slug)}`);
+export async function getBlogBySlugApi(slug) {
+  return await apiFetch(`${URL}/slug/${encodeURIComponent(slug)}`);
 }
