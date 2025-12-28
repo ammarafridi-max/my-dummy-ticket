@@ -11,18 +11,20 @@ import { useDummyTicket } from '../../hooks/useDummyTicket';
 
 function Section({ children }) {
   return (
-    <div className="w-full md:w-[50%] mb-3.75 p-5 rounded-xl shadow-md bg-white font-nunito">
-      {children}
-    </div>
+    <div className="w-full md:w-[50%] mb-3.75 p-5 rounded-xl shadow-md bg-white">{children}</div>
   );
 }
 
 function SectionTitle({ children }) {
-  return <h2 className="text-[20px] md:text-2xl mb-2.5 pb-1.25 font-bold">{children}</h2>;
+  return <h2 className="text-[20px] md:text-2xl mb-2.5 pb-1.25 font-normal">{children}</h2>;
 }
 
 function Detail({ children }) {
-  return <div className="mb-1 text-[0.9rem] md:text-[1rem] flex justify-between">{children}</div>;
+  return (
+    <div className="mb-2 text-[14px] lg:text-[16px] flex justify-between font-light">
+      {children}
+    </div>
+  );
 }
 
 export default function ReviewDetails() {

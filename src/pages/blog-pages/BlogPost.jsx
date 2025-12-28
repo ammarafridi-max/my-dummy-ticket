@@ -68,7 +68,9 @@ export default function BlogPost() {
                   },
                 ]}
               />
-              <h1 className="text-4xl leading-12 my-5">{pageData?.blogPost?.title}</h1>
+              <h1 className="text-3xl lg:text-4xl leading-10 lg:leading-12 my-5">
+                {pageData?.blogPost?.title}
+              </h1>
               <p className="font-light text-gray-600">{pageData?.blogPost?.excerpt}</p>
             </div>
             <div className="bg-gray-100 aspect-[16/10] rounded-3xl overflow-hidden">
