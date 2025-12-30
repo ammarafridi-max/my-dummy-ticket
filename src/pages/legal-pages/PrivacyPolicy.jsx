@@ -2,129 +2,129 @@ import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
 import PageTitle from '../../components/PageTitle';
 import SectionTitle from '../../components/SectionTitle';
-import Paragraph from '../../components/Paragraph';
+import { Helmet } from 'react-helmet-async';
 
 export default function PrivacyPolicy() {
   return (
-    <PrimarySection pb="50px">
-      <Container>
-        <PageTitle>Privacy Policy</PageTitle>
+    <>
+      <Helmet>
+        <title>Privacy Policy - My Dummy Ticket</title>
+        <meta
+          name="description"
+          content="Read the official Privacy Policy of My Dummy Ticket to understand how we collect, protect, and use your personal data."
+        />
+        <link rel="canonical" href="https://www.mydummyticket.ae/privacy-policy" />
+      </Helmet>
 
-        <Paragraph fontSize="20px" mt="20px">
-          At My Dummy Ticket, your privacy is of utmost importance to us. This Privacy Policy
-          outlines how we collect, use, and protect your personal information when you use our
-          website (https://www.mydummyticket.ae).
-        </Paragraph>
+      <PrimarySection className="py-12.5">
+        <Container>
+          <PageTitle className="text-[32px] lg:text-[48px] leading-[1.2] font-light mb-3">
+            Privacy Policy
+          </PageTitle>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Information We Collect
-        </SectionTitle>
+          <p className="text-xl font-extralight">
+            At My Dummy Ticket, your privacy is extremely important to us. This Privacy Policy
+            explains how we collect, use, store, and protect your personal information when you use
+            our website (https://www.mydummyticket.ae) and our services.
+          </p>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              We collect personal information that you provide to us when placing an order,
-              including your name, email address, phone number, and payment details.
+          <SectionTitle className="my-10">Information We Collect</SectionTitle>
+
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              We collect personal information that you provide when placing an order, including your
+              name, email address, phone number, and booking details.
             </li>
-            <li>
-              We may also collect non-personal information such as your IP address, browser type,
-              and operating system for analytics and improvement purposes.
+            <li className="pl-2">
+              Payment information is processed securely by third-party payment gateways and is not
+              stored on our servers.
             </li>
-          </ol>
-        </Paragraph>
-
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          How We Use Your Information
-        </SectionTitle>
-
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>To process your orders and deliver the services you have requested.</li>
-            <li>To communicate with you regarding your orders, updates, and support requests.</li>
-            <li>
-              To improve our website, services, and user experience through analytics and feedback.
+            <li className="pl-2">
+              We may also collect non-personal data such as IP address, browser type, and device
+              information for analytics and website improvement.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Sharing Your Information
-        </SectionTitle>
+          <SectionTitle className="my-10">How We Use Your Information</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              We do not sell, rent, or share your personal information with third parties except as
-              required to fulfill your order or comply with legal obligations.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">To process your order and deliver the services you requested.</li>
+            <li className="pl-2">
+              To communicate with you regarding your booking, updates, or support requests.
             </li>
-            <li>
-              Third-party services we use for payment processing or analytics are required to
-              maintain the confidentiality of your information.
+            <li className="pl-2">
+              To improve our website, services, performance, and overall user experience through
+              analytics.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Data Security
-        </SectionTitle>
+          <SectionTitle className="my-10">Sharing Your Information</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              We do not sell, rent, or trade your personal information with third parties.
+            </li>
+            <li className="pl-2">
+              Information may be shared only with trusted third parties such as payment processors
+              or service providers strictly for fulfilling your order.
+            </li>
+            <li className="pl-2">
+              We may disclose information if required to do so by law or governmental authority.
+            </li>
+          </ul>
+
+          <SectionTitle className="my-10">Data Security</SectionTitle>
+
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
               We implement appropriate security measures to protect your personal information from
-              unauthorized access, alteration, disclosure, or destruction.
+              unauthorized access, alteration, or disclosure.
             </li>
-            <li>
-              However, no method of transmission over the internet or electronic storage is
-              completely secure. We cannot guarantee absolute security.
+            <li className="pl-2">
+              However, no method of data transmission over the internet is completely secure;
+              therefore absolute security cannot be guaranteed.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Your Rights
-        </SectionTitle>
+          <SectionTitle className="my-10">Your Rights</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              You have the right to access, correct, or delete your personal information by
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              You have the right to access, correct, or request deletion of your personal data by
               contacting us at info@mydummyticket.ae.
             </li>
-            <li>
-              You may also opt out of receiving marketing communications by following the
-              unsubscribe instructions in our emails.
+            <li className="pl-2">
+              You may opt out of marketing communications at any time by using the unsubscribe link
+              in our emails.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Changes to This Privacy Policy
-        </SectionTitle>
+          <SectionTitle className="my-10">Changes to This Privacy Policy</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              We reserve the right to update or modify this Privacy Policy at any time without prior
-              notice.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              My Dummy Ticket reserves the right to update or modify this Privacy Policy at any time
+              without prior notice.
             </li>
-            <li>Any changes will be effective immediately upon posting on our website.</li>
-          </ol>
-        </Paragraph>
+            <li className="pl-2">
+              Any changes become effective immediately upon posting on our website.
+            </li>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Contact Us
-        </SectionTitle>
+          <SectionTitle className="my-10">Contact Us</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          If you have any questions or concerns about this Privacy Policy, please contact us at:
-          <br />
-          <br />
-          Email: info@mydummyticket.ae
-          <br />
-          Address: Abraj Al Mamzar, Al Mamzar, Dubai, United Arab Emirates
-        </Paragraph>
-      </Container>
-    </PrimarySection>
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              If you have any questions or concerns regarding this Privacy Policy, please contact
+              us:
+            </li>
+            <li className="pl-2">Email: info@mydummyticket.ae</li>
+            <li className="pl-2">
+              Address: Abraj Al Mamzar, Al Mamzar, Dubai, United Arab Emirates
+            </li>
+          </ul>
+        </Container>
+      </PrimarySection>
+    </>
   );
 }

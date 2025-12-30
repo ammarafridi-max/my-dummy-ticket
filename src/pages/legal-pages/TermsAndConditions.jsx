@@ -1,186 +1,176 @@
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
 import PageTitle from '../../components/PageTitle';
 import SectionTitle from '../../components/SectionTitle';
-import Paragraph from '../../components/Paragraph';
 
 export default function TermsAndConditions() {
   return (
-    <PrimarySection pb="50px" pt="50px">
-      <Container>
-        <PageTitle>Terms And Conditions</PageTitle>
+    <>
+      <Helmet>
+        <title>Terms & Conditions - My Dummy Ticket</title>
+        <meta
+          name="description"
+          content="Read the official Terms & Conditions of My Dummy Ticket to understand service usage, refunds, legal responsibility, and policies."
+        />
+        <link rel="canonical" href="https://www.mydummyticket.ae/terms-and-conditions" />
+      </Helmet>
 
-        <Paragraph fontSize="20px" mt="20px">
-          Welcome to My Dummy Ticket! By using our website (https://www.mydummyticket.ae), you agree
-          to comply with and be bound by the following terms and conditions. Please read them
-          carefully before using our services.
-        </Paragraph>
+      <PrimarySection className="py-12.5">
+        <Container>
+          <PageTitle className="text-[32px] lg:text-[44px] leading-[1.2] font-light mb-3">
+            Terms & Conditions
+          </PageTitle>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          General Information
-        </SectionTitle>
+          <p className="text-xl font-extralight">
+            Welcome to My Dummy Ticket. By using our website (https://www.mydummyticket.ae) or
+            purchasing any service from us, you agree to comply with the Terms & Conditions below.
+            Please read them carefully before proceeding.
+          </p>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              My Dummy Ticket provides travel-related services, including the provision of dummy
-              tickets for visa applications and travel planning purposes.
+          <SectionTitle className="my-10">General Information</SectionTitle>
+
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              My Dummy Ticket provides travel-related services including dummy flight tickets,
+              travel itineraries, and supporting travel documentation for visa applications and
+              travel planning purposes.
             </li>
-            <li>
-              Our services are intended for legitimate use only. Misuse of our services for
-              fraudulent activities is strictly prohibited and may result in legal action.
+            <li className="pl-2">
+              Our services are intended for legitimate use only. Misuse for fraudulent or illegal
+              purposes is strictly prohibited and may result in legal action.
             </li>
-          </ol>
-        </Paragraph>
+            <li className="pl-2">
+              These Terms & Conditions apply to all visitors, users, and customers of My Dummy
+              Ticket.
+            </li>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Use Of Services
-        </SectionTitle>
+          <SectionTitle className="my-10">Use of Services</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              By accessing or using our website, you warrant that you are at least 18 years old or
-              have obtained parental consent to use the site.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              By using our website, you confirm that you are at least 18 years old or have
+              parental/guardian consent.
             </li>
-            <li>
-              You agree to use our services only for lawful purposes and in accordance with these
-              Terms and Conditions.
+            <li className="pl-2">
+              You agree to use our services only for lawful and legitimate purposes.
             </li>
-            <li>
-              You acknowledge that the dummy tickets provided are not actual tickets and cannot be
-              used for boarding or any other purpose beyond their intended use.
+            <li className="pl-2">
+              You acknowledge that dummy tickets are not real flight tickets and cannot be used for
+              boarding or actual air travel.
             </li>
-          </ol>
-        </Paragraph>
+            <li className="pl-2">
+              My Dummy Ticket reserves the right to refuse service to users engaging in fraudulent,
+              abusive, or illegal activities.
+            </li>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Payments and Refunds
-        </SectionTitle>
+          <SectionTitle className="my-10">Payments & Refund Policy</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              All payments for services must be made via the payment methods available on our
-              website.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              All payments must be made through the secure payment options provided on our website.
             </li>
-            <li>
-              Payments are non-refundable except in cases of system errors where the service was not
-              delivered as described.
+            <li className="pl-2">
+              All payments are non-refundable except in cases of system failure or when the service
+              is not delivered as described.
             </li>
-            <li>
-              If you encounter any issues with your order, you must contact us within 24 hours of
-              purchase.
+            <li className="pl-2">
+              If you experience any issue, you must contact us within 24 hours of purchase for
+              review.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          User Responsibilities
-        </SectionTitle>
+          <SectionTitle className="my-10">User Responsibilities</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
               You are responsible for providing accurate and complete information when placing an
               order.
             </li>
-            <li>
-              My Dummy Ticket is not responsible for any consequences arising from incorrect or
-              incomplete information provided by you.
+            <li className="pl-2">
+              My Dummy Ticket is not responsible for consequences arising from incorrect or
+              incomplete user information.
             </li>
-            <li>
-              You agree not to misuse our services, including but not limited to using our dummy
-              tickets for illegal purposes.
+            <li className="pl-2">
+              You agree not to misuse dummy tickets for illegal or fraudulent purposes under any
+              circumstances.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Intellectual Property
-        </SectionTitle>
+          <SectionTitle className="my-10">Intellectual Property</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              All content on the My Dummy Ticket website, including text, graphics, logos, and
-              software, is the property of My Dummy Ticket and protected by copyright laws.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              All content on My Dummy Ticket — including text, graphics, logos, and software — is
+              owned by My Dummy Ticket and protected by copyright law.
             </li>
-            <li>
-              You may not copy, distribute, modify, or create derivative works from our website
-              content without prior written consent.
+            <li className="pl-2">
+              You may not copy, reproduce, distribute, or create derivative works without written
+              permission.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Disclaimer of Liability
-        </SectionTitle>
+          <SectionTitle className="my-10">Disclaimer of Liability</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              My Dummy Ticket does not guarantee visa approval or any specific outcomes from the use
-              of our services.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              My Dummy Ticket does not guarantee visa approval or any outcome related to visa
+              applications.
             </li>
-            <li>
-              We are not liable for any direct, indirect, incidental, or consequential damages
-              arising from your use of our services.
+            <li className="pl-2">
+              We are not liable for direct, indirect, incidental, or consequential damages resulting
+              from service use.
             </li>
-            <li>
-              It is your responsibility to ensure that the dummy ticket meets the requirements of
-              the relevant authorities or agencies.
+            <li className="pl-2">
+              It is your responsibility to ensure our documents meet the requirements of relevant
+              authorities.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Privacy Policy
-        </SectionTitle>
+          <SectionTitle className="my-10">Privacy Policy</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              Your privacy is important to us. Please refer to our Privacy Policy for details on how
-              we collect, use, and protect your personal information.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              Your privacy is important to us. We only collect necessary information to process your
+              order and deliver services.
             </li>
-          </ol>
-        </Paragraph>
+            <li className="pl-2">
+              Full details are available in our
+              <Link to="/privacy-policy" className="text-primary-500">
+                {' '}
+                Privacy Policy
+              </Link>
+              .
+            </li>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Amendments to Terms
-        </SectionTitle>
+          <SectionTitle className="my-10">Amendments</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              We reserve the right to update or modify these Terms and Conditions at any time
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              My Dummy Ticket reserves the right to update or modify these Terms & Conditions
               without prior notice.
             </li>
-            <li>
-              Continued use of the website following any changes indicates your acceptance of the
-              new Terms and Conditions.
+            <li className="pl-2">
+              Continued use of the website indicates acceptance of updated Terms.
             </li>
-          </ol>
-        </Paragraph>
+          </ul>
 
-        <SectionTitle fontSize="small" mt="50px" mb="20px" fontWeight="400">
-          Governing Law
-        </SectionTitle>
+          <SectionTitle className="my-10">Governing Law</SectionTitle>
 
-        <Paragraph fontSize="20px">
-          <ol>
-            <li>
-              These Terms and Conditions are governed by and construed in accordance with the laws
-              of the United Arab Emirates.
+          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+            <li className="pl-2">
+              These Terms & Conditions are governed by the laws of the United Arab Emirates.
             </li>
-            <li>
-              Any disputes arising under these Terms and Conditions shall be subject to the
-              exclusive jurisdiction of the courts of the UAE.
+            <li className="pl-2">
+              All disputes fall under the exclusive jurisdiction of UAE courts.
             </li>
-          </ol>
-        </Paragraph>
-      </Container>
-    </PrimarySection>
+          </ul>
+        </Container>
+      </PrimarySection>
+    </>
   );
 }
