@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useBlog } from '../../hooks/useBlogBySlug';
 import { Helmet } from 'react-helmet-async';
 import PrimarySection from '../../components/PrimarySection';
+import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import Breadcrumb from '../../components/Breadcrumb';
 
@@ -9,7 +10,7 @@ export default function BlogPost() {
   const { slug } = useParams();
   const { blog, isLoadingBlog, isErrorBlog } = useBlog(slug);
 
-  if (isLoadingBlog) return <p>...Loading</p>;
+  if (isLoadingBlog) return <Loading />;
 
   const {
     author,
