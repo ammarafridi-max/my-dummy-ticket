@@ -81,6 +81,7 @@ function Success({ sessionId, dummyTicket }) {
     <>
       <Helmet>
         <title>Payment Successfully Processed</title>
+        <meta name="robots" content="none" />
       </Helmet>
       <PrimarySection className="py-7">
         <Container>

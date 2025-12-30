@@ -61,6 +61,7 @@ export default function SelectFlights() {
     <>
       <Helmet>
         <title>Select Flights</title>
+        <meta name="robots" content="none" />
       </Helmet>
       {isLoadingFlights && Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} />)}
 

@@ -81,6 +81,7 @@ export default function ReviewDetails() {
     <>
       <Helmet>
         <title>Review Your Information</title>
+        <meta name="robots" content="none" />
       </Helmet>
       <div className="block md:flex md:gap-4">
         <BookingDetailBox dummyTicket={dummyTicket} />
