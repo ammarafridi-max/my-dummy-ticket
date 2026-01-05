@@ -1,7 +1,6 @@
 export function formatISOTime(isoString) {
   const dateObj = new Date(isoString);
 
-  // const year = dateObj.getFullYear();
   const monthNames = [
     'January',
     'February',
