@@ -6,7 +6,7 @@ import { updateField } from '../../redux/slices/ticketFormSlice';
 import { FaCircle } from 'react-icons/fa';
 import { PlaneLandingIcon, PlaneTakeoff, CalendarDaysIcon } from 'lucide-react';
 import { formatDate } from '../../utils/formatDate';
-import { trackFlightSearch } from '../../utils/analytics';
+import { trackFlightSearch } from '../../lib/analytics';
 import Label from '../FormElements/Label';
 import PrimaryButton from '../PrimaryButton';
 import SelectAirport from '../FormElements/SelectAirport';

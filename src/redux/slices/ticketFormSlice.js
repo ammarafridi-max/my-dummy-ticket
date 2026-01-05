@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BACKEND } from '../../config';
 import { formatISODuration } from '../../utils/formatISODuration';
-import { trackFlightFormSubmission } from '../../utils/analytics';
+import { trackFlightFormSubmission } from '../../lib/analytics';
 
 const routes = JSON.parse(localStorage.getItem('routes'));
 const email = localStorage.getItem('email') || '';
@@ -61,9 +61,7 @@ const ticketFormSlice = createSlice({
           }
 
           if (['firstName', 'lastName'].includes(field)) {
-            state.passengerErrors[index][field] = value.trim()
-              ? ''
-              : `${field} is required`;
+            state.passengerErrors[index][field] = value.trim() ? '' : `${field} is required`;
           }
           break;
 
@@ -125,11 +123,11 @@ const ticketFormSlice = createSlice({
               : 'Last name required',
           }));
           state.passengerErrors = errors;
-          return errors.every((err) => !Object.values(err).some(Boolean));
+          return errors.every(err => !Object.values(err).some(Boolean));
       }
     },
 
-    validateForm: (state) => {
+    validateForm: state => {
       const errors = state.passengers.map(({ firstName, lastName }) => ({
         firstName: firstName
           ? /^[A-Za-z\s]+$/.test(firstName.trim())
@@ -153,15 +151,15 @@ const ticketFormSlice = createSlice({
 
     resetForm: () => ({ ...initialState }),
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(submitFormData.pending, (state) => {
+      .addCase(submitFormData.pending, state => {
         state.loading = true;
       })
-      .addCase(submitFormData.fulfilled, (state) => {
+      .addCase(submitFormData.fulfilled, state => {
         state.loading = false;
       })
-      .addCase(submitFormData.rejected, (state) => {
+      .addCase(submitFormData.rejected, state => {
         state.loading = false;
       });
   },
@@ -256,7 +254,7 @@ export const initializePassengers = createAsyncThunk(
 export function transformItinerary(itinerary) {
   return {
     duration: formatISODuration(itinerary.duration),
-    segments: itinerary.segments.map((segment) => ({
+    segments: itinerary.segments.map(segment => ({
       departure: {
         iataCode: segment.departure.iataCode,
         date: segment.departure.at.split('T')[0],
@@ -272,10 +270,7 @@ export function transformItinerary(itinerary) {
       flightNumber: segment.number,
       aircraftCode: segment.aircraft?.code,
       airline: {
-        name:
-          segment.airlineDetail?.commonName ||
-          segment.airlineDetail?.businessName ||
-          '',
+        name: segment.airlineDetail?.commonName || segment.airlineDetail?.businessName || '',
         logo: `${segment.airlineDetail?.logo}` || '',
       },
     })),

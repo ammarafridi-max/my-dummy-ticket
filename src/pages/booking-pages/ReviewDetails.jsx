@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/formatDate';
 import { Helmet } from 'react-helmet-async';
-import { trackBeginCheckout } from '../../utils/analytics';
+import { trackBeginCheckout } from '../../lib/analytics';
 import { useStripePaymentURL } from '../../hooks/useStripePaymentURL';
+import { useDummyTicket } from '../../hooks/useDummyTicket';
 import PrimaryButton from '../../components/PrimaryButton';
 import Loading from '../../components/Loading';
-import { useDummyTicket } from '../../hooks/useDummyTicket';
 
 function Section({ children }) {
   return (

@@ -1,7 +1,7 @@
 import '@fontsource-variable/nunito';
 import '@fontsource/merriweather';
 import { useEffect } from 'react';
-import { initializeGA } from './utils/analytics';
+import { initializeGA } from './lib/analytics';
 import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDummyTicket } from '../../hooks/useDummyTicket';
-import { trackPurchaseEvent } from '../../utils/analytics';
+import { trackPurchaseEvent } from '../../lib/analytics';
 import { formatDate } from '../../utils/formatDate';
 import { Helmet } from 'react-helmet-async';
 import { Check, X } from 'lucide-react';
