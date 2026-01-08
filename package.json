@@ -21,7 +21,6 @@
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.511.0",
-    "new-dirham-symbol": "^1.0.3",
     "prettier": "^3.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
