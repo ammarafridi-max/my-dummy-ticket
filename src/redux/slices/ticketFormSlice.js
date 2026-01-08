@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BACKEND } from '../../config';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { formatISODuration } from '../../utils/formatISODuration';
 import { trackFlightFormSubmission } from '../../lib/analytics';
 
