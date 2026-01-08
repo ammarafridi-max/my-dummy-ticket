@@ -52,10 +52,6 @@ a {
   text-decoration: none;
 }
 
-.blog_post {
-  font-family: 'Avenir' !important;
-}
-
 .blog_post h2 {
   font-size: 28px;
   font-weight: 500;
@@ -72,7 +68,7 @@ a {
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 25px;
-  line-height: 28px;
+  line-height: 32px;
 }
 
 .blog_post a {
