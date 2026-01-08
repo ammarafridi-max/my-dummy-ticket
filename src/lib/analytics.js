@@ -1,20 +1,16 @@
 import ReactGA from 'react-ga4';
+import { GA4_MEASUREMENT_ID } from '../config';
+
+const isProduction = import.meta.env.MODE === 'production';
 
 export function initializeGA() {
-  if (import.meta.env.MODE === 'production') {
-    ReactGA.initialize(import.meta.env.VITE_GA4_MEASUREMENT_ID);
+  if (!isProduction) {
+    ReactGA.initialize(GA4_MEASUREMENT_ID);
   }
 }
 
-export const trackFlightSearch = ({
-  type,
-  from,
-  to,
-  departureDate,
-  returnDate,
-  quantity,
-}) => {
-  if (import.meta.env.MODE === 'production') {
+export const trackFlightSearch = ({ type, from, to, departureDate, returnDate, quantity }) => {
+  if (!isProduction) {
     ReactGA.event('flight_search', {
       type,
       from,
@@ -33,7 +29,7 @@ export const trackFlightFormSubmission = ({
   ticketValidity,
   flightDetails,
 }) => {
-  if (import.meta.env.MODE === 'production') {
+  if (!isProduction) {
     ReactGA.event('flight_form_submission', {
       passengers,
       email,
@@ -45,7 +41,7 @@ export const trackFlightFormSubmission = ({
 };
 
 export const trackBeginCheckout = ({ currency, value, items }) => {
-  if (import.meta.env.MODE === 'production') {
+  if (!isProduction) {
     ReactGA.event('begin_checkout', {
       currency,
       value,
@@ -60,7 +56,7 @@ export const trackPurchaseEvent = ({
   sessionId,
   items = [{ item_name: 'Flight reservation', price: 13, quantity: 1 }],
 }) => {
-  if (import.meta.env.MODE === 'production') {
+  if (!isProduction) {
     ReactGA.event('purchase', {
       transaction_id: sessionId,
       value,
