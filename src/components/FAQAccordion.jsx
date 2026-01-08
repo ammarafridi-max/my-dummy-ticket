@@ -3,27 +3,39 @@ import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 
 export default function FAQAccordion({ question, children }) {
   const [showAnswer, setShowAnswer] = useState(false);
+
   return (
-    <div className="w-full font-outfit">
+    <div className="w-full border-b border-gray-200 py-1.5">
+      <button
+        onClick={() => setShowAnswer(prev => !prev)}
+        className="w-full flex items-center justify-between text-left py-3 px-2 sm:px-4 transition-all duration-200 cursor-pointer group"
+      >
+        <h3
+          className={`text-[16px] sm:text-[18px] font-normal leading-snug transition-colors duration-200 ${showAnswer ? 'text-primary-600' : 'text-gray-800 group-hover:text-primary-500'}`}
+        >
+          {question}
+        </h3>
+
+        <span
+          className={`flex items-center justify-center w-7 h-7 rounded-full border transition-all duration-200
+                     ${showAnswer ? 'bg-primary-500 border-primary-500 text-white' : 'border-gray-300 text-gray-500 group-hover:border-primary-400 group-hover:text-primary-500'}`}
+        >
+          {showAnswer ? (
+            <HiOutlineMinus className="text-lg" />
+          ) : (
+            <HiOutlinePlus className="text-lg" />
+          )}
+        </span>
+      </button>
+
       <div
-        onClick={() => setShowAnswer((prev) => !prev)}
-        className={`w-full rounded-xl px-4 py-2 lg:px-5 lg:py-3 grid grid-cols-[1fr_auto] gap-4 items-center text-left font-light duration-300 cursor-pointer  ${
-          showAnswer
-            ? 'bg-primary-600 text-white'
-            : 'bg-white border border-gray-300 text-black'
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          showAnswer ? 'max-h-[500px] opacity-100 mt-1' : 'max-h-0 opacity-0'
         }`}
       >
-        <h3 className="text-base lg:text-[17px]">{question}</h3>
-        {showAnswer ? (
-          <HiOutlineMinus className="text-xl sm:text-2xl" />
-        ) : (
-          <HiOutlinePlus className="text-xl sm:text-2xl" />
-        )}
-      </div>
-      <div
-        className={`font-outfit font-light text-gray-700 text-base lg:text-[17px] px-5 duration-300 ${showAnswer ? 'h-fit pt-4 pb-2' : 'h-0 overflow-hidden'}`}
-      >
-        {children}
+        <div className="px-2 sm:px-4 pb-4 text-gray-600 text-[15px] sm:text-[16px] leading-relaxed font-light font-nunito">
+          {children}
+        </div>
       </div>
     </div>
   );
