@@ -11,7 +11,6 @@ import {
   updateField,
 } from '../../redux/slices/ticketFormSlice';
 import { formatDate } from '../../utils/formatDate';
-import styled from 'styled-components';
 import Error from '../Error';
 import Input from '../FormElements/Input';
 import Label from '../FormElements/Label';
@@ -42,7 +41,7 @@ export default function Form() {
     email,
     phoneNumber,
     ticketValidity,
-    deliverNow,
+    receiveNow,
     deliveryDate,
     message,
     passengerErrors,
@@ -69,7 +68,7 @@ export default function Form() {
         return true;
       }
 
-      if (!deliverNow && !deliveryDate) {
+      if (!receiveNow && !deliveryDate) {
         return true;
       }
 
@@ -77,7 +76,7 @@ export default function Form() {
     };
 
     setIsSubmitDisabled(hasEmptyFields());
-  }, [passengers, email, phoneNumber, deliverNow, deliveryDate]);
+  }, [passengers, email, phoneNumber, receiveNow, deliveryDate]);
 
   const handleUpdatePassenger = (index, field, value) => {
     dispatch(
@@ -90,15 +89,6 @@ export default function Form() {
 
   const handleEmailChange = e => {
     dispatch(updateField({ field: 'email', value: e.target.value }));
-  };
-
-  const handleValidityChange = e => {
-    dispatch(
-      updatePricing({
-        type: 'SET_VALIDITY',
-        validity: e.target.value,
-      })
-    );
   };
 
   const handleSubmit = async e => {
@@ -136,13 +126,10 @@ export default function Form() {
         phoneNumber={phoneNumber}
         setPhoneNumber={value => dispatch(updateField({ field: 'phoneNumber', value }))}
       />
-      <TicketValidityOptions
-        ticketValidity={ticketValidity}
-        handleValidityChange={handleValidityChange}
-      />
+      <TicketValidityOptions ticketValidity={ticketValidity} />
       <ReceiptOptions
-        deliverNow={deliverNow}
-        setDeliverNow={value => dispatch(updateField({ field: 'deliverNow', value }))}
+        receiveNow={receiveNow}
+        setReceiveNow={value => dispatch(updateField({ field: 'receiveNow', value }))}
         deliveryDate={deliveryDate}
         setDeliveryDate={date => dispatch(updateField({ field: 'deliveryDate', value: date }))}
       />
@@ -250,7 +237,7 @@ function TicketValidityOptions({ ticketValidity }) {
     dispatch(
       updatePricing({
         ticketValidity: e.target.value,
-        ticketPrice: options.find(option => option.value === e.target.value).price,
+        ticketPrice: options.find(o => o.value === e.target.value).price,
       })
     );
   };
@@ -294,7 +281,7 @@ function TicketValidityOptions({ ticketValidity }) {
   );
 }
 
-function ReceiptOptions({ deliverNow, deliveryDate, setDeliverNow, setDeliveryDate }) {
+function ReceiptOptions({ receiveNow, deliveryDate, setReceiveNow, setDeliveryDate }) {
   return (
     <div className="flex flex-col my-5">
       <Label>Deliver Ticket On</Label>
@@ -303,8 +290,8 @@ function ReceiptOptions({ deliverNow, deliveryDate, setDeliverNow, setDeliveryDa
           <input
             type="radio"
             name="receiveTicket"
-            checked={deliverNow}
-            onChange={() => setDeliverNow(true)}
+            checked={receiveNow}
+            onChange={() => setReceiveNow(true)}
           />
           <span>I need it now</span>
         </div>
@@ -312,13 +299,13 @@ function ReceiptOptions({ deliverNow, deliveryDate, setDeliverNow, setDeliveryDa
           <input
             type="radio"
             name="receiveTicket"
-            checked={!deliverNow}
-            onChange={() => setDeliverNow(false)}
+            checked={!receiveNow}
+            onChange={() => setReceiveNow(false)}
           />
           <span>I need it on a later date</span>
         </div>
       </div>
-      {!deliverNow && (
+      {!receiveNow && (
         <FormRow>
           <FormItem>
             <SelectDate

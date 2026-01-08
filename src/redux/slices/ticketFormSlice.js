@@ -1,5 +1,5 @@
-import { BACKEND } from '../../config';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { BACKEND } from '../../config';
 import { formatISODuration } from '../../utils/formatISODuration';
 import { trackFlightFormSubmission } from '../../lib/analytics';
 
@@ -18,12 +18,12 @@ const initialState = {
   departureDate: '',
   returnDate: '',
   quantity: { adults: 1, children: 0, infants: 0 },
-  ticketPrice: 49,
+  ticketPrice: 13,
   passengers: [],
   email,
   phoneNumber,
   ticketValidity: '2 Days',
-  deliverNow: true,
+  receiveNow: true,
   deliveryDate: '',
   message: '',
   paymentStatus: 'UNPAID',
@@ -90,7 +90,6 @@ const ticketFormSlice = createSlice({
       const { ticketValidity, ticketPrice } = payload;
       state.ticketValidity = ticketValidity;
       state.ticketPrice = ticketPrice;
-      console;
     },
 
     updateValidation: (state, { payload }) => {
@@ -187,7 +186,7 @@ export const submitFormData = createAsyncThunk(
       departureFlight,
       returnFlight,
       ticketValidity,
-      deliverNow,
+      receiveNow,
       deliveryDate,
     } = state.ticketForm;
 
@@ -205,8 +204,8 @@ export const submitFormData = createAsyncThunk(
       paymentStatus,
       ticketValidity,
       ticketDelivery: {
-        immediate: deliverNow,
-        deliveryDate: deliverNow ? null : deliveryDate,
+        immediate: receiveNow,
+        deliveryDate: receiveNow ? null : deliveryDate,
       },
       flightDetails: {
         departureFlight,
