@@ -1,6 +1,5 @@
-import { ChevronLeft, ChevronRight, CircleChevronLeft, CircleChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { FaChevronCircleLeft, FaChevronCircleRight } from 'react-icons/fa';
 
 const formatToDateString = date => {
   const year = date.getFullYear();
