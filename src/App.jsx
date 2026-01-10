@@ -3,6 +3,7 @@ import { initializeGA } from './lib/analytics';
 import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { InsuranceProvider } from './context/InsuranceContext';
 import AppRoutes from './app/AppRoutes';
 
 const queryClient = new QueryClient({
@@ -22,7 +23,9 @@ function App() {
     <HelmetProvider>
       <ToastContainer transition={Zoom} />
       <QueryClientProvider client={queryClient}>
-        <AppRoutes />
+        <InsuranceProvider>
+          <AppRoutes />
+        </InsuranceProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );
