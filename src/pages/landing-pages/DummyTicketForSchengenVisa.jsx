@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
   FaCalendarAlt,
@@ -8,11 +9,11 @@ import {
   FaShieldAlt,
 } from 'react-icons/fa';
 import Hero from '../../components/HomeComponents/Hero';
-import Process from '../../components/HomeComponents/Process';
-import Benefits from '../../components/HomeComponents/Benefits';
-import About from '../../components/HomeComponents/About';
-import FAQ from '../../components/HomeComponents/FAQ';
-import Contact from '../../components/HomeComponents/Contact';
+const Process = lazy(() => import('../../components/HomeComponents/Process'));
+const About = lazy(() => import('../../components/HomeComponents/About'));
+const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
+const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
+const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
 
 const benefits = [
   {
@@ -80,47 +81,100 @@ const faqs = [
   },
 ];
 
+const keyword = 'dummy ticket';
+
+const pageData = {
+  meta: {
+    title: 'Dummy Ticket for Schengen Visa From AED 49 | Accepted by VFS',
+    description:
+      'Book your dummy flight ticket for Schengen visa. We provide verifiable dummy tickets with a valid PNR number that are accepted by VFS. Starting from AED 49.',
+    canonical: 'https://www.mydummyticket/dummy-ticket-schengen-visa',
+  },
+  sections: {
+    hero: {
+      title: 'Dummy Tickets For Schengen Visa',
+      subtitle:
+        'Book your verifiable dummy ticket for your Schengen visa from AED 49. Our dummy tickets come with a 6-digit PNR number that can be used to verify ticket details at airline and reservation systems, and they are accepted by VFS, BLS, and embassies for visa applications.',
+    },
+    process: {
+      title: 'How to book your dummy ticket?',
+      subtitle:
+        "Get your dummy ticket for Schengen visa in 3 quick, simple, and hassle-free steps. Here's how it works:",
+      keyword,
+    },
+    about: {
+      title: 'About Us',
+      text: '',
+      keyword,
+    },
+    benefits: {
+      title: 'Benefits of Choosing Our Dummy Tickets for Your Schengen Visa',
+      subtitle: 'This is why we believe you should book your dummy ticket with us',
+      benefits,
+    },
+    faqs: {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Commonly asked questions about dummy tickets for Schengen visa',
+      faqs,
+    },
+    contact: {
+      title: 'Reserve Your Dummy Ticket with Us',
+      subtitle: 'Contact us now',
+      text: 'Still not sure whether you should book a dummy ticket or get a real flight ticket? Get in touch with us now and let us help you clear your doubts.',
+    },
+  },
+};
+
 export default function DummyTicketForSchengenVisa() {
   return (
     <>
       <Helmet>
-        <title>Dummy Ticket for Schengen Visa From AED 49 | Accepted by VFS</title>
-        <link rel="canonical" href="https://www.mydummyticket/dummy-ticket-schengen-visa" />
+        <title>{pageData.meta.title}</title>
+        <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
-        <meta
-          name="description"
-          content="Book your dummy flight ticket for Schengen visa. We provide verifiable dummy tickets with a valid PNR number that are accepted by VFS. Starting from AED 49."
-        />
+        <meta name="description" content={pageData.meta.description} />
         <meta
           name="keywords"
           content="dummy ticket, dummy ticket for schengen visa, dummy air ticket for schengen visa, dummy flight ticket for schengen visa"
         />
       </Helmet>
-      <Hero
-        title="Dummy Tickets For Schengen Visa"
-        subtitle="Book your verifiable dummy ticket for your Schengen visa from AED 49. Our dummy tickets come with a 6-digit PNR number that can be used to verify ticket details at airline and reservation systems, and they are accepted by VFS, BLS, and embassies for visa applications."
-      />
-      <Process
-        title="How to book your dummy ticket?"
-        subtitle="Get your dummy ticket for Schengen visa in 3 quick, simple, and hassle-free steps. Here's how it works:"
-      />
-      <About />
-      <Benefits
-        title="Benefits of Choosing Our Dummy Tickets for Your Schengen Visa"
-        subtitle="This is why we believe you should book your dummy ticket with us"
-        keyword="dummy ticket"
-        benefits={benefits}
-      />
-      <FAQ
-        title="Frequently Asked Questions"
-        subtitle="Commonly asked questions about dummy tickets for Schengen visa"
-        faqs={faqs}
-      />
-      <Contact
-        title="Reserve Your Dummy Ticket with Us"
-        subtitle="Contact us now"
-        text="Still not sure whether you should book a dummy ticket or get a real flight ticket? Get in touch with us now and let us help you clear your doubts."
-      />
+
+      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+
+      <Suspense fallback={null}>
+        <Process
+          title={pageData.sections.process.title}
+          subtitle={pageData.sections.process.subtitle}
+        />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <About title={pageData.sections.about.title} keyword={pageData.sections.about.keyword} />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <Benefits
+          title={pageData.sections.benefits.title}
+          subtitle={pageData.sections.benefits.subtitle}
+          benefits={pageData.sections.benefits.benefits}
+        />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <FAQ
+          title={pageData.sections.faqs.title}
+          subtitle={pageData.sections.faqs.subtitle}
+          faqs={pageData.sections.faqs.faqs}
+        />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <Contact
+          title={pageData.sections.contact.title}
+          subtitle={pageData.sections.contact.subtitle}
+          text={pageData.sections.contact.text}
+        />
+      </Suspense>
     </>
   );
 }
