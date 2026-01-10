@@ -10,6 +10,7 @@ import Home from '../pages/landing-pages/Home';
 import FlightReservation from '../pages/landing-pages/FlightReservation';
 import DummyTicketForSchengenVisa from '../pages/landing-pages/DummyTicketForSchengenVisa';
 import DummyTicketForUSVisa from '../pages/landing-pages/DummyTicketForUSVisa';
+import EmiratesDummyTicket from '../pages/landing-pages/EmiratesDummyTicket';
 import OnwardTicket from '../pages/landing-pages/OnwardTicket';
 
 // Booking Pages
@@ -31,6 +32,7 @@ import Blog from '../pages/blog-pages/Blog';
 // Other Pages
 import Sitemap from '../pages/other/Sitemap';
 import PageNotFound from '../pages/other/PageNotFound';
+import EtihadDummyTicket from '../pages/landing-pages/EtihadDummyTicket';
 
 export default function AppRoutes() {
   return (
@@ -41,6 +43,8 @@ export default function AppRoutes() {
           <Route index element={<Home />} />
           <Route path="dummy-ticket-schengen-visa" element={<DummyTicketForSchengenVisa />} />
           <Route path="dummy-ticket-us-visa" element={<DummyTicketForUSVisa />} />
+          <Route path="emirates-dummy-ticket" element={<EmiratesDummyTicket />} />
+          <Route path="etihad-dummy-ticket" element={<EtihadDummyTicket />} />
           <Route path="onward-ticket" element={<OnwardTicket />} />
           <Route path="flight-reservation" element={<FlightReservation />} />
           <Route path="*" element={<PageNotFound />} />
