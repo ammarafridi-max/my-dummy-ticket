@@ -47,6 +47,9 @@ export default function SearchableSelect({
         type="text"
         value={query}
         placeholder={placeholder}
+        onClick={() => {
+          setQuery('');
+        }}
         onChange={e => {
           setQuery(e.target.value);
           onChange(null);
@@ -67,7 +70,7 @@ export default function SearchableSelect({
 
           {filteredItems.map(item => (
             <ListItem key={item.id} onClick={() => handleSelect(item)}>
-              <div className="font-medium">{item.name}</div>
+              <div className="font-normal">{item.name}</div>
               {item.description && (
                 <div className="text-xs font-light text-gray-400">{item.description}</div>
               )}
@@ -84,7 +87,7 @@ function ListItem({ children, muted = false, ...props }) {
     <li
       {...props}
       className={`cursor-pointer px-3 py-2 transition-colors ${
-        muted ? 'cursor-default text-gray-400' : 'hover:bg-primary-100'
+        muted ? 'cursor-default text-gray-400' : 'hover:bg-gray-50'
       }`}
     >
       {children}
