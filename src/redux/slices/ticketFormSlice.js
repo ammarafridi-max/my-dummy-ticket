@@ -18,7 +18,7 @@ const initialState = {
   departureDate: '',
   returnDate: '',
   quantity: { adults: 1, children: 0, infants: 0 },
-  ticketPrice: 13,
+  ticketPrice: 49,
   passengers: [],
   email,
   phoneNumber,
