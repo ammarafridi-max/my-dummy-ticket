@@ -18,6 +18,9 @@ import SelectFlights from '../pages/booking-pages/SelectFlights';
 import ReviewDetails from '../pages/booking-pages/ReviewDetails';
 import PaymentSuccess from '../pages/booking-pages/PaymentSuccess';
 
+// Travel Insurance
+import TravelInsurance from '../pages/travel-insurance/TravelInsurance';
+
 // Legal Pages
 import TermsAndConditions from '../pages/legal-pages/TermsAndConditions';
 import PrivacyPolicy from '../pages/legal-pages/PrivacyPolicy';
@@ -47,6 +50,7 @@ export default function AppRoutes() {
           <Route path="etihad-dummy-ticket" element={<EtihadDummyTicket />} />
           <Route path="onward-ticket" element={<OnwardTicket />} />
           <Route path="flight-reservation" element={<FlightReservation />} />
+          <Route path="travel-insurance" element={<TravelInsurance />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="sitemap" element={<Sitemap />} />
           <Route path="faq" element={<FAQ />} />
