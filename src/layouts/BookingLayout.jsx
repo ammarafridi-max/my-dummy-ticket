@@ -1,7 +1,6 @@
 import React from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, Link } from 'react-router-dom';
 import { HiChevronRight } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
 import PrimarySection from '../components/PrimarySection';
 
 export default function BookingLayout() {
