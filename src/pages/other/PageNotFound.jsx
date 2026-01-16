@@ -1,30 +1,33 @@
-import PrimaryButton from '../../components/PrimaryButton';
+import PrimaryLink from '../../components/PrimaryLink';
 import Container from '../../components/Container';
 import PrimarySection from '../../components/PrimarySection';
-import { Helmet } from 'react-helmet-async';
 
 export default function PageNotFound() {
   return (
-    <>
-      <Helmet>
-        <title>Page Not Found!</title>
-        <meta name="robots" content="none" />
-      </Helmet>
-      <PrimarySection py="150px">
-        <Container>
-          <div className="text-center">
-            <h1 className="font-merriweather text-center text-primary-800 text-7xl font-bold">
-              404 Error!
-            </h1>
-            <h2 className="font-nunito text-center text-3xl font-normal">
-              The page you're looking for doesn't exist.
-            </h2>
-            <PrimaryButton mr="8px" href="/">
-              Go to Home
-            </PrimaryButton>
+    <PrimarySection className="bg-gray-50 py-28 md:py-30 font-outfit">
+      <Container>
+        <div className="text-center space-y-6">
+          <h1 className="text-[72px] md:text-[96px] font-bold text-[#ff6b00] leading-none">404</h1>
+
+          <h2 className="text-[26px] md:text-[32px] font-semibold text-gray-800">
+            Oops! Page Not Found
+          </h2>
+
+          <p className="text-[16px] md:text-[18px] text-gray-600 max-w-lg mx-auto font-light">
+            The page you're looking for doesn’t exist or has been moved. Let’s get you back home
+            safely.
+          </p>
+
+          <div className="pt-6">
+            <PrimaryLink
+              href="/"
+              className="inline-block bg-[#ff6b00] text-white text-[16px] font-medium px-6 py-3 rounded-full shadow-md hover:bg-[#e65e00] transition-all duration-300"
+            >
+              Go Back Home
+            </PrimaryLink>
           </div>
-        </Container>
-      </PrimarySection>
-    </>
+        </div>
+      </Container>
+    </PrimarySection>
   );
 }
