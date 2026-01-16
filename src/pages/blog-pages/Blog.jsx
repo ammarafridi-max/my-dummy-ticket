@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet-async';
+import { useBlogs } from '../../hooks/useBlogs';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
 import PageTitle from '../../components/PageTitle';
 import Breadcrumb from '../../components/Breadcrumb';
-import { useBlogs } from '../../hooks/useBlogs';
 import Loading from '../../components/Loading';
 import BlogCard from '../../components/BlogCard';
 
