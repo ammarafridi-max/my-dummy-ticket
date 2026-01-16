@@ -1,14 +1,7 @@
-import { BACKEND } from '../config';
+import { apiFetch } from './apiClient';
+
+const URL = '/api/airports';
 
 export async function getAirportsApi(query) {
-  const res = await fetch(`${BACKEND}/api/airports?keyword=${query}`);
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Could not fetch airports');
-  }
-
-  const data = await res.json();
-
-  return data?.result;
+  return await apiFetch(`${URL}?keyword=${query}`);
 }
