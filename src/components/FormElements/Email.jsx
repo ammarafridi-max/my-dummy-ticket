@@ -1,24 +1,18 @@
 import { FaEnvelope } from 'react-icons/fa';
-import Label from './Label';
 import InputWithIcon from './InputWithIcon';
 
-export default function Email({ email, handleEmailChange }) {
+export default function Email({ email, onChange }) {
   return (
-    <div className="w-full mt-3 flex flex-col">
-      <Label htmlFor="email" required>
-        Email Address
-      </Label>
-      <InputWithIcon
-        type="email"
-        value={email}
-        onChange={handleEmailChange}
-        required
-        name="email"
-        id="email"
-        autoComplete="on"
-        icon={<FaEnvelope />}
-        placeholder="Enter email address"
-      />
-    </div>
+    <InputWithIcon
+      type="email"
+      value={email}
+      onChange={onChange}
+      required
+      name="email"
+      id="email"
+      autoComplete="on"
+      icon={<FaEnvelope />}
+      placeholder="Enter email address"
+    />
   );
 }
