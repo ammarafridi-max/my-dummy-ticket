@@ -1,0 +1,15 @@
+import { useQuery } from '@tanstack/react-query';
+import { getInsuranceApplicationApi } from '../../services/apiInsurance';
+
+export function useInsuranceApplication(sessionId) {
+  const {
+    data: insuranceApplication,
+    isLoading: isLoadingInsuranceApplication,
+    isError: isErrorInsuranceApplication,
+  } = useQuery({
+    queryKey: ['insurance-application', sessionId],
+    queryFn: () => getInsuranceApplicationApi(sessionId),
+  });
+
+  return { insuranceApplication, isLoadingInsuranceApplication, isErrorInsuranceApplication };
+}
