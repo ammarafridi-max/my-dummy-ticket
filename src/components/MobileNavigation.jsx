@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { pages } from './Navigation';
 import { HiOutlineXMark, HiOutlineBars3 } from 'react-icons/hi2';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { useOutsideClick } from '../hooks/useOutsideClick';
+import { useOutsideClick } from '../hooks/general/useOutsideClick';
 import Container from './Container';
 
 export default function MobileNavigation() {
