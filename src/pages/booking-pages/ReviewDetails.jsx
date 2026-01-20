@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { formatDate } from '../../utils/formatDate';
+import { toast } from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
+import { formatDate } from '../../utils/formatDate';
 import { trackBeginCheckout } from '../../lib/analytics';
-import { useStripePaymentURL } from '../../hooks/useStripePaymentURL';
-import { useDummyTicket } from '../../hooks/useDummyTicket';
+import { useStripePaymentURL } from '../../hooks/ticket/useStripePaymentURL';
+import { useDummyTicket } from '../../hooks/ticket/useDummyTicket';
 import PrimaryButton from '../../components/PrimaryButton';
 import Loading from '../../components/Loading';
 
@@ -36,6 +36,8 @@ export default function ReviewDetails() {
 
   const totalQuantity = dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;
+
+  console.log(dummyTicket);
 
   const handleConfirm = () => {
     if (sessionId) {

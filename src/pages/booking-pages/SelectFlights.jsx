@@ -6,11 +6,11 @@ import {
   updateField,
 } from '../../redux/slices/ticketFormSlice';
 import { Helmet } from 'react-helmet-async';
-import { useFlights } from '../../hooks/useFlights';
-import FlightCard from '../../components/FlightCard/FlightCard';
+import { useFlights } from '../../hooks/flight/useFlights';
+import FlightCard from '../../components/FlightCard';
 import PrimaryButton from '../../components/PrimaryButton';
 import Error from '../../components/Error';
-import Skeleton from '../../components/FlightCard/Skeleton';
+import FlightSkeleton from '../../components/FlightSkeleton';
 import FlightError from '../../components/FlightError';
 
 export default function SelectFlights() {
@@ -63,7 +63,7 @@ export default function SelectFlights() {
         <title>Select Flights</title>
         <meta name="robots" content="none" />
       </Helmet>
-      {isLoadingFlights && Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} />)}
+      {isLoadingFlights && Array.from({ length: 3 }).map((_, i) => <FlightSkeleton key={i} />)}
 
       {isErrorFlights && <FlightError />}
 

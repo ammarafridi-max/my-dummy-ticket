@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDummyTicket } from '../../hooks/useDummyTicket';
-import { trackPurchaseEvent } from '../../lib/analytics';
-import { formatDate } from '../../utils/formatDate';
 import { Helmet } from 'react-helmet-async';
 import { Check, X } from 'lucide-react';
+import { useDummyTicket } from '../../hooks/ticket/useDummyTicket';
+import { trackPurchaseEvent } from '../../lib/analytics';
+import { formatDate } from '../../utils/formatDate';
 import styled from 'styled-components';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
