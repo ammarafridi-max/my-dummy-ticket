@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { getStripePaymentURL } from '../services/apiTickets';
+import { useMutation } from '@tanstack/react-query';
+import { getStripePaymentURL } from '../../services/apiTickets';
 
 export function useStripePaymentURL() {
   const {

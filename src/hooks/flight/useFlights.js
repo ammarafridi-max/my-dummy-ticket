@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getFlightsApi } from '../services/apiFlights';
+import { getFlightsApi } from '../../services/apiFlights';
 
 export function useFlights(formData) {
   const {
