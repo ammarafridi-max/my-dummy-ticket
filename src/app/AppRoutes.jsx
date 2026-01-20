@@ -25,6 +25,7 @@ import PaymentSuccess from '../pages/booking-pages/PaymentSuccess';
 import TravelInsurance from '../pages/travel-insurance/TravelInsurance';
 import Quotes from '../pages/travel-insurance/Quotes';
 import PassengerDetails from '../pages/travel-insurance/PassengerDetails';
+import InsurancePayment from '../pages/travel-insurance/InsurancePayment';
 
 // Legal Pages
 import TermsAndConditions from '../pages/legal-pages/TermsAndConditions';
@@ -71,6 +72,7 @@ export default function AppRoutes() {
             <Route element={<InsuranceBookingLayout />}>
               <Route path="travel-insurance/quotes" element={<Quotes />} />
               <Route path="travel-insurance/passenger-details" element={<PassengerDetails />} />
+              <Route path="travel-insurance/payment" element={<InsurancePayment />} />
             </Route>
           </Route>
         </Routes>
