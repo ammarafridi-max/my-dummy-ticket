@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import InputWithIcon from './InputWithIcon';
-import { useAirports } from '../../hooks/useAirports';
+import { useAirports } from '../../hooks/airport/useAirports';
+import { useOutsideClick } from '../../hooks/general/useOutsideClick';
 
 export default function SelectAirport({ value, onChange, id, icon }) {
   const [query, setQuery] = useState(value || '');
@@ -22,16 +23,7 @@ export default function SelectAirport({ value, onChange, id, icon }) {
     onChange(display);
   };
 
-  const handleClickOutside = e => {
-    if (componentRef.current && !componentRef.current.contains(e.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useOutsideClick(componentRef, () => setIsOpen(false));
 
   return (
     <div className="relative" ref={componentRef}>
