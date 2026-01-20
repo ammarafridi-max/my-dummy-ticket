@@ -7,7 +7,7 @@ export default function InputWithIcon({ icon, className = '', type = 'text', ...
         </div>
       )}
       <input
-        className="w-[100%] bg-white text-[14.5px] py-2.5 px-3 pl-10 md:pl-10 font-light outline-none placeholder:text-gray-400 placeholder:text-[14px] rounded-lg border border-gray-300 focus-visible:border-1.5 focus-visible:border-primary-500"
+        className={`w-[100%] bg-white text-[14.5px] font-light outline-none placeholder:text-gray-400 placeholder:text-[14px] rounded-lg border border-gray-300 focus-visible:border-1.5 focus-visible:border-primary-500 ${icon ? 'py-2.5 px-3 pl-10 md:pl-10' : 'py-2.5 px-3'}`}
         {...props}
       />
     </div>
