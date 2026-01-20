@@ -1,20 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { countryCodes } from '../../data/countryCodes';
-import Label from './Label';
+import { useOutsideClick } from '../../hooks/general/useOutsideClick';
 
 export default function PhoneNumber({ phoneNumber, setPhoneNumber }) {
   return (
-    <div className="w-full mt-3 flex flex-col">
-      <Label htmlFor="number" required>
-        Phone Number
-      </Label>
-      <Number
-        codeValue={phoneNumber.code}
-        codeOnChange={e => setPhoneNumber({ ...phoneNumber, code: e.target.value })}
-        digitsValue={phoneNumber.digits}
-        digitsOnChange={e => setPhoneNumber({ ...phoneNumber, digits: e.target.value })}
-      />
-    </div>
+    <Number
+      codeValue={phoneNumber?.code}
+      codeOnChange={e => setPhoneNumber({ ...phoneNumber, code: e.target.value })}
+      digitsValue={phoneNumber?.digits}
+      digitsOnChange={e => setPhoneNumber({ ...phoneNumber, digits: e.target.value })}
+    />
   );
 }
 
@@ -35,19 +30,7 @@ function Number({ codeValue, digitsValue, codeOnChange, digitsOnChange, disabled
 
   const componentRef = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = event => {
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
-        setIsOnFocus(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  useOutsideClick(componentRef, () => setIsOnFocus(false));
 
   return (
     <div
