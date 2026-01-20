@@ -1,22 +1,21 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
+import { useOutsideClick } from '../../hooks/general/useOutsideClick';
 import Calendar from './Calendar';
 import InputWithIcon from './InputWithIcon';
 
-export default function SelectDate({ selectedDate, onDateSelect, minDate, placeholder, icon }) {
+export default function SelectDate({
+  selectedDate,
+  onDateSelect,
+  minDate,
+  maxDate,
+  placeholder,
+  icon,
+  minYear,
+}) {
   const [showCalendar, setShowCalendar] = useState(false);
   const componentRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
-        setShowCalendar(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [componentRef]);
+  useOutsideClick(componentRef, () => setShowCalendar(false));
 
   return (
     <div ref={componentRef}>
@@ -31,13 +30,18 @@ export default function SelectDate({ selectedDate, onDateSelect, minDate, placeh
       {showCalendar && (
         <div>
           <Calendar
+            minYear={minYear}
             onDateClick={date => {
               onDateSelect(date);
               setShowCalendar(false);
             }}
             showCalendar={showCalendar}
             setShowCalendar={setShowCalendar}
-            isDateDisabled={date => minDate && date < minDate}
+            isDateDisabled={date => {
+              if (minDate && date < minDate) return true;
+              if (maxDate && date > maxDate) return true;
+              return false;
+            }}
           />
         </div>
       )}

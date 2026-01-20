@@ -1,5 +1,24 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useOutsideClick } from '../../hooks/general/useOutsideClick';
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const getYearsRange = (start = 2000, end = new Date().getFullYear() + 5) =>
+  Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
 const formatToDateString = date => {
   const year = date.getFullYear();
@@ -8,7 +27,7 @@ const formatToDateString = date => {
   return `${year}-${month}-${day}`;
 };
 
-export default function Calendar({ onDateClick, isDateDisabled, showCalendar, setShowCalendar }) {
+export default function Calendar({ onDateClick, isDateDisabled, setShowCalendar, minYear = 2000 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const componentRef = useRef(null);
 
@@ -20,38 +39,69 @@ export default function Calendar({ onDateClick, isDateDisabled, showCalendar, se
     });
   };
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
-        setShowCalendar(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [componentRef]);
+  useOutsideClick(componentRef, () => setShowCalendar(false));
 
-  const renderHeader = () => (
-    <div className="flex justify-between items-center gap-3 w-full p-4 bg-gray-white font-medium font-nunito text-sm sm:text-base">
-      <p className="flex-1 text-left text-lg text-gray-800 font-normal">
-        {currentDate.toLocaleDateString('en-US', {
-          month: 'long',
-          year: 'numeric',
-        })}
-      </p>
-      <ChevronLeft
-        size={28}
-        className="cursor-pointer duration-300 text-gray-300 hover:text-primary-500"
-        onClick={() => handleMonthChange(-1)}
-      />
-      <ChevronRight
-        size={28}
-        className="cursor-pointer duration-300 text-gray-300 hover:text-primary-500"
-        onClick={() => handleMonthChange(1)}
-      />
-    </div>
-  );
+  const renderHeader = () => {
+    const years = getYearsRange(minYear, new Date().getFullYear() + 10);
+
+    return (
+      <div className="flex items-center justify-between w-full px-4 py-3 border-b border-gray-100 bg-white">
+        {/* Month + Year */}
+        <div className="flex items-center gap-2">
+          <select
+            value={currentDate.getMonth()}
+            onChange={e => {
+              const newDate = new Date(currentDate);
+              newDate.setMonth(Number(e.target.value));
+              setCurrentDate(newDate);
+            }}
+            className="rounded-md border border-gray-200 px-2 py-1.5 text-gray-800 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-primary-500"
+          >
+            {MONTHS.map((month, index) => (
+              <option key={month} value={index}>
+                {month}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={currentDate.getFullYear()}
+            onChange={e => {
+              const newDate = new Date(currentDate);
+              newDate.setFullYear(Number(e.target.value));
+              setCurrentDate(newDate);
+            }}
+            className="rounded-md border border-gray-200 px-2 py-1.5 text-gray-800 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-primary-500"
+          >
+            {years.map(year => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => handleMonthChange(-1)}
+            className="p-1.5 rounded-md text-gray-400 hover:text-primary-500 hover:bg-gray-50 transition"
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleMonthChange(1)}
+            className="p-1.5 rounded-md text-gray-400 hover:text-primary-500 hover:bg-gray-50 transition"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </div>
+    );
+  };
 
   const renderDays = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -120,7 +170,7 @@ export default function Calendar({ onDateClick, isDateDisabled, showCalendar, se
       onClick={() => setShowCalendar(false)}
     >
       <div
-        className="w-full max-w-[360px] sm:max-w-[350px] bg-white rounded-lg shadow-lg overflow-hidden"
+        className="w-full max-w-[370px] sm:max-w-[350px] bg-white rounded-lg shadow-lg overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {renderHeader()}
