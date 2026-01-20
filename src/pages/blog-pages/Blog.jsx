@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useBlogs } from '../../hooks/useBlogs';
+import { useBlogs } from '../../hooks/blog/useBlogs';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
 import PageTitle from '../../components/PageTitle';
