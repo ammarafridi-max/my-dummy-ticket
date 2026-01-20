@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaGlobeAfrica } from 'react-icons/fa';
 import InputWithIcon from './InputWithIcon';
+import { useOutsideClick } from '../../hooks/general/useOutsideClick';
 
 export default function SearchableSelect({
+  icon,
   items = [],
   value = null,
   onChange,
@@ -17,15 +18,7 @@ export default function SearchableSelect({
     setQuery(value?.name || '');
   }, [value]);
 
-  useEffect(() => {
-    const handleClickOutside = e => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useOutsideClick(ref, () => setIsOpen(false));
 
   const filteredItems =
     query.trim().length < minSearchLength
@@ -43,7 +36,7 @@ export default function SearchableSelect({
   return (
     <div ref={ref} className="relative w-full">
       <InputWithIcon
-        icon={<FaGlobeAfrica />}
+        icon={icon}
         type="text"
         value={query}
         placeholder={placeholder}
