@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-hot-toast';
-import { Helmet } from 'react-helmet-async';
-import { formatDate } from '../../utils/formatDate';
-import { trackBeginCheckout } from '../../lib/analytics';
+import { useContext, useEffect } from 'react';
 import { useStripePaymentURL } from '../../hooks/ticket/useStripePaymentURL';
 import { useDummyTicket } from '../../hooks/ticket/useDummyTicket';
+import { toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
+import { TicketContext } from '../../context/TicketContext';
+import { trackBeginCheckout } from '../../lib/analytics';
+import { formatDate } from '../../utils/formatDate';
 import PrimaryButton from '../../components/PrimaryButton';
 import Loading from '../../components/Loading';
 
@@ -28,16 +28,15 @@ function Detail({ children }) {
 }
 
 export default function ReviewDetails() {
-  const { type, ticketPrice, quantity } = useSelector(state => state.ticketForm);
   const sessionId = localStorage.getItem('SESSION_ID');
-  const { url, createStripePayment, isLoadingStripePaymentURL, isErrorStripePaymentURL } =
+  const { type, ticketPrice, quantity } = useContext(TicketContext);
+  const { createStripePayment, isLoadingStripePaymentURL, isErrorStripePaymentURL } =
     useStripePaymentURL();
   const { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket } = useDummyTicket(sessionId);
 
   const totalQuantity = dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;
 
-  console.log(dummyTicket);
 
   const handleConfirm = () => {
     if (sessionId) {
@@ -61,12 +60,6 @@ export default function ReviewDetails() {
       toast.error('Could not get payment URL. Please send us an email.');
     }
   }, [isErrorStripePaymentURL]);
-
-  useEffect(() => {
-    if (url) {
-      window.location.href = url;
-    }
-  }, [url]);
 
   const groupedPassengers =
     dummyTicket?.passengers?.reduce((acc, passenger) => {

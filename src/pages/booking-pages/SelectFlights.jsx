@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  initializePassengers,
-  transformItinerary,
-  updateField,
-} from '../../redux/slices/ticketFormSlice';
-import { Helmet } from 'react-helmet-async';
+import { useContext, useEffect, useState } from 'react';
+import { transformItinerary } from '../../utils/transformItinerary';
 import { useFlights } from '../../hooks/flight/useFlights';
+import { Helmet } from 'react-helmet-async';
+import { TicketContext } from '../../context/TicketContext';
 import FlightCard from '../../components/FlightCard';
 import PrimaryButton from '../../components/PrimaryButton';
 import Error from '../../components/Error';
@@ -14,12 +10,9 @@ import FlightSkeleton from '../../components/FlightSkeleton';
 import FlightError from '../../components/FlightError';
 
 export default function SelectFlights() {
-  const dispatch = useDispatch();
   const [maxFlights, setMaxFlights] = useState(5);
   const [expandedCardId, setExpandedCardId] = useState(null);
-  const { type, from, to, departureDate, returnDate, quantity } = useSelector(
-    state => state.ticketForm
-  );
+  const { type, from, to, departureDate, returnDate, quantity, setDepartureFlight, setReturnFlight, setPassengers, initializePassengers } = useContext(TicketContext)
   const { flights, isLoadingFlights, isErrorFlights } = useFlights({
     type,
     from,
@@ -33,30 +26,20 @@ export default function SelectFlights() {
     setExpandedCardId(prevId => (prevId === id ? null : id));
   };
 
-  useEffect(() => {
-    if (quantity) {
-      dispatch(initializePassengers());
-    }
-  }, [dispatch, quantity]);
-
-  const showMoreFlights = () => {
-    if (maxFlights < flights?.length) {
-      setMaxFlights(cur => cur + 5);
-    }
-  };
-
   function handleSelectFlight(flight, index) {
     handleToggleExpand(index);
-
-    const departureFlightObj = transformItinerary(flight.itineraries[0]);
-    dispatch(updateField({ field: 'departureFlight', value: departureFlightObj }));
-
+    setDepartureFlight(transformItinerary(flight.itineraries[0]))
     if (type === 'Return' && flight.itineraries[1]) {
-      const returnFlightObj = transformItinerary(flight.itineraries[1]);
-      dispatch(updateField({ field: 'returnFlight', value: returnFlightObj }));
+      setReturnFlight(transformItinerary(flight.itineraries[1]))
     }
   }
 
+  useEffect(() => {
+    if (quantity) {
+      initializePassengers(quantity, setPassengers)
+    }
+  }, [])
+  
   return (
     <>
       <Helmet>
@@ -79,7 +62,11 @@ export default function SelectFlights() {
           ))}
           {flights.length > maxFlights && (
             <div className="text-center mt-3">
-              <PrimaryButton onClick={showMoreFlights}>Load More Flights</PrimaryButton>
+              <PrimaryButton onClick={() => {
+                if (maxFlights < flights?.length) {
+                  setMaxFlights(cur => cur + 5);
+                }
+              }}>Load More Flights</PrimaryButton>
             </div>
           )}
         </>
