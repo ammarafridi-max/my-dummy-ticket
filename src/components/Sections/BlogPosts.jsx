@@ -1,8 +1,8 @@
+import { useBlogs } from '../../hooks/blog/useBlogs';
 import BlogCard from '../BlogCard';
 import Container from '../Container';
 import PrimarySection from '../PrimarySection';
 import SectionTitle from '../SectionTitle';
-import { useBlogs } from '../../hooks/useBlogs';
 
 export default function BlogPosts({
   title = 'Blog Posts',
