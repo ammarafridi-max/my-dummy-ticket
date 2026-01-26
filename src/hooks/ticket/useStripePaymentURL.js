@@ -3,18 +3,19 @@ import { getStripePaymentURL } from '../../services/apiTickets';
 
 export function useStripePaymentURL() {
   const {
-    data: url,
     mutate: createStripePayment,
     isPending: isLoadingStripePaymentURL,
     isError: isErrorStripePaymentURL,
     error,
   } = useMutation({
     mutationFn: getStripePaymentURL,
+    onSuccess: url => {
+      window.location.href = url;
+    }
   });
 
   return {
     createStripePayment,
-    url,
     isLoadingStripePaymentURL,
     isErrorStripePaymentURL,
     error,
