@@ -43,3 +43,11 @@ export async function finalizeInsuranceApi({
     }),
   });
 }
+
+export async function getInsuranceApplicationApi(sessionId) {
+  return await apiFetch(`${URL}/${sessionId}`);
+}
+
+export async function downloadInsurancePolicyApi(policyId) {
+  return await apiFetch(`${URL}/download/${policyId}`);
+}
