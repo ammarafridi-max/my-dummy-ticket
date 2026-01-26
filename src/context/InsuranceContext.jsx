@@ -1,7 +1,15 @@
 import { createContext, useEffect, useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useNavigate } from 'react-router-dom';
+import { useLocalStorage } from '../hooks/general/useLocalStorage';
+import toast from 'react-hot-toast';
 
-const regions = [
+const PASSENGER_GROUPS = [
+  { key: 'adults', label: 'Adult' },
+  { key: 'children', label: 'Child' },
+  { key: 'seniors', label: 'Senior' },
+];
+
+const REGIONS = [
   {
     id: 'gulf',
     name: 'Gulf',
@@ -45,69 +53,153 @@ const ageCategories = [
 export const InsuranceContext = createContext();
 
 export function InsuranceProvider({ children }) {
-  const { updateLocalStorage, deleteLocalStorage } = useLocalStorage();
-  const existingData = JSON.parse(localStorage.getItem('travelInsurance'));
-  const [journeyType, setJourneyType] = useState(existingData.journeyType || 'Single Trip');
-  const [startDate, setStartDate] = useState(existingData.startDate || '');
-  const [endDate, setEndDate] = useState(existingData.endDate || '');
-  const [region, setRegion] = useState(existingData.region || 'gulf');
-  const [group, setGroup] = useState(existingData.group || 'individual');
+  const navigate = useNavigate();
+  const { updateLocalStorage } = useLocalStorage();
+
+  const storedData = JSON.parse(localStorage.getItem('travelInsurance')) || {};
+
+  const [quoteId, setQuoteId] = useState(storedData.quoteId || null);
+  const [schemeId, setSchemeId] = useState(storedData.schemeId || null);
+  const [journeyType, setJourneyType] = useState(storedData.journeyType || 'single');
+  const [startDate, setStartDate] = useState(storedData.startDate || '');
+  const [endDate, setEndDate] = useState(storedData.endDate || '');
+  const [region, setRegion] = useState(storedData.region || REGIONS[0]);
+  const [group, setGroup] = useState(storedData.group || 'individual');
   const [quantity, setQuantity] = useState(
-    existingData.quantity || {
-      adults: 1,
-      children: 0,
-      infants: 0,
-    }
+    storedData.quantity || { adults: 1, children: 0, seniors: 0 }
   );
 
-  function onQuantityChange(field, delta) {
+  const [passengers, setPassengers] = useState([]);
+  const [email, setEmail] = useState(localStorage.getItem('email') || '');
+  const [mobile, setMobile] = useState(JSON.parse(localStorage.getItem('phoneNumber')));
+
+  function handleUpdatePassenger(id, field, value) {
+    setPassengers(prev => prev.map(p => (p.id === id ? { ...p, [field]: value } : p)));
+  }
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+
+  function handlePhoneChange(phone) {
+    setMobile(phone);
+  }
+
+  function handleQuantityChange(field, delta) {
     setQuantity(prev => ({
       ...prev,
       [field]: Math.max(0, prev[field] + delta),
     }));
   }
 
+  function handleSelectQuote(schemeId, quoteId) {
+    setSchemeId(schemeId);
+    setQuoteId(quoteId);
+
+    updateLocalStorage('travelInsurance', {
+      ...storedData,
+      schemeId,
+      quoteId,
+    });
+  }
+
   function validateForm() {
-    if (!startDate || !endDate || !region || !group) {
+    if (!startDate || !endDate || !region?.id) {
+      toast.error('Please select travel dates and region');
       return false;
     }
+
+    if (new Date(startDate) > new Date(endDate)) {
+      toast.error('End date must be after start date');
+      return false;
+    }
+
     return true;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const data = { journeyType, startDate, endDate, region, group, quantity };
-    updateLocalStorage('travelInsurance', data);
-    console.log(data);
+
+    if (!validateForm()) return;
+
+    setSchemeId(null);
+    setQuoteId(null);
+
+    updateLocalStorage('travelInsurance', {
+      journeyType,
+      startDate,
+      endDate,
+      region,
+      group,
+      quantity,
+      schemeId: null,
+      quoteId: null,
+    });
+
+    navigate('/travel-insurance/quotes');
   }
 
   useEffect(() => {
+    if (!startDate || !endDate) return;
+
     if (new Date(startDate) < new Date() || new Date(endDate) < new Date()) {
       setStartDate('');
       setEndDate('');
     }
   }, []);
 
+  useEffect(() => {
+    const initialPassengers = PASSENGER_GROUPS.flatMap(gr =>
+      Array.from({ length: quantity[gr.key] || 0 }, (_, index) => ({
+        id: `${gr.key}-${index + 1}`,
+        type: gr.key,
+        title: 'Mr.',
+        firstName: '',
+        lastName: '',
+        nationality: null,
+        dob: new Date(),
+        passport: '',
+      }))
+    );
+
+    setPassengers(initialPassengers);
+  }, [quantity]);
+
   return (
     <InsuranceContext.Provider
       value={{
-        regions,
+        REGIONS,
         groups,
         ageCategories,
+
+        quoteId,
+        schemeId,
         journeyType,
-        setJourneyType,
         startDate,
-        setStartDate,
         endDate,
-        setEndDate,
         region,
-        setRegion,
         group,
-        setGroup,
         quantity,
+
+        passengers,
+        email,
+        mobile,
+
+        setJourneyType,
+        setStartDate,
+        setEndDate,
+        setRegion,
+        setGroup,
         setQuantity,
-        onQuantityChange,
-        validateForm,
+        setPassengers,
+        setEmail,
+        setMobile,
+
+        handleEmailChange,
+        handlePhoneChange,
+        handleQuantityChange,
+        handleUpdatePassenger,
+        handleSelectQuote,
         handleSubmit,
       }}
     >
