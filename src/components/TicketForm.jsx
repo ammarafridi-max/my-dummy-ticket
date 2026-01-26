@@ -120,7 +120,7 @@ export default function TicketForm() {
       </div>
 
       <div className="block md:flex gap-3 md:gap-3.5">
-        <div className="w-full md:w-[50%] flex flex-col mb-3 md:mb-3">
+        <div className="w-full md:w-[50%] flex flex-col gap-1 mb-3 md:mb-3">
           <Label htmlFor="from">From</Label>
           <SelectAirport
             value={from || ''}
@@ -128,7 +128,7 @@ export default function TicketForm() {
             icon={<PlaneTakeoff size={20} />}
           />
         </div>
-        <div className="w-full md:w-[50%] flex flex-col mb-3 md:mb-3">
+        <div className="w-full md:w-[50%] flex flex-col gap-1 mb-3 md:mb-3">
           <Label htmlFor="to">To</Label>
           <SelectAirport
             value={to || ''}
@@ -140,7 +140,7 @@ export default function TicketForm() {
 
       <div className="flex gap-3 md:gap-3.5">
         <div
-          className={`w-full flex flex-col mb-3 md:mb-3 ${
+          className={`w-full flex flex-col gap-1 mb-3 md:mb-3 ${
             type === 'Return' ? 'md:w-[50%]' : 'md:w-full'
           }`}
         >
@@ -154,7 +154,7 @@ export default function TicketForm() {
         </div>
 
         {type === 'Return' && (
-          <div className="w-full md:w-[50%] flex flex-col mb-3 md:mb-3">
+          <div className="w-full md:w-[50%] flex flex-col gap-1 mb-3 md:mb-3">
             <Label htmlFor="returnDate">Return Date</Label>
             <SelectDate
               selectedDate={returnDate && formatDate(returnDate)}
