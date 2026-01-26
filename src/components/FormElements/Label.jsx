@@ -1,7 +1,7 @@
 export default function Label({ children, htmlFor, optional, required, className }) {
   return (
     <label
-      className={`text-[14px] md:text-[14px] font-normal text-black/80 uppercase mb-1.25 ${className}`}
+      className={`text-[14px] md:text-[14px] font-normal text-black/80 uppercase pb-2 ${className}`}
       htmlFor={htmlFor}
     >
       {children}
