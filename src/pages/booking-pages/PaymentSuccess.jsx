@@ -77,6 +77,12 @@ function Success({ sessionId, dummyTicket }) {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.removeItem('routes')
+    localStorage.removeItem('departureDate')
+    localStorage.removeItem('returnDate')
+  }, [])
+
   return (
     <>
       <Helmet>
