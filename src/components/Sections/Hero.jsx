@@ -17,7 +17,7 @@ export default function Hero({ title, subtitle, form, sectionId = 'form' }) {
           </h1>
 
           {subtitle && (
-            <p className="text-[16px] md:text-[17px] text-gray-900/60 font-outfit font-light leading-7">
+            <p className="text-[16px] md:text-[17px] text-gray-900/70 font-outfit font-light leading-7">
               {subtitle}
             </p>
           )}
