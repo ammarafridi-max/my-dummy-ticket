@@ -19,3 +19,11 @@ export async function getStripePaymentURL(ticketData) {
     headers: { 'X-Session-ID': sessionId, 'Content-Type': 'application/json' },
   });
 }
+
+export async function createDummyTicketApi(data){
+  return await apiFetch(URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+}
