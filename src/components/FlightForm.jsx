@@ -15,7 +15,7 @@ import PrimaryButton from './PrimaryButton';
 import SegmentedRadioGroup from './FormElements/SegmentedRadioGroup';
 
 const FormRow = ({ children }) => <div className="block lg:grid lg:grid-cols-2 lg:gap-2.5">{children}</div>;
-const FormItem = ({ children }) => <div className="w-full">{children}</div>;
+const FormItem = ({ children }) => <div className="w-full flex flex-col gap-1.5 mb-3 lg:mb-5">{children}</div>;
 
 export default function FlightForm() {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
@@ -97,7 +97,7 @@ export default function FlightForm() {
   }
 
   return (
-    <form className="flex flex-col gap-3 mt-2.5 p-5 lg:p-6.25 rounded-xl bg-gray-100" onSubmit={handleSubmit}>
+    <form className="flex flex-col mt-2.5 p-6 lg:p-6.25 rounded-xl bg-gray-100" onSubmit={handleSubmit}>
       {passengers.length > 0 && (
         <PassengerData passengers={passengers} updatePassengerData={updatePassengerData} />
       )}
@@ -132,7 +132,7 @@ function PassengerData({ passengers, updatePassengerData }) {
         return (
           <FormItem key={index}>
             <Label>{label}</Label>
-            <div className="w-full flex gap-1.25 mt-2">
+            <div className="w-full flex gap-1.25">
               <SelectTitle value={passenger.title} onChange={e => updatePassengerData(index, 'title', e.target.value)} />
               <Input value={passenger.firstName} placeholder="First Name" onChange={e => updatePassengerData(index, 'firstName', e.target.value)} />
               <Input value={passenger.lastName} placeholder="Last Name" onChange={e => updatePassengerData(index, 'lastName', e.target.value)} />
@@ -171,41 +171,43 @@ function TicketValidityOptions({ ticketValidity, updatePricing }) {
   };
 
   return (
-    <div>
+    <FormItem>
       <Label>Choose Ticket Validity</Label>
       <SegmentedRadioGroup name='ticketValidity' options={options} value={ticketValidity} onChange={handleChange} />
-    </div>
+    </FormItem>
   );
 }
 
 function TicketDelivery({ receiveNow, deliveryDate, setReceiveNow, setDeliveryDate }) {
   return (
-    <div className="flex flex-col my-5">
-      <Label>Deliver Ticket On</Label>
-      <div>
+    <FormRow>
+      <FormItem>
+        <Label>Ticket Delivery Type</Label>
         <div>
-          <input type="radio" checked={receiveNow} onChange={() => setReceiveNow(true)} /> I need it now
+          <div className='font-light text-[14.5px]'>
+            <input type="radio" checked={receiveNow} onChange={() => setReceiveNow(true)} /> <span className='ml-3'>I need it now</span>
+          </div>
+          <div className='font-light text-[14.5px]'>
+            <input type="radio" checked={!receiveNow} onChange={() => setReceiveNow(false)} /> <span className='ml-3'>I need it on a later date</span>
+          </div>
         </div>
-        <div>
-          <input type="radio" checked={!receiveNow} onChange={() => setReceiveNow(false)} /> I need it on a later date
-        </div>
-      </div>
+      </FormItem>
       {!receiveNow && (
-        <FormRow>
-          <FormItem>
-            <SelectDate selectedDate={deliveryDate && formatDate(deliveryDate)} onDateSelect={setDeliveryDate} minDate={new Date()} />
-          </FormItem>
-        </FormRow>
+        <FormItem>
+          <Label>Deliver Ticket On</Label>
+          <SelectDate selectedDate={deliveryDate && formatDate(deliveryDate)} onDateSelect={setDeliveryDate} minDate={new Date()} />
+        </FormItem>
       )}
-    </div>
+    </FormRow>
+    
   );
 }
 
 function Message({ message, setMessage }) {
   return (
-    <div className="flex flex-col">
+    <FormItem>
       <Label optional>Special Requests</Label>
       <TextArea value={message} onChange={e => setMessage(e.target.value)} />
-    </div>
+    </FormItem>
   );
 }
