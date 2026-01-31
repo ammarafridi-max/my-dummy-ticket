@@ -34,6 +34,7 @@ export default function Calendar({ onDateClick, isDateDisabled, setShowCalendar,
   const handleMonthChange = delta => {
     setCurrentDate(prev => {
       const newDate = new Date(prev);
+      newDate.setDate(1); // 🔥 prevent overflow
       newDate.setMonth(newDate.getMonth() + delta);
       return newDate;
     });

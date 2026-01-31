@@ -8,7 +8,9 @@ export default function AppLayout() {
     <>
       <Navigation />
       <MobileNavigation />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

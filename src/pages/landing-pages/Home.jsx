@@ -2,14 +2,15 @@ import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { faqArray, formatFaqArray } from '../../data/faqs';
 import { HiOutlineClock, HiOutlineCurrencyDollar, HiCheck } from 'react-icons/hi2';
-import Hero from '../../components/HomeComponents/Hero';
-const Process = lazy(() => import('../../components/HomeComponents/Process'));
-const About = lazy(() => import('../../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
-const Testimonials = lazy(() => import('../../components/HomeComponents/Testimonials'));
-const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
-const BlogPosts = lazy(() => import('../../components/HomeComponents/BlogPosts'));
+import Hero from '../../components/Sections/Hero';
+import TicketForm from '../../components/TicketForm';
+const Process = lazy(() => import('../../components/Sections/Process'));
+const About = lazy(() => import('../../components/Sections/About'));
+const Benefits = lazy(() => import('../../components/Sections/Benefits'));
+const Testimonials = lazy(() => import('../../components/Sections/Testimonials'));
+const FAQ = lazy(() => import('../../components/Sections/FAQ'));
+const Contact = lazy(() => import('../../components/Sections/Contact'));
+const BlogPosts = lazy(() => import('../../components/Sections/BlogPosts'));
 
 const keyword = 'dummy ticket';
 
@@ -67,6 +68,7 @@ const pageData = {
       title: 'Dummy Ticket From AED 49. Verifiable and Legit.',
       subtitle:
         'Book verifiable dummy tickets for visa applications. All legitimate reservations come with a PNR code that can be verified directly on airline websites.',
+      form: <TicketForm />,
     },
     process: {
       title: 'Simple, Hassle-Free Process',
@@ -109,7 +111,11 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
       </Helmet>
-      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+      <Hero
+        title={pageData.sections.hero.title}
+        subtitle={pageData.sections.hero.subtitle}
+        form={pageData.sections.hero.form}
+      />
       <Suspense fallback={null}>
         <Process
           title={pageData.sections['process'].title}

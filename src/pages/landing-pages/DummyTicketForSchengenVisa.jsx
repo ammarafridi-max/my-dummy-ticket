@@ -8,12 +8,13 @@ import {
   FaMoneyBillWave,
   FaShieldAlt,
 } from 'react-icons/fa';
-import Hero from '../../components/HomeComponents/Hero';
-const Process = lazy(() => import('../../components/HomeComponents/Process'));
-const About = lazy(() => import('../../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
-const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
+import Hero from '../../components/Sections/Hero';
+import TicketForm from '../../components/TicketForm';
+const Process = lazy(() => import('../../components/Sections/Process'));
+const About = lazy(() => import('../../components/Sections/About'));
+const Benefits = lazy(() => import('../../components/Sections/Benefits'));
+const FAQ = lazy(() => import('../../components/Sections/FAQ'));
+const Contact = lazy(() => import('../../components/Sections/Contact'));
 
 const benefits = [
   {
@@ -95,6 +96,7 @@ const pageData = {
       title: 'Dummy Tickets For Schengen Visa',
       subtitle:
         'Book your verifiable dummy ticket for your Schengen visa from AED 49. Our dummy tickets come with a 6-digit PNR number that can be used to verify ticket details at airline and reservation systems, and they are accepted by VFS, BLS, and embassies for visa applications.',
+      form: <TicketForm />,
     },
     process: {
       title: 'How to book your dummy ticket?',
@@ -139,7 +141,11 @@ export default function DummyTicketForSchengenVisa() {
         />
       </Helmet>
 
-      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+      <Hero
+        title={pageData.sections.hero.title}
+        subtitle={pageData.sections.hero.subtitle}
+        form={pageData.sections.hero.form}
+      />
 
       <Suspense fallback={null}>
         <Process

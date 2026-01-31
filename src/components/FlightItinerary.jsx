@@ -8,8 +8,8 @@ export default function FlightItinerary({ itinerary, airlineInfo }) {
   const imgSrc = `${BACKEND}${airlineInfo.logo}`;
 
   return (
-    <div className="w-full bg-white py-4 flex items-center justify-between lg:justify-center gap-6 lg:gap-10 nth-of-type-[2]:border-t-1 nth-of-type-[2]:border-t-gray-300">
-      <div className="w-[60px] h-[60px] flex flex-col justify-center align-middle">
+    <div className="w-full bg-white py-4 flex items-center justify-between lg:justify-center gap-9 lg:gap-10 nth-of-type-[2]:border-t-1 nth-of-type-[2]:border-t-gray-300">
+      <div className="w-[50px] h-[50px] flex flex-col justify-center align-middle">
         <img
           src={imgSrc || ''}
           alt={`${airlineInfo.commonName}`}
@@ -28,7 +28,7 @@ export default function FlightItinerary({ itinerary, airlineInfo }) {
 function DepartureData({ itinerary }) {
   return (
     <div className="w-[80px] text-left lg:text-center text-md lg:text-lg font-medium leading-4.5">
-      <p className="mb-1">{itinerary?.segments[0].departure.iataCode}</p>
+      <p className="mb-1 text-[13px] lg:text-[15px]">{itinerary?.segments[0].departure.iataCode}</p>
       <span className="text-[13px] lg:text-[14px] font-extralight">
         {format(new Date(itinerary?.segments[0].departure.at), 'dd MMM')}
       </span>
@@ -43,7 +43,7 @@ function DepartureData({ itinerary }) {
 function ReturnData({ itinerary }) {
   return (
     <div className="w-[80px] text-right lg:text-center text-md lg:text-lg font-medium leading-4.5">
-      <p className="mb-1">{itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}</p>
+      <p className="mb-1 text-[13px] lg:text-[15px]">{itinerary.segments[itinerary.segments.length - 1].arrival.iataCode}</p>
       <span className="text-[13px] lg:text-[14px] font-extralight">
         {format(new Date(itinerary.segments[itinerary.segments.length - 1].arrival.at), 'dd MMM')}
       </span>

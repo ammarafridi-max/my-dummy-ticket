@@ -8,13 +8,14 @@ import {
   FaBolt,
   FaGlobe,
 } from 'react-icons/fa';
-import Hero from '../../components/HomeComponents/Hero';
-const Process = lazy(() => import('../../components/HomeComponents/Process'));
-const About = lazy(() => import('../../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
-const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
-const BlogPosts = lazy(() => import('../../components/HomeComponents/BlogPosts'));
+import Hero from '../../components/Sections/Hero';
+import TicketForm from '../../components/TicketForm';
+const Process = lazy(() => import('../../components/Sections/Process'));
+const About = lazy(() => import('../../components/Sections/About'));
+const Benefits = lazy(() => import('../../components/Sections/Benefits'));
+const FAQ = lazy(() => import('../../components/Sections/FAQ'));
+const Contact = lazy(() => import('../../components/Sections/Contact'));
+const BlogPosts = lazy(() => import('../../components/Sections/BlogPosts'));
 
 const benefits = [
   {
@@ -63,6 +64,7 @@ const pageData = {
       title: 'Emirates Dummy Ticket for Visa Applications',
       subtitle:
         "Get an official Emirates flight reservation with a live 6-digit PNR for your visa application in minutes. Our dummy ticket is verifiable on the Emirates website under 'Manage Booking' and is accepted by VFS, BLS, and consulates as valid proof of travel intent, all for just AED 49.",
+      form: <TicketForm />,
     },
     process: {
       title: 'How to Book Your Emirates Dummy Ticket in 3 Steps',
@@ -128,7 +130,11 @@ export default function EmiratesDummyTicket() {
         />
       </Helmet>
 
-      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+      <Hero
+        title={pageData.sections.hero.title}
+        subtitle={pageData.sections.hero.subtitle}
+        form={pageData.sections.hero.form}
+      />
 
       <Suspense fallback={null}>
         <Process

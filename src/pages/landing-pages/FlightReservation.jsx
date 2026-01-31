@@ -3,20 +3,21 @@ import { faqArray, formatFaqArray } from '../../data/faqs';
 import { testimonials } from '../../data/testimonials';
 import { Helmet } from 'react-helmet-async';
 import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi2';
-import Hero from '../../components/HomeComponents/Hero';
-const Process = lazy(() => import('../../components/HomeComponents/Process'));
-const About = lazy(() => import('../../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
-const Testimonials = lazy(() => import('../../components/HomeComponents/Testimonials'));
-const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
+import Hero from '../../components/Sections/Hero';
+import TicketForm from '../../components/TicketForm';
+const Process = lazy(() => import('../../components/Sections/Process'));
+const About = lazy(() => import('../../components/Sections/About'));
+const Benefits = lazy(() => import('../../components/Sections/Benefits'));
+const Testimonials = lazy(() => import('../../components/Sections/Testimonials'));
+const FAQ = lazy(() => import('../../components/Sections/FAQ'));
+const Contact = lazy(() => import('../../components/Sections/Contact'));
 
 const keyword = 'flight reservation';
 
 const benefits = [
   {
     title: 'Accepted by VFS',
-    text: 'We issue flight reservations through official airline systems, ensuring they are 100% genuine, verifiable, and widely accepted by embassies and consulates.',
+    text: 'We issue flight reservations through official airline systems, ensuring they are 100% genuine, and widely accepted by embassies and consulates.',
     icon: HiCheck,
   },
   {
@@ -33,7 +34,7 @@ const benefits = [
 
 const pageData = {
   meta: {
-    title: 'Flight Reservation From AED 49 | Instant, Genuine & Verifiable PNR',
+    title: 'Flight Reservation From AED 49 | Instant Reservations With PNR',
     description:
       'Get a genuine flight reservation with a valid PNR for travel documentation purposes. Issued by official airline systems. Instant delivery from AED 49.',
     canonical: 'https://www.mydummyticket.ae/flight-reservation',
@@ -42,7 +43,8 @@ const pageData = {
     hero: {
       title: 'Book a Genuine Flight Reservation from AED 49',
       subtitle:
-        'Get genuine flight reservations issued through official airline systems with a valid, verifiable PNR. Our flight reservations are legitimate bookings created for travel documentation purposes, not fake or falsified tickets.',
+        'Get genuine flight reservations issued through official airline systems with a valid, six-digit PNR. Our flight reservations are legitimate bookings created for travel documentation purposes, not fake or falsified tickets.',
+      form: <TicketForm />,
     },
     process: {
       title: 'How To Book Your Flight Reservation?',
@@ -51,7 +53,7 @@ const pageData = {
     },
     about: {
       title: 'About Us',
-      text: 'We are an international travel services provider offering verifiable flight reservations and related travel documentation for travelers worldwide. Our services are used by thousands of customers each year for onward travel, immigration checks, and airline requirements. All reservations follow accepted airline formats and include a valid PNR code for verification',
+      text: 'We are an international travel services provider offering flight reservations and related travel documentation for travelers worldwide. Our services are used by thousands of customers each year for onward travel, immigration checks, and airline requirements. All reservations follow accepted airline formats and include a valid PNR code for verification',
       keyword,
     },
     benefits: {
@@ -85,7 +87,11 @@ export default function FlightReservation() {
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData?.meta?.description} />
       </Helmet>
-      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+      <Hero
+        title={pageData.sections.hero.title}
+        subtitle={pageData.sections.hero.subtitle}
+        form={pageData.sections.hero.form}
+      />
       <Suspense fallback={null}>
         <Process
           title={pageData.sections['process'].title}

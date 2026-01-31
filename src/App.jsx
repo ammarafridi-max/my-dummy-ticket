@@ -1,3 +1,4 @@
+import "@fontsource-variable/outfit";
 import { useEffect } from 'react';
 import { initializeGA } from './lib/analytics';
 import { HelmetProvider } from 'react-helmet-async';

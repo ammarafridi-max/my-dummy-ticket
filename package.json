@@ -10,8 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fontsource-variable/nunito": "^5.2.5",
-    "@fontsource/merriweather": "^5.2.7",
+    "@fontsource-variable/outfit": "^5.2.8",
     "@fontsource/outfit": "^5.2.6",
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.12",
@@ -22,6 +21,7 @@
     "email-validator": "^2.0.4",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.511.0",
+    "page-progressbar-react": "^1.0.6",
     "prettier": "^3.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,7 +34,8 @@
     "react-spinners": "^0.17.0",
     "styled-components": "^6.1.18",
     "swiper": "^12.0.3",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.12",
+    "vite-plugin-compression": "^0.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

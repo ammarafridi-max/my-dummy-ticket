@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import 'tailwindcss';
 
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: 'Outfit';
+  font-family: "Outfit Variable";
 }
 
 @theme {
@@ -54,44 +53,46 @@ a {
 
 .blog_post h2 {
   font-size: 28px;
-  font-weight: 500;
-  margin-bottom: 25px;
+  font-weight: 400;
+  margin-bottom: 35px;
 }
 
 .blog_post h3 {
   font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 25px;
+  font-weight: 400;
+  margin-bottom: 35px;
 }
 
 .blog_post p {
   font-size: 18px;
-  font-weight: 300;
-  margin-bottom: 25px;
+  font-weight: 200;
+  margin-bottom: 35px;
   line-height: 32px;
 }
 
 .blog_post a {
-  color: var(--color-primary-500);
+  color: var(--color-accent-500);
   font-weight: 400;
+  text-decoration: underline;
 }
 
 .blog_post ol,
 .blog_post ul {
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .blog_post li {
   font-size: 18px;
-  font-weight: 300;
-  margin: 8px 0;
+  font-weight: 200;
+  margin-bottom: 20px;
   margin-left: 20px;
   padding-left: 10px;
   list-style-type: disc;
+  line-height: 32px;
 }
 
-.blog_post li:nth-last-of-type {
-  margin-bottom: 0;
+.blog_post li:last-of-type {
+  margin-bottom: 0px;
 }
 
 @media (width < 1024px) {

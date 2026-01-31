@@ -42,6 +42,7 @@ import Blog from '../pages/blog-pages/Blog';
 // Other Pages
 import Sitemap from '../pages/other/Sitemap';
 import PageNotFound from '../pages/other/PageNotFound';
+import AppLayout2 from '../layouts/AppLayout2';
 
 export default function AppRoutes() {
   return (
@@ -57,7 +58,6 @@ export default function AppRoutes() {
               <Route path="emirates-dummy-ticket" element={<EmiratesDummyTicket />} />
               <Route path="etihad-dummy-ticket" element={<EtihadDummyTicket />} />
               <Route path="onward-ticket" element={<OnwardTicket />} />
-              <Route path="flight-reservation" element={<FlightReservation />} />
               <Route path="travel-insurance" element={<TravelInsurance />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="sitemap" element={<Sitemap />} />
@@ -76,6 +76,9 @@ export default function AppRoutes() {
                 <Route path="travel-insurance/passenger-details" element={<PassengerDetails />} />
                 <Route path="travel-insurance/payment" element={<InsurancePayment />} />
               </Route>
+            </Route>
+            <Route element={<AppLayout2 />}>
+              <Route path="flight-reservation" element={<FlightReservation />} />
             </Route>
           </Routes>
         </InsuranceProvider>

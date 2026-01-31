@@ -2,14 +2,15 @@ import { lazy, Suspense } from 'react';
 import { faqArray, formatFaqArray } from '../../data/faqs';
 import { Helmet } from 'react-helmet-async';
 import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi';
-import Hero from '../../components/HomeComponents/Hero';
-const Process = lazy(() => import('../../components/HomeComponents/Process'));
-const About = lazy(() => import('../../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
-const Testimonials = lazy(() => import('../../components/HomeComponents/Testimonials'));
-const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
-const BlogPosts = lazy(() => import('../../components/HomeComponents/BlogPosts'));
+import Hero from '../../components/Sections/Hero';
+import TicketForm from '../../components/TicketForm';
+const Process = lazy(() => import('../../components/Sections/Process'));
+const About = lazy(() => import('../../components/Sections/About'));
+const Benefits = lazy(() => import('../../components/Sections/Benefits'));
+const Testimonials = lazy(() => import('../../components/Sections/Testimonials'));
+const FAQ = lazy(() => import('../../components/Sections/FAQ'));
+const Contact = lazy(() => import('../../components/Sections/Contact'));
+const BlogPosts = lazy(() => import('../../components/Sections/BlogPosts'));
 
 const keyword = 'onward ticket';
 
@@ -67,6 +68,7 @@ const pageData = {
       title: 'Book a Your Onward Ticket from AED 49.',
       subtitle:
         'Get onward tickets issued through official airline systems with a valid, verifiable PNR. Our flight reservations are legitimate bookings created for travel documentation purposes, not fake or falsified tickets.',
+      form: <TicketForm />,
     },
     process: {
       title: 'Your Onward Ticket, Ready in 3 Easy Steps',
@@ -109,7 +111,11 @@ export default function OnwardTicket() {
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
       </Helmet>
-      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+      <Hero
+        title={pageData.sections.hero.title}
+        subtitle={pageData.sections.hero.subtitle}
+        form={pageData.sections.hero.form}
+      />
       <Suspense fallback={null}>
         <Process
           title={pageData.sections['process'].title}

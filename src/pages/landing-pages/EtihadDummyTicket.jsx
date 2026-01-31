@@ -8,14 +8,14 @@ import {
   FaBolt,
   FaUserTie,
 } from 'react-icons/fa';
-import Hero from '../../components/HomeComponents/Hero';
-
-const Process = lazy(() => import('../../components/HomeComponents/Process'));
-const About = lazy(() => import('../../components/HomeComponents/About'));
-const Benefits = lazy(() => import('../../components/HomeComponents/Benefits'));
-const FAQ = lazy(() => import('../../components/HomeComponents/FAQ'));
-const Contact = lazy(() => import('../../components/HomeComponents/Contact'));
-const BlogPosts = lazy(() => import('../../components/HomeComponents/BlogPosts'));
+import Hero from '../../components/Sections/Hero';
+import TicketForm from '../../components/TicketForm';
+const Process = lazy(() => import('../../components/Sections/Process'));
+const About = lazy(() => import('../../components/Sections/About'));
+const Benefits = lazy(() => import('../../components/Sections/Benefits'));
+const FAQ = lazy(() => import('../../components/Sections/FAQ'));
+const Contact = lazy(() => import('../../components/Sections/Contact'));
+const BlogPosts = lazy(() => import('../../components/Sections/BlogPosts'));
 
 const benefits = [
   {
@@ -62,6 +62,7 @@ const pageData = {
       title: 'Etihad Dummy Ticket for Visa Applications',
       subtitle:
         'Get an official Etihad Airways flight reservation with a live booking reference for your visa application. Our Etihad dummy tickets provide a real, verifiable flight reservation with a valid PNR that shows your travel intent, without the financial commitment.',
+      form: <TicketForm />,
     },
     process: {
       title: 'How Our Etihad Dummy Ticket Service Works',
@@ -122,7 +123,11 @@ export default function EtihadDummyTicket() {
         <meta name="description" content={pageData.meta.description} />
       </Helmet>
 
-      <Hero title={pageData.sections.hero.title} subtitle={pageData.sections.hero.subtitle} />
+      <Hero
+        title={pageData.sections.hero.title}
+        subtitle={pageData.sections.hero.subtitle}
+        form={pageData.sections.hero.form}
+      />
 
       <Suspense fallback={null}>
         <Process

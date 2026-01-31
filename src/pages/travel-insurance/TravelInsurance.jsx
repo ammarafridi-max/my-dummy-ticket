@@ -18,7 +18,7 @@ const pageData = {
     hero: {
       title: 'Travel Insurance for UAE Residents',
       subtitle:
-        'Book legitimate and genuine outbound travel insurance from the UAE for residents and citizens. Our travel insurances are accepted across the world, including embassies for visa applications.',
+        'Book outbound travel insurance from the UAE for residents and citizens. Our travel insurances are genuine, legitimate, and accepted for various purposes, including embassies for visa applications. These are strictly for UAE residents/citizens.',
       form: <TravelInsuranceForm />,
     },
     process: {

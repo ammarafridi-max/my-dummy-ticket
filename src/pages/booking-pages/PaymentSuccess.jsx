@@ -20,7 +20,7 @@ export default function PaymentSuccess() {
 
   if (isLoadingDummyTicket) return <Loading />;
 
-  if (isErrorDummyTicket || dummyTicket?.paymentStatus === 'UNPAUD') return <Error />;
+  if (isErrorDummyTicket || dummyTicket?.paymentStatus === 'UNPAID') return <Error />;
 
   return <Success sessionId={sessionId} dummyTicket={dummyTicket} />;
 }
