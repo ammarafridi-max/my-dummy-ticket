@@ -3,11 +3,11 @@ import { getAllBlogsApi } from '../../services/apiBlog';
 
 export function useBlogs() {
   const {
-    data: blogs,
+    data: blogs = [],
     isLoading: isLoadingBlogs,
     isError: isErrorBlogs,
   } = useQuery({
-    queryKey: ['blogs'],
+    queryKey: ['blogs', 'published'], // better cache key
     queryFn: getAllBlogsApi,
   });
 

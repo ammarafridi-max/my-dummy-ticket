@@ -35,8 +35,6 @@ export default function Footer() {
             <FooterLink href="/terms-and-conditions">Terms & Conditions</FooterLink>
             <FaCircle className="text-[5px]" />
             <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
-            <FaCircle className="text-[5px]" />
-            <FooterLink href="/sitemap">Sitemap</FooterLink>
           </div>
         </div>
         <p className="text-center text-sm mt-3 text-gray-400">

@@ -11,7 +11,7 @@ export function useStripePaymentURL() {
     mutationFn: getStripePaymentURL,
     onSuccess: url => {
       window.location.href = url;
-    }
+    },
   });
 
   return {

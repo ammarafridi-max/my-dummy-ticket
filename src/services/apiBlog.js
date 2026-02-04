@@ -3,7 +3,8 @@ import { apiFetch } from './apiClient';
 const URL = `/api/blogs`;
 
 export async function getAllBlogsApi() {
-  return await apiFetch(`${URL}?status=published`);
+  const data = await apiFetch(`${URL}?status=published`);
+  return data.blogs;
 }
 
 export async function getBlogBySlugApi(slug) {

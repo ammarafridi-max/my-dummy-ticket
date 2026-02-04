@@ -5,7 +5,7 @@ import PrimarySection from '../components/PrimarySection';
 
 export default function BookingLayout() {
   return (
-    <PrimarySection className="bg-gray-100 pb-20">
+    <PrimarySection className="bg-gray-50 pb-20">
       <div className="w-[95%] lg:w-[70%] mx-auto">
         <Menu />
         <Outlet />

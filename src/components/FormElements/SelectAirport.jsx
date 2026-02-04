@@ -26,7 +26,7 @@ export default function SelectAirport({ value, onChange, id, icon }) {
   useOutsideClick(componentRef, () => setIsOpen(false));
 
   return (
-    <div className="relative z-50" ref={componentRef}>
+    <>
       <InputWithIcon
         id={id}
         icon={icon}
@@ -42,33 +42,34 @@ export default function SelectAirport({ value, onChange, id, icon }) {
         }}
       />
 
-      {isOpen && (
-        <ul className="absolute top-full left-0 w-full min-h-[150px] max-h-[300px] mt-2 overflow-y-auto rounded-md border border-gray-300 bg-white z-[60] text-sm shadow-lg">
-          {isLoadingAirports && <ListItem>Loading airports...</ListItem>}
+      <div className="relative z-50" ref={componentRef}>
+        {isOpen && (
+          <ul className="absolute top-0 left-0 w-full min-h-[200px] max-h-[300px] mt-2 overflow-y-auto rounded-md border border-gray-300 bg-white z-[60] text-sm shadow-lg">
+            {isLoadingAirports && <ListItem>Loading airports...</ListItem>}
 
-          {!isLoadingAirports && query.trim().length < 3 && (
-            <ListItem>Enter at least 3 characters</ListItem>
-          )}
+            {!isLoadingAirports && query.trim().length < 3 && (
+              <ListItem>Enter at least 3 characters</ListItem>
+            )}
 
-          {!isLoadingAirports && query.trim().length >= 3 && airports.length === 0 && (
-            <ListItem>No airports found</ListItem>
-          )}
+            {!isLoadingAirports && query.trim().length >= 3 && airports.length === 0 && (
+              <ListItem>No airports found</ListItem>
+            )}
 
-          {!isLoadingAirports &&
-            airports.map(airport => (
-              <ListItem
-                key={airport.iataCode}
-                onClick={() => handleSelect(airport)}
-                className="hover:bg-primary-500 hover:text-white"
-              >
-                {airport.address.cityName} ({airport.iataCode})
-              </ListItem>
-            ))}
-        </ul>
-      )}
-    </div>
+            {!isLoadingAirports &&
+              airports.map(airport => (
+                <ListItem
+                  key={airport.iataCode}
+                  onClick={() => handleSelect(airport)}
+                  className="hover:bg-primary-500 hover:text-white"
+                >
+                  {airport.address.cityName} ({airport.iataCode})
+                </ListItem>
+              ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
-
 }
 
 function ListItem({ children, className, ...props }) {

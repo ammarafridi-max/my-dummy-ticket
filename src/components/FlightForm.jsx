@@ -14,12 +14,16 @@ import PhoneNumber from './FormElements/PhoneNumber';
 import PrimaryButton from './PrimaryButton';
 import SegmentedRadioGroup from './FormElements/SegmentedRadioGroup';
 
-const FormRow = ({ children }) => <div className="block lg:grid lg:grid-cols-2 lg:gap-2.5">{children}</div>;
-const FormItem = ({ children }) => <div className="w-full flex flex-col gap-1.5 mb-3 lg:mb-5">{children}</div>;
+const FormRow = ({ children }) => (
+  <div className="block lg:grid lg:grid-cols-2 lg:gap-2.5">{children}</div>
+);
+const FormItem = ({ children }) => (
+  <div className="w-full flex flex-col gap-1.5 mb-3 lg:mb-5">{children}</div>
+);
 
 export default function FlightForm() {
-  const [isBtnDisabled, setIsBtnDisabled] = useState(true)
-  const { createDummyTicket, isCreatingDummyTicket } = useCreateDummyTicket()
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+  const { createDummyTicket, isCreatingDummyTicket } = useCreateDummyTicket();
   const {
     type,
     from,
@@ -44,6 +48,7 @@ export default function FlightForm() {
     initializePassengers,
     updatePassengerData,
     updatePricing,
+    createSessionId,
   } = useContext(TicketContext);
 
   useEffect(() => {
@@ -53,14 +58,14 @@ export default function FlightForm() {
   }, [quantity, passengers]);
 
   useEffect(() => {
-    function validateForm(){
+    function validateForm() {
       if (passengers?.some(p => !p.title || !p.firstName || !p.lastName)) {
         setIsBtnDisabled(true);
-        return false
+        return false;
       }
       if (!email) {
         setIsBtnDisabled(true);
-        return false
+        return false;
       }
       if (!validate(email)) {
         setIsBtnDisabled(true);
@@ -74,11 +79,11 @@ export default function FlightForm() {
         setIsBtnDisabled(true);
         return false;
       }
-      setIsBtnDisabled(false)
-      return true
+      setIsBtnDisabled(false);
+      return true;
     }
-    validateForm()
-  }, [passengers, email, phoneNumber, receiveNow, deliveryDate])
+    validateForm();
+  }, [passengers, email, phoneNumber, receiveNow, deliveryDate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -91,22 +96,50 @@ export default function FlightForm() {
       email,
       phoneNumber,
       ticketValidity,
-      flightDetails: { departureFlight, returnFlight: type === 'One Way' ? null : returnFlight }
+      flightDetails: { departureFlight, returnFlight: type === 'One Way' ? null : returnFlight },
     });
-    createDummyTicket({ type, from, to, departureDate, returnDate, quantity, passengers, email, phoneNumber, message, ticketValidity, ticketDelivery: { immediate: receiveNow, deliveryDate: receiveNow ? null : deliveryDate }, flightDetails: { departureFlight, returnFlight: type === 'One Way' ? null : returnFlight } })
+
+    createDummyTicket({
+      type,
+      from,
+      to,
+      departureDate,
+      returnDate,
+      quantity,
+      passengers,
+      email,
+      phoneNumber,
+      message,
+      ticketValidity,
+      ticketDelivery: { immediate: receiveNow, deliveryDate: receiveNow ? null : deliveryDate },
+      flightDetails: { departureFlight, returnFlight: type === 'One Way' ? null : returnFlight },
+    });
   }
 
   return (
-    <form className="flex flex-col mt-2.5 p-6 lg:p-6.25 rounded-xl bg-gray-100" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col mt-2.5 p-6 lg:p-6.25 rounded-xl bg-gray-100"
+      onSubmit={handleSubmit}
+    >
       {passengers.length > 0 && (
         <PassengerData passengers={passengers} updatePassengerData={updatePassengerData} />
       )}
 
-      <ContactDetails email={email} setEmail={setEmail} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />
+      <ContactDetails
+        email={email}
+        setEmail={setEmail}
+        phoneNumber={phoneNumber}
+        setPhoneNumber={setPhoneNumber}
+      />
 
       <TicketValidityOptions ticketValidity={ticketValidity} updatePricing={updatePricing} />
 
-      <TicketDelivery receiveNow={receiveNow} setReceiveNow={setReceiveNow} deliveryDate={deliveryDate} setDeliveryDate={setDeliveryDate} />
+      <TicketDelivery
+        receiveNow={receiveNow}
+        setReceiveNow={setReceiveNow}
+        deliveryDate={deliveryDate}
+        setDeliveryDate={setDeliveryDate}
+      />
 
       <Message message={message} setMessage={setMessage} />
 
@@ -125,17 +158,31 @@ function PassengerData({ passengers, updatePassengerData }) {
   return (
     <FormRow>
       {passengers.map((passenger, index) => {
-        let label = passenger.type === 'Adult' ? `Adult ${++adultCount}` :
-          passenger.type === 'Child' ? `Child ${++childCount}` :
-          `Infant ${++infantCount}`;
+        let label =
+          passenger.type === 'Adult'
+            ? `Adult ${++adultCount}`
+            : passenger.type === 'Child'
+              ? `Child ${++childCount}`
+              : `Infant ${++infantCount}`;
 
         return (
           <FormItem key={index}>
             <Label>{label}</Label>
             <div className="w-full flex gap-1.25">
-              <SelectTitle value={passenger.title} onChange={e => updatePassengerData(index, 'title', e.target.value)} />
-              <Input value={passenger.firstName} placeholder="First Name" onChange={e => updatePassengerData(index, 'firstName', e.target.value)} />
-              <Input value={passenger.lastName} placeholder="Last Name" onChange={e => updatePassengerData(index, 'lastName', e.target.value)} />
+              <SelectTitle
+                value={passenger.title}
+                onChange={e => updatePassengerData(index, 'title', e.target.value)}
+              />
+              <Input
+                value={passenger.firstName}
+                placeholder="First Name"
+                onChange={e => updatePassengerData(index, 'firstName', e.target.value)}
+              />
+              <Input
+                value={passenger.lastName}
+                placeholder="Last Name"
+                onChange={e => updatePassengerData(index, 'lastName', e.target.value)}
+              />
             </div>
           </FormItem>
         );
@@ -173,7 +220,12 @@ function TicketValidityOptions({ ticketValidity, updatePricing }) {
   return (
     <FormItem>
       <Label>Choose Ticket Validity</Label>
-      <SegmentedRadioGroup name='ticketValidity' options={options} value={ticketValidity} onChange={handleChange} />
+      <SegmentedRadioGroup
+        name="ticketValidity"
+        options={options}
+        value={ticketValidity}
+        onChange={handleChange}
+      />
     </FormItem>
   );
 }
@@ -184,22 +236,27 @@ function TicketDelivery({ receiveNow, deliveryDate, setReceiveNow, setDeliveryDa
       <FormItem>
         <Label>Ticket Delivery Type</Label>
         <div>
-          <div className='font-light text-[14.5px]'>
-            <input type="radio" checked={receiveNow} onChange={() => setReceiveNow(true)} /> <span className='ml-3'>I need it now</span>
+          <div className="font-light text-[14.5px]">
+            <input type="radio" checked={receiveNow} onChange={() => setReceiveNow(true)} />{' '}
+            <span className="ml-3">I need it now</span>
           </div>
-          <div className='font-light text-[14.5px]'>
-            <input type="radio" checked={!receiveNow} onChange={() => setReceiveNow(false)} /> <span className='ml-3'>I need it on a later date</span>
+          <div className="font-light text-[14.5px]">
+            <input type="radio" checked={!receiveNow} onChange={() => setReceiveNow(false)} />{' '}
+            <span className="ml-3">I need it on a later date</span>
           </div>
         </div>
       </FormItem>
       {!receiveNow && (
         <FormItem>
           <Label>Deliver Ticket On</Label>
-          <SelectDate selectedDate={deliveryDate && formatDate(deliveryDate)} onDateSelect={setDeliveryDate} minDate={new Date()} />
+          <SelectDate
+            selectedDate={deliveryDate && formatDate(deliveryDate)}
+            onDateSelect={setDeliveryDate}
+            minDate={new Date()}
+          />
         </FormItem>
       )}
     </FormRow>
-    
   );
 }
 

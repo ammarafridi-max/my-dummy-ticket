@@ -1,14 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
-import { createDummyTicketApi } from "../../services/apiTickets";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import { trackFlightFormSubmission } from "../../lib/analytics";
+import { useMutation } from '@tanstack/react-query';
+import { createDummyTicketApi } from '../../services/apiTickets';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { trackFlightFormSubmission } from '../../lib/analytics';
 
-export function useCreateDummyTicket(){
+export function useCreateDummyTicket() {
   const navigate = useNavigate();
 
   const { mutate: createDummyTicket, isPending: isCreatingDummyTicket } = useMutation({
-    mutationFn: ({ 
+    mutationFn: ({
       type,
       from,
       to,
@@ -22,7 +22,7 @@ export function useCreateDummyTicket(){
       ticketValidity,
       ticketDelivery,
       flightDetails,
-      paymentStatus = 'UNPAID'
+      paymentStatus = 'UNPAID',
     }) =>
       createDummyTicketApi({
         type,

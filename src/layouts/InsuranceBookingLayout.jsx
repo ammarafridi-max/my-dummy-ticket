@@ -13,7 +13,7 @@ export const insuranceSteps = [
 
 export default function InsuranceBookingLayout() {
   return (
-    <PrimarySection className="bg-white pb-20">
+    <PrimarySection className="bg-gray-50 pb-20">
       <Container>
         <InsuranceStepsSm />
         <InsuranceStepsLg />
