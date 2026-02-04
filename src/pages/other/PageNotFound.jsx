@@ -20,7 +20,7 @@ export default function PageNotFound() {
 
           <div className="pt-6">
             <PrimaryLink
-              href="/"
+              to="/"
               className="inline-block bg-[#ff6b00] text-white text-[16px] font-medium px-6 py-3 rounded-full shadow-md hover:bg-[#e65e00] transition-all duration-300"
             >
               Go Back Home

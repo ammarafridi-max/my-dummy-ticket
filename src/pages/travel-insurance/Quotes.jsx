@@ -31,7 +31,7 @@ export default function Quotes() {
   const { insuranceQuotes, getInsuranceQuotes, isPendingInsuranceQuotes } = useInsuranceQuotes();
 
   useEffect(() => {
-    if (!journeyType || !region) return;
+    if (!journeyType || !region?.id || !startDate || !endDate) return;
 
     getInsuranceQuotes({
       journeyType,
@@ -51,8 +51,6 @@ export default function Quotes() {
   const quoteId = insuranceQuotes?.quote_id;
 
   if (isPendingInsuranceQuotes) return <Loading />;
-
-  console.log('Local Storage: ', JSON.parse(localStorage.getItem('travelInsurance')));
 
   return (
     <>

@@ -52,10 +52,7 @@ function Success({ sessionId, dummyTicket }) {
   }, []);
 
   useEffect(() => {
-    localStorage.removeItem('routes');
-    localStorage.removeItem('departureDate');
-    localStorage.removeItem('returnDate');
-    localStorage.removeItem('sessionId');
+    localStorage.removeItem('SESSION_ID');
   }, []);
 
   return (
@@ -123,7 +120,7 @@ function Error() {
           <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
             If you have already completed a payment, please contact our support team with your
             transaction details at{' '}
-            <Link href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</Link>, and we will
+            <a href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</a>, and we will
             assist you as soon as possible.
           </p>
         </Container>

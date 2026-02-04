@@ -12,20 +12,18 @@ function safeParse(key, fallback) {
 export const TicketContext = createContext();
 
 export function TicketProvider({ children }) {
-  const routes = safeParse('routes', {});
   const storedPhone = safeParse('phoneNumber', { code: '', digits: '' });
+  const storedEmail = localStorage.getItem('email') || '';
 
   const [type, setType] = useState('One Way');
-  const [from, setFrom] = useState(routes.from || '');
-  const [to, setTo] = useState(routes.to || '');
-  const [departureDate, setDepartureDate] = useState(localStorage.getItem('departureDate') || '');
-  const [returnDate, setReturnDate] = useState(
-    type === 'One Way' ? '' : localStorage.getItem('returnDate') || ''
-  );
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [departureDate, setDepartureDate] = useState('');
+  const [returnDate, setReturnDate] = useState(type === 'One Way' ? '' : '');
   const [quantity, setQuantity] = useState({ adults: 1, children: 0, infants: 0 });
   const [ticketPrice, setTicketPrice] = useState(49);
   const [passengers, setPassengers] = useState([]);
-  const [email, setEmail] = useState(localStorage.getItem('email') || '');
+  const [email, setEmail] = useState(storedEmail);
   const [phoneNumber, setPhoneNumber] = useState(storedPhone);
   const [ticketValidity, setTicketValidity] = useState('2 Days');
   const [receiveNow, setReceiveNow] = useState(true);

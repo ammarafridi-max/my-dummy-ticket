@@ -17,6 +17,22 @@ export default function BlogPost() {
 
   if (isLoadingBlog) return <Loading />;
 
+  if (isErrorBlog || !blog) {
+    return (
+      <>
+        <Helmet>
+          <title>Blog Post Not Found</title>
+          <meta name="robots" content="noindex, nofollow" />
+        </Helmet>
+        <PrimarySection className="py-10 bg-gray-50">
+          <Container>
+            <p className="text-center text-gray-600">We couldn’t find that blog post.</p>
+          </Container>
+        </PrimarySection>
+      </>
+    );
+  }
+
   const {
     author,
     content,

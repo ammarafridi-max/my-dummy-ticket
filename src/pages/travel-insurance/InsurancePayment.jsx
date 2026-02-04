@@ -25,9 +25,15 @@ export default function InsurancePayment() {
   const { insuranceApplication, isLoadingInsuranceApplication, isErrorInsuranceApplication } =
     useInsuranceApplication(sessionId);
 
+  if (!sessionId) return <Error />;
+
   if (isLoadingInsuranceApplication) return <Loading />;
 
-  if (isErrorInsuranceApplication || insuranceApplication?.paymentStatus === 'UNPAID')
+  if (
+    isErrorInsuranceApplication ||
+    !insuranceApplication ||
+    insuranceApplication?.paymentStatus === 'UNPAID'
+  )
     return <Error />;
 
   return <Success insuranceApplication={insuranceApplication} />;

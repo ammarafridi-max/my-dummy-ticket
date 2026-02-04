@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '../hooks/general/useLocalStorage';
 import toast from 'react-hot-toast';
 
+function safeParse(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 const PASSENGER_GROUPS = [
   { key: 'adults', label: 'Adult' },
   { key: 'children', label: 'Child' },
@@ -56,7 +65,7 @@ export function InsuranceProvider({ children }) {
   const navigate = useNavigate();
   const { updateLocalStorage } = useLocalStorage();
 
-  const storedData = JSON.parse(localStorage.getItem('travelInsurance')) || {};
+  const storedData = safeParse('travelInsurance', {});
 
   const [quoteId, setQuoteId] = useState(storedData.quoteId || null);
   const [schemeId, setSchemeId] = useState(storedData.schemeId || null);
@@ -71,7 +80,12 @@ export function InsuranceProvider({ children }) {
 
   const [passengers, setPassengers] = useState([]);
   const [email, setEmail] = useState(localStorage.getItem('email') || '');
-  const [mobile, setMobile] = useState(JSON.parse(localStorage.getItem('phoneNumber')));
+  const [mobile, setMobile] = useState(
+    safeParse('phoneNumber', {
+      code: '',
+      digits: '',
+    })
+  );
 
   function handleUpdatePassenger(id, field, value) {
     setPassengers(prev => prev.map(p => (p.id === id ? { ...p, [field]: value } : p)));

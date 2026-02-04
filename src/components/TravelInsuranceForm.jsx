@@ -26,7 +26,6 @@ export default function TravelInsuranceForm() {
     setGroup,
     quantity,
     handleQuantityChange,
-    validateForm,
     handleSubmit,
   } = useContext(InsuranceContext);
 

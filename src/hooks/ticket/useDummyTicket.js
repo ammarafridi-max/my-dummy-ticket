@@ -9,6 +9,7 @@ export function useDummyTicket(sessionId) {
   } = useQuery({
     queryKey: ['dummy-ticket', sessionId],
     queryFn: () => getDummyTicketApi(sessionId),
+    enabled: !!sessionId,
   });
 
   return { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket };

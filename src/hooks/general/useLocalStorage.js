@@ -1,6 +1,6 @@
 export function useLocalStorage() {
   function getLocalStorage(key) {
-    JSON.parse(localStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key));
   }
 
   function updateLocalStorage(key, value) {

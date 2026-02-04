@@ -9,6 +9,7 @@ export function useInsuranceApplication(sessionId) {
   } = useQuery({
     queryKey: ['insurance-application', sessionId],
     queryFn: () => getInsuranceApplicationApi(sessionId),
+    enabled: !!sessionId,
   });
 
   return { insuranceApplication, isLoadingInsuranceApplication, isErrorInsuranceApplication };

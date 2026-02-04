@@ -48,7 +48,6 @@ export default function FlightForm() {
     initializePassengers,
     updatePassengerData,
     updatePricing,
-    createSessionId,
   } = useContext(TicketContext);
 
   useEffect(() => {

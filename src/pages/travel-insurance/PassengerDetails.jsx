@@ -25,10 +25,9 @@ const pageData = {
 };
 
 export default function PassengerDetails() {
-  const { updateLocalStorage } = useLocalStorage()
+  const { updateLocalStorage } = useLocalStorage();
   const { finalizeInsurance, isFinalizing } = useFinalizeInsurance();
   const { nationalities } = useNationalities();
-  const data = useContext(InsuranceContext);
   const {
     quoteId,
     schemeId,
@@ -57,9 +56,9 @@ export default function PassengerDetails() {
       passengers,
       email,
       mobile,
-    }
+    };
 
-    updateLocalStorage('travelInsurance', obj)
+    updateLocalStorage('travelInsurance', obj);
 
     finalizeInsurance(obj);
   }
@@ -87,7 +86,7 @@ export default function PassengerDetails() {
                     : passenger.type === 'children'
                       ? 'Child'
                       : 'Senior'}{' '}
-                  {passenger.index}
+                  {i + 1}
                 </h2>
 
                 <span className="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-600">

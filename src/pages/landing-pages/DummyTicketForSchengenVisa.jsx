@@ -90,7 +90,7 @@ const pageData = {
     title: 'Dummy Ticket for Schengen Visa From AED 49 | Accepted by VFS',
     description:
       'Book your dummy flight ticket for Schengen visa. We provide verifiable dummy tickets with a valid PNR number that are accepted by VFS. Starting from AED 49.',
-    canonical: 'https://www.mydummyticket/dummy-ticket-schengen-visa',
+    canonical: 'https://www.mydummyticket.ae/dummy-ticket-schengen-visa',
   },
   sections: {
     hero: {

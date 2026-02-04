@@ -81,9 +81,6 @@ export default function TicketForm() {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    localStorage.setItem('routes', JSON.stringify({ from, to }));
-    localStorage.setItem('departureDate', departureDate);
-    localStorage.setItem('returnDate', returnDate);
     if (isFormValid()) {
       trackFlightSearch({
         type,

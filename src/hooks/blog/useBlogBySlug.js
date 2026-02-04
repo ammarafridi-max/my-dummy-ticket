@@ -7,7 +7,7 @@ export function useBlog(slug) {
     isLoading: isLoadingBlog,
     isError: isErrorBlog,
   } = useQuery({
-    queryKey: ['blog'],
+    queryKey: ['blog', slug],
     queryFn: () => getBlogBySlugApi(slug),
   });
 

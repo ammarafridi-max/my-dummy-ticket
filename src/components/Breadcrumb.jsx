@@ -9,7 +9,7 @@ export default function Breadcrumb({ paths = [] }) {
           {index === paths.length - 1 ? (
             <span className="text-gray-900">{path.label}</span>
           ) : (
-            <Link to={path.href} className="hover:text-primary-600 transition-colors">
+            <Link to={path.path} className="hover:text-primary-600 transition-colors">
               {path.label}
             </Link>
           )}
