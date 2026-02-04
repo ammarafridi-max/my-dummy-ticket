@@ -1,17 +1,16 @@
-import React from 'react';
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Check, X } from 'lucide-react';
+import { FaCheck, FaX } from 'react-icons/fa6';
 import { useDummyTicket } from '../../hooks/ticket/useDummyTicket';
 import { trackPurchaseEvent } from '../../lib/analytics';
 import { formatDate } from '../../utils/formatDate';
-import styled from 'styled-components';
+import { HiShieldCheck } from 'react-icons/hi2';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
-import Paragraph from '../../components/Paragraph';
 import PageTitle from '../../components/PageTitle';
 import Loading from '../../components/Loading';
+import PrimaryLink from '../../components/PrimaryLink';
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
@@ -23,31 +22,6 @@ export default function PaymentSuccess() {
   if (isErrorDummyTicket || dummyTicket?.paymentStatus === 'UNPAID') return <Error />;
 
   return <Success sessionId={sessionId} dummyTicket={dummyTicket} />;
-}
-
-function Error() {
-  return (
-    <>
-      <Helmet>
-        <title>Payment Not Found</title>
-      </Helmet>
-      <PrimarySection className="py-9 max-w-320 mx-auto">
-        <Container>
-          <IconContainer type="error">
-            <X />
-          </IconContainer>
-          <PageTitle className="text-center">Payment Not Found!</PageTitle>
-          <Text textAlign="center" fontSize="22px" mb="15px">
-            We could not locate a payment associated with your transaction.
-          </Text>
-          <Text textAlign="center" fontSize="22px">
-            If you've already made a payment, please contact us with your transaction details at{' '}
-            <Link href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</Link>.
-          </Text>
-        </Container>
-      </PrimarySection>
-    </>
-  );
 }
 
 function Success({ sessionId, dummyTicket }) {
@@ -78,10 +52,11 @@ function Success({ sessionId, dummyTicket }) {
   }, []);
 
   useEffect(() => {
-    localStorage.removeItem('routes')
-    localStorage.removeItem('departureDate')
-    localStorage.removeItem('returnDate')
-  }, [])
+    localStorage.removeItem('routes');
+    localStorage.removeItem('departureDate');
+    localStorage.removeItem('returnDate');
+    localStorage.removeItem('sessionId');
+  }, []);
 
   return (
     <>
@@ -89,69 +64,99 @@ function Success({ sessionId, dummyTicket }) {
         <title>Payment Successfully Processed</title>
         <meta name="robots" content="none" />
       </Helmet>
-      <PrimarySection className="py-7">
+      <PrimarySection className="py-10 md:pt-5 md:pb-15 bg-gray-50">
         <Container>
-          <IconContainer type="success">
-            <Check />
-          </IconContainer>
+          <div className="w-30 h-30 flex items-center justify-center bg-green-500/20 text-green-800 mx-auto rounded-full text-5xl mb-10">
+            <FaCheck />
+          </div>
           <PageTitle className="text-center">Thank You for Your Booking!</PageTitle>
-          <Text textAlign="center" fontSize="22px" mb="15px">
+          <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
             Your payment of{' '}
-            <strong>
+            <span className="font-normal">
               {currency} {amount}
-            </strong>{' '}
+            </span>{' '}
             has been successfully processed.
-          </Text>
+          </p>
           {!dummyTicket?.ticketDelivery?.immediate && (
-            <Text textAlign="center" fontSize="22px" mb="25px">
+            <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
               Your dummy ticket will be sent to your email address on{' '}
               {formatDate(dummyTicket?.ticketDelivery?.deliveryDate)} since you selected the later
               delivery option. An email regarding the same has been sent your email address, as
               well.
-            </Text>
+            </p>
           )}
           {dummyTicket?.ticketDelivery?.immediate && (
-            <Text textAlign="center" fontSize="22px" mb="25px">
+            <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
               You will recieve a receipt of your payment by email, followed by your dummy ticket in
               a second email shortly afterwards. Please remember to check your spam folder too.
-            </Text>
+            </p>
           )}
+
+          <UpsellCard
+            icon={<HiShieldCheck />}
+            title="Buy Travel Insurance"
+            description="Book a legitimate, and 100% genuine travel insurance for your next trip. Our travel insurance policies are accepted by embassies for visa applications. Exclusively for UAE residents/citizens."
+            price={55}
+            to="/travel-insurance"
+          />
         </Container>
       </PrimarySection>
     </>
   );
 }
 
-const Text = styled(Paragraph)`
-  margin-top: 20px;
-  @media screen and (max-width: 991px) {
-    font-size: 19px;
-  }
-`;
+function Error() {
+  return (
+    <>
+      <Helmet>
+        <title>Payment Not Found</title>
+      </Helmet>
+      <PrimarySection className="py-10 md:pt-5 md:pb-15 bg-gray-50">
+        <Container>
+          <div className="w-30 h-30 flex items-center justify-center bg-red-500/20 text-red-800 mx-auto rounded-full text-5xl mb-10">
+            <FaX />
+          </div>
+          <PageTitle className="text-center">Payment Not Found!</PageTitle>
+          <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
+            We couldn’t find a successful payment linked to this booking.
+          </p>
+          <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
+            If you have already completed a payment, please contact our support team with your
+            transaction details at{' '}
+            <Link href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</Link>, and we will
+            assist you as soon as possible.
+          </p>
+        </Container>
+      </PrimarySection>
+    </>
+  );
+}
 
-const Link = styled.a`
-  font-weight: 600;
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 130px;
-  height: 130px;
-  border-radius: 100%;
-  margin: 0 auto;
-  margin-bottom: 30px;
-  background-color: ${({ type }) => {
-    if (type === 'success') return '#e5f3eb';
-    if (type === 'error') return '#ffcccc';
-  }};
-  & svg {
-    width: 70px !important;
-    height: 70px !important;
-    color: ${({ type }) => {
-      if (type === 'success') return '#00702e';
-      if (type === 'error') return '#990000';
-    }};
-  }
-`;
+function UpsellCard({ icon, title, description, price, to }) {
+  return (
+    <div className="max-w-120 mx-auto bg-white shadow-md rounded-xl mt-7">
+      <Link to={to}>
+        <div className="flex items-center gap-3 p-5 font-normal border-b border-gray-200">
+          <div className="w-8 h-8 flex items-center justify-center bg-primary-500 text-white rounded-full">
+            {icon}
+          </div>
+          <p className="text-base md:text-[18px]">{title}</p>
+        </div>
+        <div className="p-5 font-extralight">
+          <p>{description}</p>
+          <div className="mt-4 grid grid-cols-[6fr_4fr]">
+            <div className="leading-5">
+              <p className="text-sm text-gray-400">from</p>
+              <p className="font-medium">AED {price}</p>
+            </div>
+            <div>
+              <PrimaryLink to={to} size="small" className="w-full">
+                Book Now
+              </PrimaryLink>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+}

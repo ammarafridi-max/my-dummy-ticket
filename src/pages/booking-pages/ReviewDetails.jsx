@@ -37,7 +37,6 @@ export default function ReviewDetails() {
   const totalQuantity = dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;
 
-
   const handleConfirm = () => {
     if (sessionId) {
       trackBeginCheckout({

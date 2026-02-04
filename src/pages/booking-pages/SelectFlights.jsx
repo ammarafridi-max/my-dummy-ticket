@@ -12,7 +12,18 @@ import FlightError from '../../components/FlightError';
 export default function SelectFlights() {
   const [maxFlights, setMaxFlights] = useState(5);
   const [expandedCardId, setExpandedCardId] = useState(null);
-  const { type, from, to, departureDate, returnDate, quantity, setDepartureFlight, setReturnFlight, setPassengers, initializePassengers } = useContext(TicketContext)
+  const {
+    type,
+    from,
+    to,
+    departureDate,
+    returnDate,
+    quantity,
+    setDepartureFlight,
+    setReturnFlight,
+    setPassengers,
+    initializePassengers,
+  } = useContext(TicketContext);
   const { flights, isLoadingFlights, isErrorFlights } = useFlights({
     type,
     from,
@@ -28,18 +39,18 @@ export default function SelectFlights() {
 
   function handleSelectFlight(flight, index) {
     handleToggleExpand(index);
-    setDepartureFlight(transformItinerary(flight.itineraries[0]))
+    setDepartureFlight(transformItinerary(flight.itineraries[0]));
     if (type === 'Return' && flight.itineraries[1]) {
-      setReturnFlight(transformItinerary(flight.itineraries[1]))
+      setReturnFlight(transformItinerary(flight.itineraries[1]));
     }
   }
 
   useEffect(() => {
     if (quantity) {
-      initializePassengers(quantity, setPassengers)
+      initializePassengers(quantity, setPassengers);
     }
-  }, [])
-  
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -62,11 +73,15 @@ export default function SelectFlights() {
           ))}
           {flights.length > maxFlights && (
             <div className="text-center mt-3">
-              <PrimaryButton onClick={() => {
-                if (maxFlights < flights?.length) {
-                  setMaxFlights(cur => cur + 5);
-                }
-              }}>Load More Flights</PrimaryButton>
+              <PrimaryButton
+                onClick={() => {
+                  if (maxFlights < flights?.length) {
+                    setMaxFlights(cur => cur + 5);
+                  }
+                }}
+              >
+                Load More Flights
+              </PrimaryButton>
             </div>
           )}
         </>
