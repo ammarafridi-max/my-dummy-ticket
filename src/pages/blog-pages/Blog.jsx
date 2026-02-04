@@ -2,10 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import { useBlogs } from '../../hooks/blog/useBlogs';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
-import PageTitle from '../../components/PageTitle';
-import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
 import BlogCard from '../../components/BlogCard';
+import PageHero from '../../components/Sections/PageHero';
 
 const pageData = {
   meta: {
@@ -40,20 +39,14 @@ export default function Blog() {
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
       </Helmet>
-      <PrimarySection className="py-10 lg:py-15 bg-gray-50">
-        <Container>
-          <div className="flex flex-col lg:items-center lg:justify-center lg:text-center lg:max-w-200 lg:mx-auto">
-            <Breadcrumb paths={pageData?.breadcrumb} />
-            <PageTitle className="mt-3 mb-5">{pageData?.sections?.hero?.title}</PageTitle>
-            <p className="font-extralight text-sm lg:text-lg">
-              {pageData?.sections?.hero?.subtitle}
-            </p>
-          </div>
-        </Container>
-      </PrimarySection>
+      <PageHero
+        title={pageData?.sections?.hero?.title}
+        subtitle={pageData?.sections?.hero?.subtitle}
+        paths={pageData.breadcrumb}
+      />
       <PrimarySection>
         <Container>
-          <div className="flex items-start gap-7 lg:grid lg:grid-cols-3 lg:gap-7 py-10 lg:py-15">
+          <div className="block items-start gap-7 lg:grid lg:grid-cols-3 lg:gap-7 py-10 lg:py-15">
             {blogs?.map((post, i) => (
               <BlogCard key={i} blog={post} />
             ))}

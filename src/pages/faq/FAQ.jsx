@@ -2,9 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import { faqArray, formatFaqArray } from '../../data/faqs';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
-import PageTitle from '../../components/PageTitle';
 import FAQAccordion from '../../components/FAQAccordion';
-import Breadcrumb from '../../components/Breadcrumb';
+import PageHero from '../../components/Sections/PageHero';
 
 const pageData = {
   meta: {
@@ -35,17 +34,11 @@ export default function FAQ() {
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
       </Helmet>
-      <PrimarySection className="py-10 lg:py-15 bg-gray-50">
-        <Container>
-          <div className="flex flex-col lg:items-center lg:justify-center lg:text-center lg:max-w-200 lg:mx-auto">
-            <Breadcrumb paths={pageData?.breadcrumb} />
-            <PageTitle className="mt-3 mb-5">{pageData?.sections?.hero?.title}</PageTitle>
-            <p className="font-extralight text-sm lg:text-lg">
-              {pageData?.sections?.hero?.subtitle}
-            </p>
-          </div>
-        </Container>
-      </PrimarySection>
+      <PageHero
+        paths={pageData?.breadcrumb}
+        title={pageData?.sections?.hero?.title}
+        subtitle={pageData?.sections?.hero?.subtitle}
+      />
       <PrimarySection className="py-10 lg:py-15 bg-white">
         <Container>
           <div className="flex flex-col lg:items-center lg:justify-center lg:max-w-240 lg:mx-auto gap-5">

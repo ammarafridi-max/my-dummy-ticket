@@ -2,36 +2,49 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
-import PageTitle from '../../components/PageTitle';
 import SectionTitle from '../../components/SectionTitle';
+import PageHero from '../../components/Sections/PageHero';
+
+const pageData = {
+  meta: {
+    title: 'Terms & Conditions - My Dummy Ticket',
+    description:
+      'Read the official Terms & Conditions of My Dummy Ticket to understand service usage, refunds, legal responsibility, and policies.',
+    canonical: 'https://www.mydummyticket.ae/terms-and-conditions',
+  },
+  breadcrumb: [
+    { label: 'Home', path: '/' },
+    { label: 'Terms & Conditions', path: '/terms-and-conditions' },
+  ],
+  sections: {
+    hero: {
+      title: 'Terms & Conditions',
+      subtitle:
+        'Welcome to My Dummy Ticket. By using our website (https://www.mydummyticket.ae) or purchasing any service from us, you agree to comply with the Terms & Conditions below. Please read them carefully before proceeding.',
+    },
+  },
+};
 
 export default function TermsAndConditions() {
   return (
     <>
       <Helmet>
-        <title>Terms & Conditions - My Dummy Ticket</title>
-        <meta
-          name="description"
-          content="Read the official Terms & Conditions of My Dummy Ticket to understand service usage, refunds, legal responsibility, and policies."
-        />
-        <link rel="canonical" href="https://www.mydummyticket.ae/terms-and-conditions" />
+        <title>{pageData.meta.title}</title>
+        <link rel="canonical" href={pageData.meta.canonical} />
+        <meta name="robots" content="index, follow" />
+        <meta name="description" content={pageData.meta.description} />
       </Helmet>
+      <PageHero
+        paths={pageData?.breadcrumb}
+        title={pageData?.sections?.hero?.title}
+        subtitle={pageData?.sections?.hero?.subtitle}
+      />
 
       <PrimarySection className="py-12.5">
         <Container>
-          <PageTitle className="text-[32px] lg:text-[44px] leading-[1.2] font-light mb-3">
-            Terms & Conditions
-          </PageTitle>
+          <SectionTitle className="mt-10">General Information</SectionTitle>
 
-          <p className="text-xl font-extralight">
-            Welcome to My Dummy Ticket. By using our website (https://www.mydummyticket.ae) or
-            purchasing any service from us, you agree to comply with the Terms & Conditions below.
-            Please read them carefully before proceeding.
-          </p>
-
-          <SectionTitle className="my-10">General Information</SectionTitle>
-
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               My Dummy Ticket provides travel-related services including dummy flight tickets,
               travel itineraries, and supporting travel documentation for visa applications and
@@ -47,9 +60,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Use of Services</SectionTitle>
+          <SectionTitle className="mt-10">Use of Services</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               By using our website, you confirm that you are at least 18 years old or have
               parental/guardian consent.
@@ -67,9 +80,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Payments & Refund Policy</SectionTitle>
+          <SectionTitle className="mt-10">Payments & Refund Policy</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               All payments must be made through the secure payment options provided on our website.
             </li>
@@ -83,9 +96,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">User Responsibilities</SectionTitle>
+          <SectionTitle className="mt-10">User Responsibilities</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               You are responsible for providing accurate and complete information when placing an
               order.
@@ -100,9 +113,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Intellectual Property</SectionTitle>
+          <SectionTitle className="mt-10">Intellectual Property</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               All content on My Dummy Ticket — including text, graphics, logos, and software — is
               owned by My Dummy Ticket and protected by copyright law.
@@ -113,9 +126,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Disclaimer of Liability</SectionTitle>
+          <SectionTitle className="mt-10">Disclaimer of Liability</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               My Dummy Ticket does not guarantee visa approval or any outcome related to visa
               applications.
@@ -130,9 +143,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Privacy Policy</SectionTitle>
+          <SectionTitle className="mt-10">Privacy Policy</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               Your privacy is important to us. We only collect necessary information to process your
               order and deliver services.
@@ -147,9 +160,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Amendments</SectionTitle>
+          <SectionTitle className="mt-10">Amendments</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               My Dummy Ticket reserves the right to update or modify these Terms & Conditions
               without prior notice.
@@ -159,9 +172,9 @@ export default function TermsAndConditions() {
             </li>
           </ul>
 
-          <SectionTitle className="my-10">Governing Law</SectionTitle>
+          <SectionTitle className="mt-10">Governing Law</SectionTitle>
 
-          <ul className="text-xl font-extralight flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               These Terms & Conditions are governed by the laws of the United Arab Emirates.
             </li>
