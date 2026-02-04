@@ -5,6 +5,7 @@ import ScrollToTop from '../components/ScrollToTop';
 
 // Layout
 import AppLayout from '../layouts/AppLayout';
+import AppLayout2 from '../layouts/AppLayout2';
 import BookingLayout from '../layouts/BookingLayout';
 import InsuranceBookingLayout from '../layouts/InsuranceBookingLayout';
 
@@ -40,9 +41,7 @@ import BlogPost from '../pages/blog-pages/BlogPost';
 import Blog from '../pages/blog-pages/Blog';
 
 // Other Pages
-import Sitemap from '../pages/other/Sitemap';
 import PageNotFound from '../pages/other/PageNotFound';
-import AppLayout2 from '../layouts/AppLayout2';
 
 export default function AppRoutes() {
   return (
@@ -60,7 +59,6 @@ export default function AppRoutes() {
               <Route path="onward-ticket" element={<OnwardTicket />} />
               <Route path="travel-insurance" element={<TravelInsurance />} />
               <Route path="*" element={<PageNotFound />} />
-              <Route path="sitemap" element={<Sitemap />} />
               <Route path="faq" element={<FAQ />} />
               <Route path="payment-successful" element={<PaymentSuccess />} />
               <Route path="terms-and-conditions" element={<TermsAndConditions />} />
