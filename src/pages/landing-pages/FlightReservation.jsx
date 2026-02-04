@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi2';
 import Hero from '../../components/Sections/Hero';
 import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -44,7 +45,7 @@ const pageData = {
       title: 'Book a Genuine Flight Reservation from AED 49',
       subtitle:
         'Get genuine flight reservations issued through official airline systems with a valid, six-digit PNR. Our flight reservations are legitimate bookings created for travel documentation purposes, not fake or falsified tickets.',
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'How To Book Your Flight Reservation?',

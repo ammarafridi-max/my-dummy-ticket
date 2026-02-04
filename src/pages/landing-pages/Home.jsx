@@ -4,6 +4,7 @@ import { faqArray, formatFaqArray } from '../../data/faqs';
 import { HiOutlineClock, HiOutlineCurrencyDollar, HiCheck } from 'react-icons/hi2';
 import Hero from '../../components/Sections/Hero';
 import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -68,7 +69,7 @@ const pageData = {
       title: 'Dummy Ticket From AED 49. Verifiable and Legit.',
       subtitle:
         'Book verifiable dummy tickets for visa applications. All legitimate reservations come with a PNR code that can be verified directly on airline websites.',
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'Simple, Hassle-Free Process',

@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 import Hero from '../../components/Sections/Hero';
 import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -64,7 +65,7 @@ const pageData = {
       title: 'Emirates Dummy Ticket for Visa Applications',
       subtitle:
         "Get an official Emirates flight reservation with a live 6-digit PNR for your visa application in minutes. Our dummy ticket is verifiable on the Emirates website under 'Manage Booking' and is accepted by VFS, BLS, and consulates as valid proof of travel intent, all for just AED 49.",
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'How to Book Your Emirates Dummy Ticket in 3 Steps',

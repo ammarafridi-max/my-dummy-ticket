@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi';
 import Hero from '../../components/Sections/Hero';
 import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -68,7 +69,7 @@ const pageData = {
       title: 'Book a Your Onward Ticket from AED 49.',
       subtitle:
         'Get onward tickets issued through official airline systems with a valid, verifiable PNR. Our flight reservations are legitimate bookings created for travel documentation purposes, not fake or falsified tickets.',
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'Your Onward Ticket, Ready in 3 Easy Steps',

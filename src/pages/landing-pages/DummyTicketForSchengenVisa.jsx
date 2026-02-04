@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 import Hero from '../../components/Sections/Hero';
 import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -96,7 +97,7 @@ const pageData = {
       title: 'Dummy Tickets For Schengen Visa',
       subtitle:
         'Book your verifiable dummy ticket for your Schengen visa from AED 49. Our dummy tickets come with a 6-digit PNR number that can be used to verify ticket details at airline and reservation systems, and they are accepted by VFS, BLS, and embassies for visa applications.',
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'How to book your dummy ticket?',

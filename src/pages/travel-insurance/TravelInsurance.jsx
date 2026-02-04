@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import Hero from '../../components/Sections/Hero';
 import TravelInsuranceForm from '../../components/TravelInsuranceForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 
@@ -19,7 +20,7 @@ const pageData = {
       title: 'Travel Insurance for UAE Residents',
       subtitle:
         'Book outbound travel insurance from the UAE for residents and citizens. Our travel insurances are genuine, legitimate, and accepted for various purposes, including embassies for visa applications. These are strictly for UAE residents/citizens.',
-      form: <TravelInsuranceForm />,
+      form: <AllForms defaultTab="insurance" />,
     },
     process: {
       title: 'How to book your travel insurance?',

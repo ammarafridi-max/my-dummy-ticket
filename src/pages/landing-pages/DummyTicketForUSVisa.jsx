@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fa';
 import Hero from '../../components/Sections/Hero';
 import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -91,7 +92,7 @@ const pageData = {
       title: 'Verifiable Dummy Tickets for US Visa from AED 49.',
       subtitle:
         'Book your verifiable dummy tickets for US visa. Our reservations come with a valid 6-digit PNR number that can be used to verify the reservation, and are commonly used for US B1/B2 visas.',
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'How to Book Your Dummy Ticket for US Visa',

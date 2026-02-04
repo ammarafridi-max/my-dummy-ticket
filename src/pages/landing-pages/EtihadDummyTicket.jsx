@@ -9,7 +9,7 @@ import {
   FaUserTie,
 } from 'react-icons/fa';
 import Hero from '../../components/Sections/Hero';
-import TicketForm from '../../components/TicketForm';
+import AllForms from '../../components/AllForms';
 const Process = lazy(() => import('../../components/Sections/Process'));
 const About = lazy(() => import('../../components/Sections/About'));
 const Benefits = lazy(() => import('../../components/Sections/Benefits'));
@@ -62,7 +62,7 @@ const pageData = {
       title: 'Etihad Dummy Ticket for Visa Applications',
       subtitle:
         'Get an official Etihad Airways flight reservation with a live booking reference for your visa application. Our Etihad dummy tickets provide a real, verifiable flight reservation with a valid PNR that shows your travel intent, without the financial commitment.',
-      form: <TicketForm />,
+      form: <AllForms />,
     },
     process: {
       title: 'How Our Etihad Dummy Ticket Service Works',
