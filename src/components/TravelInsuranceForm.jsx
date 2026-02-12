@@ -101,9 +101,9 @@ export default function TravelInsuranceForm() {
         ))}
       </div>
 
-      <div className='mt-4'>
-        <div className='flex gap-3 items-center text-gray-900/60 text-sm font-light'>
-          <FaInfo className='text-[12px]' />
+      <div className="mt-4">
+        <div className="flex gap-3 items-center text-gray-900/60 text-sm font-light">
+          <FaInfo className="text-[12px]" />
           <p>By proceeding, you confirm that you are a resident/citizen of the UAE.</p>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function TravelInsuranceForm() {
         <PrimaryButton
           className="w-full"
           type="submit"
-          size='small'
+          size="small"
           disabled={!startDate || !endDate || !region.id || !group}
           onClick={handleSubmit}
         >

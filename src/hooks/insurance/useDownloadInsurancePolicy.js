@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 export function useDownloadInsurancePolicy() {
   const { mutate: downloadPolicy } = useMutation({
-    mutationFn: policyId => downloadInsurancePolicyApi(policyId),
+    mutationFn: ({ policyId, index = 0 }) => downloadInsurancePolicyApi(policyId, index),
     onSuccess: data => {
       window.location.assign(data.policyDocuments);
       toast.success('Policy downloaded');

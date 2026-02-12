@@ -23,7 +23,7 @@ export default function TestimonialCard({ title, name, src, children, purpose })
       </div>
 
       {/* Accent Line */}
-      <div className="absolute bottom-0 left-0 w-full h-[4px] bg-gradient-to-r from-primary-500 to-orange-400 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute bottom-0 left-0 w-full h-[4px] bg-gradient-to-r from-primary-300 to-primary-500 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </div>
   );
 }

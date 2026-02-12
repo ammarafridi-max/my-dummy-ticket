@@ -1,5 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
+import {
+  buildFAQPage,
+  buildGraph,
+  buildOrganization,
+  buildWebPage,
+  buildWebsite,
+} from '../../lib/schema';
 import { faqArray, formatFaqArray } from '../../data/faqs';
 import {
   FaCalendarAlt,
@@ -130,6 +137,22 @@ const pageData = {
 };
 
 export default function DummyTicketForUSVisa() {
+  const schema = buildGraph([
+    buildOrganization(),
+    buildWebsite(),
+    buildWebPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+    buildFAQPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.sections.faqs.title,
+      description: pageData.meta.description,
+      faqs: pageData.sections.faqs.faqs,
+    }),
+  ]);
+
   return (
     <>
       <Helmet>
@@ -137,6 +160,7 @@ export default function DummyTicketForUSVisa() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <Hero
         title={pageData.sections.hero.title}

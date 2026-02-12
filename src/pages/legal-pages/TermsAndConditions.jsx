@@ -1,4 +1,10 @@
 import { Helmet } from 'react-helmet-async';
+import {
+  buildGraph,
+  buildOrganization,
+  buildWebPage,
+  buildWebsite,
+} from '../../lib/schema';
 import { Link } from 'react-router-dom';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
@@ -26,6 +32,16 @@ const pageData = {
 };
 
 export default function TermsAndConditions() {
+  const schema = buildGraph([
+    buildOrganization(),
+    buildWebsite(),
+    buildWebPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+  ]);
+
   return (
     <>
       <Helmet>
@@ -33,6 +49,7 @@ export default function TermsAndConditions() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <PageHero
         paths={pageData?.breadcrumb}

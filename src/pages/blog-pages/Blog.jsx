@@ -1,4 +1,11 @@
 import { Helmet } from 'react-helmet-async';
+import {
+  buildBlog,
+  buildGraph,
+  buildOrganization,
+  buildWebPage,
+  buildWebsite,
+} from '../../lib/schema';
 import { useBlogs } from '../../hooks/blog/useBlogs';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
@@ -28,6 +35,20 @@ const pageData = {
 
 export default function Blog() {
   const { blogs, isLoadingBlogs, isErrorBlogs } = useBlogs();
+  const schema = buildGraph([
+    buildOrganization(),
+    buildWebsite(),
+    buildWebPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+    buildBlog({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+  ]);
 
   if (isLoadingBlogs) return <Loading />;
 
@@ -38,6 +59,7 @@ export default function Blog() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <PageHero
         title={pageData?.sections?.hero?.title}

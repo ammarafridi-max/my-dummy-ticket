@@ -24,7 +24,7 @@ export default function Process({
   steps = stepsTemplate,
 }) {
   return (
-    <PrimarySection className="py-15 lg:py-30" id="process">
+    <PrimarySection className="py-10 md:py-12 lg:py-15" id="process">
       <Container>
         <SectionTitle textAlign="center" subtitle={subtitle} mb="7">
           {title}
@@ -33,13 +33,13 @@ export default function Process({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:m-0 md:p-0">
           {steps.map((step, i) => (
             <div className="min-w-80 max-w-full rounded-xl duration-300" key={i}>
-              <div className="w-10 h-10 flex items-center justify-center bg-white text-primary-500 border border-primary-500 text-md font-medium font-outfit rounded-full">
+              <div className="w-9 h-9 flex items-center justify-center bg-white text-primary-500 border-[1.5px] border-primary-500 text-md font-medium font-outfit rounded-full">
                 {i + 1}
               </div>
-              <h3 className="text-[19px] lg:text-[20px] font-light capitalize font-outfit text-left my-3 p-0">
+              <h3 className="text-[18px] lg:text-[20px] font-light text-gray-900/90 capitalize font-outfit text-left my-3 p-0">
                 {step.title}
               </h3>
-              <p className="text-[16px] text-gray-900/70 font-extralight leading-6.5">
+              <p className="text-[16px] text-gray-900/55 font-light leading-6.5">
                 {step.text.replaceAll('{keyword}', keyword)}
               </p>
             </div>

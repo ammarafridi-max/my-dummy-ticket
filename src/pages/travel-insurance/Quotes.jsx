@@ -94,9 +94,7 @@ export default function Quotes() {
           type="button"
           disabled={!schemeId}
           onClick={() => navigate('/travel-insurance/passenger-details')}
-          className="px-6 py-2.5 rounded-xl bg-accent-500 text-white text-sm font-light
-                     hover:bg-accent-600 transition
-                     disabled:bg-accent-500/20 disabled:cursor-not-allowed"
+          className="px-6 py-2.5 rounded-xl bg-accent-500 text-white text-sm font-light hover:bg-accent-600 transition disabled:bg-accent-500/20 disabled:cursor-not-allowed"
         >
           Proceed
         </button>
@@ -110,31 +108,39 @@ export default function Quotes() {
 }
 
 function ComparisonTable({ quotesArray, onClose }) {
-  const wrapperRef = useRef(null);
-  useOutsideClick(wrapperRef, onClose);
+  const modalRef = useRef(null);
+  useOutsideClick(modalRef, onClose);
 
   if (!quotesArray.length) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+    <div
+      className="fixed inset-0 bg-black/50 z-[10000] flex items-center justify-center overflow-y-auto p-6"
+      onClick={onClose}
+    >
       <button
         onClick={onClose}
-        className="fixed right-7 top-7 text-white"
+        className="fixed right-7 top-7 text-white z-[10001]"
         aria-label="Close comparison table"
       >
         <X size={40} />
       </button>
 
-      <div ref={wrapperRef} className="h-140">
-        <Container className="h-full bg-white rounded-2xl border border-gray-200 shadow-sm overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-50">
-                <th className="px-6 py-5 text-left text-gray-600 font-normal">Inclusions</th>
+      <div
+        ref={modalRef}
+        onClick={e => e.stopPropagation()}
+        className="w-full max-w-[95vw] md:max-w-[85vw]"
+      >
+        <Container className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-auto max-h-[75vh]">
+          <table className="min-w-max w-full border-collapse text-sm">
+            <thead className="sticky top-0 z-10 bg-gray-100 border-b border-gray-200">
+              <tr>
+                <th className="px-5 py-4 text-left text-gray-900 font-normal">Inclusions</th>
+
                 {quotesArray.map(quote => (
                   <th
                     key={quote.scheme_id}
-                    className="px-6 py-5 text-left text-gray-600 font-normal"
+                    className="px-5 py-4 text-left text-gray-900 font-normal max-w-30"
                   >
                     {quote.name.split(' - ')[1]}
                   </th>
@@ -142,14 +148,18 @@ function ComparisonTable({ quotesArray, onClose }) {
               </tr>
             </thead>
 
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-gray-200">
               {quotesArray[0].benefits.map((benefit, i) => (
                 <tr key={i} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-500">{benefit.cover}</td>
+                  <td className="px-5 py-3 text-sm text-gray-600 max-w-60">{benefit.cover}</td>
 
                   {quotesArray.map((quote, j) => (
-                    <td key={j} className="px-6 py-4 text-sm text-gray-900">
-                      {quote.benefits?.[i]?.amount || '—'}
+                    <td key={j} className="px-5 py-3 text-sm font-light text-gray-500 max-w-60">
+                      {quote.benefits?.[i]?.amount === 'Not Covered' ? (
+                        <X size={16} className="text-red-700" />
+                      ) : (
+                        quote.benefits?.[i]?.amount || <X size={16} className="text-red-700" />
+                      )}
                     </td>
                   ))}
                 </tr>

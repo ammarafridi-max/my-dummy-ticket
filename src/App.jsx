@@ -1,4 +1,8 @@
-import "@fontsource-variable/outfit";
+import '@fontsource-variable/outfit';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import { useEffect } from 'react';
 import { initializeGA } from './lib/analytics';
 import { HelmetProvider } from 'react-helmet-async';

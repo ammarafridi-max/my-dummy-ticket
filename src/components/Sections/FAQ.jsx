@@ -10,7 +10,7 @@ export default function FAQ({
   faqs,
 }) {
   return (
-    <PrimarySection id="faq" className="pt-5 pb-15 lg:pb-20 lg:pt-20">
+    <PrimarySection id="faq" className="py-10 md:py-12 lg:py-15">
       <Container>
         <SectionTitle textAlign="center" subtitle={subtitle} mb="8">
           {title}

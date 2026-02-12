@@ -4,7 +4,7 @@ import PrimarySection from '../PrimarySection';
 
 export default function Hero({ title, subtitle, form, sectionId = 'form' }) {
   return (
-    <PrimarySection className="bg-gray-50 py-7 md:pt-8 md:pb-15" id={sectionId}>
+    <PrimarySection className="bg-gray-50 py-8 md:py-10 lg:py-12" id={sectionId}>
       <Container className="flex flex-col lg:flex-row items-center justify-between gap-7 lg:gap-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

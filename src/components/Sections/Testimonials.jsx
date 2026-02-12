@@ -9,7 +9,7 @@ export default function Testimonials({
   testimonials,
 }) {
   return (
-    <PrimarySection className="pt-15 md:pt-10">
+    <PrimarySection className="py-10 md:py-12 lg:py-15">
       <Container>
         <SectionTitle textAlign="center" subtitle={subtitle} mb="8">
           {title}

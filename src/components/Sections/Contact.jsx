@@ -10,15 +10,13 @@ export default function Contact({
   text = "Still have questions or doubts about our service? Feel free to send us an email. We'd be happy to help you out.",
 }) {
   return (
-    <PrimarySection id="contact" className="mt-10 mb-15">
+    <PrimarySection id="contact" className="py-10 md:py-12 lg:py-15">
       <Container>
         <div className="flex flex-col md:flex-row items-center gap-8 bg-gray-100 p-6 md:p-12 rounded-2xl">
           <div className="w-full md:w-3/5 mb-8 md:mb-0">
-            <SectionTitle subtitle={subtitle} className="mb-7 lg:mb-6">
-              {title}
-            </SectionTitle>
-            <p className="text-lg lg:text-lg font-nunito font-light">{text}</p>
-            <PrimaryLink size="small" href="mailto:info@mydummyticket.ae" className="mt-5">
+            <SectionTitle className="mb-7 lg:mb-6">{title}</SectionTitle>
+            <p className="text-lg lg:text-lg font-nunito font-extralight">{text}</p>
+            <PrimaryLink size="small" href="mailto:info@mydummyticket.ae" className="mt-7">
               Send Us An Email
             </PrimaryLink>
           </div>

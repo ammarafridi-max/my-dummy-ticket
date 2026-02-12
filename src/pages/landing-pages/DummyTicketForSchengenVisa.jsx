@@ -1,6 +1,13 @@
 import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
+  buildFAQPage,
+  buildGraph,
+  buildOrganization,
+  buildWebPage,
+  buildWebsite,
+} from '../../lib/schema';
+import {
   FaCalendarAlt,
   FaCheckCircle,
   FaFileAlt,
@@ -129,6 +136,22 @@ const pageData = {
 };
 
 export default function DummyTicketForSchengenVisa() {
+  const schema = buildGraph([
+    buildOrganization(),
+    buildWebsite(),
+    buildWebPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+    buildFAQPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.sections.faqs.title,
+      description: pageData.meta.description,
+      faqs: pageData.sections.faqs.faqs,
+    }),
+  ]);
+
   return (
     <>
       <Helmet>
@@ -140,6 +163,7 @@ export default function DummyTicketForSchengenVisa() {
           name="keywords"
           content="dummy ticket, dummy ticket for schengen visa, dummy air ticket for schengen visa, dummy flight ticket for schengen visa"
         />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
 
       <Hero

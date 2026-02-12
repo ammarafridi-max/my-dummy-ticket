@@ -1,4 +1,11 @@
 import { Helmet } from 'react-helmet-async';
+import {
+  buildFAQPage,
+  buildGraph,
+  buildOrganization,
+  buildWebPage,
+  buildWebsite,
+} from '../../lib/schema';
 import { faqArray, formatFaqArray } from '../../data/faqs';
 import PrimarySection from '../../components/PrimarySection';
 import Container from '../../components/Container';
@@ -26,6 +33,24 @@ const pageData = {
 };
 
 export default function FAQ() {
+  const faqs = formatFaqArray(faqArray, 'dummy ticket');
+
+  const schema = buildGraph([
+    buildOrganization(),
+    buildWebsite(),
+    buildWebPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+    buildFAQPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+      faqs,
+    }),
+  ]);
+
   return (
     <>
       <Helmet>
@@ -33,6 +58,7 @@ export default function FAQ() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <PageHero
         paths={pageData?.breadcrumb}
@@ -42,7 +68,7 @@ export default function FAQ() {
       <PrimarySection className="py-10 lg:py-15 bg-white">
         <Container>
           <div className="flex flex-col lg:items-center lg:justify-center lg:max-w-240 lg:mx-auto gap-5">
-            {formatFaqArray(faqArray, 'dummy ticket').map((faq, i) => (
+            {faqs.map((faq, i) => (
               <FAQAccordion key={i} question={faq?.question}>
                 {faq.answer}
               </FAQAccordion>

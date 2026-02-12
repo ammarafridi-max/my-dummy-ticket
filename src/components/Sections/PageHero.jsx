@@ -5,7 +5,7 @@ import PrimarySection from '../PrimarySection';
 
 export default function PageHero({ paths = [], title = '', subtitle = '' }) {
   return (
-    <PrimarySection className="py-10 lg:pt-10 lg:pb-15 bg-gray-50">
+    <PrimarySection className="py-8 md:py-10 lg:py-12 bg-gray-50">
       <Container>
         <div className="flex flex-col lg:items-center lg:justify-center lg:text-center lg:max-w-200 lg:mx-auto">
           <Breadcrumb paths={paths} />

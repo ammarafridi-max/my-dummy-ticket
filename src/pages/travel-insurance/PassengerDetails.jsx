@@ -94,25 +94,12 @@ export default function PassengerDetails() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
                 <div>
                   <label className="block mb-1 text-sm font-light text-gray-700">Title</label>
                   <SelectTitle
                     value={passenger.title}
                     onChange={e => handleUpdatePassenger(passenger.id, 'title', e.target.value)}
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-1 text-sm font-light text-gray-700">
-                    Date of Birth
-                  </label>
-                  <SelectDate
-                    selectedDate={formatDate(passenger.dob)}
-                    onDateSelect={date => handleUpdatePassenger(passenger.id, 'dob', date)}
-                    minYear={1900}
-                    maxDate={new Date()}
-                    icon={<CalendarDaysIcon size={20} />}
                   />
                 </div>
 
@@ -129,6 +116,19 @@ export default function PassengerDetails() {
                   <Input
                     value={passenger.lastName}
                     onChange={e => handleUpdatePassenger(passenger.id, 'lastName', e.target.value)}
+                  />
+                </div>
+
+                <div className="md:col-span-1">
+                  <label className="block mb-1 text-sm font-light text-gray-700">
+                    Date of Birth
+                  </label>
+                  <SelectDate
+                    selectedDate={formatDate(passenger.dob)}
+                    onDateSelect={date => handleUpdatePassenger(passenger.id, 'dob', date)}
+                    minYear={1900}
+                    maxDate={new Date()}
+                    icon={<CalendarDaysIcon size={20} />}
                   />
                 </div>
 

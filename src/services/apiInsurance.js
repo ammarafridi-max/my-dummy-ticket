@@ -48,6 +48,10 @@ export async function getInsuranceApplicationApi(sessionId) {
   return await apiFetch(`${URL}/${sessionId}`);
 }
 
-export async function downloadInsurancePolicyApi(policyId) {
-  return await apiFetch(`${URL}/download/${policyId}`);
+export async function getInsuranceDocumentsApi(policyId) {
+  return await apiFetch(`${URL}/documents/${policyId}`);
+}
+
+export async function downloadInsurancePolicyApi(policyId, index = 0) {
+  return await apiFetch(`${URL}/download/${policyId}/${index}`);
 }

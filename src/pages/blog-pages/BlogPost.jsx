@@ -9,6 +9,13 @@ import PrimarySection from '../../components/PrimarySection';
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import Breadcrumb from '../../components/Breadcrumb';
+import {
+  buildBlogPosting,
+  buildGraph,
+  buildOrganization,
+  buildWebPage,
+  buildWebsite,
+} from '../../lib/schema';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -69,6 +76,25 @@ export default function BlogPost() {
     },
   };
 
+  const schema = buildGraph([
+    buildOrganization(),
+    buildWebsite(),
+    buildWebPage({
+      canonical: pageData.meta.canonical,
+      title: pageData.meta.title,
+      description: pageData.meta.description,
+    }),
+    buildBlogPosting({
+      canonical: pageData.meta.canonical,
+      title: pageData.blogPost.title,
+      description: pageData.blogPost.excerpt || pageData.meta.description,
+      image: pageData.blogPost.coverImageUrl,
+      datePublished: pageData.blogPost.publishedAt,
+      dateModified: pageData.blogPost.updatedAt,
+      authorName: pageData.blogPost.author?.name,
+    }),
+  ]);
+
   return (
     <>
       <Helmet>
@@ -76,6 +102,7 @@ export default function BlogPost() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <PageProgressBar color="#14948f" height={3} />
       <PrimarySection className="py-10 lg:pt-8 lg:pb-20 bg-gray-50">
