@@ -2,30 +2,31 @@ import PrimarySection from '../PrimarySection';
 import Container from '../Container';
 import SectionTitle from '../SectionTitle';
 import PrimaryLink from '../PrimaryLink';
-import Paragraph from '../Paragraph';
-
 export default function Contact({
   title = 'Contact Us Now',
   subtitle = 'Still got questions?',
   text = "Still have questions or doubts about our service? Feel free to send us an email. We'd be happy to help you out.",
 }) {
   return (
-    <PrimarySection id="contact" className="py-10 md:py-12 lg:py-15">
+    <PrimarySection id="contact" className="py-14 md:py-18 lg:py-24">
       <Container>
-        <div className="flex flex-col md:flex-row items-center gap-8 bg-gray-100 p-6 md:p-12 rounded-2xl">
-          <div className="w-full md:w-3/5 mb-8 md:mb-0">
-            <SectionTitle className="mb-7 lg:mb-6">{title}</SectionTitle>
-            <p className="text-lg lg:text-lg font-nunito font-extralight">{text}</p>
-            <PrimaryLink size="small" href="mailto:info@mydummyticket.ae" className="mt-7">
+        <div className="relative overflow-hidden flex flex-col md:flex-row items-center gap-10 rounded-3xl border border-primary-100 bg-[linear-gradient(145deg,#f5fbfb_0%,#eff7ff_55%,#fff7f0_100%)] p-8 md:p-12">
+          <div className="pointer-events-none absolute -left-16 -top-16 h-44 w-44 rounded-full bg-primary-200/30 blur-3xl" />
+          <div className="pointer-events-none absolute -right-16 -bottom-16 h-44 w-44 rounded-full bg-accent-200/30 blur-3xl" />
+
+          <div className="relative w-full md:w-3/5 mb-6 md:mb-0">
+            <SectionTitle className="mb-5">{title}</SectionTitle>
+            <p className="text-[16px] md:text-[18px] text-gray-700 leading-7 font-light">{text}</p>
+            <PrimaryLink size="small" href="mailto:info@mydummyticket.ae" className="mt-6">
               Send Us An Email
             </PrimaryLink>
           </div>
 
-          <div className="w-full md:w-2/5">
+          <div className="relative w-full md:w-2/5">
             <img
               src="/contact-img.webp"
               alt="Contact MDT Now"
-              className="w-full h-full object-cover rounded-[5px_50px_5px_50px]"
+              className="w-full h-full object-cover rounded-[16px_44px_16px_44px] shadow-lg"
             />
           </div>
         </div>

@@ -23,6 +23,29 @@ export default defineConfig({
         }
       }
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return null;
+          if (
+            id.includes('/react/') ||
+            id.includes('/react-dom/') ||
+            id.includes('/scheduler/')
+          ) {
+            return 'react-core';
+          }
+          if (id.includes('@tanstack/react-query')) return 'query';
+          if (id.includes('axios')) return 'network';
+          if (id.includes('date-fns')) return 'date';
+          if (id.includes('swiper')) return 'swiper';
+          if (id.includes('react-icons') || id.includes('lucide-react')) return 'icons';
+          if (id.includes('react-hot-toast')) return 'toast';
+          return null;
+        },
+      },
+    },
+  },
   server: {
     headers: {
       'X-Robots-Tag': 'index, follow',

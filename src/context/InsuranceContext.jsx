@@ -86,6 +86,10 @@ export function InsuranceProvider({ children }) {
       digits: '',
     })
   );
+  const [address1, setAddress1] = useState(storedData.address1 || '');
+  const [address2, setAddress2] = useState(storedData.address2 || '');
+  const [address3, setAddress3] = useState(storedData.address3 || '');
+  const [address4, setAddress4] = useState(storedData.address4 || '');
 
   function handleUpdatePassenger(id, field, value) {
     setPassengers(prev => prev.map(p => (p.id === id ? { ...p, [field]: value } : p)));
@@ -97,6 +101,22 @@ export function InsuranceProvider({ children }) {
 
   function handlePhoneChange(phone) {
     setMobile(phone);
+  }
+
+  function handleAddress1Change(e) {
+    setAddress1(e.target.value);
+  }
+
+  function handleAddress2Change(e) {
+    setAddress2(e.target.value);
+  }
+
+  function handleAddress3Change(e) {
+    setAddress3(e.target.value);
+  }
+
+  function handleAddress4Change(e) {
+    setAddress4(e.target.value);
   }
 
   function handleQuantityChange(field, delta) {
@@ -198,6 +218,10 @@ export function InsuranceProvider({ children }) {
         passengers,
         email,
         mobile,
+        address1,
+        address2,
+        address3,
+        address4,
 
         setJourneyType,
         setStartDate,
@@ -208,9 +232,17 @@ export function InsuranceProvider({ children }) {
         setPassengers,
         setEmail,
         setMobile,
+        setAddress1,
+        setAddress2,
+        setAddress3,
+        setAddress4,
 
         handleEmailChange,
         handlePhoneChange,
+        handleAddress1Change,
+        handleAddress2Change,
+        handleAddress3Change,
+        handleAddress4Change,
         handleQuantityChange,
         handleUpdatePassenger,
         handleSelectQuote,

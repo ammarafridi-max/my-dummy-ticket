@@ -16,24 +16,24 @@ export default function MobileNavigation() {
   useOutsideClick(wrapperRef, () => setMenuOpen(false));
 
   return (
-    <nav className="block lg:hidden pt-4 relative z-[9999] bg-gray-50">
+    <nav className="block lg:hidden absolute top-0 left-0 right-0 z-[9999] bg-transparent py-3">
       <Container className="flex justify-between items-center">
-        <a href="/" className="w-45 h-auto flex items-center">
+        <a href="/" className="w-50 h-auto flex items-center">
           <img src="/logo.webp" alt="MDT Logo" className="w-full h-auto object-contain" />
         </a>
 
-        <div className="flex items-center gap-3">
-          <a
+        <div className="flex items-center gap-2">
+          {/* <a
             aria-label="Email us"
             href="mailto:info@mydummyticket.ae"
-            className="bg-gray-200 p-2 rounded-sm hover:bg-gray-300"
+            className="bg-gray-100 p-2.5 rounded-xl hover:bg-gray-200 transition-colors"
           >
             <HiOutlineEnvelope className="text-xl" />
-          </a>
+          </a> */}
 
           <div
             onClick={() => setMenuOpen(prev => !prev)}
-            className="bg-gray-200 p-2 rounded-sm cursor-pointer hover:bg-gray-300"
+            className="bg-gray-900 text-white p-2.5 rounded-xl cursor-pointer transition-colors"
           >
             {menuOpen ? (
               <HiOutlineXMark className="text-xl" />
@@ -51,14 +51,21 @@ export default function MobileNavigation() {
           <div className="fixed inset-0 z-[9999] flex">
             <div
               ref={wrapperRef}
-              className="w-[75%] h-dvh bg-white shadow-md border border-gray-200 px-5 pt-5"
+              className="w-[82%] max-w-[360px] h-dvh bg-white shadow-2xl border-r border-gray-200 px-5 pt-5"
             >
+              <div className="mb-5 pb-4 border-b border-gray-100">
+                <p className="text-xs uppercase tracking-[0.14em] text-primary-600 font-semibold">
+                  Menu
+                </p>
+                <p className="text-sm text-gray-500 mt-1">Find tickets, insurance, and support.</p>
+              </div>
+
               {defaultPages.map((page, i) => {
                 if (page.subpages) {
                   return (
                     <div key={i}>
                       <div
-                        className="flex items-center justify-between px-3 py-2 text-base font-light text-gray-800 hover:bg-gray-100"
+                        className="flex items-center justify-between px-3 py-2.5 text-[15px] font-medium text-gray-800 hover:bg-gray-100 rounded-xl"
                         onClick={() => setOpenIndex(openIndex === i ? null : i)}
                       >
                         <div className="flex items-center gap-3">
@@ -69,13 +76,13 @@ export default function MobileNavigation() {
                       </div>
 
                       {openIndex === i && (
-                        <div className="flex flex-col bg-gray-50">
+                        <div className="mt-1 mb-2 flex flex-col rounded-xl bg-gray-50 p-1.5">
                           {page.subpages.map((sub, idx) => (
                             <a
                               key={idx}
                               href={sub.link}
                               onClick={() => setMenuOpen(false)}
-                              className="px-10 py-2 font-light text-gray-700 hover:bg-gray-100"
+                              className="px-6 py-2.5 font-medium text-sm text-gray-700 hover:bg-gray-100 rounded-lg"
                             >
                               {sub.name}
                             </a>
@@ -91,9 +98,9 @@ export default function MobileNavigation() {
                     key={i}
                     href={page.links[0]}
                     onClick={() => setMenuOpen(false)}
-                    className={`flex items-center justify-between px-3 py-2 text-base font-light rounded-md transition ${
+                    className={`flex items-center justify-between px-3 py-2.5 text-[15px] font-medium rounded-xl transition ${
                       page.links.includes(pathname)
-                        ? 'bg-primary-100 text-primary-600'
+                        ? 'bg-primary-100 text-primary-700'
                         : 'text-gray-800 hover:bg-gray-100'
                     }`}
                   >

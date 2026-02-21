@@ -9,11 +9,11 @@ export const defaultPages = [
     icon: <Plane size={18} />,
     subpages: [
       {
-        name: 'For Schengen Visa',
+        name: 'Dummy Ticket For Schengen Visa',
         link: '/dummy-ticket-schengen-visa',
       },
       {
-        name: 'For US Visa',
+        name: 'Dummy Ticket For US Visa',
         link: '/dummy-ticket-us-visa',
       },
       {
@@ -35,10 +35,10 @@ export default function Navigation({ pages = defaultPages }) {
   const { pathname } = useLocation();
 
   return (
-    <header className="hidden lg:block bg-gray-50 backdrop-blur-sm py-2 z-40 relative">
+    <header className="hidden lg:block absolute top-0 left-0 right-0 z-50 bg-transparent">
       <Container>
-        <nav className="flex items-center justify-between py-2 font-outfit">
-          <div className="w-60 flex-shrink-0">
+        <nav className="flex items-center justify-between py-3 font-outfit">
+          <div className="w-56 flex-shrink-0">
             <a href="/" className="block">
               <img
                 src="/logo.webp"
@@ -49,26 +49,30 @@ export default function Navigation({ pages = defaultPages }) {
             </a>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 rounded-2xl bg-transparent p-1">
             {pages.map((page, i) => (
               <div key={i} className="relative group">
                 <a
                   href={page.links[0]}
                   title={page.name}
-                  className={`flex items-center gap-1 text-[15px] font-normal text-black/60 hover:text-black py-2 px-2 capitalize transition-colors duration-300 ${page.links.includes(pathname) ? 'bg-primary-100 text-primary-600 rounded-md' : ''}`}
+                  className={`flex items-center gap-1.5 text-[14px] font-medium py-2 px-3 capitalize transition-all duration-300 rounded-xl ${
+                    page.links.includes(pathname)
+                      ? 'bg-primary-100 text-primary-700'
+                      : 'text-gray-700'
+                  }`}
                 >
-                  {page.icon && <span className='text-sm mr-1'>{page.icon}</span>}
+                  {page.icon && <span className="text-sm">{page.icon}</span>}
                   <span>{page.name}</span>
-                  <span>{page.subpages ? <ChevronDown size={20} /> : ''}</span>
+                  <span>{page.subpages ? <ChevronDown size={18} /> : ''}</span>
                 </a>
 
                 {page?.subpages && (
-                  <div className="hidden group-hover:flex flex-col w-70 absolute top-9.5 left-0 bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden z-[60]">
+                  <div className="hidden group-hover:flex flex-col w-72 absolute top-10 left-0 bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden z-[60] p-2">
                     {page.subpages.map((subpage, j) => (
                       <a
                         key={j}
                         href={subpage.link}
-                        className="text-[15px] font-normal text-black/50 hover:text-black px-4 py-2 hover:bg-gray-100"
+                        className="text-[14px] font-medium text-gray-600 hover:text-gray-900 px-3 py-2.5 hover:bg-gray-100 rounded-xl"
                       >
                         {subpage.name}
                       </a>

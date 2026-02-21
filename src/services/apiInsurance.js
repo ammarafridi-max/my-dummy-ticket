@@ -25,6 +25,10 @@ export async function finalizeInsuranceApi({
   passengers,
   email,
   mobile,
+  address1,
+  address2,
+  address3,
+  address4,
 }) {
   return await apiFetch(`${URL}/finalize`, {
     method: 'POST',
@@ -40,12 +44,22 @@ export async function finalizeInsuranceApi({
       passengers,
       email,
       mobile,
+      address1,
+      address2,
+      address3,
+      address4,
     }),
   });
 }
 
 export async function getInsuranceApplicationApi(sessionId) {
   return await apiFetch(`${URL}/${sessionId}`);
+}
+
+export async function confirmInsurancePaymentApi(sessionId) {
+  return await apiFetch(`${URL}/confirm-payment/${sessionId}`, {
+    method: 'POST',
+  });
 }
 
 export async function getInsuranceDocumentsApi(policyId) {

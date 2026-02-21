@@ -10,37 +10,46 @@ import Container from './Container';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 font-nunito">
+    <footer className="bg-[linear-gradient(155deg,#0b1220_0%,#0f172a_55%,#132134_100%)] text-gray-300 font-nunito">
       <Container className="py-10 md:py-12">
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pb-6 border-b border-gray-700">
-          {icons.map((icon, i) => (
-            <div
-              key={i}
-              className="text-gray-300 text-[34px] md:text-[40px] hover:text-white transition-colors duration-200"
-            >
-              {icon}
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 space-y-3 text-center">
-          <div className="text-[14px] text-gray-400">
-            © 2025 <span className="text-white font-medium">TRAVL Technologies</span>. All Rights
-            Reserved.
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 pb-7 border-b border-white/10">
+          <div className="max-w-lg">
+            <img src="/logo.webp" alt="MDT" className="w-40 h-auto object-contain brightness-0 invert" />
+            <p className="mt-3 text-[14px] md:text-[15px] text-gray-400 leading-6">
+              Genuine flight reservations and travel documentation for visa and onward travel needs.
+            </p>
           </div>
-
-          <div className="flex items-center justify-center flex-wrap gap-2 text-[14px] text-gray-400">
-            <FooterLink href="/blog">Blog</FooterLink>
-            <FaCircle className="text-[5px]" />
-            <FooterLink href="/terms-and-conditions">Terms & Conditions</FooterLink>
-            <FaCircle className="text-[5px]" />
-            <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
+            {icons.map((icon, i) => (
+              <div
+                key={i}
+                className="text-gray-300 text-[32px] md:text-[36px] hover:text-white transition-colors duration-200"
+              >
+                {icon}
+              </div>
+            ))}
           </div>
         </div>
-        <p className="text-center text-sm mt-3 text-gray-400">
+
+        <div className="mt-7 flex flex-wrap items-center gap-2 text-[14px] text-gray-400">
+          <FooterLink href="/blog">Blog</FooterLink>
+          <FaCircle className="text-[5px]" />
+          <FooterLink href="/terms-and-conditions">Terms & Conditions</FooterLink>
+          <FaCircle className="text-[5px]" />
+          <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+          <FaCircle className="hidden md:block text-[5px]" />
+          <FooterLink href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</FooterLink>
+        </div>
+
+        <p className="text-sm mt-4 text-gray-400">
           Disclaimer: We only provide genuine flight reservations and do not issue fake or
           counterfeit tickets.
         </p>
+
+        <div className="mt-6 pt-5 border-t border-white/10 text-[13px] text-gray-500">
+          © 2025 <span className="text-gray-200 font-medium">TRAVL Technologies</span>. All rights
+          reserved.
+        </div>
       </Container>
     </footer>
   );
@@ -48,7 +57,7 @@ export default function Footer() {
 
 function FooterLink({ href, children }) {
   return (
-    <a href={href} className="hover:text-white transition-colors duration-200">
+    <a href={href} className="hover:text-white transition-colors duration-200 font-medium">
       {children}
     </a>
   );

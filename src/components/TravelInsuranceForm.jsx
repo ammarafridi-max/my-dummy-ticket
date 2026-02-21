@@ -102,9 +102,11 @@ export default function TravelInsuranceForm() {
       </div>
 
       <div className="mt-4">
-        <div className="flex gap-3 items-center text-gray-900/60 text-sm font-light">
+        <div className="flex gap-2 items-center text-gray-900/60 font-light">
           <FaInfo className="text-[12px]" />
-          <p>By proceeding, you confirm that you are a resident/citizen of the UAE.</p>
+          <span className="text-sm">
+            By proceeding, you confirm that you are a resident/citizen of the UAE.
+          </span>
         </div>
       </div>
 

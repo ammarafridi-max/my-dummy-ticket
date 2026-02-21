@@ -8,21 +8,24 @@ export default function Benefits({
   benefits,
 }) {
   return (
-    <PrimarySection className="py-10 md:py-12 lg:py-15" id="benefits">
+    <PrimarySection className="py-14 md:py-18 lg:py-24 bg-gray-50/70" id="benefits">
       <Container>
-        <SectionTitle textAlign="center" subtitle={subtitle} mb="7">
+        <SectionTitle textAlign="center" subtitle={subtitle} className="mb-10 md:mb-12">
           {title}
         </SectionTitle>
-        <div className="flex flex-col gap-8 md:grid md:grid-cols-3 md:gap-10">
+        <div className="flex flex-col gap-5 md:grid md:grid-cols-3 md:gap-7">
           {benefits.map((item, i) => (
-            <div className="w-full md:mb-0 font-outfit" key={i}>
-              <div className="w-9 h-9 flex items-center justify-center bg-white text-primary-500 border-[1.5px] border-primary-500 text-lg font-medium font-outfit rounded-full">
+            <div
+              className="w-full md:mb-0 font-outfit rounded-2xl border border-white bg-white p-7 shadow-[0_14px_35px_rgba(16,24,40,0.08)]"
+              key={i}
+            >
+              <div className="w-10 h-10 flex items-center justify-center bg-primary-600 text-white text-lg font-medium font-outfit rounded-xl">
                 <item.icon />
               </div>
-              <h3 className="text-[18px] lg:text-[20px] font-light text-gray-900/90 capitalize font-outfit text-left my-3 p-0">
+              <h3 className="text-[20px] font-normal text-gray-900 capitalize font-outfit text-left mt-4 mb-2">
                 {item?.title}
               </h3>
-              <p className="text-[16px] text-gray-900/55 font-light leading-6.5">{item?.text}</p>
+              <p className="text-[16px] text-gray-600 font-light leading-6.5">{item?.text}</p>
             </div>
           ))}
         </div>

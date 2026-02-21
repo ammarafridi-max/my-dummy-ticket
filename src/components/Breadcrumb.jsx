@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Breadcrumb({ paths = [] }) {
   return (
-    <nav className="text-[12px] lg:text-sm text-gray-400">
+    <nav className="text-[14px] lg:text-base text-gray-500">
       {paths.map((path, index) => (
         <span key={index} className="font-light">
           {index !== 0 && <span className="mx-2 lg:mx-3">/</span>}

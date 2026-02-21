@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import InputWithIcon from './InputWithIcon';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks/general/useOutsideClick';
 
 export default function SearchRegion({
   icon,

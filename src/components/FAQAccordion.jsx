@@ -5,20 +5,20 @@ export default function FAQAccordion({ question, children }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
-    <div className="w-full border-b border-gray-200 py-1.5">
+    <div className="w-full border-b border-gray-100 py-1.5">
       <button
         onClick={() => setShowAnswer(prev => !prev)}
-        className="w-full flex items-center justify-between text-left py-3 px-2 sm:px-4 transition-all duration-200 cursor-pointer group"
+        className="w-full flex items-center justify-between text-left py-3 px-2 sm:px-4 transition-all duration-200 cursor-pointer group rounded-xl"
       >
         <h3
-          className={`text-[16px] sm:text-[18px] font-normal leading-snug transition-colors duration-200 ${showAnswer ? 'text-primary-600' : 'text-gray-800 group-hover:text-primary-500'}`}
+          className={`text-[16px] sm:text-[18px] font-medium leading-snug transition-colors duration-200 ${showAnswer ? 'text-primary-600' : 'text-gray-800 group-hover:text-primary-500'}`}
         >
           {question}
         </h3>
 
         <span
-          className={`flex items-center justify-center w-7 h-7 rounded-full border transition-all duration-200
-                     ${showAnswer ? 'bg-primary-500 border-primary-500 text-white' : 'border-gray-300 text-gray-500 group-hover:border-primary-400 group-hover:text-primary-500'}`}
+          className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-200
+                     ${showAnswer ? 'bg-primary-500 border-primary-500 text-white' : 'border-gray-300 bg-white text-gray-500 group-hover:border-primary-400 group-hover:text-primary-500'}`}
         >
           {showAnswer ? (
             <HiOutlineMinus className="text-lg" />

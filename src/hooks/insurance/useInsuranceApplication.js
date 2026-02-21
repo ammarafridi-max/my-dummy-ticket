@@ -6,11 +6,12 @@ export function useInsuranceApplication(sessionId) {
     data: insuranceApplication,
     isLoading: isLoadingInsuranceApplication,
     isError: isErrorInsuranceApplication,
+    refetch,
   } = useQuery({
     queryKey: ['insurance-application', sessionId],
     queryFn: () => getInsuranceApplicationApi(sessionId),
     enabled: !!sessionId,
   });
 
-  return { insuranceApplication, isLoadingInsuranceApplication, isErrorInsuranceApplication };
+  return { insuranceApplication, isLoadingInsuranceApplication, isErrorInsuranceApplication, refetch };
 }

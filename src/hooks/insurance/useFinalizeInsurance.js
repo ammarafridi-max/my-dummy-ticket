@@ -15,6 +15,10 @@ export function useFinalizeInsurance() {
       passengers,
       email,
       mobile,
+      address1,
+      address2,
+      address3,
+      address4,
     }) =>
       finalizeInsuranceApi({
         quoteId,
@@ -27,6 +31,10 @@ export function useFinalizeInsurance() {
         passengers,
         email,
         mobile,
+        address1,
+        address2,
+        address3,
+        address4,
       }),
     onError: err => {
       toast.error(err.message || 'Failed to fetch insurance quotes');

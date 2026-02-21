@@ -9,12 +9,12 @@ export default function Testimonials({
   testimonials,
 }) {
   return (
-    <PrimarySection className="py-10 md:py-12 lg:py-15">
+    <PrimarySection className="py-14 md:py-18 lg:py-24">
       <Container>
-        <SectionTitle textAlign="center" subtitle={subtitle} mb="8">
+        <SectionTitle textAlign="center" subtitle={subtitle} className="mb-10 md:mb-12">
           {title}
         </SectionTitle>
-        <div className="flex overflow-scroll md:grid md:grid-cols-3 gap-5">
+        <div className="flex gap-5 overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-7">
           {testimonials.map((test, i) => (
             <TestimonialCard
               key={i}

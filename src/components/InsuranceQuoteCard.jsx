@@ -6,7 +6,7 @@ export default function InsuranceQuoteCard({ quote, onClick, isSelected = false 
       className={`md:min-w-auto bg-white rounded-3xl p-6 border shadow-sm hover:shadow-md transition-shadow duration-300 mb-2 cursor-pointer ${isSelected ? 'border-primary-500' : 'border-gray-200'}`}
       onClick={onClick}
     >
-      <h2 className="font-extralight text-2xl mb-5 pb-4 border-b border-gray-200">
+      <h2 className="font-light text-2xl mb-5 pb-4 border-b border-gray-200">
         {quote?.name?.split(' - ')?.[1] || quote?.name}
       </h2>
 
@@ -23,7 +23,7 @@ export default function InsuranceQuoteCard({ quote, onClick, isSelected = false 
 
       <div className="mt-6 pt-5 border-t border-gray-200 flex items-center justify-between">
         <div className="flex flex-col">
-          <span className="text-sm font-extralight text-gray-500">Total Premium</span>
+          <span className="text-sm font-light text-gray-500">Total Premium</span>
           <span className="text-xl font-normal text-gray-900">
             {quote?.currency?.toUpperCase()} {Number(quote?.premium).toFixed(0)}
           </span>

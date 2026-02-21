@@ -1,5 +1,6 @@
 import { useBlogs } from '../../hooks/blog/useBlogs';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import BlogCard from '../BlogCard';
 import Container from '../Container';
 import PrimarySection from '../PrimarySection';
@@ -12,13 +13,13 @@ export default function BlogPosts({
   const { blogs, isLoadingBlogs, isErrorBlogs } = useBlogs();
 
   return (
-    <PrimarySection className="py-10 md:py-12 lg:py-15">
+    <PrimarySection className="py-14 md:py-18 lg:py-24">
       <Container>
-        <SectionTitle subtitle={subtitle} textAlign="center">
+        <SectionTitle subtitle={subtitle} textAlign="center" className="mb-10 md:mb-12">
           {title}
         </SectionTitle>
 
-        <div className="lg:hidden mt-8">
+        <div className="lg:hidden mt-10">
           <Swiper spaceBetween={16} slidesPerView={1.1} className="overflow-visible">
             {blogs?.map((post, i) => (
               <SwiperSlide
@@ -31,11 +32,14 @@ export default function BlogPosts({
           </Swiper>
         </div>
 
-        <div className="hidden lg:grid lg:grid-cols-3 gap-7 mt-8">
+        <div className="hidden lg:grid lg:grid-cols-3 gap-8 mt-10">
           {blogs?.map((post, i) => (
             <BlogCard key={i} blog={post} />
           ))}
         </div>
+
+        {isLoadingBlogs && <p className="text-center text-gray-500 text-sm mt-6">Loading blog posts...</p>}
+        {isErrorBlogs && <p className="text-center text-red-500 text-sm mt-6">Unable to load blog posts right now.</p>}
       </Container>
     </PrimarySection>
   );

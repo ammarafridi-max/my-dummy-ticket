@@ -9,11 +9,17 @@ export default function About({
   keyword = 'dummy ticket',
 }) {
   return (
-    <PrimarySection className="py-10 md:py-12 lg:py-15" id="about">
-      <Container className="flex flex-col lg:grid lg:grid-cols-[7fr_5fr] lg:items-center gap-5">
+    <PrimarySection className="py-14 md:py-10 lg:py-10" id="about">
+      <Container className="flex flex-col lg:grid lg:grid-cols-[7fr_5fr] lg:items-center gap-8 lg:gap-12">
         <div className="w-full">
-          <SectionTitle className="mb-6 lg:mb-6">{title}</SectionTitle>
-          <p className="text-[16px] text-gray-900/55 font-light leading-6.5">{text}</p>
+          <SectionTitle className="mb-7">{title}</SectionTitle>
+          <p className="text-[16px] text-gray-700 font-light leading-7">{text}</p>
+
+          <div className="mt-8 grid grid-cols-2 gap-4">
+            <Stat text="10k+" label="Annual customers" />
+            <Stat text="Minutes" label="Average delivery" />
+          </div>
+
           <IconWithText
             icon={<MdOutlineAirplaneTicket />}
             title="Dummy Tickets"
@@ -30,33 +36,36 @@ export default function About({
             description="We provide comprehensive travel insurance policies covering medical emergencies, trip cancellations, and travel delays. These are genuine documents and not reservations, unlike hotel and flights."
           />
         </div>
-        <Gallery />
+        <Gallery keyword={keyword} />
       </Container>
     </PrimarySection>
   );
 }
 
-function Gallery() {
+function Gallery({ keyword }) {
   return (
-    <div className="w-full min-h-[400px] lg:min-h-[500px] grid grid-cols-2 gap-3.75 lg:p-0">
+    <div className="w-full min-h-[380px] lg:min-h-[540px] grid grid-cols-2 gap-4 lg:p-0">
       <div className="flex flex-col gap-3.75">
-        <div className="bg-gray-100 rounded-sm h-[100%] overflow-hidden">
+        <div className="relative bg-gray-100 rounded-2xl h-[100%] overflow-hidden">
           <img
             src="/happy-traveler1.webp"
             className="w-full h-full object-cover object-center"
             alt="Happy couple with their approved visas"
           />
+          <div className="absolute inset-x-3 bottom-3 rounded-xl bg-white/85 px-3 py-2 text-[12px] font-medium text-gray-700 backdrop-blur-sm">
+            Verified {keyword} documentation
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-3.75">
-        <div className="bg-gray-100 rounded-sm h-[25%] overflow-hidden p-5.5">
+        <div className="bg-gray-100 rounded-2xl h-[25%] overflow-hidden p-5.5">
           <img
             src="/travel-icon.webp"
             className="w-full h-full object-contain object-center"
             alt="Travel icon"
           />
         </div>
-        <div className="bg-gray-100 rounded-sm h-[75%] overflow-hidden">
+        <div className="bg-gray-100 rounded-2xl h-[75%] overflow-hidden">
           <img
             src="/happy-traveler2.webp"
             className="w-full h-full object-cover object-center"
@@ -69,13 +78,22 @@ function Gallery() {
 }
 
 const IconWithText = ({ icon, title, description }) => (
-  <div className="grid grid-cols-[auto_1fr] gap-5 items-center mt-6">
-    <div className="w-[40px] h-[40px] text-xl rounded-full bg-primary-500 text-white flex items-center justify-center">
+  <div className="grid grid-cols-[auto_1fr] gap-4 items-center mt-6 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+    <div className="w-[40px] h-[40px] text-xl rounded-xl bg-primary-500 text-white flex items-center justify-center">
       {icon}
     </div>
-    <p className="text-[16px] text-gray-900/55 font-light leading-6.5">
-      <span className="font-light text-gray-900/90">{title}: </span>
+    <p className="text-[15px] text-gray-600 font-light leading-6.5">
+      <span className="font-medium text-gray-900">{title}: </span>
       {description}
     </p>
   </div>
 );
+
+function Stat({ text, label }) {
+  return (
+    <div className="rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-3">
+      <p className="text-[20px] font-semibold text-primary-700 leading-none">{text}</p>
+      <p className="mt-1 text-[13px] text-gray-600">{label}</p>
+    </div>
+  );
+}

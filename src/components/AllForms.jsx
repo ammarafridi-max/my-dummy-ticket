@@ -16,7 +16,7 @@ export default function AllForms({ defaultTab }) {
             key={i}
             type="button"
             onClick={() => setActiveForm(item.name)}
-            className={`flex items-center gap-2 py-2 px-4 text-sm font-light rounded-lg shadow-[0px_0px_7px_0px_rgba(0,0,0,0.1)] cursor-pointer duration-300 ${activeForm === item.name ? 'bg-primary-600 text-white' : 'bg-white hover:bg-primary-100'}`}
+            className={`flex items-center gap-2 py-2 px-4 text-sm font-light rounded-lg border border-gray-300 cursor-pointer duration-300 ${activeForm === item.name ? 'bg-primary-600 text-white' : 'bg-white hover:bg-gray-50'}`}
           >
             <span>{item.icon}</span>
             <span>{item.label}</span>

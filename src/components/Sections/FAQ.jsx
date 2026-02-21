@@ -10,12 +10,13 @@ export default function FAQ({
   faqs,
 }) {
   return (
-    <PrimarySection id="faq" className="py-10 md:py-12 lg:py-15">
+    <PrimarySection id="faq" className="py-14 md:py-18 lg:py-24 bg-gray-50/70">
       <Container>
-        <SectionTitle textAlign="center" subtitle={subtitle} mb="8">
+        <SectionTitle textAlign="center" subtitle={subtitle} className="mb-10 md:mb-12">
           {title}
         </SectionTitle>
-        <div className="mt-12 flex flex-col gap-3 overflow-x-scroll lg:overflow-x-visible">
+        <div className="rounded-2xl border border-white bg-white p-4 md:p-7 shadow-[0_14px_35px_rgba(16,24,40,0.08)]">
+          <div className="flex flex-col gap-1">
           {faqs?.map((faq, i) => {
             while (i < 6) {
               return (
@@ -25,6 +26,7 @@ export default function FAQ({
               );
             }
           })}
+          </div>
         </div>
         <div className="flex items-center justify-center mt-10">
           <PrimaryLink size="small" to="/faq">

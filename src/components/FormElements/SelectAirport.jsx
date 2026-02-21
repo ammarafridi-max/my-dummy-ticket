@@ -14,6 +14,8 @@ export default function SelectAirport({ value, onChange, id, icon }) {
     setQuery(inputValue);
     onChange(null);
     setIsOpen(true);
+
+    console.log(airports);
   };
 
   const handleSelect = airport => {
@@ -60,7 +62,7 @@ export default function SelectAirport({ value, onChange, id, icon }) {
                 <ListItem
                   key={airport.iataCode}
                   onClick={() => handleSelect(airport)}
-                  className="hover:bg-primary-500 hover:text-white"
+                  className="hover:bg-primary-600 hover:text-white"
                 >
                   {airport.address.cityName} ({airport.iataCode})
                 </ListItem>

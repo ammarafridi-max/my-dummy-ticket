@@ -1,14 +1,11 @@
 import '@fontsource-variable/outfit';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import { useEffect } from 'react';
 import { initializeGA } from './lib/analytics';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import AppRoutes from './app/AppRoutes';
+import AppRoutes from './client/app/AppRoutes';
+import AdminAppRoutes from './admin/app/AdminAppRoutes';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,15 +16,28 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const isAdminPath =
+    typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
+
   useEffect(() => {
-    initializeGA();
-  }, []);
+    if (isAdminPath) return undefined;
+
+    const init = () => initializeGA();
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(init);
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(init, 1200);
+    return () => window.clearTimeout(timeoutId);
+  }, [isAdminPath]);
 
   return (
     <HelmetProvider>
       <Toaster />
       <QueryClientProvider client={queryClient}>
-        <AppRoutes />
+        {isAdminPath ? <AdminAppRoutes /> : <AppRoutes />}
       </QueryClientProvider>
     </HelmetProvider>
   );
