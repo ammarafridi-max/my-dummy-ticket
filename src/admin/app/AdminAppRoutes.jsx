@@ -3,33 +3,33 @@ import '../../index.css';
 
 import AdminLayout from '../../layouts/AdminLayout';
 import Dashboard from './Dashboard';
-import Login from '../features/auth/pages/Login';
+import Login from '../features/auth/Login';
 import NotFound from './NotFound';
 
 // Dummy Ticket Routes
-import DummyTickets from '../features/dummy-tickets/pages/DummyTickets';
-import DummyTicketDetail from '../features/dummy-tickets/pages/DummyTicketDetail';
-import SendEmail from '../features/dummy-tickets/pages/SendEmail';
+import DummyTickets from '../features/dummy-tickets/DummyTickets';
+import DummyTicketDetail from '../features/dummy-tickets/DummyTicketDetail';
+import SendEmail from '../features/dummy-tickets/SendEmail';
 
 // Protection Routes
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
 
 // Users
-import Users from '../features/users/pages/Users';
-import CreateUser from '../features/users/pages/CreateUser';
-import UpdateUser from '../features/users/pages/UpdateUser';
-import MyAccount from '../features/account/pages/MyAccount';
+import Users from '../features/users/Users';
+import CreateUser from '../features/users/CreateUser';
+import UpdateUser from '../features/users/UpdateUser';
+import MyAccount from '../features/account/MyAccount';
 
 // Blog
-import Blogs from '../features/blog/pages/Blogs';
-import CreateBlogPost from '../features/blog/pages/CreateBlogPost';
-import UpdateBlogPost from '../features/blog/pages/UpdateBlogPost';
-import InsuranceApplications from '../features/insurance/pages/InsuranceApplications';
-import InsuranceApplicationDetail from '../features/insurance/pages/InsuranceApplicationDetail';
-import Affiliates from '../features/affiliates/pages/Affiliates';
-import CreateAffiliate from '../features/affiliates/pages/CreateAffiliate';
-import UpdateAffiliate from '../features/affiliates/pages/UpdateAffiliate';
+import Blogs from '../features/blog/Blogs';
+import CreateBlogPost from '../features/blog/CreateBlogPost';
+import UpdateBlogPost from '../features/blog/UpdateBlogPost';
+import InsuranceApplications from '../features/insurance/InsuranceApplications';
+import InsuranceApplicationDetail from '../features/insurance/InsuranceApplicationDetail';
+import Affiliates from '../features/affiliates/Affiliates';
+import CreateAffiliate from '../features/affiliates/CreateAffiliate';
+import UpdateAffiliate from '../features/affiliates/UpdateAffiliate';
 import { AuthProvider } from '../../context/AuthContext';
 
 export default function AdminAppRoutes() {

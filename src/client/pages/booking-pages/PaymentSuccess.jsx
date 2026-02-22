@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FaCheck, FaX } from 'react-icons/fa6';
-import { useDummyTicket } from '../../../hooks/ticket/useDummyTicket';
+import { useDummyTicket } from '../../../hooks/dummy-tickets/useDummyTicket';
 import { trackPurchaseEvent } from '../../../lib/analytics';
 import { formatDate } from '../../../utils/formatDate';
 import { HiShieldCheck } from 'react-icons/hi2';

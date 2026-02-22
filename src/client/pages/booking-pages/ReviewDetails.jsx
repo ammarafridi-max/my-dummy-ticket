@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
-import { useStripePaymentURL } from '../../../hooks/ticket/useStripePaymentURL';
-import { useDummyTicket } from '../../../hooks/ticket/useDummyTicket';
+import { useStripePaymentURL } from '../../../hooks/dummy-tickets/useStripePaymentURL';
+import { useDummyTicket } from '../../../hooks/dummy-tickets/useDummyTicket';
 import { toast } from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
 import { TicketContext } from '../../../context/TicketContext';

@@ -1,0 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
+import { getDummyTicketApi } from '../../services/apiDummyTickets';
+
+export function useDummyTicket(sessionId) {
+  const {
+    data: dummyTicket,
+    isLoading: isLoadingDummyTicket,
+    isError: isErrorDummyTicket,
+  } = useQuery({
+    queryKey: ['dummy-ticket', sessionId],
+    queryFn: () => getDummyTicketApi(sessionId),
+    enabled: !!sessionId,
+  });
+
+  return { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket };
+}

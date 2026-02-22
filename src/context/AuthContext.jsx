@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getMeApi } from '../admin/features/auth/services/apiAuth';
-import Loading from '../components/Loading';
+import { getMyAccountApi } from '../services/apiAccount';
 import { BACKEND } from '../config';
+import Loading from '../components/Loading';
 
 const AuthContext = createContext();
 
@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
 
   async function fetchUser() {
     try {
-      const me = await getMeApi();
+      const me = await getMyAccountApi();
       setUser(me || null);
     } catch {
       setUser(null);

@@ -1,3 +1,4 @@
+import { BACKEND } from '../config';
 import { apiFetch } from './apiClient';
 
 const URL = `/api/insurance`;
@@ -56,6 +57,21 @@ export async function getInsuranceApplicationApi(sessionId) {
   return await apiFetch(`${URL}/${sessionId}`);
 }
 
+export async function getInsuranceApplicationsApi(params = {}) {
+  const queryString = new URLSearchParams(params).toString();
+
+  const res = await fetch(`${BACKEND}${URL}?${queryString}`, {
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || 'Error fetching data');
+  }
+
+  return res.json();
+}
+
 export async function confirmInsurancePaymentApi(sessionId) {
   return await apiFetch(`${URL}/confirm-payment/${sessionId}`, {
     method: 'POST',
@@ -66,6 +82,22 @@ export async function getInsuranceDocumentsApi(policyId) {
   return await apiFetch(`${URL}/documents/${policyId}`);
 }
 
-export async function downloadInsurancePolicyApi(policyId, index = 0) {
-  return await apiFetch(`${URL}/download/${policyId}/${index}`);
+export async function downloadInsurancePolicyApi(policyOrPayload, index = 0) {
+  const policyId = typeof policyOrPayload === 'object' ? policyOrPayload?.policyId : policyOrPayload;
+  const docIndex = typeof policyOrPayload === 'object' ? policyOrPayload?.index ?? 0 : index;
+  return await apiFetch(`${URL}/download/${policyId}/${docIndex}`);
+}
+
+export async function deleteInsuranceApplicationApi(sessionId) {
+  return await apiFetch(`${URL}/${sessionId}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function updateInsuranceApplicationApi({ sessionId, orderStatus }) {
+  return await apiFetch(`${URL}/${sessionId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ orderStatus }),
+  });
 }

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useCreateDummyTicket } from '../hooks/ticket/useCreateDummyTicket';
+import { useCreateDummyTicket } from '../hooks/dummy-tickets/useCreateDummyTicket';
 import { formatDate } from '../utils/formatDate';
 import { trackFlightFormSubmission } from '../lib/analytics';
 import { validate } from 'email-validator';

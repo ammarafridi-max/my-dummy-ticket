@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllBlogsApi } from '../../services/apiBlog';
+import { getPublishedBlogsApi } from '../../services/apiBlog';
 
 export function useBlogs() {
   const {
@@ -8,7 +8,7 @@ export function useBlogs() {
     isError: isErrorBlogs,
   } = useQuery({
     queryKey: ['blogs', 'published'], // better cache key
-    queryFn: getAllBlogsApi,
+    queryFn: getPublishedBlogsApi,
   });
 
   return { blogs, isLoadingBlogs, isErrorBlogs };
