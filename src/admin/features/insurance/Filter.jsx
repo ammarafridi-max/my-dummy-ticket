@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../context/AuthContext';
+import { useOutsideClick } from '../../../hooks/general/useOutsideClick';
 
 export default function Filter() {
   const { user } = useAuth();
@@ -75,6 +76,9 @@ function FilterTemplate({ id, title, options, searchParamsName, activeFilterBox,
   const [boxTitle, setBoxTitle] = useState(title);
   const isOpen = activeFilterBox === id;
   const ref = useRef(null);
+  useOutsideClick(ref, () => {
+    if (isOpen) setActiveFilterBox('');
+  });
 
   useEffect(() => {
     const paramValue = searchParams.get(searchParamsName);
@@ -97,17 +101,19 @@ function FilterTemplate({ id, title, options, searchParamsName, activeFilterBox,
   return (
     <div className="relative w-fit" ref={ref}>
       <button
-        className="w-fit min-w-[100px] bg-white text-[14px] py-1.5 px-5 rounded-md shadow-sm cursor-pointer"
+        type="button"
+        className="inline-flex min-w-[100px] items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs md:text-sm text-gray-700 shadow-sm transition-colors hover:bg-gray-100 cursor-pointer"
         onClick={() => setActiveFilterBox(isOpen ? '' : id)}
       >
         {boxTitle}
       </button>
       {isOpen && (
-        <div className="absolute bg-white w-full min-w-[200px] rounded-sm shadow-sm mt-2 overflow-hidden">
+        <div className="absolute z-20 bg-white w-full min-w-[200px] rounded-sm shadow-sm mt-2 overflow-hidden">
           {options?.map((option) => (
-            <p
+            <button
+              type="button"
               key={option?.value}
-              className="text-[14px] py-2 px-4 hover:bg-primary-500 cursor-pointer duration-300"
+              className="w-full text-left text-xs md:text-sm py-1.5 px-3 hover:bg-primary-50 cursor-pointer duration-300"
               onClick={() => {
                 const newParams = new URLSearchParams(searchParams);
                 if (option?.value?.toLowerCase() === 'all') {
@@ -115,13 +121,14 @@ function FilterTemplate({ id, title, options, searchParamsName, activeFilterBox,
                 } else {
                   newParams.set(searchParamsName, option?.value);
                 }
+                newParams.set('page', '1');
                 setSearchParams(newParams);
                 setActiveFilterBox('');
                 setBoxTitle(`${title}: ${option?.label}`);
               }}
             >
               {option?.label}
-            </p>
+            </button>
           ))}
         </div>
       )}
@@ -131,7 +138,11 @@ function FilterTemplate({ id, title, options, searchParamsName, activeFilterBox,
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
+
+  useEffect(() => {
+    setSearchQuery(searchParams.get('search') || '');
+  }, [searchParams]);
 
   return (
     <div className="relative">
@@ -142,8 +153,13 @@ function Search() {
         value={searchQuery}
         onChange={(e) => {
           const newParams = new URLSearchParams(searchParams);
-          newParams.set('search', e.target.value);
           setSearchQuery(e.target.value);
+          if (!e.target.value.trim()) {
+            newParams.delete('search');
+          } else {
+            newParams.set('search', e.target.value);
+          }
+          newParams.set('page', '1');
           setSearchParams(newParams);
         }}
       />
@@ -152,6 +168,7 @@ function Search() {
           onClick={() => {
             const newParams = new URLSearchParams(searchParams);
             newParams.delete('search');
+            newParams.set('page', '1');
             setSearchParams(newParams);
             setSearchQuery('');
           }}

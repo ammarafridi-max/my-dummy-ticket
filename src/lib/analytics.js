@@ -2,15 +2,18 @@ import ReactGA from 'react-ga4';
 import { GA4_MEASUREMENT_ID } from '../config';
 
 const isProduction = import.meta.env.MODE === 'production';
+const isAdminPath = () =>
+  typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
+const shouldTrackAnalytics = () => isProduction && !isAdminPath();
 
 export function initializeGA() {
-  if (isProduction) {
+  if (shouldTrackAnalytics()) {
     ReactGA.initialize(GA4_MEASUREMENT_ID);
   }
 }
 
 export const trackFlightSearch = ({ type, from, to, departureDate, returnDate, quantity }) => {
-  if (isProduction) {
+  if (shouldTrackAnalytics()) {
     ReactGA.event('flight_search', {
       type,
       from,
@@ -29,7 +32,7 @@ export const trackFlightFormSubmission = ({
   ticketValidity,
   flightDetails,
 }) => {
-  if (isProduction) {
+  if (shouldTrackAnalytics()) {
     ReactGA.event('flight_form_submission', {
       passengers,
       email,
@@ -41,7 +44,7 @@ export const trackFlightFormSubmission = ({
 };
 
 export const trackBeginCheckout = ({ currency, value, items }) => {
-  if (isProduction) {
+  if (shouldTrackAnalytics()) {
     ReactGA.event('begin_checkout', {
       currency,
       value,
@@ -56,7 +59,7 @@ export const trackPurchaseEvent = ({
   sessionId,
   items = [{ item_name: 'Flight reservation', price: 13, quantity: 1 }],
 }) => {
-  if (isProduction) {
+  if (shouldTrackAnalytics()) {
     ReactGA.event('purchase', {
       transaction_id: sessionId,
       value,

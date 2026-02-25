@@ -6,7 +6,7 @@ export function useRefundDummyTicket() {
   const queryClient = useQueryClient();
   const { mutate: refundDummyTicket, isLoading: isRefunding } = useMutation({
     mutationFn: (transactionId) => refundDummyTicketApi(transactionId),
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success('Refund successful');
       queryClient.invalidateQueries({ queryKey: ['dummytickets'] });
       queryClient.invalidateQueries({ queryKey: ['dummyticket'] });

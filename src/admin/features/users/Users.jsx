@@ -36,8 +36,8 @@ export default function Users() {
           <Table.Heading>Role</Table.Heading>
           <Table.Heading>Status</Table.Heading>
         </Table.Head>
-        {users?.map((user, i) => (
-          <Table.Row key={i} href={`/users/${user.username}`}>
+        {users?.map((user) => (
+          <Table.Row key={user?.username} href={`/users/${user.username}`}>
             <Table.Item textAlign="left">{user.name}</Table.Item>
             <Table.Item textAlign="left">{user.username}</Table.Item>
             <Table.Item textAlign="left">{user.email}</Table.Item>
@@ -49,7 +49,8 @@ export default function Users() {
         ))}
       </Table>
       <button
-        className="absolute bottom-10 right-10 bg-primary-600 hover:bg-primary-700 cursor-pointer duration-300 p-4 text-white text-2xl rounded-full"
+        type="button"
+        className="absolute bottom-8 right-8 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-accent-500 bg-accent-500 text-sm text-white transition-colors hover:bg-accent-600 cursor-pointer"
         onClick={() => navigate('/users/create')}
       >
         <FaPlus />

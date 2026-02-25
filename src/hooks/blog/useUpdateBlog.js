@@ -1,10 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { updateBlogApi } from '../../services/apiBlog';
-import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 export function useUpdateBlog() {
-  const navigate = useNavigate();
   const { mutate: updateBlog, isLoading: isUpdatingBlog } = useMutation({
     mutationFn: ({ id, blogData }) => updateBlogApi({ id, blogData }),
     onSuccess: () => {

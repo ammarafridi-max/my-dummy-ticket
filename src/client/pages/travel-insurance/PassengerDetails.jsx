@@ -36,16 +36,10 @@ export default function PassengerDetails() {
     region,
     email,
     mobile,
-    address1,
-    address3,
-    address4,
     quantity,
     passengers,
     handlePhoneChange,
     handleEmailChange,
-    handleAddress1Change,
-    handleAddress3Change,
-    handleAddress4Change,
     handleUpdatePassenger,
   } = useContext(InsuranceContext);
 
@@ -61,10 +55,6 @@ export default function PassengerDetails() {
       passengers,
       email,
       mobile,
-      address1,
-      address2: '',
-      address3,
-      address4,
     };
 
     updateLocalStorage('travelInsurance', obj);
@@ -103,12 +93,25 @@ export default function PassengerDetails() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block mb-1 text-sm font-light text-gray-700">Title</label>
                   <SelectTitle
                     value={passenger.title}
                     onChange={e => handleUpdatePassenger(passenger.id, 'title', e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block mb-1 text-sm font-light text-gray-700">
+                    Date of Birth
+                  </label>
+                  <SelectDate
+                    selectedDate={formatDate(passenger.dob)}
+                    onDateSelect={date => handleUpdatePassenger(passenger.id, 'dob', date)}
+                    minYear={1900}
+                    maxDate={new Date()}
+                    icon={<CalendarDaysIcon size={20} />}
                   />
                 </div>
 
@@ -125,19 +128,6 @@ export default function PassengerDetails() {
                   <Input
                     value={passenger.lastName}
                     onChange={e => handleUpdatePassenger(passenger.id, 'lastName', e.target.value)}
-                  />
-                </div>
-
-                <div className="md:col-span-1">
-                  <label className="block mb-1 text-sm font-light text-gray-700">
-                    Date of Birth
-                  </label>
-                  <SelectDate
-                    selectedDate={formatDate(passenger.dob)}
-                    onDateSelect={date => handleUpdatePassenger(passenger.id, 'dob', date)}
-                    minYear={1900}
-                    maxDate={new Date()}
-                    icon={<CalendarDaysIcon size={20} />}
                   />
                 </div>
 
@@ -180,21 +170,6 @@ export default function PassengerDetails() {
                         Phone Number
                       </label>
                       <PhoneNumber phoneNumber={mobile} setPhoneNumber={handlePhoneChange} />
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 text-sm font-light text-gray-700">Address</label>
-                      <Input value={address1} onChange={handleAddress1Change} />
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 text-sm font-light text-gray-700">City</label>
-                      <Input value={address3} onChange={handleAddress3Change} />
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 text-sm font-light text-gray-700">Country</label>
-                      <Input value={address4} onChange={handleAddress4Change} />
                     </div>
                   </div>
                 </div>

@@ -16,6 +16,20 @@ import { confirmAlert } from 'react-confirm-alert';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../../context/AuthContext';
 
+function toDateTimeLocal(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+
 export default function UpdateBlogPost() {
   const editorRef = useRef(null);
   const { id } = useParams();
@@ -25,13 +39,15 @@ export default function UpdateBlogPost() {
   const { deleteBlog, isDeletingBlog } = useDeleteBlog();
   const { isAdmin } = useAuth();
 
-  const { register, handleSubmit, control, reset } = useForm({
+  const { register, handleSubmit, control, reset, watch } = useForm({
     defaultValues: {
       metaTitle: '',
       metaDescription: '',
       title: '',
       slug: '',
       excerpt: '',
+      status: 'draft',
+      scheduledAt: '',
       tags: [],
       content: '',
     },
@@ -40,6 +56,7 @@ export default function UpdateBlogPost() {
   function buildFormData(data, { status } = {}) {
     const editorContent = editorRef.current ? editorRef.current.getContent() : '';
     const formData = new FormData();
+    const finalStatus = status || data.status || 'draft';
 
     formData.append('metaTitle', data.metaTitle || '');
     formData.append('metaDescription', data.metaDescription || '');
@@ -48,8 +65,9 @@ export default function UpdateBlogPost() {
     formData.append('excerpt', data.excerpt || '');
     formData.append('content', editorContent);
 
-    if (status) {
-      formData.append('status', status);
+    formData.append('status', finalStatus);
+    if (finalStatus === 'scheduled') {
+      formData.append('scheduledAt', data.scheduledAt || '');
     }
 
     if (data.tags && data.tags.length > 0) {
@@ -99,6 +117,8 @@ export default function UpdateBlogPost() {
         title: blog.title || '',
         slug: blog.slug || '',
         excerpt: blog.excerpt || '',
+        status: blog.status || 'draft',
+        scheduledAt: toDateTimeLocal(blog.scheduledAt),
         tags: blog.tags || [],
       });
     }
@@ -107,6 +127,7 @@ export default function UpdateBlogPost() {
   if (isLoadingBlog) return <Loading />;
 
   if (isErrorBlog) return <p>Could not load blog data</p>;
+  if (!blog) return <p>Blog post not found</p>;
 
   return (
     <>
@@ -164,6 +185,7 @@ export default function UpdateBlogPost() {
         onSubmit={handleEdit}
         handleSubmit={handleSubmit}
         control={control}
+        watch={watch}
         isLoading={isUpdatingBlog}
         editorRef={editorRef}
         readOnly={!isAdmin}

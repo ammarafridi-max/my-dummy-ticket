@@ -1,16 +1,14 @@
 import { useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FaCheck, FaX } from 'react-icons/fa6';
 import { useDummyTicket } from '../../../hooks/dummy-tickets/useDummyTicket';
 import { trackPurchaseEvent } from '../../../lib/analytics';
 import { formatDate } from '../../../utils/formatDate';
-import { HiShieldCheck } from 'react-icons/hi2';
 import PrimarySection from '../../../components/PrimarySection';
 import Container from '../../../components/Container';
 import PageTitle from '../../../components/PageTitle';
 import Loading from '../../../components/Loading';
-import PrimaryLink from '../../../components/PrimaryLink';
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
@@ -49,7 +47,7 @@ function Success({ sessionId, dummyTicket }) {
         items: [{ item_name: `${type} Flight Reservation`, quantity, price }],
       });
     }
-  }, []);
+  }, [amount, currency, price, quantity, sessionId, type]);
 
   useEffect(() => {
     localStorage.removeItem('SESSION_ID');
@@ -67,7 +65,7 @@ function Success({ sessionId, dummyTicket }) {
             <FaCheck />
           </div>
           <PageTitle className="text-center">Thank You for Your Booking!</PageTitle>
-          <p className="text-center text-lg md:text-[20px] font-light mt-5">
+          <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
             Your payment of{' '}
             <span className="font-normal">
               {currency} {amount}
@@ -75,7 +73,7 @@ function Success({ sessionId, dummyTicket }) {
             has been successfully processed.
           </p>
           {!dummyTicket?.ticketDelivery?.immediate && (
-            <p className="text-center text-lg md:text-[20px] font-light mt-5">
+            <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
               Your dummy ticket will be sent to your email address on{' '}
               {formatDate(dummyTicket?.ticketDelivery?.deliveryDate)} since you selected the later
               delivery option. An email regarding the same has been sent your email address, as
@@ -83,19 +81,13 @@ function Success({ sessionId, dummyTicket }) {
             </p>
           )}
           {dummyTicket?.ticketDelivery?.immediate && (
-            <p className="text-center text-lg md:text-[20px] font-light mt-5">
+            <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
               You will recieve a receipt of your payment by email, followed by your dummy ticket in
               a second email shortly afterwards. Please remember to check your spam folder too.
             </p>
           )}
 
-          <UpsellCard
-            icon={<HiShieldCheck />}
-            title="Buy Travel Insurance"
-            description="Book a legitimate, and 100% genuine travel insurance for your next trip. Our travel insurance policies are accepted by embassies for visa applications. Exclusively for UAE residents/citizens."
-            price={55}
-            to="/travel-insurance"
-          />
+          {/* DT365: travel insurance upsell disabled for now (UAE residents only) */}
         </Container>
       </PrimarySection>
     </>
@@ -114,46 +106,17 @@ function Error() {
             <FaX />
           </div>
           <PageTitle className="text-center">Payment Not Found!</PageTitle>
-          <p className="text-center text-lg md:text-[20px] font-light mt-5">
+          <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
             We couldn’t find a successful payment linked to this booking.
           </p>
-          <p className="text-center text-lg md:text-[20px] font-light mt-5">
+          <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
             If you have already completed a payment, please contact our support team with your
             transaction details at{' '}
-            <a href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</a>, and we will
-            assist you as soon as possible.
+            <a href="mailto:info@mydummyticket.ae">info@mydummyticket.ae</a>, and we will assist
+            you as soon as possible.
           </p>
         </Container>
       </PrimarySection>
     </>
-  );
-}
-
-function UpsellCard({ icon, title, description, price, to }) {
-  return (
-    <div className="max-w-120 mx-auto bg-white shadow-md rounded-xl mt-7">
-      <Link to={to}>
-        <div className="flex items-center gap-3 p-5 font-normal border-b border-gray-200">
-          <div className="w-8 h-8 flex items-center justify-center bg-primary-500 text-white rounded-full">
-            {icon}
-          </div>
-          <p className="text-base md:text-[18px]">{title}</p>
-        </div>
-        <div className="p-5 font-light">
-          <p>{description}</p>
-          <div className="mt-4 grid grid-cols-[6fr_4fr]">
-            <div className="leading-5">
-              <p className="text-sm text-gray-400">from</p>
-              <p className="font-medium">AED {price}</p>
-            </div>
-            <div>
-              <PrimaryLink to={to} size="small" className="w-full">
-                Book Now
-              </PrimaryLink>
-            </div>
-          </div>
-        </div>
-      </Link>
-    </div>
   );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
@@ -83,13 +82,13 @@ export default function Affiliates() {
               { label: 'Affiliates', href: '/affiliates' },
             ]}
           />
-          <PageHeading mb="15px">Affiliates</PageHeading>
+          <PageHeading className="mb-[15px]">Affiliates</PageHeading>
         </div>
 
         <button
           type="button"
           disabled={isSeedingAffiliates}
-          className="bg-white text-sm px-4 py-2 rounded-md border border-gray-200 cursor-pointer disabled:opacity-50"
+          className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs md:text-sm text-gray-700 transition-colors hover:bg-gray-100 disabled:opacity-55 disabled:cursor-not-allowed"
           onClick={() => seedAffiliates()}
         >
           {isSeedingAffiliates ? 'Seeding...' : 'Seed 5 Test Affiliates'}
@@ -160,7 +159,7 @@ export default function Affiliates() {
                   </Link>
                   <button
                     type="button"
-                    className="text-xs text-orange-700 hover:underline cursor-pointer"
+                    className="inline-flex items-center justify-center rounded-lg border border-orange-300 bg-orange-50 px-2.5 py-1 text-xs text-orange-700 transition-colors hover:bg-orange-100 cursor-pointer"
                     disabled={isTogglingAffiliateStatus}
                     onClick={(e) => {
                       e.preventDefault();
@@ -171,7 +170,7 @@ export default function Affiliates() {
                   </button>
                   <button
                     type="button"
-                    className="text-xs text-red-700 hover:underline cursor-pointer"
+                    className="inline-flex items-center justify-center rounded-lg border border-red-300 bg-red-50 px-2.5 py-1 text-xs text-red-700 transition-colors hover:bg-red-100 cursor-pointer"
                     disabled={isDeletingAffiliate}
                     onClick={(e) => {
                       e.preventDefault();
@@ -215,7 +214,7 @@ export default function Affiliates() {
       )}
 
       <Link
-        className="absolute bottom-10 right-10 bg-primary-600 hover:bg-primary-700 cursor-pointer duration-300 p-4 text-white text-2xl rounded-full"
+        className="absolute bottom-8 right-8 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-accent-500 bg-accent-500 text-sm text-white transition-colors hover:bg-accent-600 cursor-pointer"
         to="/affiliates/create"
       >
         <FaPlus />
@@ -226,7 +225,12 @@ export default function Affiliates() {
 
 function PageButton({ children, onClick, disabled }) {
   return (
-    <button className="bg-transparent border-0 cursor-pointer disabled:opacity-50" onClick={onClick} disabled={disabled}>
+    <button
+      type="button"
+      className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs md:text-sm text-gray-700 transition-colors hover:bg-gray-100 disabled:opacity-55 disabled:cursor-not-allowed"
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

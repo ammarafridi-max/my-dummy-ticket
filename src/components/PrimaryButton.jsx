@@ -1,18 +1,26 @@
-export default function PrimaryButton({ children, className = '', size = 'medium', ...props }) {
+export default function PrimaryButton({
+  children,
+  className = '',
+  size = 'small',
+  colorType = 'primary',
+  ...props
+}) {
   let newClassName = className;
   const baseClassName =
-    'inline-flex items-center justify-center gap-2 text-center text-white no-underline font-outfit rounded-xl border border-solid border-accent-500/80 bg-[linear-gradient(135deg,#ff6b45_0%,#ff5a2f_100%)] shadow-[0_10px_22px_rgba(231,68,29,0.35)] cursor-pointer duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(231,68,29,0.42)] hover:brightness-105 active:translate-y-0 active:shadow-[0_8px_18px_rgba(231,68,29,0.32)] disabled:opacity-55 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-[0_10px_22px_rgba(231,68,29,0.35)] disabled:hover:brightness-100';
+    'inline-flex items-center justify-center gap-2 text-center no-underline font-outfit rounded-lg border border-solid cursor-pointer transition-all duration-200 disabled:opacity-55 disabled:cursor-not-allowed';
+  const colorClassName =
+    colorType === 'danger'
+      ? 'text-white border-red-600 bg-red-600 hover:bg-red-700'
+      : colorType === 'neutral'
+        ? 'text-gray-800 border-gray-300 bg-white hover:bg-gray-100'
+        : 'text-white border-accent-500 bg-accent-500 hover:bg-accent-600';
 
   if (size === 'large') {
-    newClassName =
-      newClassName + ` ${baseClassName} text-[15px] md:text-[18px] font-semibold py-3 px-5`;
+    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-sm md:text-base font-semibold py-2.5 px-4`;
   } else if (size === 'small') {
-    newClassName =
-      newClassName +
-      ` ${baseClassName} text-[12px] md:text-[14px] font-medium py-2 px-4 rounded-lg`;
+    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-xs md:text-sm font-medium py-2 px-3`;
   } else {
-    newClassName =
-      newClassName + ` ${baseClassName} text-[14px] md:text-[16px] font-medium py-2.5 px-5`;
+    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-xs md:text-sm font-medium py-2 px-3.5`;
   }
 
   return (

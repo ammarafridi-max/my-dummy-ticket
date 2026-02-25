@@ -11,7 +11,9 @@ export default function MyAccount() {
           { label: 'My Account', href: '/account' },
         ]}
       />
-      <Helmet>My Account</Helmet>
+      <Helmet>
+        <title>My Account</title>
+      </Helmet>
       <AccountForm />
       {/* <PasswordForm /> */}
     </>

@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useContext, createContext } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const TableContext = createContext();
 
@@ -30,13 +30,14 @@ function Heading({ children, textAlign = 'left' }) {
 
 function Row({ children, onClick, href }) {
   const { $columntemplate } = useContext(TableContext);
-  const Component = href ? 'a' : 'div';
+  const Component = href ? RouterLink : 'div';
   const clickable = Boolean(href || onClick);
+  const linkProps = href ? { to: href } : {};
 
   return (
     <Component
-      href={href}
       onClick={onClick}
+      {...linkProps}
       className={`group grid items-center py-3.5 px-6 gap-3 text-[15px] text-gray-800 border-b border-gray-100/80 transition-all duration-200 ${
         clickable ? 'cursor-pointer hover:bg-primary-50/40' : 'cursor-default'
       }`}

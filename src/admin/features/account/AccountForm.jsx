@@ -16,7 +16,6 @@ export default function AccountForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm({
     defaultValues: {
@@ -27,10 +26,8 @@ export default function AccountForm() {
   });
 
   async function onSubmit(data) {
-    try {
-      await updateAccount(data);
-      setUpdateMode(false);
-    } catch {}
+    await updateAccount(data);
+    setUpdateMode(false);
   }
 
   useEffect(() => {

@@ -6,7 +6,6 @@ import SectionTitle from '../SectionTitle';
 export default function About({
   title = 'About Us',
   text = 'We are a licensed travel agency based in Dubai, UAE. We offer air tickets, hotel bookings, travel insurance, flight and hotel reservations, airport transfers, tours, and holiday packages to thousands of satisfied customers annually. Our documentation is accepted by VFS, BLS, and embassies.',
-  keyword = 'dummy ticket',
 }) {
   return (
     <PrimarySection className="py-14 md:py-10 lg:py-10" id="about">
@@ -14,12 +13,6 @@ export default function About({
         <div className="w-full">
           <SectionTitle className="mb-7">{title}</SectionTitle>
           <p className="text-[16px] text-gray-700 font-light leading-7">{text}</p>
-
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            <Stat text="10k+" label="Annual customers" />
-            <Stat text="Minutes" label="Average delivery" />
-          </div>
-
           <IconWithText
             icon={<MdOutlineAirplaneTicket />}
             title="Dummy Tickets"
@@ -36,13 +29,13 @@ export default function About({
             description="We provide comprehensive travel insurance policies covering medical emergencies, trip cancellations, and travel delays. These are genuine documents and not reservations, unlike hotel and flights."
           />
         </div>
-        <Gallery keyword={keyword} />
+        <Gallery />
       </Container>
     </PrimarySection>
   );
 }
 
-function Gallery({ keyword }) {
+function Gallery() {
   return (
     <div className="w-full min-h-[380px] lg:min-h-[540px] grid grid-cols-2 gap-4 lg:p-0">
       <div className="flex flex-col gap-3.75">
@@ -52,9 +45,6 @@ function Gallery({ keyword }) {
             className="w-full h-full object-cover object-center"
             alt="Happy couple with their approved visas"
           />
-          <div className="absolute inset-x-3 bottom-3 rounded-xl bg-white/85 px-3 py-2 text-[12px] font-medium text-gray-700 backdrop-blur-sm">
-            Verified {keyword} documentation
-          </div>
         </div>
       </div>
       <div className="flex flex-col gap-3.75">
@@ -78,7 +68,7 @@ function Gallery({ keyword }) {
 }
 
 const IconWithText = ({ icon, title, description }) => (
-  <div className="grid grid-cols-[auto_1fr] gap-4 items-center mt-6 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+  <div className="grid grid-cols-[auto_1fr] gap-4 items-center mt-6 rounded-2xl bg-white">
     <div className="w-[40px] h-[40px] text-xl rounded-xl bg-primary-500 text-white flex items-center justify-center">
       {icon}
     </div>

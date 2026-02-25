@@ -68,7 +68,7 @@ const pageData = {
   meta: {
     title: 'Onward Ticket From AED 49 | Instant, Genuine, & Affordable',
     description:
-      'Travelers use onward tickets for travel purposes, such as to show as proof of onward travel at airports. Book yours with us now. Starting from USD 13.',
+      'Travelers use onward tickets for travel purposes, such as to show as proof of onward travel at airports. Book yours with us now. Starting from AED 13.',
     canonical: 'https://www.mydummyticket.ae/onward-ticket',
   },
   sections: {

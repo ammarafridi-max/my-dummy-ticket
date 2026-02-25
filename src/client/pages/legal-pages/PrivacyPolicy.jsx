@@ -1,10 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import {
-  buildGraph,
-  buildOrganization,
-  buildWebPage,
-  buildWebsite,
-} from '../../../lib/schema';
 import PrimarySection from '../../../components/PrimarySection';
 import Container from '../../../components/Container';
 import PageTitle from '../../../components/PageTitle';
@@ -32,16 +26,6 @@ const pageData = {
 };
 
 export default function PrivacyPolicy() {
-  const schema = buildGraph([
-    buildOrganization(),
-    buildWebsite(),
-    buildWebPage({
-      canonical: pageData.meta.canonical,
-      title: pageData.meta.title,
-      description: pageData.meta.description,
-    }),
-  ]);
-
   return (
     <>
       <Helmet>
@@ -49,7 +33,6 @@ export default function PrivacyPolicy() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
-        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <PageHero
         paths={pageData?.breadcrumb}
@@ -61,7 +44,7 @@ export default function PrivacyPolicy() {
         <Container>
           <SectionTitle className="mt-10">Information We Collect</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               We collect personal information that you provide when placing an order, including your
               name, email address, phone number, and booking details.
@@ -78,7 +61,7 @@ export default function PrivacyPolicy() {
 
           <SectionTitle className="mt-10">How We Use Your Information</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">To process your order and deliver the services you requested.</li>
             <li className="pl-2">
               To communicate with you regarding your booking, updates, or support requests.
@@ -91,7 +74,7 @@ export default function PrivacyPolicy() {
 
           <SectionTitle className="mt-10">Sharing Your Information</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               We do not sell, rent, or trade your personal information with third parties.
             </li>
@@ -106,7 +89,7 @@ export default function PrivacyPolicy() {
 
           <SectionTitle className="mt-10">Data Security</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               We implement appropriate security measures to protect your personal information from
               unauthorized access, alteration, or disclosure.
@@ -119,7 +102,7 @@ export default function PrivacyPolicy() {
 
           <SectionTitle className="mt-10">Your Rights</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               You have the right to access, correct, or request deletion of your personal data by
               contacting us at info@mydummyticket.ae.
@@ -132,10 +115,10 @@ export default function PrivacyPolicy() {
 
           <SectionTitle className="mt-10">Changes to This Privacy Policy</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
-              My Dummy Ticket reserves the right to update or modify this Privacy Policy at any time
-              without prior notice.
+              My Dummy Ticket reserves the right to update or modify this Privacy Policy at any
+              time without prior notice.
             </li>
             <li className="pl-2">
               Any changes become effective immediately upon posting on our website.
@@ -144,7 +127,7 @@ export default function PrivacyPolicy() {
 
           <SectionTitle className="mt-10">Contact Us</SectionTitle>
 
-          <ul className="text-md font-light flex flex-col gap-3 list-decimal pl-5">
+          <ul className="text-md font-extralight flex flex-col gap-3 list-decimal pl-5">
             <li className="pl-2">
               If you have any questions or concerns regarding this Privacy Policy, please contact
               us:

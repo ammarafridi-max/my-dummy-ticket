@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import FormRow from '../../../components/FormElements/FormRow';
 import Label from '../../../components/FormElements/Label';
 import Input from '../../../components/FormElements/Input';

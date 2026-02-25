@@ -13,6 +13,7 @@ import Email from './FormElements/Email';
 import PhoneNumber from './FormElements/PhoneNumber';
 import PrimaryButton from './PrimaryButton';
 import SegmentedRadioGroup from './FormElements/SegmentedRadioGroup';
+import { PRICING_OPTIONS } from '../config';
 
 const FormRow = ({ children }) => (
   <div className="block lg:grid lg:grid-cols-2 lg:gap-2.5">{children}</div>
@@ -54,7 +55,7 @@ export default function FlightForm() {
     if (quantity && passengers.length === 0) {
       initializePassengers(quantity);
     }
-  }, [quantity, passengers]);
+  }, [initializePassengers, quantity, passengers]);
 
   useEffect(() => {
     function validateForm() {
@@ -206,11 +207,7 @@ function ContactDetails({ email, setEmail, phoneNumber, setPhoneNumber }) {
 }
 
 function TicketValidityOptions({ ticketValidity, updatePricing }) {
-  const options = [
-    { value: '2 Days', label: '2 Days', price: 49 },
-    { value: '7 Days', label: '7 Days', price: 69 },
-    { value: '14 Days', label: '14 Days', price: 79 },
-  ];
+  const options = PRICING_OPTIONS;
 
   const handleChange = option => {
     updatePricing({ ticketValidity: option.value, ticketPrice: option.price });

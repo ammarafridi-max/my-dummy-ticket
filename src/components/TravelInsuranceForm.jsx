@@ -12,7 +12,6 @@ import PrimaryButton from './PrimaryButton';
 export default function TravelInsuranceForm() {
   const {
     REGIONS,
-    groups,
     ageCategories,
     journeyType,
     setJourneyType,
@@ -23,7 +22,6 @@ export default function TravelInsuranceForm() {
     region,
     setRegion,
     group,
-    setGroup,
     quantity,
     handleQuantityChange,
     handleSubmit,

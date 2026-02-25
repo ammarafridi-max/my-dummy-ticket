@@ -4,6 +4,7 @@ import FormRow from '../../../components/FormElements/FormRow';
 import Input from '../../../components/FormElements/Input';
 import Textarea from '../../../components/FormElements/Textarea';
 import Label from '../../../components/FormElements/Label';
+import Select from '../../../components/FormElements/Select';
 import CheckboxGroup from '../../../components/FormElements/CheckboxGroup';
 import UploadFile from '../../../components/FormElements/UploadFile';
 import TinyEditor from '../../../components/TinyEditor';
@@ -14,6 +15,7 @@ export default function BlogForm({
   editorRef,
   register,
   control,
+  watch,
   handleSubmit,
   onSubmit,
   isLoading = false,
@@ -31,6 +33,7 @@ export default function BlogForm({
               <Info label="Created" value={format(blog.createdAt, 'dd MMM yyyy • hh:mm aa')} />
               <Info label="Updated" value={format(blog.updatedAt, 'dd MMM yyyy • hh:mm aa')} />
               <Info label="Published" value={blog.publishedAt ? format(blog.publishedAt, 'dd MMM yyyy • hh:mm aa') : '-'} />
+              <Info label="Scheduled" value={blog.scheduledAt ? format(blog.scheduledAt, 'dd MMM yyyy • hh:mm aa') : '-'} />
               <Info label="Status" value={capitalCase(blog.status || '-')} />
             </div>
           </section>
@@ -86,6 +89,22 @@ export default function BlogForm({
               disabled={readOnly}
             />
           </FormRow>
+
+          <FormRow>
+            <Label>Status</Label>
+            <Select {...register('status')} disabled={readOnly}>
+              <option value="draft">Draft</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="published">Published</option>
+            </Select>
+          </FormRow>
+
+          {watch?.('status') === 'scheduled' && (
+            <FormRow>
+              <Label>Schedule Date & Time</Label>
+              <Input type="datetime-local" {...register('scheduledAt')} disabled={readOnly} />
+            </FormRow>
+          )}
 
           <FormRow>
             <Label>Tags</Label>

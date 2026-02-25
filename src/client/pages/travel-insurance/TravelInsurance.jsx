@@ -1,114 +1,118 @@
 import { Helmet } from 'react-helmet-async';
-import {
-  buildFAQPage,
-  buildGraph,
-  buildOrganization,
-  buildService,
-  buildWebPage,
-  buildWebsite,
-} from '../../../lib/schema';
 import { lazy, Suspense } from 'react';
-import { HiCheck, HiOutlineClock, HiOutlineCurrencyDollar } from 'react-icons/hi2';
-import { insuranceFaqs } from '../../../data/faqs';
 import Hero from '../../../components/Sections/Hero';
 import AllForms from '../../../components/AllForms';
+import PrimarySection from '../../../components/PrimarySection';
+import Container from '../../../components/Container';
+import SectionTitle from '../../../components/SectionTitle';
+import FAQAccordion from '../../../components/FAQAccordion';
 const Process = lazy(() => import('../../../components/Sections/Process'));
 const About = lazy(() => import('../../../components/Sections/About'));
-const Benefits = lazy(() => import('../../../components/Sections/Benefits'));
-const FAQ = lazy(() => import('../../../components/Sections/FAQ'));
 
 const keyword = 'travel insurance';
+const processSteps = [
+  {
+    title: 'Enter Your Trip Details',
+    text: 'Select your trip start and end dates, choose your destination region, and enter the number of travelers by age group. Whether you are traveling solo or with family, the form adjusts to your exact needs.',
+  },
+  {
+    title: 'Fill in Passenger Details',
+    text: "Enter each traveler's full name, date of birth, nationality, and passport number exactly as they appear on the passport. Accurate details ensure your policy is issued correctly and accepted without issues at any embassy or visa center.",
+  },
+  {
+    title: 'Pay and Receive Your Policy',
+    text: 'Review your selected plan, complete your payment securely online, and receive your travel insurance policy by email within minutes. It is ready to download immediately for visa submission or travel.',
+  },
+];
 
-const benefits = [
+const reasons = [
+  {
+    title: 'Genuine Policy, Not a Reservation',
+    text: 'Our travel insurance is a fully valid, legally issued policy backed by a licensed insurer. It is not a placeholder or a reservation.',
+  },
   {
     title: 'Embassy-Compliant Coverage',
-    text: 'Our travel insurance plans meet embassy and visa requirements, including Schengen-compliant coverage where needed, so your application stays smooth and stress-free.',
-    icon: HiCheck,
+    text: 'Our plans meet official visa requirements, including the minimum EUR 30,000 medical coverage required for Schengen visa applications.',
   },
   {
-    title: 'Instant Policy Issuance',
-    text: 'Get your travel insurance policy delivered straight to your email within minutes. Fast processing, zero paperwork, and no delays.',
-    icon: HiOutlineClock,
+    title: 'Instant Policy Delivery',
+    text: 'Once your payment is confirmed, your policy is issued and delivered to your inbox within minutes. No office visit and no waiting.',
   },
   {
-    title: 'Affordable & Reliable',
-    text: 'Starting from competitive rates, our travel insurance plans provide strong medical and travel coverage without overpaying, giving you protection and peace of mind.',
-    icon: HiOutlineCurrencyDollar,
+    title: 'Covers the Full Trip',
+    text: 'Coverage includes emergency medical expenses, hospitalization, trip cancellations, baggage loss, travel delays, and COVID-19 medical coverage (as per policy terms).',
+  },
+  {
+    title: 'Affordable Rates for Every Trip',
+    text: 'We offer competitive pricing for single-trip and annual plans, giving UAE residents strong coverage with practical pricing.',
+  },
+  {
+    title: 'Single and Annual Plans Available',
+    text: 'Choose a single-trip plan for one-off travel or an annual multi-trip plan if you travel frequently.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is travel insurance mandatory for UAE residents traveling abroad?',
+    answer:
+      'Yes, many countries require valid travel insurance as part of the visa application process. Schengen states in particular make it a strict requirement.',
+  },
+  {
+    question: 'Does your travel insurance meet Schengen visa requirements?',
+    answer:
+      'Yes. Our plans include the minimum EUR 30,000 medical coverage required by Schengen consulates and are suitable for embassy, VFS, and BLS submissions.',
+  },
+  {
+    question: 'Is this a real insurance policy or a dummy document?',
+    answer:
+      'This is a fully genuine, underwritten insurance policy issued by a licensed insurer. It is not a dummy document.',
+  },
+  {
+    question: 'How quickly will I receive my policy after payment?',
+    answer:
+      'Your policy is issued instantly and delivered to your email within minutes of successful payment.',
+  },
+  {
+    question: 'Can I buy travel insurance online as a UAE resident?',
+    answer:
+      'Yes. UAE residents and citizens can purchase and receive a fully valid travel insurance policy entirely online.',
+  },
+  {
+    question: 'What does the travel insurance policy cover?',
+    answer:
+      'Coverage includes emergency medical expenses, hospital stays, trip cancellations, baggage loss, travel delays, and COVID-19 related medical treatment during your trip.',
   },
 ];
 
 const pageData = {
   meta: {
-    title: 'Travel Insurance for UAE Residents | Instant Policy Delivery',
+    title: 'Travel Insurance - Instant Delivery',
     description:
-      'Buy travel insurance online with instant policy delivery. Embassy‑compliant coverage for UAE residents and citizens, with quick quotes and secure checkout.',
+      'Get real, embassy-compliant travel insurance online with instant policy delivery for UAE residents and citizens.',
     canonical: 'https://www.mydummyticket.ae/travel-insurance',
   },
   sections: {
     hero: {
       title: 'Travel Insurance for UAE Residents',
       subtitle:
-        'Get travel insurance online with instant delivery. Our policies are genuine, embassy‑compliant, and suitable for visa applications and international travel from the UAE.',
+        'Get real, embassy-compliant travel insurance online with instant policy delivery. Our plans are genuine, legally valid, and accepted for Schengen visa applications and international travel from the UAE.',
       form: <AllForms defaultTab="insurance" />,
     },
     process: {
       title: 'How to Book Travel Insurance',
       subtitle: 'Get covered in 3 quick steps',
-      steps: [
-        {
-          title: 'Trip Details',
-          text: 'Enter your trip start and end dates, choose your destination region, and select the number of adults, children, and seniors traveling.',
-        },
-        {
-          title: "Passengers' Details",
-          text: 'Fill in each traveler’s details exactly as per passport, including full name, date of birth, nationality, and passport number, so the policy is issued without errors.',
-        },
-        {
-          title: 'Payment',
-          text: 'Review your plan, pay securely online, and receive your travel insurance policy instantly by email. You can download it right away for visa submission or travel.',
-        },
-      ],
+      keyword,
+      steps: processSteps,
     },
     about: {
       title: 'About Our Travel Insurance',
-      text: 'We provide travel insurance for UAE residents and citizens with instant policy delivery, competitive pricing, and coverage that meets embassy requirements. Choose the plan that fits your trip and get insured in minutes.',
-    },
-    benefits: {
-      title: 'Why Book Travel Insurance With Us?',
-      subtitle: 'Trusted UAE‑based travel insurance provider',
-      benefits,
-    },
-    faqs: {
-      title: 'Travel Insurance FAQs',
-      subtitle: 'Common questions about travel insurance',
-      faqs: insuranceFaqs,
+      text: 'We provide travel insurance for UAE residents and citizens with instant policy delivery, genuine coverage, and pricing that makes sense. Every plan we issue meets embassy requirements and gives you real protection throughout your trip.',
     },
   },
 };
 
 export default function TravelInsurance() {
-  const schema = buildGraph([
-    buildOrganization(),
-    buildWebsite(),
-    buildWebPage({
-      canonical: pageData.meta.canonical,
-      title: pageData.meta.title,
-      description: pageData.meta.description,
-    }),
-    buildService({
-      canonical: pageData.meta.canonical,
-      name: 'Travel Insurance',
-      description: pageData.meta.description,
-      areaServed: 'AE',
-    }),
-    buildFAQPage({
-      canonical: pageData.meta.canonical,
-      title: pageData.sections.faqs.title,
-      description: pageData.meta.description,
-      faqs: pageData.sections.faqs.faqs,
-    }),
-  ]);
-
   return (
     <>
       <Helmet>
@@ -116,11 +120,6 @@ export default function TravelInsurance() {
         <link rel="canonical" href={pageData.meta.canonical} />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={pageData.meta.description} />
-        <meta
-          name="keywords"
-          content="travel insurance, travel insurance UAE, travel insurance for UAE residents, instant travel insurance"
-        />
-        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <Hero
         title={pageData.sections.hero.title}
@@ -137,20 +136,62 @@ export default function TravelInsurance() {
       <Suspense fallback={null}>
         <About title={pageData.sections.about.title} text={pageData.sections.about.text} />
       </Suspense>
-      <Suspense fallback={null}>
-        <Benefits
-          title={pageData.sections.benefits.title}
-          subtitle={pageData.sections.benefits.subtitle}
-          benefits={pageData.sections.benefits.benefits}
-        />
-      </Suspense>
-      <Suspense fallback={null}>
-        <FAQ
-          title={pageData.sections.faqs.title}
-          subtitle={pageData.sections.faqs.subtitle}
-          faqs={pageData.sections.faqs.faqs}
-        />
-      </Suspense>
+      <PrimarySection className="py-14 md:py-18 lg:py-24 bg-gray-50/70">
+        <Container>
+          <SectionTitle
+            textAlign="center"
+            subtitle="Trusted travel insurance provider for UAE residents"
+            className="mb-10 md:mb-12"
+          >
+            Why Book Travel Insurance With Us?
+          </SectionTitle>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
+            {reasons.map((reason, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-gray-100 bg-white p-6 md:p-7 shadow-[0_12px_30px_rgba(16,24,40,0.07)]"
+              >
+                <h3 className="text-[20px] font-normal text-gray-900 font-outfit mb-2">
+                  {reason.title}
+                </h3>
+                <p className="text-[16px] text-gray-600 font-light leading-6.5">{reason.text}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </PrimarySection>
+      <PrimarySection className="py-14 md:py-18 lg:py-24">
+        <Container className="rounded-3xl border border-primary-100 bg-[linear-gradient(145deg,#f5fbfb_0%,#eff7ff_55%,#fff7f0_100%)] p-8 md:p-10">
+          <SectionTitle textAlign="center" className="mb-4">
+            Ready to Get Insured Before Your Trip?
+          </SectionTitle>
+          <p className="text-[16px] md:text-[18px] text-gray-700 font-light leading-7 max-w-[820px]">
+            Do not leave your travel plans or your visa application without proper coverage. Get
+            your genuine, embassy-accepted travel insurance policy in minutes and travel from the
+            UAE with confidence.
+          </p>
+        </Container>
+      </PrimarySection>
+      <PrimarySection id="faq" className="py-14 md:py-18 lg:py-24 bg-gray-50/70">
+        <Container>
+          <SectionTitle
+            textAlign="center"
+            subtitle="Frequently Asked Questions"
+            className="mb-10 md:mb-12"
+          >
+            Common questions answered
+          </SectionTitle>
+          <div className="rounded-2xl border border-white bg-white p-4 md:p-7 shadow-[0_14px_35px_rgba(16,24,40,0.08)]">
+            <div className="flex flex-col gap-1">
+              {faqs.map((faq, i) => (
+                <FAQAccordion key={i} question={faq.question}>
+                  {faq.answer}
+                </FAQAccordion>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </PrimarySection>
     </>
   );
 }

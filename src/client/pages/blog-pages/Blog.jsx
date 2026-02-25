@@ -34,7 +34,7 @@ const pageData = {
 };
 
 export default function Blog() {
-  const { blogs, isLoadingBlogs, isErrorBlogs } = useBlogs();
+  const { blogs, isLoadingBlogs } = useBlogs();
   const schema = buildGraph([
     buildOrganization(),
     buildWebsite(),

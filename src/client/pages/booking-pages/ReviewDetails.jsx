@@ -32,7 +32,7 @@ export default function ReviewDetails() {
   const { type, ticketPrice, quantity } = useContext(TicketContext);
   const { createStripePayment, isLoadingStripePaymentURL, isErrorStripePaymentURL } =
     useStripePaymentURL();
-  const { dummyTicket, isLoadingDummyTicket, isErrorDummyTicket } = useDummyTicket(sessionId);
+  const { dummyTicket, isLoadingDummyTicket } = useDummyTicket(sessionId);
 
   const totalQuantity = dummyTicket?.quantity?.adults + dummyTicket?.quantity?.children;
   const totalAmount = ticketPrice * totalQuantity;

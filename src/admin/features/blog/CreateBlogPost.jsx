@@ -10,7 +10,12 @@ import { useAuth } from '../../../context/AuthContext';
 export default function CreateBlogPost() {
   const editorRef = useRef(null);
   const { createBlog, isCreatingBlog } = useCreateBlog();
-  const { handleSubmit, register, control } = useForm({});
+  const { handleSubmit, register, control, watch } = useForm({
+    defaultValues: {
+      status: 'draft',
+      scheduledAt: '',
+    },
+  });
   const { isAdmin } = useAuth();
 
   if (!isAdmin) {
@@ -42,7 +47,10 @@ export default function CreateBlogPost() {
     formData.append('title', data.title || '');
     formData.append('slug', data.slug || '');
     formData.append('excerpt', data.excerpt || '');
-    formData.append('status', 'draft');
+    formData.append('status', data.status || 'draft');
+    if (data.status === 'scheduled') {
+      formData.append('scheduledAt', data.scheduledAt || '');
+    }
     formData.append('content', editorRef.current.getContent());
 
     if (data.tags && data.tags.length > 0) {
@@ -74,6 +82,7 @@ export default function CreateBlogPost() {
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         control={control}
+        watch={watch}
         isLoading={isCreatingBlog}
         editorRef={editorRef}
         showSubmitButton

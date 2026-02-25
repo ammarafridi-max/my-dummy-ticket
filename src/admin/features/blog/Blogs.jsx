@@ -8,6 +8,7 @@ import { useDuplicateBlog } from '../../../hooks/blog/useDuplicateBlog';
 import Loading from '../../../components/Loading';
 import WarningPill from '../../../components/WarningPill';
 import SuccessPill from '../../../components/SuccessPill';
+import NeutralPill from '../../../components/NeutralPill';
 import Breadcrumb from '../../../components/Breadcrumb';
 import PageHeading from '../../../components/PageHeading';
 import Table from '../../../components/Table';
@@ -40,10 +41,14 @@ export default function Blogs() {
             <Table.Heading>Tags</Table.Heading>
             <Table.Heading textAlign="center">Status</Table.Heading>
           </Table.Head>
-          {blogs?.map((blog) => (
+          {blogs?.map(blog => (
             <Table.Row key={blog?._id} href={`/blogs/${blog?._id}`}>
               <Table.Item>
-                <img src={blog?.coverImageUrl} alt={blog?.title} className="w-full aspect-square object-cover rounded-lg" />
+                <img
+                  src={blog?.coverImageUrl}
+                  alt={blog?.title}
+                  className="w-full aspect-square object-cover rounded-lg"
+                />
               </Table.Item>
               <Table.Item>
                 <span className="text-[17px] mb-1">{blog?.title}</span>
@@ -51,15 +56,25 @@ export default function Blogs() {
                   Created at {format(blog.createdAt, 'dd MMM yyyy')} by {blog?.author?.name}
                 </span>
                 <span className="mt-2">
-                  <Table.DuplicateLink onClick={() => duplicateBlog(blog?._id)}>
+                  <Table.DuplicateLink
+                    isDuplicating={isDuplicatingBlog}
+                    onClick={() => duplicateBlog(blog?._id)}
+                  >
                     <FaCopy />
                   </Table.DuplicateLink>
                 </span>
               </Table.Item>
-              <Table.Item>{blog?.tags?.map((tag) => capitalCase(tag)).join(', ')}</Table.Item>
+              <Table.Item>{blog?.tags?.map(tag => capitalCase(tag)).join(', ')}</Table.Item>
               <Table.Item>
-                {blog?.status === 'draft' && <WarningPill>{blog?.status?.toUpperCase()}</WarningPill>}
-                {blog?.status === 'published' && <SuccessPill>{blog?.status?.toUpperCase()}</SuccessPill>}
+                {blog?.status === 'draft' && (
+                  <WarningPill>{blog?.status?.toUpperCase()}</WarningPill>
+                )}
+                {blog?.status === 'scheduled' && (
+                  <NeutralPill>{blog?.status?.toUpperCase()}</NeutralPill>
+                )}
+                {blog?.status === 'published' && (
+                  <SuccessPill>{blog?.status?.toUpperCase()}</SuccessPill>
+                )}
               </Table.Item>
             </Table.Row>
           ))}
@@ -68,7 +83,7 @@ export default function Blogs() {
 
       {isAdmin && (
         <Link
-          className="absolute bottom-10 right-10 bg-primary-600 hover:bg-primary-700 cursor-pointer duration-300 p-4 text-white text-2xl rounded-full"
+          className="absolute bottom-8 right-8 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-accent-500 bg-accent-500 text-sm text-white transition-colors hover:bg-accent-600 cursor-pointer"
           to="/blogs/create"
         >
           <FaPlus />

@@ -1,4 +1,5 @@
 import { LucideCheckCircle2 } from 'lucide-react';
+import { CURRENCY } from '../../config';
 
 function SegmentedRadioGroup({ name, value, options, onChange, textAlign = 'left' }) {
   return (
@@ -34,7 +35,9 @@ function SegmentedRadioGroup({ name, value, options, onChange, textAlign = 'left
                 {option.price !== undefined && (
                   <>
                     <span> - </span>
-                    <span className={`text-sm`}>AED {option.price} / person</span>
+                    <span className={`text-sm`}>
+                      {CURRENCY} {option.price} / person
+                    </span>
                   </>
                 )}
               </div>

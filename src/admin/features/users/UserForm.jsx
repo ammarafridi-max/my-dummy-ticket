@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useDeleteUser } from '../../../hooks/users/useDeleteUser';
-import { useCreateUser } from '../../../hooks/users/useCreateUser';
 import FormRow from '../../../components/FormElements/FormRow';
 import Input from '../../../components/FormElements/Input';
 import Label from '../../../components/FormElements/Label';
@@ -14,13 +13,15 @@ export default function UserForm({ user, register, handleSubmit, onSubmit, watch
   const { username } = useParams();
 
   const { deleteUser, isDeleting } = useDeleteUser(username);
-  const { createUser, isCreating } = useCreateUser();
 
   const passwordValue = watch('password');
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 px-10 py-6 mt-5 bg-white rounded-lg shadow-md ">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 px-10 py-6 mt-5 bg-white rounded-lg shadow-md "
+      >
         <FormRow>
           <Label>Name</Label>
           <Input type="text" {...register('name', { required: 'Name is required' })} />
@@ -52,7 +53,7 @@ export default function UserForm({ user, register, handleSubmit, onSubmit, watch
               { label: 'Admin', value: 'admin' },
               { label: 'Agent', value: 'agent' },
               { label: 'Blog Manager', value: 'blog-manager' },
-            ].map((el) => (
+            ].map(el => (
               <option value={el.value} key={el.value}>
                 {el.label}
               </option>
@@ -63,7 +64,7 @@ export default function UserForm({ user, register, handleSubmit, onSubmit, watch
         <FormRow>
           <Label>Status</Label>
           <Select {...register('status', { required: 'Status is required' })}>
-            {['ACTIVE', 'INACTIVE'].map((el) => (
+            {['ACTIVE', 'INACTIVE'].map(el => (
               <option value={el} key={el}>
                 {el}
               </option>
@@ -98,14 +99,15 @@ export default function UserForm({ user, register, handleSubmit, onSubmit, watch
               autoComplete="new-password"
               {...register('passwordConfirm', {
                 required: 'Confirm Password is required',
-                validate: (val) => (passwordValue && val !== passwordValue ? 'Passwords do not match' : true),
+                validate: val =>
+                  passwordValue && val !== passwordValue ? 'Passwords do not match' : true,
               })}
             />
           </FormRow>
         )}
 
         <div className="flex items-center gap-2.5 mt-5">
-          <PrimaryButton type="submit" disabled={isLoading}>
+          <PrimaryButton type="submit" size="small" disabled={isLoading}>
             Submit
           </PrimaryButton>
           {user && (
@@ -115,7 +117,8 @@ export default function UserForm({ user, register, handleSubmit, onSubmit, watch
               onClick={() => {
                 confirmAlert({
                   title: 'Confirm to delete',
-                  message: 'Are you sure you want to delete this user? This action cannot be undone.',
+                  message:
+                    'Are you sure you want to delete this user? This action cannot be undone.',
                   buttons: [
                     {
                       label: 'Delete',

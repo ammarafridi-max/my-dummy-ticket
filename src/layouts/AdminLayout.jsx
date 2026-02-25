@@ -6,14 +6,14 @@ const SIDEBAR_WIDTH = 250;
 export default function AdminLayout() {
   return (
     <div
-      className="h-dvh w-full grid bg-black m-0 p-0"
+      className="min-h-dvh w-full grid bg-black m-0 p-0"
       style={{ gridTemplateColumns: `${SIDEBAR_WIDTH}px minmax(0,1fr)` }}
     >
-      <div className="h-full">
+      <div className="h-dvh sticky top-0">
         <AdminNavigation />
       </div>
 
-      <div className="bg-gray-100 p-10 overflow-scroll">
+      <div className="bg-gray-100 p-10 overflow-auto">
         <Outlet />
       </div>
     </div>

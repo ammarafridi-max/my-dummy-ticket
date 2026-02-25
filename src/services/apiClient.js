@@ -6,7 +6,9 @@ async function checkError(res) {
     try {
       const json = await res.json();
       message = json.message || json.error || message;
-    } catch (_) {}
+    } catch (error) {
+      void error;
+    }
     throw new Error(message);
   }
 }

@@ -97,7 +97,6 @@ export default function DummyTicketDetail() {
     }
 
     const text = messageLines.join('\n');
-    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
   }
 

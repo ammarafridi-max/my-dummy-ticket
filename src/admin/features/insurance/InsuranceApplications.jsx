@@ -1,4 +1,3 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 import { useInsuranceApplications } from '../../../hooks/insurance/useInsuranceApplications';
@@ -7,7 +6,6 @@ import PageHeading from '../../../components/PageHeading';
 import Table from '../../../components/Table';
 import SuccessPill from '../../../components/SuccessPill';
 import NeutralPill from '../../../components/NeutralPill';
-import WarningPill from '../../../components/WarningPill';
 import Filter from './Filter';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Loading from '../../../components/Loading';
@@ -19,8 +17,8 @@ export default function InsuranceApplications() {
     useInsuranceApplications();
   const { isAdmin } = useAuth();
 
-  const currentPage = parseInt(searchParams.get('page')) || 1;
-  const limit = parseInt(searchParams.get('limit')) || 100;
+  const currentPage = parseInt(searchParams.get('page'), 10) || 1;
+  const limit = parseInt(searchParams.get('limit'), 10) || 100;
 
   const handlePageChange = newPage => {
     const newParams = new URLSearchParams(searchParams);
@@ -42,7 +40,7 @@ export default function InsuranceApplications() {
               { label: 'Insurance Applications', href: '/insurance' },
             ]}
           />
-          <PageHeading mb="15px">Insurance Applications</PageHeading>
+          <PageHeading className="mb-[15px]">Insurance Applications</PageHeading>
         </div>
         <div></div>
       </div>
@@ -60,8 +58,8 @@ export default function InsuranceApplications() {
             <Table.Heading textAlign="center">Payment</Table.Heading>
           </Table.Head>
 
-          {applications.map((app, i) => (
-            <Table.Row key={i} href={`/insurance/${app.sessionId}`}>
+          {applications.map((app) => (
+            <Table.Row key={app?.sessionId || app?._id} href={`/insurance/${app.sessionId}`}>
               <Table.Item>{convertToDubaiDate(app.createdAt)}</Table.Item>
 
               <Table.Item textAlign="left" textTransform="capitalize">
@@ -83,9 +81,9 @@ export default function InsuranceApplications() {
 
               <Table.Item textAlign="center">
                 {app.paymentStatus === 'PAID' ? (
-                  <SuccessPill width="auto">PAID</SuccessPill>
+                  <SuccessPill>PAID</SuccessPill>
                 ) : (
-                  <NeutralPill width="auto">{app.paymentStatus}</NeutralPill>
+                  <NeutralPill>{app.paymentStatus}</NeutralPill>
                 )}
               </Table.Item>
             </Table.Row>
@@ -133,7 +131,8 @@ export default function InsuranceApplications() {
 function PageButton({ children, onClick, disabled }) {
   return (
     <button
-      className="bg-transparent border-0 cursor-pointer disabled:opacity-50"
+      type="button"
+      className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs md:text-sm text-gray-700 transition-colors hover:bg-gray-100 disabled:opacity-55 disabled:cursor-not-allowed"
       onClick={onClick}
       disabled={disabled}
     >

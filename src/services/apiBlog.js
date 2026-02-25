@@ -22,7 +22,25 @@ export function getBlogBySlugApi(slug) {
 }
 
 export function getBlogByIdApi(id) {
-  return apiFetch(`${URL}/${id}`);
+  return fetch(`${BACKEND}${URL}/${id}`, {
+    method: 'GET',
+    credentials: 'include',
+  }).then(async (res) => {
+    if (!res.ok) {
+      let message = 'Failed to fetch blog';
+      try {
+        const err = await res.json();
+        message = err.message || err.error || message;
+      } catch (error) {
+        void error;
+      }
+      throw new Error(message);
+    }
+
+    const json = await res.json();
+    const payload = json?.data ?? json;
+    return payload?.blog ?? payload ?? null;
+  });
 }
 
 export async function createBlogApi(formData) {
@@ -37,7 +55,9 @@ export async function createBlogApi(formData) {
     try {
       const err = await res.json();
       message = err.message || message;
-    } catch (_) {}
+    } catch (error) {
+      void error;
+    }
     throw new Error(message);
   }
 

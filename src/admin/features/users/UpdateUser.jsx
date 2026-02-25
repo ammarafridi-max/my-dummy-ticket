@@ -35,7 +35,7 @@ export default function UpdateUser() {
         password: '',
       });
     }
-  }, [user]);
+  }, [user, reset]);
 
   if (isLoading) return <Loading />;
 

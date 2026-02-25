@@ -1,4 +1,3 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 import { useDummyTickets } from '../../../hooks/dummy-tickets/useDummyTickets';
@@ -19,8 +18,8 @@ export default function DummyTickets() {
   const { dummyTickets, pagination, isLoadingDummyTickets, isErrorDummyTickets } =
     useDummyTickets();
 
-  const currentPage = parseInt(searchParams.get('page')) || 1;
-  const limit = parseInt(searchParams.get('limit')) || 100;
+  const currentPage = parseInt(searchParams.get('page'), 10) || 1;
+  const limit = parseInt(searchParams.get('limit'), 10) || 100;
 
   const handlePageChange = newPage => {
     const newParams = new URLSearchParams(searchParams);
@@ -42,7 +41,7 @@ export default function DummyTickets() {
               { label: 'Dummy Tickets', href: '/dummy-tickets' },
             ]}
           />
-          <PageHeading mb="15px">Dummy Tickets</PageHeading>
+          <PageHeading className="mb-[15px]">Dummy Tickets</PageHeading>
         </div>
         <div></div>
       </div>
@@ -61,9 +60,8 @@ export default function DummyTickets() {
             <Table.Heading>Payment</Table.Heading>
             <Table.Heading>Status</Table.Heading>
           </Table.Head>
-          {dummyTickets?.map((item, i) => (
-            <React.Fragment key={i}>
-              <Table.Row href={`/dummy-tickets/${item?.sessionId}`}>
+          {dummyTickets?.map((item) => (
+              <Table.Row key={item?.sessionId || item?._id} href={`/dummy-tickets/${item?.sessionId}`}>
                 <Table.Item>{convertToDubaiDate(item?.updatedAt)}</Table.Item>
                 <Table.Item textAlign="left" textTransform="capitalize">
                   {`${item?.leadPassenger}`.toLowerCase()}
@@ -95,7 +93,6 @@ export default function DummyTickets() {
                   {item?.orderStatus === 'PROGRESS' && <WarningPill>PROGRESS</WarningPill>}
                 </Table.Item>
               </Table.Row>
-            </React.Fragment>
           ))}
           <Table.Footer>
             <div className="flex justify-between">
@@ -139,7 +136,8 @@ export default function DummyTickets() {
 function PageButton({ children, onClick, disabled }) {
   return (
     <button
-      className="bg-transparent border-0 cursor-pointer disabled:opacity-50"
+      type="button"
+      className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs md:text-sm text-gray-700 transition-colors hover:bg-gray-100 disabled:opacity-55 disabled:cursor-not-allowed"
       onClick={onClick}
       disabled={disabled}
     >

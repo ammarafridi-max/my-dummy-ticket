@@ -3,7 +3,7 @@ import { getBlogByIdApi } from '../../services/apiBlog';
 
 export function useBlog(id) {
   const {
-    data: blog,
+    data,
     isLoading: isLoadingBlog,
     isError: isErrorBlog,
   } = useQuery({
@@ -11,6 +11,8 @@ export function useBlog(id) {
     queryFn: () => getBlogByIdApi(id),
     enabled: !!id,
   });
+
+  const blog = data?.blog || data || null;
 
   return { blog, isLoadingBlog, isErrorBlog };
 }

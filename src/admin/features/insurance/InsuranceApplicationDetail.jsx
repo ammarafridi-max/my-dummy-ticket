@@ -76,10 +76,10 @@ ${isAdmin ? `Amount: ${application?.amountPaid?.currency || ''} ${application?.a
           <Breadcrumb
             paths={[
               { label: 'Home', href: '/' },
-              { label: 'Insurance Applications', href: '/insurance-applications' },
+              { label: 'Insurance Applications', href: '/insurance' },
               {
                 label: capitalCase(application?.leadPassenger),
-                href: `/insurance-applications/${sessionId}`,
+                href: `/insurance/${sessionId}`,
               },
             ]}
           />
@@ -157,9 +157,9 @@ function Overview({ application, isAdmin }) {
     <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3 mt-1 mb-4">
       <OverviewCard label="Payment Status">
         {application?.paymentStatus === 'PAID' ? (
-          <SuccessPill width="auto">PAID</SuccessPill>
+          <SuccessPill>PAID</SuccessPill>
         ) : (
-          <NeutralPill width="auto">{application?.paymentStatus || 'UNPAID'}</NeutralPill>
+          <NeutralPill>{application?.paymentStatus || 'UNPAID'}</NeutralPill>
         )}
       </OverviewCard>
       <OverviewCard label="Policy Number" value={application?.policyNumber || 'Pending'} />

@@ -1,28 +1,26 @@
 export default function PrimaryButtonOutline({
   children,
   className = '',
-  size = 'medium',
+  size = 'small',
   selected,
   ...props
 }) {
   let newClassName =
     className +
-    ' text-center no-underline font-normal font-outfit rounded-lg capitalize border border-solid border-accent-500 cursor-pointer duration-300 shadow disabled:bg-accent-600 disabled:text-white disabled:opacity-50 disabled:cursor-auto';
+    ' inline-flex items-center justify-center gap-2 text-center no-underline font-outfit rounded-lg border border-solid border-accent-500 cursor-pointer transition-all duration-200 disabled:opacity-55 disabled:cursor-not-allowed';
 
   if (size === 'large') {
-    newClassName = newClassName + ` text-[15px] md:text-[18px] py-3 px-5 `;
+    newClassName = newClassName + ` text-sm md:text-base py-2.5 px-4 `;
   } else if (size === 'small') {
-    newClassName = newClassName + `text-[12px] md:text-[14px] py-2 px-4`;
+    newClassName = newClassName + ` text-xs md:text-sm py-1.5 px-3`;
   } else {
-    newClassName = newClassName + `text-[14px] md:text-[16px] py-2.5 px-5`;
+    newClassName = newClassName + ` text-xs md:text-sm py-2 px-3.5`;
   }
 
   if (selected) {
     newClassName = newClassName + ` bg-accent-500 text-white`;
   } else {
-    newClassName =
-      newClassName +
-      ` bg-transparent text-accent-500 hover:bg-accent-600 hover:text-white hover:border-accent-600`;
+    newClassName = newClassName + ` bg-white text-accent-600 hover:bg-accent-50`;
   }
 
   return (

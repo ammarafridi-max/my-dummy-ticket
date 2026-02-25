@@ -4,7 +4,6 @@ import SectionTitle from '../SectionTitle';
 import PrimaryLink from '../PrimaryLink';
 export default function Contact({
   title = 'Contact Us Now',
-  subtitle = 'Still got questions?',
   text = "Still have questions or doubts about our service? Feel free to send us an email. We'd be happy to help you out.",
 }) {
   return (

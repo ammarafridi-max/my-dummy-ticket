@@ -1,22 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useUpdateMyPassword } from '../../../hooks/account/useUpdateMyPassword';
-import styled from 'styled-components';
 import FormRow from '../../../components/FormElements/FormRow';
 import Label from '../../../components/FormElements/Label';
 import Input from '../../../components/FormElements/Input';
 import SectionHeading from '../../../components/SectionHeading';
 import PrimaryButton from '../../../components/PrimaryButton';
 import LinkButton from '../../../components/LinkButton';
-
-const Container = styled.div`
-  margin-top: 80px;
-`;
-
-const BtnRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
 
 export default function PasswordForm() {
   const { updatePassword, isUpdating } = useUpdateMyPassword();
@@ -37,7 +26,7 @@ export default function PasswordForm() {
 
   return (
     <>
-      <Container>
+      <div className="mt-20">
         <SectionHeading fontSize="28px" mb="40px">
           Update Your Password
         </SectionHeading>
@@ -73,14 +62,14 @@ export default function PasswordForm() {
             />
             <p>{errors?.passwordConfirm?.message}</p>
           </FormRow>
-          <BtnRow>
+          <div className="flex items-center gap-2.5">
             <PrimaryButton type="submit" disabled={isUpdating}>
               Update
             </PrimaryButton>
             <LinkButton type="button">Forgot Password?</LinkButton>
-          </BtnRow>
+          </div>
         </form>
-      </Container>
+      </div>
     </>
   );
 }

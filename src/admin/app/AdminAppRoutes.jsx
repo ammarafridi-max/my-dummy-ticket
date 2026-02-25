@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import '../../index.css';
 
 import AdminLayout from '../../layouts/AdminLayout';
@@ -36,6 +37,9 @@ export default function AdminAppRoutes() {
   return (
     <BrowserRouter basename="/admin">
       <AuthProvider>
+        <Helmet>
+          <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        </Helmet>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute />}>

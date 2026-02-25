@@ -30,7 +30,7 @@ export default function Hero({ title, subtitle, form, sectionId = 'form' }) {
             </p>
           )}
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 gap-2">
             <ValuePill text="Verifiable PNR details" />
             <ValuePill text="Instant email delivery" />
             <ValuePill text="Embassy-ready format" />
@@ -46,7 +46,7 @@ export default function Hero({ title, subtitle, form, sectionId = 'form' }) {
 
 function ValuePill({ text }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-xl border border-white/80 bg-white/75 px-3 py-2 text-[13px] text-gray-700 shadow-sm backdrop-blur-sm">
+    <div className="inline-flex items-center gap-2 rounded-xl text-[14px] text-gray-500">
       <HiCheckCircle className="text-primary-600" />
       <span>{text}</span>
     </div>

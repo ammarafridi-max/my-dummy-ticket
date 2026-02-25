@@ -1,3 +1,4 @@
+import { createElement } from 'react';
 import {
   HiOutlineUsers,
   HiOutlineTicket,
@@ -42,7 +43,7 @@ const links = [
     icon: HiOutlineUserGroup,
     accessTo: ['admin'],
   },
-  { name: 'Users', href: '/users', icon: HiOutlineUsers, accessTo: ['admin', 'userManager'] },
+  { name: 'Users', href: '/users', icon: HiOutlineUsers, accessTo: ['admin'] },
   {
     name: 'My Account',
     href: '/account',
@@ -114,12 +115,13 @@ function SidebarLink({ name, href, Icon, accessTo, action }) {
   if (action === 'logout') {
     return (
       <button
+        type="button"
         onClick={() => logout()}
         className="w-full flex items-center justify-between rounded-xl px-2 py-2 cursor-pointer text-primary-100 hover:text-white bg-white/0 hover:bg-white/10 border border-transparent hover:border-white/15 transition-all duration-200"
       >
         <div className="flex items-center gap-2.5">
           <span className="h-8 w-8 rounded-lg bg-white/10 grid place-items-center">
-            <Icon className="w-4 h-4" />
+            {createElement(Icon, { className: 'w-4 h-4' })}
           </span>
           <span className="text-[14px]">{name}</span>
         </div>
@@ -146,7 +148,7 @@ function SidebarLink({ name, href, Icon, accessTo, action }) {
               : 'bg-white/10 text-primary-100 group-hover:bg-white/15'
           }`}
         >
-          <Icon className="w-4 h-4" />
+          {createElement(Icon, { className: 'w-4 h-4' })}
         </span>
         <span className="text-[14px]">{name}</span>
       </div>

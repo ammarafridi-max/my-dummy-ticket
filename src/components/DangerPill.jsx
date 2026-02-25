@@ -1,3 +1,3 @@
-export default function DangerPill({ children, width = 'fit-content' }) {
+export default function DangerPill({ children }) {
   return <span className="bg-red-100 text-red-800 font-bold rounded-full text-[12px] py-1.5 text-center">{children}</span>;
 }

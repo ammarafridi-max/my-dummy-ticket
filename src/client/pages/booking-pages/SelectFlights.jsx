@@ -49,7 +49,7 @@ export default function SelectFlights() {
     if (quantity) {
       initializePassengers(quantity, setPassengers);
     }
-  }, []);
+  }, [initializePassengers, quantity, setPassengers]);
 
   return (
     <>

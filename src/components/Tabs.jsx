@@ -18,8 +18,10 @@ export function TabButton({ active, onClick, children }) {
   return (
     <button
       type="button"
-      className={`px-4 py-2 rounded-lg text-sm cursor-pointer ${
-        active ? 'bg-primary-700 text-white' : 'text-gray-600'
+      className={`inline-flex items-center justify-center rounded-lg border px-3 py-1.5 text-xs md:text-sm transition-colors ${
+        active
+          ? 'border-primary-700 bg-primary-700 text-white'
+          : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100'
       }`}
       onClick={onClick}
     >

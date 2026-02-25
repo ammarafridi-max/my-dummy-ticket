@@ -5,12 +5,19 @@ import PrimaryButton from './PrimaryButton';
 
 export default function ActionButtons({ actions = [] }) {
   const [showOptions, setShowOptions] = useState(false);
+  const hasActions = actions.length > 0;
 
   const ref = useRef(null);
   useOutsideClick(ref, () => setShowOptions(false));
   return (
     <div className="relative" ref={ref}>
-      <PrimaryButton className="flex items-center gap-2 justify-between" onClick={() => setShowOptions((val) => !val)}>
+      <PrimaryButton
+        className="flex items-center gap-2 justify-between"
+        type="button"
+        disabled={!hasActions}
+        onClick={() => setShowOptions(val => !val)}
+        size="small"
+      >
         <span>Actions</span>
         <span>
           <ChevronDown size={16} />
@@ -27,10 +34,10 @@ export default function ActionButtons({ actions = [] }) {
                 setShowOptions(false);
                 action.onClick();
               }}
-              disabled={action.disabled}
+              disabled={action.disabled || action.loading}
             >
               <action.icon size={13} />
-              {action.text}
+              {action.loading ? `${action.text}...` : action.text}
             </button>
           ))}
         </div>

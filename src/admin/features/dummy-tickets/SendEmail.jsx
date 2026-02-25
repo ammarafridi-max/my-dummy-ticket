@@ -27,20 +27,19 @@ function generateEmailTemplate(templateName) {
   return { subject, body };
 }
 
-export default function MDTSendEmail() {
+export default function SendEmail() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('sessionId');
   const { user } = useAuth();
   const { dummyTicket, isLoadingDummyTicket } = useGetDummyTicket(sessionId);
   const { sendEmail, isSendingEmail } = useSendEmail();
-  
 
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [reservation, setReservation] = useState(null);
   const [leadPassenger, setLeadPassenger] = useState('');
-  
+
   const btnDisabled = !email || !subject || !body || !reservation?.name || isLoadingDummyTicket || isSendingEmail;
 
   useEffect(() => {
