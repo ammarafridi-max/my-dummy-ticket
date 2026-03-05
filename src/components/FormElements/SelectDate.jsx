@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks/general/useOutsideClick';
 import Calendar from './Calendar';
 import InputWithIcon from './InputWithIcon';
+import { compareDateOnly, dateOnlyFromInput } from '../../utils/dateOnly';
 
 export default function SelectDate({
   selectedDate,
@@ -38,8 +39,12 @@ export default function SelectDate({
             showCalendar={showCalendar}
             setShowCalendar={setShowCalendar}
             isDateDisabled={date => {
-              if (minDate && date < minDate) return true;
-              if (maxDate && date > maxDate) return true;
+              const currentDateOnly = dateOnlyFromInput(date);
+              const minDateOnly = dateOnlyFromInput(minDate);
+              const maxDateOnly = dateOnlyFromInput(maxDate);
+
+              if (minDateOnly && compareDateOnly(currentDateOnly, minDateOnly) < 0) return true;
+              if (maxDateOnly && compareDateOnly(currentDateOnly, maxDateOnly) > 0) return true;
               return false;
             }}
           />

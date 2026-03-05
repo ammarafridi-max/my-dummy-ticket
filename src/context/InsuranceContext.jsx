@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '../hooks/general/useLocalStorage';
 import toast from 'react-hot-toast';
+import { compareDateOnly, todayDateOnly } from '../utils/dateOnly';
 
 function safeParse(key, fallback) {
   try {
@@ -86,6 +87,10 @@ export function InsuranceProvider({ children }) {
       digits: '',
     })
   );
+  const [address1, setAddress1] = useState(storedData.address1 || '');
+  const [address2, setAddress2] = useState(storedData.address2 || '');
+  const [address3, setAddress3] = useState(storedData.address3 || '');
+  const [address4, setAddress4] = useState(storedData.address4 || '');
 
   function handleUpdatePassenger(id, field, value) {
     setPassengers(prev => prev.map(p => (p.id === id ? { ...p, [field]: value } : p)));
@@ -97,6 +102,22 @@ export function InsuranceProvider({ children }) {
 
   function handlePhoneChange(phone) {
     setMobile(phone);
+  }
+
+  function handleAddress1Change(e) {
+    setAddress1(e.target.value);
+  }
+
+  function handleAddress2Change(e) {
+    setAddress2(e.target.value);
+  }
+
+  function handleAddress3Change(e) {
+    setAddress3(e.target.value);
+  }
+
+  function handleAddress4Change(e) {
+    setAddress4(e.target.value);
   }
 
   function handleQuantityChange(field, delta) {
@@ -123,7 +144,7 @@ export function InsuranceProvider({ children }) {
       return false;
     }
 
-    if (new Date(startDate) > new Date(endDate)) {
+    if (compareDateOnly(startDate, endDate) > 0) {
       toast.error('End date must be after start date');
       return false;
     }
@@ -155,8 +176,9 @@ export function InsuranceProvider({ children }) {
 
   useEffect(() => {
     if (!startDate || !endDate) return;
+    const today = todayDateOnly();
 
-    if (new Date(startDate) < new Date() || new Date(endDate) < new Date()) {
+    if (compareDateOnly(startDate, today) < 0 || compareDateOnly(endDate, today) < 0) {
       setStartDate('');
       setEndDate('');
     }
@@ -171,7 +193,7 @@ export function InsuranceProvider({ children }) {
         firstName: '',
         lastName: '',
         nationality: null,
-        dob: new Date(),
+        dob: '',
         passport: '',
       }))
     );
@@ -198,6 +220,10 @@ export function InsuranceProvider({ children }) {
         passengers,
         email,
         mobile,
+        address1,
+        address2,
+        address3,
+        address4,
 
         setJourneyType,
         setStartDate,
@@ -208,9 +234,17 @@ export function InsuranceProvider({ children }) {
         setPassengers,
         setEmail,
         setMobile,
+        setAddress1,
+        setAddress2,
+        setAddress3,
+        setAddress4,
 
         handleEmailChange,
         handlePhoneChange,
+        handleAddress1Change,
+        handleAddress2Change,
+        handleAddress3Change,
+        handleAddress4Change,
         handleQuantityChange,
         handleUpdatePassenger,
         handleSelectQuote,

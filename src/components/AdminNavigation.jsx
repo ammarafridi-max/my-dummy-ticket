@@ -8,6 +8,7 @@ import {
   HiOutlineRss,
   HiOutlineShieldCheck,
   HiOutlineUserGroup,
+  HiOutlineCurrencyDollar,
 } from 'react-icons/hi2';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -43,6 +44,18 @@ const links = [
     icon: HiOutlineUserGroup,
     accessTo: ['admin'],
   },
+  {
+    name: 'Pricing',
+    href: '/pricing',
+    icon: HiOutlineCurrencyDollar,
+    accessTo: ['admin'],
+  },
+  {
+    name: 'Currencies',
+    href: '/currencies',
+    icon: HiOutlineCurrencyDollar,
+    accessTo: ['admin'],
+  },
   { name: 'Users', href: '/users', icon: HiOutlineUsers, accessTo: ['admin'] },
   {
     name: 'My Account',
@@ -59,14 +72,14 @@ const links = [
 
 export default function AdminNavigation() {
   const { user } = useAuth();
-  const navLinks = links.filter((link) => !link.action);
-  const actionLinks = links.filter((link) => link.action);
+  const navLinks = links.filter(link => !link.action);
+  const actionLinks = links.filter(link => link.action);
 
   return (
     <aside className="h-full bg-gradient-to-b from-primary-900 via-primary-800 to-primary-700 p-4 border-r border-white/10 shadow-2xl">
       <div className="h-full flex flex-col">
         <nav className="space-y-1.5">
-          {navLinks.map((link) => (
+          {navLinks.map(link => (
             <SidebarLink
               key={link.name}
               name={link.name}
@@ -83,7 +96,7 @@ export default function AdminNavigation() {
             <p className="text-[11px] tracking-[0.14em] uppercase text-primary-200/80">Account</p>
           </div>
           <div className="space-y-1.5">
-            {actionLinks.map((link) => (
+            {actionLinks.map(link => (
               <SidebarLink
                 key={link.name}
                 name={link.name}
@@ -134,9 +147,9 @@ function SidebarLink({ name, href, Icon, accessTo, action }) {
   return (
     <NavLink
       to={href}
-      className={`group flex items-center justify-between rounded-xl px-2 py-2 border transition-all duration-200 ${
+      className={`group flex items-center justify-between rounded-xl p-2 transition-all duration-200 ${
         isActive
-          ? 'bg-white text-primary-900 border-white shadow-[0_8px_25px_rgba(0,0,0,0.18)]'
+          ? 'text-white'
           : 'bg-white/0 text-primary-100 border-transparent hover:bg-white/10 hover:text-white hover:border-white/15'
       }`}
     >
@@ -144,7 +157,7 @@ function SidebarLink({ name, href, Icon, accessTo, action }) {
         <span
           className={`h-8 w-8 rounded-lg grid place-items-center transition-colors duration-200 ${
             isActive
-              ? 'bg-primary-100 text-primary-800'
+              ? 'bg-white text-primary-800'
               : 'bg-white/10 text-primary-100 group-hover:bg-white/15'
           }`}
         >

@@ -8,6 +8,7 @@ import SelectDate from './FormElements/SelectDate';
 import SearchableSelect from './FormElements/SearchableSelect';
 import Counter from './FormElements/Counter';
 import PrimaryButton from './PrimaryButton';
+import { todayDateOnly } from '../utils/dateOnly';
 
 export default function TravelInsuranceForm() {
   const {
@@ -56,7 +57,7 @@ export default function TravelInsuranceForm() {
           <SelectDate
             selectedDate={startDate && formatDate(startDate)}
             onDateSelect={setStartDate}
-            minDate={new Date()}
+            minDate={todayDateOnly()}
             icon={<CalendarDaysIcon size={20} />}
           />
         </div>
@@ -66,7 +67,7 @@ export default function TravelInsuranceForm() {
           <SelectDate
             selectedDate={endDate && formatDate(endDate)}
             onDateSelect={setEndDate}
-            minDate={new Date(startDate)}
+            minDate={startDate || todayDateOnly()}
             icon={<CalendarDaysIcon size={20} />}
           />
         </div>

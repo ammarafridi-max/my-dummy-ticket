@@ -57,7 +57,7 @@ export const trackPurchaseEvent = ({
   currency,
   value,
   sessionId,
-  items = [{ item_name: 'Flight reservation', price: 13, quantity: 1 }],
+  items = [{ item_name: 'Flight reservation', price: 49, quantity: 1 }],
 }) => {
   if (shouldTrackAnalytics()) {
     ReactGA.event('purchase', {

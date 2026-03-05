@@ -7,7 +7,7 @@ import { useUpdateDummyTicket } from '../../../hooks/dummy-tickets/useUpdateDumm
 import { convertToDubaiTime } from '../../../utils/dubaiDateTime';
 import { convertToDubaiDate } from '../../../utils/dubaiDateTime';
 import { extractIataCode } from '../../../utils/extractIataCode';
-import { format } from 'date-fns';
+import { formatDate } from '../../../utils/formatDate';
 import { capitalCase } from 'change-case';
 import { confirmAlert } from 'react-confirm-alert';
 import { MdWhatsapp } from 'react-icons/md';
@@ -19,6 +19,7 @@ import ActionButtons from '../../../components/ActionButtons';
 import { Tabs } from '../../../components/Tabs';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../../context/AuthContext';
+import { formatAmount } from '../../../utils/currency';
 
 export default function DummyTicketDetail() {
   const { sessionId } = useParams();
@@ -39,11 +40,11 @@ export default function DummyTicketDetail() {
     const fromText = `${dummyTicket?.from || ''} (${fromCode || '-'})`.trim();
     const toText = `${dummyTicket?.to || ''} (${toCode || '-'})`.trim();
     const departureDate = dummyTicket?.departureDate
-      ? format(new Date(dummyTicket.departureDate), 'dd MMM yyyy')
+      ? formatDate(dummyTicket.departureDate)
       : '-';
     const returnDate =
       dummyTicket?.type?.toLowerCase() === 'return' && dummyTicket?.returnDate
-        ? format(new Date(dummyTicket.returnDate), 'dd MMM yyyy')
+        ? formatDate(dummyTicket.returnDate)
         : null;
 
     const depFlight = dummyTicket?.flightDetails?.departureFlight?.segments?.[0];
@@ -59,7 +60,7 @@ export default function DummyTicketDetail() {
     const deliveryText = dummyTicket?.ticketDelivery?.immediate
       ? 'Immediate'
       : dummyTicket?.ticketDelivery?.deliveryDate
-        ? format(new Date(dummyTicket.ticketDelivery.deliveryDate), 'dd MMM yyyy')
+        ? formatDate(dummyTicket.ticketDelivery.deliveryDate)
         : '-';
 
     const phone =
@@ -237,7 +238,7 @@ function BasicInfo({ dummyTicket, isAdmin }) {
       {isAdmin && dummyTicket?.amountPaid && (
         <Info
           label="Amount"
-          value={`${dummyTicket?.amountPaid?.currency} ${dummyTicket?.amountPaid?.amount}`}
+          value={`${dummyTicket?.amountPaid?.currency} ${formatAmount(dummyTicket?.amountPaid?.amount)}`}
         />
       )}
       <Info label="Affiliate ID" value={dummyTicket?.affiliateId || '-'} />
@@ -255,10 +256,10 @@ function TripDetails({ dummyTicket }) {
         <Info label="To" value={dummyTicket?.to} />
         <Info
           label="Departure"
-          value={format(new Date(dummyTicket?.departureDate), 'dd MMM yyyy')}
+          value={formatDate(dummyTicket?.departureDate)}
         />
         {dummyTicket?.type?.toLowerCase() === 'return' && (
-          <Info label="Return" value={format(new Date(dummyTicket?.returnDate), 'dd MMM yyyy')} />
+          <Info label="Return" value={formatDate(dummyTicket?.returnDate)} />
         )}
         <Info
           label="Departure Flight"

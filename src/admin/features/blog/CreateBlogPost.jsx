@@ -17,6 +17,7 @@ export default function CreateBlogPost() {
     },
   });
   const { isAdmin } = useAuth();
+  const selectedStatus = watch('status');
 
   if (!isAdmin) {
     return (
@@ -86,7 +87,9 @@ export default function CreateBlogPost() {
         isLoading={isCreatingBlog}
         editorRef={editorRef}
         showSubmitButton
-        submitButtonLabel={isCreatingBlog ? 'Creating...' : 'Create Blog Post'}
+        submitButtonLabel={
+          isCreatingBlog ? 'Creating...' : selectedStatus === 'scheduled' ? 'Schedule Blog Post' : 'Create Blog Post'
+        }
       />
     </>
   );

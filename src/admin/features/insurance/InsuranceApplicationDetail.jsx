@@ -5,7 +5,7 @@ import { useAdminDownloadInsurancePolicy } from '../../../hooks/insurance/useAdm
 import { useDeleteInsuranceApplication } from '../../../hooks/insurance/useDeleteInsuranceApplication';
 import { convertToDubaiTime } from '../../../utils/dubaiDateTime';
 import { convertToDubaiDate } from '../../../utils/dubaiDateTime';
-import { format } from 'date-fns';
+import { formatDate } from '../../../utils/formatDate';
 import { capitalCase } from 'change-case';
 import { confirmAlert } from 'react-confirm-alert';
 import { MdWhatsapp } from 'react-icons/md';
@@ -21,6 +21,7 @@ import SuccessPill from '../../../components/SuccessPill';
 import NeutralPill from '../../../components/NeutralPill';
 import { useAuth } from '../../../context/AuthContext';
 import toast from 'react-hot-toast';
+import { formatAmount } from '../../../utils/currency';
 
 export default function InsuranceApplicationDetail() {
   const { sessionId } = useParams();
@@ -35,10 +36,10 @@ export default function InsuranceApplicationDetail() {
     if (!application) return;
 
     const startDate = application?.startDate
-      ? format(new Date(application.startDate), 'dd MMM yyyy')
+      ? formatDate(application.startDate)
       : '-';
     const endDate = application?.endDate
-      ? format(new Date(application.endDate), 'dd MMM yyyy')
+      ? formatDate(application.endDate)
       : '-';
 
     const passengers = application?.passengers?.length
@@ -61,7 +62,7 @@ ${passengers.join('\n')}
 
 Policy #: ${application?.policyNumber || 'Pending'}
 Payment: ${application?.paymentStatus || '-'}
-${isAdmin ? `Amount: ${application?.amountPaid?.currency || ''} ${application?.amountPaid?.amount || ''}` : ''}
+${isAdmin ? `Amount: ${application?.amountPaid?.currency || ''} ${formatAmount(application?.amountPaid?.amount)}` : ''}
     `.trim();
 
     const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -167,7 +168,7 @@ function Overview({ application, isAdmin }) {
       {isAdmin && (
         <OverviewCard
           label="Amount"
-          value={`${application?.amountPaid?.currency || ''} ${application?.amountPaid?.amount || '-'}`.trim()}
+          value={`${application?.amountPaid?.currency || ''} ${formatAmount(application?.amountPaid?.amount)}`.trim()}
         />
       )}
     </div>
@@ -188,13 +189,13 @@ function BasicInfo({ application, isAdmin }) {
       <Info label="Region" value={application?.region?.name} />
       <Info
         label="Travel Dates"
-        value={`${format(new Date(application?.startDate), 'dd MMM')} → ${format(new Date(application?.endDate), 'dd MMM')}`}
+        value={`${formatDate(application?.startDate)} → ${formatDate(application?.endDate)}`}
       />
       <Info label="Policy #" value={application?.policyNumber} />
       {isAdmin && (
         <Info
           label="Amount"
-          value={`${application?.amountPaid?.currency} ${application?.amountPaid?.amount}`}
+          value={`${application?.amountPaid?.currency} ${formatAmount(application?.amountPaid?.amount)}`}
         />
       )}
       <Info label="Payment" value={application?.paymentStatus} />
@@ -219,9 +220,7 @@ function TripDetails({ application }) {
 function Passengers({ application }) {
   const formatDob = dob => {
     if (!dob) return '-';
-    const date = new Date(dob);
-    if (Number.isNaN(date.getTime())) return dob;
-    return format(date, 'dd MMM yyyy');
+    return formatDate(dob);
   };
 
   return (

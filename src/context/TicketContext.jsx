@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { compareDateOnly, todayDateOnly } from '../utils/dateOnly';
 
 function safeParse(key, fallback) {
   try {
@@ -37,7 +38,7 @@ export function TicketProvider({ children }) {
   const [departureDate, setDepartureDate] = useState('');
   const [returnDate, setReturnDate] = useState(type === 'One Way' ? '' : '');
   const [quantity, setQuantity] = useState({ adults: 1, children: 0, infants: 0 });
-  const [ticketPrice, setTicketPrice] = useState(13);
+  const [ticketPrice, setTicketPrice] = useState(49);
   const [passengers, setPassengers] = useState([]);
   const [email, setEmail] = useState(storedEmail);
   const [phoneNumber, setPhoneNumber] = useState(storedPhone);
@@ -49,7 +50,7 @@ export function TicketProvider({ children }) {
   const [returnFlight, setReturnFlight] = useState('');
   const [affiliateAttribution, setAffiliateAttribution] = useState(storedAffiliate);
 
-  function initializePassengers(quantity) {
+  const initializePassengers = useCallback((quantity) => {
     const newPassengers = [];
     [
       ['Adult', quantity.adults],
@@ -66,23 +67,25 @@ export function TicketProvider({ children }) {
       }
     });
     setPassengers(newPassengers);
-  }
+  }, []);
 
-  function updatePassengerData(index, field, value) {
-    const updatedPassengers = [...passengers];
-    updatedPassengers[index] = { ...updatedPassengers[index], [field]: value };
-    setPassengers(updatedPassengers);
-  }
+  const updatePassengerData = useCallback((index, field, value) => {
+    setPassengers((currentPassengers) => {
+      const updatedPassengers = [...currentPassengers];
+      updatedPassengers[index] = { ...updatedPassengers[index], [field]: value };
+      return updatedPassengers;
+    });
+  }, []);
 
-  function updatePricing({ ticketValidity, ticketPrice }) {
+  const updatePricing = useCallback(({ ticketValidity, ticketPrice }) => {
     setTicketValidity(ticketValidity);
     setTicketPrice(ticketPrice);
-  }
+  }, []);
 
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    if (departureDate && departureDate <= today) setDepartureDate('');
-    if (returnDate && returnDate <= today) setReturnDate('');
+    const today = todayDateOnly();
+    if (departureDate && compareDateOnly(departureDate, today) <= 0) setDepartureDate('');
+    if (returnDate && compareDateOnly(returnDate, today) <= 0) setReturnDate('');
   }, [departureDate, returnDate]);
 
   useEffect(() => {

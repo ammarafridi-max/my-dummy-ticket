@@ -10,6 +10,7 @@ import Filter from './Filter';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Loading from '../../../components/Loading';
 import { useAuth } from '../../../context/AuthContext';
+import { formatAmount } from '../../../utils/currency';
 
 export default function InsuranceApplications() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -75,7 +76,7 @@ export default function InsuranceApplications() {
 
               {isAdmin && (
                 <Table.Item textAlign="center">
-                  {app.amountPaid?.currency} {app.amountPaid?.amount}
+                  {app.amountPaid?.currency} {formatAmount(app.amountPaid?.amount)}
                 </Table.Item>
               )}
 

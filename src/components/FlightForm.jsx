@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useCreateDummyTicket } from '../hooks/dummy-tickets/useCreateDummyTicket';
 import { formatDate } from '../utils/formatDate';
 import { trackFlightFormSubmission } from '../lib/analytics';
@@ -14,6 +14,11 @@ import PhoneNumber from './FormElements/PhoneNumber';
 import PrimaryButton from './PrimaryButton';
 import SegmentedRadioGroup from './FormElements/SegmentedRadioGroup';
 import { PRICING_OPTIONS } from '../config';
+import { useDummyTicketPricing } from '../hooks/pricing/useDummyTicketPricing';
+import { normalizePricingOptions } from '../utils/dummyTicketPricing';
+import { CurrencyContext } from '../context/CurrencyContext';
+import { todayDateOnly } from '../utils/dateOnly';
+import { convertAmount } from '../utils/currency';
 
 const FormRow = ({ children }) => (
   <div className="block lg:grid lg:grid-cols-2 lg:gap-2.5">{children}</div>
@@ -25,6 +30,8 @@ const FormItem = ({ children }) => (
 export default function FlightForm() {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const { createDummyTicket, isCreatingDummyTicket } = useCreateDummyTicket();
+  const { pricing } = useDummyTicketPricing();
+  const { currency } = useContext(CurrencyContext);
   const {
     type,
     from,
@@ -41,6 +48,7 @@ export default function FlightForm() {
     deliveryDate,
     departureFlight,
     returnFlight,
+    affiliateAttribution,
     setEmail,
     setPhoneNumber,
     setReceiveNow,
@@ -50,6 +58,14 @@ export default function FlightForm() {
     updatePassengerData,
     updatePricing,
   } = useContext(TicketContext);
+  const pricingOptions = useMemo(() => normalizePricingOptions(pricing), [pricing]);
+  const displayPricingOptions = useMemo(() => {
+    const rate = Number(currency?.conversionRate || 1);
+    return (pricingOptions.length > 0 ? pricingOptions : PRICING_OPTIONS).map((option) => ({
+      ...option,
+      price: convertAmount(option.price, rate),
+    }));
+  }, [currency?.conversionRate, pricingOptions]);
 
   useEffect(() => {
     if (quantity && passengers.length === 0) {
@@ -85,6 +101,15 @@ export default function FlightForm() {
     validateForm();
   }, [passengers, email, phoneNumber, receiveNow, deliveryDate]);
 
+  useEffect(() => {
+    const options = displayPricingOptions.length > 0 ? displayPricingOptions : PRICING_OPTIONS;
+    const selectedOption = options.find((option) => option.value === ticketValidity) || options[0];
+
+    if (!selectedOption) return;
+
+    updatePricing({ ticketValidity: selectedOption.value, ticketPrice: selectedOption.price });
+  }, [displayPricingOptions, ticketValidity, updatePricing]);
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (isCreatingDummyTicket) return;
@@ -111,6 +136,9 @@ export default function FlightForm() {
       phoneNumber,
       message,
       ticketValidity,
+      currency: currency?.code || 'AED',
+      affiliateId: affiliateAttribution?.affiliateId || null,
+      affiliateCapturedAt: affiliateAttribution?.capturedAt || null,
       ticketDelivery: { immediate: receiveNow, deliveryDate: receiveNow ? null : deliveryDate },
       flightDetails: { departureFlight, returnFlight: type === 'One Way' ? null : returnFlight },
     });
@@ -132,7 +160,12 @@ export default function FlightForm() {
         setPhoneNumber={setPhoneNumber}
       />
 
-      <TicketValidityOptions ticketValidity={ticketValidity} updatePricing={updatePricing} />
+      <TicketValidityOptions
+        ticketValidity={ticketValidity}
+        updatePricing={updatePricing}
+        options={displayPricingOptions}
+        currencyCode={currency?.code || 'AED'}
+      />
 
       <TicketDelivery
         receiveNow={receiveNow}
@@ -206,9 +239,7 @@ function ContactDetails({ email, setEmail, phoneNumber, setPhoneNumber }) {
   );
 }
 
-function TicketValidityOptions({ ticketValidity, updatePricing }) {
-  const options = PRICING_OPTIONS;
-
+function TicketValidityOptions({ ticketValidity, updatePricing, options, currencyCode }) {
   const handleChange = option => {
     updatePricing({ ticketValidity: option.value, ticketPrice: option.price });
   };
@@ -221,6 +252,7 @@ function TicketValidityOptions({ ticketValidity, updatePricing }) {
         options={options}
         value={ticketValidity}
         onChange={handleChange}
+        currencyCode={currencyCode}
       />
     </FormItem>
   );
@@ -248,7 +280,7 @@ function TicketDelivery({ receiveNow, deliveryDate, setReceiveNow, setDeliveryDa
           <SelectDate
             selectedDate={deliveryDate && formatDate(deliveryDate)}
             onDateSelect={setDeliveryDate}
-            minDate={new Date()}
+            minDate={todayDateOnly()}
           />
         </FormItem>
       )}

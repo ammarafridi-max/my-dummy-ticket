@@ -1,6 +1,7 @@
 import { ChevronDown, Mail, Plane, Rss, ShieldPlus } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import Container from './Container';
+import Currency from './Currency';
 
 export const defaultPages = [
   {
@@ -81,6 +82,9 @@ export default function Navigation({ pages = defaultPages }) {
                 )}
               </div>
             ))}
+            <div className="ml-2 pl-2 border-l">
+              <Currency />
+            </div>
           </div>
         </nav>
       </Container>

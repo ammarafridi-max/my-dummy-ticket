@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { InsuranceProvider } from '../../context/InsuranceContext';
 import { TicketProvider } from '../../context/TicketContext';
+import { CurrencyProvider } from '../../context/CurrencyContext';
 import ScrollToTop from '../../components/ScrollToTop';
 
 // Layout
@@ -41,8 +42,9 @@ function LazyRoute({ children }) {
 export default function AppRoutes() {
   return (
     <BrowserRouter>
-      <TicketProvider>
-        <InsuranceProvider>
+      <CurrencyProvider>
+        <TicketProvider>
+          <InsuranceProvider>
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<AppLayout />}>
@@ -213,8 +215,9 @@ export default function AppRoutes() {
               />
             </Route>
           </Routes>
-        </InsuranceProvider>
-      </TicketProvider>
+          </InsuranceProvider>
+        </TicketProvider>
+      </CurrencyProvider>
     </BrowserRouter>
   );
 }

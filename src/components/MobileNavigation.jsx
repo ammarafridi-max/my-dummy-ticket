@@ -6,6 +6,7 @@ import { HiOutlineEnvelope, HiOutlineXMark } from 'react-icons/hi2';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import Container from './Container';
+import Currency from './Currency';
 
 export default function MobileNavigation() {
   const { pathname } = useLocation();
@@ -23,22 +24,15 @@ export default function MobileNavigation() {
         </a>
 
         <div className="flex items-center gap-2">
-          {/* <a
-            aria-label="Email us"
-            href="mailto:info@mydummyticket.ae"
-            className="bg-gray-100 p-2.5 rounded-xl hover:bg-gray-200 transition-colors"
-          >
-            <HiOutlineEnvelope className="text-xl" />
-          </a> */}
-
+          <Currency />
           <div
             onClick={() => setMenuOpen(prev => !prev)}
-            className="bg-gray-900 text-white p-2.5 rounded-xl cursor-pointer transition-colors"
+            className="rounded-xl cursor-pointer transition-colors"
           >
             {menuOpen ? (
-              <HiOutlineXMark className="text-xl" />
+              <HiOutlineXMark className="text-2xl" />
             ) : (
-              <CgMenuRightAlt className="text-xl" />
+              <CgMenuRightAlt className="text-2xl" />
             )}
           </div>
         </div>
@@ -47,7 +41,6 @@ export default function MobileNavigation() {
       {menuOpen && (
         <>
           <div className="fixed inset-0 bg-black/60 z-[9998]" />
-
           <div className="fixed inset-0 z-[9999] flex">
             <div
               ref={wrapperRef}

@@ -1,13 +1,18 @@
 import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FaCheck, FaX } from 'react-icons/fa6';
+import { useMutation } from '@tanstack/react-query';
+import { Download, FileText } from 'lucide-react';
 import { useInsuranceApplication } from '../../../hooks/insurance/useInsuranceApplication';
-import { useDownloadInsurancePolicy } from '../../../hooks/insurance/useDownloadInsurancePolicy';
+import { useInsuranceDocuments } from '../../../hooks/insurance/useInsuranceDocuments';
+import { confirmInsurancePaymentApi } from '../../../services/apiInsurance';
 import PrimarySection from '../../../components/PrimarySection';
 import PrimaryButton from '../../../components/PrimaryButton';
 import Container from '../../../components/Container';
 import PageTitle from '../../../components/PageTitle';
 import Loading from '../../../components/Loading';
+import { formatAmount } from '../../../utils/currency';
 
 const pageData = {
   meta: {
@@ -20,12 +25,42 @@ const pageData = {
 export default function InsurancePayment() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('sessionId');
-  const { insuranceApplication, isLoadingInsuranceApplication, isErrorInsuranceApplication } =
-    useInsuranceApplication(sessionId);
+  const redirectPaymentStatus = searchParams.get('paymentStatus');
+  const [syncTried, setSyncTried] = useState(false);
+  const {
+    insuranceApplication,
+    isLoadingInsuranceApplication,
+    isErrorInsuranceApplication,
+    refetch,
+  } = useInsuranceApplication(sessionId);
+  const { mutateAsync: confirmPayment, isPending: isConfirmingPayment } = useMutation({
+    mutationFn: confirmInsurancePaymentApi,
+  });
+
+  useEffect(() => {
+    const sync = async () => {
+      if (!sessionId) return;
+      if (syncTried) return;
+      if (!insuranceApplication) return;
+      if (insuranceApplication.paymentStatus !== 'UNPAID') return;
+      if (redirectPaymentStatus !== 'PAID') return;
+
+      setSyncTried(true);
+      try {
+        await confirmPayment(sessionId);
+      } catch (error) {
+        void error;
+      } finally {
+        refetch();
+      }
+    };
+
+    sync();
+  }, [sessionId, syncTried, insuranceApplication, redirectPaymentStatus, confirmPayment, refetch]);
 
   if (!sessionId) return <Error />;
 
-  if (isLoadingInsuranceApplication) return <Loading />;
+  if (isLoadingInsuranceApplication || isConfirmingPayment) return <Loading />;
 
   if (
     isErrorInsuranceApplication ||
@@ -66,10 +101,21 @@ function Error() {
 }
 
 function Success({ insuranceApplication }) {
-  const { downloadPolicy } = useDownloadInsurancePolicy();
-  const currency = insuranceApplication?.amountPaid?.currency;
+  const { insuranceDocuments, isLoadingInsuranceDocuments, refetch } = useInsuranceDocuments(
+    insuranceApplication?.policyId
+  );
+  const currency = insuranceApplication?.amountPaid?.currency || 'AED';
   const amount = insuranceApplication?.amountPaid?.amount;
-  const policyId = insuranceApplication?.policyId;
+
+  function handleDownloadAll(docs) {
+    if (!Array.isArray(docs) || docs.length === 0) return;
+    docs.forEach((doc, index) => {
+      if (!doc?.url) return;
+      setTimeout(() => {
+        window.open(doc.url, '_blank', 'noopener,noreferrer');
+      }, index * 250);
+    });
+  }
 
   return (
     <>
@@ -87,16 +133,68 @@ function Success({ insuranceApplication }) {
           </div>
           <PageTitle className="text-center">Thank You for Your Booking!</PageTitle>
           <p className="text-center text-lg md:text-[20px] font-extralight mt-5">
-            Your payment of{' '}
+            Payment confirmed. We have successfully received your payment of{' '}
             <strong>
-              {currency} {amount}
+              {currency} {formatAmount(amount)}
             </strong>{' '}
-            has been successfully processed.
+            for your travel insurance policy.
           </p>
-          <div className="flex items-center justify-center mt-7">
-            <PrimaryButton onClick={() => downloadPolicy(policyId)}>
-              Download Your Insurance
-            </PrimaryButton>
+
+          <div className="mt-8 mx-auto w-full lg:max-w-xl rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+              <div className="flex items-center gap-2 text-gray-800">
+                <FileText size={18} />
+                <span className="text-sm sm:text-base font-medium">Policy Documents</span>
+              </div>
+              <PrimaryButton
+                type="button"
+                size="small"
+                onClick={() => handleDownloadAll(insuranceDocuments)}
+                disabled={isLoadingInsuranceDocuments || !insuranceDocuments?.length}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2"
+              >
+                <Download size={16} />
+                Download All
+              </PrimaryButton>
+            </div>
+
+            {isLoadingInsuranceDocuments && (
+              <p className="text-center text-sm sm:text-base text-gray-600">
+                Preparing documents...
+              </p>
+            )}
+
+            {!isLoadingInsuranceDocuments && insuranceDocuments?.length > 0 && (
+              <div className="flex flex-col gap-3">
+                {insuranceDocuments.map((doc, index) => (
+                  <PrimaryButton
+                    key={`${doc?.url || 'doc'}-${index}`}
+                    type="button"
+                    size="small"
+                    onClick={() => window.open(doc.url, '_blank', 'noopener,noreferrer')}
+                    className="w-full inline-flex items-center justify-between gap-2"
+                  >
+                    <span className="inline-flex flex-1 items-center gap-2 text-left truncate">
+                      <FileText size={15} />
+                      {doc?.name || `Document ${index + 1}`}
+                    </span>
+                    <Download size={15} />
+                  </PrimaryButton>
+                ))}
+              </div>
+            )}
+
+            {!isLoadingInsuranceDocuments &&
+              (!insuranceDocuments || insuranceDocuments.length === 0) && (
+                <div className="flex flex-col items-center gap-3">
+                  <p className="text-center text-sm sm:text-base text-gray-600">
+                    Documents are still being generated. Please try again shortly.
+                  </p>
+                  <PrimaryButton type="button" size="small" onClick={() => refetch()}>
+                    Refresh Documents
+                  </PrimaryButton>
+                </div>
+              )}
           </div>
         </Container>
       </PrimarySection>

@@ -31,6 +31,10 @@ import InsuranceApplicationDetail from '../features/insurance/InsuranceApplicati
 import Affiliates from '../features/affiliates/Affiliates';
 import CreateAffiliate from '../features/affiliates/CreateAffiliate';
 import UpdateAffiliate from '../features/affiliates/UpdateAffiliate';
+import DummyTicketPricing from '../features/pricing/DummyTicketPricing';
+import Currencies from '../features/currencies/Currencies';
+import CreateCurrency from '../features/currencies/CreateCurrency';
+import UpdateCurrency from '../features/currencies/UpdateCurrency';
 import { AuthProvider } from '../../context/AuthContext';
 
 export default function AdminAppRoutes() {
@@ -41,6 +45,7 @@ export default function AdminAppRoutes() {
           <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
         </Helmet>
         <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<AdminLayout />}>
@@ -58,6 +63,10 @@ export default function AdminAppRoutes() {
                 <Route path="affiliates" element={<Affiliates />} />
                 <Route path="affiliates/create" element={<CreateAffiliate />} />
                 <Route path="affiliates/:id" element={<UpdateAffiliate />} />
+                <Route path="pricing" element={<DummyTicketPricing />} />
+                <Route path="currencies" element={<Currencies />} />
+                <Route path="currencies/create" element={<CreateCurrency />} />
+                <Route path="currencies/:code" element={<UpdateCurrency />} />
               </Route>
 
               <Route path="account" element={<MyAccount />} />

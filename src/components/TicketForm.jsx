@@ -12,6 +12,7 @@ import SelectAirport from './FormElements/SelectAirport';
 import SelectDate from './FormElements/SelectDate';
 import Counter from './FormElements/Counter';
 import Error from './Error';
+import { todayDateOnly } from '../utils/dateOnly';
 
 export default function TicketForm() {
   const navigate = useNavigate();
@@ -145,7 +146,7 @@ export default function TicketForm() {
           <SelectDate
             selectedDate={departureDate && formatDate(departureDate)}
             onDateSelect={date => handleFieldChange('departureDate', date)}
-            minDate={new Date()}
+            minDate={todayDateOnly()}
             icon={<CalendarDaysIcon size={19} className="text-gray-500" />}
           />
         </div>
@@ -156,7 +157,7 @@ export default function TicketForm() {
             <SelectDate
               selectedDate={returnDate && formatDate(returnDate)}
               onDateSelect={date => handleFieldChange('returnDate', date)}
-              minDate={new Date(departureDate)}
+              minDate={departureDate || todayDateOnly()}
               icon={<CalendarDaysIcon size={19} className="text-gray-500" />}
             />
           </div>

@@ -101,7 +101,11 @@ export default function BlogPost() {
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <PageProgressBar color="#1e60a6" height={4} />
-      <PrimarySection className="py-10 lg:pt-8 lg:pb-20 bg-gray-50">
+      <PrimarySection className="relative overflow-hidden bg-[linear-gradient(160deg,#f5fbfb_0%,#eef4ff_52%,#fff9f4_100%)] pt-24 pb-12 md:pt-28 md:pb-14 lg:pt-28 lg:pb-16">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-24 top-0 h-72 w-72 rounded-full bg-primary-200/40 blur-3xl" />
+          <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-accent-100/50 blur-3xl" />
+        </div>
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[5.5fr_4.5fr] gap-10 items-center font-outfit">
             <div>
@@ -118,7 +122,7 @@ export default function BlogPost() {
               <h1 className="text-2xl lg:text-4xl font-medium leading-9 lg:leading-12 my-3 lg:my-5">
                 {pageData?.blogPost?.title}
               </h1>
-              <div className="flex items-center gap-1 font-light text-gray-400 text-sm mb-4">
+              <div className="flex items-center gap-1 font-light text-gray-900/50 text-sm mb-4">
                 {pageData?.blogPost?.updatedAt ? (
                   <span>Updated {format(pageData?.blogPost?.updatedAt, 'dd MMM yyyy')}</span>
                 ) : (
@@ -148,7 +152,7 @@ export default function BlogPost() {
             className="font-outfit blog_post"
           />
           <div className="sticky top-0">
-            <h2 className="font-light mb-5">Recently Published Posts:</h2>
+            <h2 className="font-normal mb-5">Recently Published Posts:</h2>
             {isLoadingBlogs ? (
               <p>Loading...</p>
             ) : (
@@ -166,8 +170,8 @@ export default function BlogPost() {
                         src={b.coverImageUrl}
                       />
                       <div>
-                        <h3 className="font-extralight leading-5">{b.title}</h3>
-                        <p className="font-extralight text-[12px] text-gray-500 mt-1">
+                        <h3 className="font-light text-sm leading-5">{b.title}</h3>
+                        <p className="font-extralight text-[12px] text-gray-600 mt-1">
                           {format(b.publishedAt, 'dd MMM yyyy')}
                         </p>
                       </div>

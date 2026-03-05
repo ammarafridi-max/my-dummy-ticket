@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useContext, useMemo } from 'react';
 import FlightForm from './FlightForm';
 import FlightItinerary from './FlightItinerary';
 import PrimaryButtonOutline from './PrimaryButtonOutline';
+import { useDummyTicketPricing } from '../hooks/pricing/useDummyTicketPricing';
+import { getTicketPriceByValidity } from '../utils/dummyTicketPricing';
+import { CurrencyContext } from '../context/CurrencyContext';
+import { TicketContext } from '../context/TicketContext';
+import { convertAmount, formatAmount } from '../utils/currency';
 
 export default function FlightCard({ flight, isExpanded, onSelectFlight }) {
+  const { pricing } = useDummyTicketPricing();
+  const { currency } = useContext(CurrencyContext);
+  const { ticketValidity } = useContext(TicketContext);
+
+  const displayPrice = useMemo(() => {
+    const basePrice = getTicketPriceByValidity(pricing, ticketValidity);
+    return convertAmount(basePrice, currency?.conversionRate || 1);
+  }, [pricing, ticketValidity, currency?.conversionRate]);
+
   return (
     <div className="w-full rounded-2xl bg-white mb-5 p-3 lg:p-3.75 transition-[box-shadow_0.3s_ease] shadow-(--flight-shadow) hover:shadow-(--flight-shadow-hover)">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center gap-1 lg:gap-7.5">
@@ -15,7 +29,9 @@ export default function FlightCard({ flight, isExpanded, onSelectFlight }) {
 
         <div className="w-full lg:w-1/4 flex justify-between lg:block pt-1 lg:pt-2.5 lg:border-t-0 px-3">
           <div className="w-[40%] lg:w-full flex flex-col lg:flex-row gap-1 items-baseline justify-center font-nunito text-left lg:text-center lg:py-2">
-            <p className="text-lg font-medium text-black mb-[-8px]">AED 49</p>
+            <p className="text-lg font-medium text-black mb-[-8px]">
+              {currency?.code || 'AED'} {formatAmount(displayPrice)}
+            </p>
             <p className="text-sm font-light text-gray-400">/ person</p>
           </div>
           <PrimaryButtonOutline

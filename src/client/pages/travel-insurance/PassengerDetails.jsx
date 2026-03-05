@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
+import toast from 'react-hot-toast';
 import { InsuranceContext } from '../../../context/InsuranceContext';
 import { useNationalities } from '../../../hooks/insurance/useNationalities';
 import { CalendarDaysIcon } from 'lucide-react';
@@ -12,6 +13,7 @@ import SearchNationality from '../../../components/FormElements/SearchNationalit
 import SelectDate from '../../../components/FormElements/SelectDate';
 import PhoneNumber from '../../../components/FormElements/PhoneNumber';
 import { useLocalStorage } from '../../../hooks/general/useLocalStorage';
+import { todayDateOnly } from '../../../utils/dateOnly';
 
 const pageData = {
   meta: {
@@ -36,14 +38,81 @@ export default function PassengerDetails() {
     region,
     email,
     mobile,
+    address1,
+    address3,
+    address4,
     quantity,
     passengers,
     handlePhoneChange,
     handleEmailChange,
+    handleAddress1Change,
+    handleAddress3Change,
+    handleAddress4Change,
     handleUpdatePassenger,
   } = useContext(InsuranceContext);
 
+  function validateRequiredFields() {
+    for (let i = 0; i < passengers.length; i += 1) {
+      const passenger = passengers[i];
+      const passengerLabel = `${passenger.type === 'adults' ? 'Adult' : passenger.type === 'children' ? 'Child' : 'Senior'} ${i + 1}`;
+
+      if (!passenger.title) {
+        toast.error(`${passengerLabel}: title is required`);
+        return false;
+      }
+      if (!passenger.firstName?.trim()) {
+        toast.error(`${passengerLabel}: first name is required`);
+        return false;
+      }
+      if (!passenger.lastName?.trim()) {
+        toast.error(`${passengerLabel}: last name is required`);
+        return false;
+      }
+      if (!passenger.dob) {
+        toast.error(`${passengerLabel}: date of birth is required`);
+        return false;
+      }
+      if (!passenger.nationality?.id) {
+        toast.error(`${passengerLabel}: nationality is required`);
+        return false;
+      }
+      if (!passenger.passport?.trim()) {
+        toast.error(`${passengerLabel}: passport number is required`);
+        return false;
+      }
+    }
+
+    if (!email?.trim()) {
+      toast.error('Email address is required');
+      return false;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
+      toast.error('Please enter a valid email address');
+      return false;
+    }
+    if (!mobile?.code || !mobile?.digits?.trim()) {
+      toast.error('Phone number is required');
+      return false;
+    }
+    if (!address1?.trim()) {
+      toast.error('Address is required');
+      return false;
+    }
+    if (!address3?.trim()) {
+      toast.error('City is required');
+      return false;
+    }
+    if (!address4?.trim()) {
+      toast.error('Country is required');
+      return false;
+    }
+
+    return true;
+  }
+
   function handleSubmit() {
+    if (!validateRequiredFields()) return;
+
     const obj = {
       quoteId,
       schemeId,
@@ -55,6 +124,10 @@ export default function PassengerDetails() {
       passengers,
       email,
       mobile,
+      address1,
+      address2: '',
+      address3,
+      address4,
     };
 
     updateLocalStorage('travelInsurance', obj);
@@ -93,25 +166,12 @@ export default function PassengerDetails() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div>
                   <label className="block mb-1 text-sm font-light text-gray-700">Title</label>
                   <SelectTitle
                     value={passenger.title}
                     onChange={e => handleUpdatePassenger(passenger.id, 'title', e.target.value)}
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-1 text-sm font-light text-gray-700">
-                    Date of Birth
-                  </label>
-                  <SelectDate
-                    selectedDate={formatDate(passenger.dob)}
-                    onDateSelect={date => handleUpdatePassenger(passenger.id, 'dob', date)}
-                    minYear={1900}
-                    maxDate={new Date()}
-                    icon={<CalendarDaysIcon size={20} />}
                   />
                 </div>
 
@@ -128,6 +188,19 @@ export default function PassengerDetails() {
                   <Input
                     value={passenger.lastName}
                     onChange={e => handleUpdatePassenger(passenger.id, 'lastName', e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block mb-1 text-sm font-light text-gray-700">
+                    Date of Birth
+                  </label>
+                  <SelectDate
+                    selectedDate={passenger.dob ? formatDate(passenger.dob) : ''}
+                    onDateSelect={date => handleUpdatePassenger(passenger.id, 'dob', date)}
+                    minYear={1900}
+                    maxDate={todayDateOnly()}
+                    icon={<CalendarDaysIcon size={20} />}
                   />
                 </div>
 
@@ -170,6 +243,21 @@ export default function PassengerDetails() {
                         Phone Number
                       </label>
                       <PhoneNumber phoneNumber={mobile} setPhoneNumber={handlePhoneChange} />
+                    </div>
+
+                    <div>
+                      <label className="block mb-1 text-sm font-light text-gray-700">Address</label>
+                      <Input value={address1} onChange={handleAddress1Change} />
+                    </div>
+
+                    <div>
+                      <label className="block mb-1 text-sm font-light text-gray-700">City</label>
+                      <Input value={address3} onChange={handleAddress3Change} />
+                    </div>
+
+                    <div>
+                      <label className="block mb-1 text-sm font-light text-gray-700">Country</label>
+                      <Input value={address4} onChange={handleAddress4Change} />
                     </div>
                   </div>
                 </div>
