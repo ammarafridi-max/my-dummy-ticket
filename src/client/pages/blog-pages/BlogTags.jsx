@@ -46,7 +46,7 @@ export default function BlogTags() {
             {(tags || []).map((tag) => (
               <Link
                 key={tag._id}
-                to={`/blog/tag/${tag._id}`}
+                to={`/blog/tag/${tag.slug || tag._id}`}
                 className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
               >
                 <h2 className="text-xl font-medium text-gray-900">{tag.name}</h2>

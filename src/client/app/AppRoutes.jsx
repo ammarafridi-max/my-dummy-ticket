@@ -156,7 +156,7 @@ export default function AppRoutes() {
                 }
               />
               <Route
-                path="blog/tag/:id"
+                path="blog/tag/:slug"
                 element={
                   <LazyRoute>
                     <BlogTag />

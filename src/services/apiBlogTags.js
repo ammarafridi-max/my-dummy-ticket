@@ -13,6 +13,10 @@ export async function getBlogTagApi(id) {
   return await apiFetch(`${URL}/${id}`);
 }
 
+export async function getBlogTagBySlugApi(slug) {
+  return await apiFetch(`${URL}/slug/${encodeURIComponent(slug)}`);
+}
+
 export async function createBlogTagApi(tagData) {
   return await apiFetch(URL, {
     method: 'POST',

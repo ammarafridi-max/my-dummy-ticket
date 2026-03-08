@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { useBlogTag } from '../../../hooks/blog-tags/useBlogTag';
+import { useBlogTagBySlug } from '../../../hooks/blog-tags/useBlogTagBySlug';
 import { useBlogsByTag } from '../../../hooks/blog/useBlogsByTag';
 import PrimarySection from '../../../components/PrimarySection';
 import Container from '../../../components/Container';
@@ -9,8 +9,8 @@ import BlogCard from '../../../components/BlogCard';
 import PageHero from '../../../components/Sections/PageHero';
 
 export default function BlogTag() {
-  const { id } = useParams();
-  const { tag, isLoadingBlogTag, isErrorBlogTag } = useBlogTag(id);
+  const { slug } = useParams();
+  const { tag, isLoadingBlogTag, isErrorBlogTag } = useBlogTagBySlug(slug);
   const { blogs, isLoadingBlogsByTag } = useBlogsByTag(tag?.name);
 
   if (isLoadingBlogTag || isLoadingBlogsByTag) return <Loading />;
@@ -30,13 +30,13 @@ export default function BlogTag() {
     tag.metaDescription ||
     tag.description ||
     `Explore published blog posts under the ${tag.name} tag.`;
-  const canonical = `https://www.mydummyticket.ae/blog/tag/${tag._id}`;
+  const canonical = `https://www.mydummyticket.ae/blog/tag/${tag.slug || tag._id}`;
 
   const breadcrumb = [
     { label: 'Home', path: '/' },
     { label: 'Blog', path: '/blog' },
     { label: 'Tags', path: '/blog/tags' },
-    { label: tag.name, path: `/blog/tag/${tag._id}` },
+    { label: tag.name, path: `/blog/tag/${tag.slug || tag._id}` },
   ];
 
   return (

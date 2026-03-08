@@ -192,7 +192,10 @@ export default function BlogPost() {
                         <span key={`${tagName}-${index}`} className="inline-flex items-center gap-1">
                           {index > 0 && <span>,</span>}
                           {tagObj ? (
-                            <Link className="text-primary-700 hover:underline" to={`/blog/tag/${tagObj._id}`}>
+                            <Link
+                              className="text-primary-700 hover:underline"
+                              to={`/blog/tag/${tagObj.slug || tagObj._id}`}
+                            >
                               {tagName}
                             </Link>
                           ) : (
