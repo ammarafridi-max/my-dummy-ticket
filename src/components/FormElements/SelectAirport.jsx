@@ -14,8 +14,6 @@ export default function SelectAirport({ value, onChange, id, icon }) {
     setQuery(inputValue);
     onChange(null);
     setIsOpen(true);
-
-    console.log(airports);
   };
 
   const handleSelect = airport => {

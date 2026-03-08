@@ -1,12 +1,9 @@
-import { useContext } from 'react';
-import { CurrencyContext } from '../context/CurrencyContext';
-import { convertAmount, formatAmount } from '../utils/currency';
+import { formatAmount } from '../utils/currency';
 
 export default function InsuranceQuoteCard({ quote, onClick, isSelected = false }) {
   const benefitsArray = Object.values(quote?.benefits || {});
-  const { currency } = useContext(CurrencyContext);
-  const displayCurrencyCode = currency?.code || quote?.currency || 'AED';
-  const displayPremium = convertAmount(quote?.premium, currency?.conversionRate || 1);
+  const displayCurrencyCode = 'AED';
+  const displayPremium = Number(quote?.premium || 0);
 
   return (
     <div

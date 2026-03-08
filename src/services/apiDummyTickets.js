@@ -44,8 +44,6 @@ export async function refundDummyTicketApi(transactionId) {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  console.log(result);
-
   return result;
 }
 

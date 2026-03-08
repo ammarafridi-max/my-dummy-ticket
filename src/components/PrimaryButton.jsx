@@ -6,8 +6,10 @@ export default function PrimaryButton({
   ...props
 }) {
   let newClassName = className;
+
   const baseClassName =
     'inline-flex items-center justify-center gap-2 text-center no-underline font-outfit rounded-lg border border-solid cursor-pointer transition-all duration-200 disabled:opacity-55 disabled:cursor-not-allowed';
+
   const colorClassName =
     colorType === 'danger'
       ? 'text-white border-red-600 bg-red-600 hover:bg-red-700'
@@ -16,11 +18,11 @@ export default function PrimaryButton({
         : 'text-white border-accent-500 bg-accent-500 hover:bg-accent-600';
 
   if (size === 'large') {
-    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-sm md:text-base font-semibold py-2.5 px-4`;
+    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-sm md:text-base font-normal py-2.5 px-4`;
   } else if (size === 'small') {
-    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-xs md:text-sm font-medium py-2 px-3`;
+    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-xs md:text-sm font-normal py-2 px-3`;
   } else {
-    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-xs md:text-sm font-medium py-2 px-3.5`;
+    newClassName = `${newClassName} ${baseClassName} ${colorClassName} text-xs md:text-sm font-normal py-2 px-3.5`;
   }
 
   return (

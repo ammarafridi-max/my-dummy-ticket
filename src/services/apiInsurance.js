@@ -58,18 +58,62 @@ export async function getInsuranceApplicationApi(sessionId) {
 }
 
 export async function getInsuranceApplicationsApi(params = {}) {
+  const emptyResponse = {
+    data: [],
+    pagination: {
+      total: 0,
+      page: 1,
+      limit: Math.max(1, parseInt(params.limit, 10) || 100),
+      totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+    },
+  };
   const queryString = new URLSearchParams(params).toString();
 
-  const res = await fetch(`${BACKEND}${URL}?${queryString}`, {
-    credentials: 'include',
-  });
+  try {
+    const res = await fetch(`${BACKEND}${URL}?${queryString}`, {
+      credentials: 'include',
+    });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || 'Error fetching data');
+    if (res.status === 204) return emptyResponse;
+
+    if (!res.ok) {
+      let errorMessage = 'Error fetching data';
+
+      try {
+        const error = await res.json();
+        errorMessage = error.message || errorMessage;
+      } catch (err) {
+        void err;
+      }
+
+      if (res.status === 401 || res.status === 403) {
+        throw new Error(errorMessage);
+      }
+
+      if ([502, 503, 504].includes(res.status)) {
+        return emptyResponse;
+      }
+
+      throw new Error(errorMessage);
+    }
+
+    try {
+      const json = await res.json();
+      return {
+        data: Array.isArray(json?.data) ? json.data : [],
+        pagination: json?.pagination || emptyResponse.pagination,
+      };
+    } catch (err) {
+      void err;
+      return emptyResponse;
+    }
+  } catch (err) {
+    // Network/CORS failures can happen when the upstream is temporarily unavailable.
+    if (err instanceof TypeError) return emptyResponse;
+    throw err;
   }
-
-  return res.json();
 }
 
 export async function confirmInsurancePaymentApi(sessionId) {

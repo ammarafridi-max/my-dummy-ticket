@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { FaCopy, FaPlus } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { capitalCase } from 'change-case';
 import { useAdminBlogs } from '../../../hooks/blog/useAdminBlogs';
 import { useDuplicateBlog } from '../../../hooks/blog/useDuplicateBlog';
 import Loading from '../../../components/Loading';
@@ -30,26 +29,29 @@ export default function Blogs() {
           { label: 'Blogs', href: '/blogs' },
         ]}
       />
-      <PageHeading>Blogs</PageHeading>
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <PageHeading>Blogs</PageHeading>
+        {isAdmin && (
+          <Link
+            className="inline-flex items-center gap-2 rounded-lg border border-accent-500 bg-accent-500 px-4 py-2 text-sm text-white transition-colors hover:bg-accent-600"
+            to="/blogs/create"
+          >
+            <FaPlus />
+            Create Blog Post
+          </Link>
+        )}
+      </div>
       {isLoadingBlogs && <Loading />}
       {isErrorBlogs && <p>Error loading blogs</p>}
       {blogs && (
-        <Table $columntemplate="0.5fr 8fr 2fr 1.5fr">
+        <Table $columntemplate="8fr 2fr 2fr">
           <Table.Head>
-            <Table.Heading></Table.Heading>
             <Table.Heading>Title</Table.Heading>
-            <Table.Heading>Tags</Table.Heading>
+            <Table.Heading textAlign="left">Tags</Table.Heading>
             <Table.Heading textAlign="center">Status</Table.Heading>
           </Table.Head>
           {blogs?.map(blog => (
             <Table.Row key={blog?._id} href={`/blogs/${blog?._id}`}>
-              <Table.Item>
-                <img
-                  src={blog?.coverImageUrl}
-                  alt={blog?.title}
-                  className="w-full aspect-square object-cover rounded-lg"
-                />
-              </Table.Item>
               <Table.Item>
                 <span className="text-[17px] mb-1">{blog?.title}</span>
                 <span className="font-light text-gray-500">
@@ -64,7 +66,7 @@ export default function Blogs() {
                   </Table.DuplicateLink>
                 </span>
               </Table.Item>
-              <Table.Item>{blog?.tags?.map(tag => capitalCase(tag)).join(', ')}</Table.Item>
+              <Table.Item>{blog?.tags?.join(', ') || '-'}</Table.Item>
               <Table.Item>
                 {blog?.status === 'draft' && (
                   <WarningPill>{blog?.status?.toUpperCase()}</WarningPill>
@@ -79,15 +81,6 @@ export default function Blogs() {
             </Table.Row>
           ))}
         </Table>
-      )}
-
-      {isAdmin && (
-        <Link
-          className="absolute bottom-8 right-8 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-accent-500 bg-accent-500 text-sm text-white transition-colors hover:bg-accent-600 cursor-pointer"
-          to="/blogs/create"
-        >
-          <FaPlus />
-        </Link>
       )}
     </>
   );

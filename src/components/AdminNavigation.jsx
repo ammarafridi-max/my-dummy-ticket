@@ -9,6 +9,7 @@ import {
   HiOutlineShieldCheck,
   HiOutlineUserGroup,
   HiOutlineCurrencyDollar,
+  HiOutlineTag,
 } from 'react-icons/hi2';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -36,6 +37,12 @@ const links = [
     name: 'Blogs',
     href: '/blogs',
     icon: HiOutlineRss,
+    accessTo: ['admin', 'blog-manager'],
+  },
+  {
+    name: 'Blog Tags',
+    href: '/blog-tags',
+    icon: HiOutlineTag,
     accessTo: ['admin', 'blog-manager'],
   },
   {

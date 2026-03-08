@@ -97,7 +97,7 @@ a {
 
 .blog_post p,
 .blog_post li {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 300;
   line-height: 1.75;
   color: #334155;
@@ -117,6 +117,15 @@ a {
 .blog_post ul,
 .blog_post ol {
   padding-left: 22px;
+  list-style-position: outside;
+}
+
+.blog_post ul {
+  list-style-type: disc;
+}
+
+.blog_post ol {
+  list-style-type: decimal;
 }
 
 .blog_post li {

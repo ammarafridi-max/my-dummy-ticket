@@ -7,6 +7,7 @@ import { useBlog } from '../../../hooks/blog/useBlog';
 import { useUpdateBlog } from '../../../hooks/blog/useUpdateBlog';
 import { usePublishBlog } from '../../../hooks/blog/usePublishBlog';
 import { useDeleteBlog } from '../../../hooks/blog/useDeleteBlog';
+import { useBlogTags } from '../../../hooks/blog-tags/useBlogTags';
 import BlogForm from './BlogForm';
 import Breadcrumb from '../../../components/Breadcrumb';
 import PageHeading from '../../../components/PageHeading';
@@ -37,6 +38,7 @@ export default function UpdateBlogPost() {
   const { updateBlog, isUpdatingBlog } = useUpdateBlog();
   const { publishBlog, isPublishingBlog } = usePublishBlog();
   const { deleteBlog, isDeletingBlog } = useDeleteBlog();
+  const { tags } = useBlogTags();
   const { isAdmin } = useAuth();
 
   const { register, handleSubmit, control, reset, watch } = useForm({
@@ -216,6 +218,7 @@ export default function UpdateBlogPost() {
         isLoading={isUpdatingBlog}
         editorRef={editorRef}
         readOnly={!isAdmin}
+        tagOptions={(tags || []).map((tag) => ({ value: tag.name, label: tag.name }))}
       />
     </>
   );

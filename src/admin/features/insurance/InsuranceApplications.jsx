@@ -17,6 +17,7 @@ export default function InsuranceApplications() {
   const { applications, pagination, isLoadingApplications, isErrorApplications } =
     useInsuranceApplications();
   const { isAdmin } = useAuth();
+  const hasApplications = Array.isArray(applications) && applications.length > 0;
 
   const currentPage = parseInt(searchParams.get('page'), 10) || 1;
   const limit = parseInt(searchParams.get('limit'), 10) || 100;
@@ -48,7 +49,10 @@ export default function InsuranceApplications() {
       <Filter />
       {isLoadingApplications && <Loading />}
       {isErrorApplications && <p>Error loading insurance applications</p>}
-      {applications && (
+      {!isLoadingApplications && !isErrorApplications && applications && !hasApplications && (
+        <p>No insurance applications found for selected filters.</p>
+      )}
+      {hasApplications && (
         <Table $columntemplate={isAdmin ? '1fr 2fr 1fr 1fr 1fr 1fr' : '1fr 2fr 1fr 1fr 1fr'}>
           <Table.Head>
             <Table.Heading textAlign="left">Date</Table.Heading>

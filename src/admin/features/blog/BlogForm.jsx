@@ -2,7 +2,7 @@ import { capitalCase } from 'change-case';
 import { format } from 'date-fns';
 import FormRow from '../../../components/FormElements/FormRow';
 import Input from '../../../components/FormElements/Input';
-import Textarea from '../../../components/FormElements/Textarea';
+import Textarea from '../../../components/FormElements/TextArea';
 import Label from '../../../components/FormElements/Label';
 import Select from '../../../components/FormElements/Select';
 import CheckboxGroup from '../../../components/FormElements/CheckboxGroup';
@@ -22,6 +22,7 @@ export default function BlogForm({
   readOnly = false,
   showSubmitButton = false,
   submitButtonLabel = 'Save',
+  tagOptions = [],
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
@@ -32,8 +33,14 @@ export default function BlogForm({
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
               <Info label="Created" value={format(blog.createdAt, 'dd MMM yyyy • hh:mm aa')} />
               <Info label="Updated" value={format(blog.updatedAt, 'dd MMM yyyy • hh:mm aa')} />
-              <Info label="Published" value={blog.publishedAt ? format(blog.publishedAt, 'dd MMM yyyy • hh:mm aa') : '-'} />
-              <Info label="Scheduled" value={blog.scheduledAt ? format(blog.scheduledAt, 'dd MMM yyyy • hh:mm aa') : '-'} />
+              <Info
+                label="Published"
+                value={blog.publishedAt ? format(blog.publishedAt, 'dd MMM yyyy • hh:mm aa') : '-'}
+              />
+              <Info
+                label="Scheduled"
+                value={blog.scheduledAt ? format(blog.scheduledAt, 'dd MMM yyyy • hh:mm aa') : '-'}
+              />
               <Info label="Status" value={capitalCase(blog.status || '-')} />
             </div>
           </section>
@@ -49,7 +56,12 @@ export default function BlogForm({
 
           <FormRow>
             <Label>Meta Description</Label>
-            <Textarea rows={2} {...register('metaDescription')} readOnly={readOnly} disabled={readOnly} />
+            <Textarea
+              rows={2}
+              {...register('metaDescription')}
+              readOnly={readOnly}
+              disabled={readOnly}
+            />
           </FormRow>
         </section>
 
@@ -71,8 +83,14 @@ export default function BlogForm({
             <div className="flex flex-col gap-3 w-full">
               {blog?.coverImageUrl && (
                 <div className="relative">
-                  <img src={blog.coverImageUrl} className="w-full max-h-60 object-cover rounded-lg border" alt="Cover" />
-                  <p className="text-xs text-gray-500 mt-1">Upload a new image to replace the current one</p>
+                  <img
+                    src={blog.coverImageUrl}
+                    className="w-full max-h-60 object-cover rounded-lg border"
+                    alt="Cover"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Upload a new image to replace the current one
+                  </p>
                 </div>
               )}
               <UploadFile {...register('coverImage')} disabled={readOnly} />
@@ -112,11 +130,7 @@ export default function BlogForm({
               name="tags"
               control={control}
               disabled={readOnly}
-              options={[
-                { value: 'dummyTicket', label: 'Dummy Ticket' },
-                { value: 'schengenVisa', label: 'Schengen Visa' },
-                { value: 'usVisa', label: 'US Visa' },
-              ]}
+              options={tagOptions}
             />
           </FormRow>
         </section>

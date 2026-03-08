@@ -26,6 +26,9 @@ import MyAccount from '../features/account/MyAccount';
 import Blogs from '../features/blog/Blogs';
 import CreateBlogPost from '../features/blog/CreateBlogPost';
 import UpdateBlogPost from '../features/blog/UpdateBlogPost';
+import BlogTags from '../features/blog-tags/BlogTags';
+import CreateBlogTag from '../features/blog-tags/CreateBlogTag';
+import UpdateBlogTag from '../features/blog-tags/UpdateBlogTag';
 import InsuranceApplications from '../features/insurance/InsuranceApplications';
 import InsuranceApplicationDetail from '../features/insurance/InsuranceApplicationDetail';
 import Affiliates from '../features/affiliates/Affiliates';
@@ -45,8 +48,8 @@ export default function AdminAppRoutes() {
           <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
         </Helmet>
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigate to="dashboard" replace />} />
+          <Route path="login" element={<Login />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
@@ -73,6 +76,9 @@ export default function AdminAppRoutes() {
               <Route path="blogs" element={<Blogs />} />
               <Route path="blogs/create" element={<CreateBlogPost />} />
               <Route path="blogs/:id" element={<UpdateBlogPost />} />
+              <Route path="blog-tags" element={<BlogTags />} />
+              <Route path="blog-tags/create" element={<CreateBlogTag />} />
+              <Route path="blog-tags/:id" element={<UpdateBlogTag />} />
             </Route>
           </Route>
 

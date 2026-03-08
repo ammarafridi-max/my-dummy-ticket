@@ -33,6 +33,8 @@ const PrivacyPolicy = lazy(() => import('../pages/legal-pages/PrivacyPolicy'));
 const FAQ = lazy(() => import('../pages/faq/FAQ'));
 const BlogPost = lazy(() => import('../pages/blog-pages/BlogPost'));
 const Blog = lazy(() => import('../pages/blog-pages/Blog'));
+const BlogTags = lazy(() => import('../pages/blog-pages/BlogTags'));
+const BlogTag = lazy(() => import('../pages/blog-pages/BlogTag'));
 const PageNotFound = lazy(() => import('../pages/other/PageNotFound'));
 
 function LazyRoute({ children }) {
@@ -142,6 +144,22 @@ export default function AppRoutes() {
                 element={
                   <LazyRoute>
                     <Blog />
+                  </LazyRoute>
+                }
+              />
+              <Route
+                path="blog/tags"
+                element={
+                  <LazyRoute>
+                    <BlogTags />
+                  </LazyRoute>
+                }
+              />
+              <Route
+                path="blog/tag/:id"
+                element={
+                  <LazyRoute>
+                    <BlogTag />
                   </LazyRoute>
                 }
               />
